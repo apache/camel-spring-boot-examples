@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>spring-boot</artifactId>
+        <version>3.4.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.apache.camel.springboot.example</groupId>
+    <artifactId>examples</artifactId>
+    <name>Camel SB :: Examples</name>
+    <description>Camel Examples</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>camel-example-spring-boot</module>
+        <module>camel-example-spring-boot-activemq</module>
+        <module>camel-example-spring-boot-amqp</module>
+        <module>camel-example-spring-boot-clustered-route-controller</module>
+        <module>camel-example-spring-boot-fhir</module>
+        <module>camel-example-spring-boot-fhir-auth-tx</module>
+        <module>camel-example-spring-boot-geocoder</module>
+        <module>camel-example-spring-boot-grpc</module>
+        <module>camel-example-spring-boot-grpc-kubernetes</module>
+        <module>camel-example-spring-boot-health-checks</module>
+        <module>camel-example-spring-boot-hystrix</module>
+        <module>camel-example-spring-boot-infinispan</module>
+        <module>camel-example-spring-boot-jira</module>
+        <module>camel-example-spring-boot-kafka-avro</module>
+        <module>camel-example-spring-boot-kafka-offsetrepository</module>
+        <module>camel-example-spring-boot-master</module>
+        <module>camel-example-spring-boot-metrics</module>
+        <module>camel-example-spring-boot-opentracing</module>
+        <module>camel-example-spring-boot-pojo</module>
+        <module>camel-example-spring-boot-rabbitmq</module>
+        <module>camel-example-spring-boot-reactive-streams</module>
+        <module>camel-example-spring-boot-resilience4j</module>
+        <module>camel-example-spring-boot-rest-jpa</module>
+        <module>camel-example-spring-boot-rest-producer</module>
+        <module>camel-example-spring-boot-rest-swagger</module>
+        <module>camel-example-spring-boot-rest-swagger-simple</module>
+        <module>camel-example-spring-boot-rest-openapi</module>
+        <module>camel-example-spring-boot-rest-openapi-simple</module>
+        <module>camel-example-spring-boot-servicecall</module>
+        <module>camel-example-spring-boot-supervising-route-controller</module>
+        <module>camel-example-spring-boot-twitter-salesforce</module>
+        <module>camel-example-spring-boot-undertow-spring-security</module>
+        <module>camel-example-spring-boot-validator</module>
+        <module>camel-example-spring-boot-webhook</module>
+        <module>camel-example-spring-boot-xml</module>
+        <module>camel-example-spring-boot-zipkin</module>
+        <module>camel-example-spring-boot-strimzi</module>
+        <module>camel-example-spring-cloud-servicecall</module>
+        <module>camel-example-spring-cloud-serviceregistry</module>
+        <module>camel-example-spring-boot-widget-gadget</module>
+    </modules>
+
+    <properties>
+        <!-- for symbolicName in OSGi examples we only want the artifactId, eg camel-example-sql -->
+        <!-- as having org.apache.camel as prefix is not needed and makes the name very long -->
+        <camel.osgi.symbolic.name>${project.artifactId}</camel.osgi.symbolic.name>
+        <skip.starting.camel.context>false</skip.starting.camel.context>
+        <javax.servlet.api.version>4.0.1</javax.servlet.api.version>
+        <camel.osgi.export.pkg />
+        <fabric8-maven-plugin-version>4.4.0</fabric8-maven-plugin-version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--
+              CAMEL-13084 Fix the spring-boot examples start up error by overriding servlet API version from camel-parent
+              Wqe need to clean it up once camel-parent upgrade the servlet api version.
+            -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet.api.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <!--<resources>-->
+        <!--<resource>-->
+        <!--<directory>src/main/resources</directory>-->
+        <!--<filtering>true</filtering>-->
+        <!--</resource>-->
+        <!--</resources>-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!-- update readme file -->
+            <plugin>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-package-maven-plugin</artifactId>
+                <version>${camel-version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-example</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- to validate Camel endpoints: mvn camel-report:validate -->
+            <plugin>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-report-maven-plugin</artifactId>
+                <version>${camel-version}</version>
+                <configuration>
+                    <failOnError>false</failOnError>
+                    <includeTest>true</includeTest>
+                    <includeXml>true</includeXml>
+                    <ignoreLenientProperties>false</ignoreLenientProperties>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
+                    <systemPropertyVariables>
+                        <skipStartingCamelContext>${skip.starting.camel.context}</skipStartingCamelContext>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>container-test</id>
+            <properties>
+                <skip.starting.camel.context>true</skip.starting.camel.context>
+            </properties>
+        </profile>
+        <!--
+          This profile allows you to add a repository to the repo list so that
+          you can test the examples out against a staged version of the camel distribution
+        -->
+        <profile>
+            <id>add-remote-repo</id>
+            <activation>
+                <property>
+                    <name>remoteRepo</name>
+                </property>
+            </activation>
+
+            <repositories>
+                <repository>
+                    <id>dynamic.repo</id>
+                    <name>Repository Dynamically Added Via the Command Line</name>
+                    <url>$remoteRepo</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>dynamic.repo</id>
+                    <name>Repository Dynamically Added Via the Command Line</name>
+                    <url>$remoteRepo</url>
+                </pluginRepository>
+            </pluginRepositories>
+
+        </profile>
+    </profiles>
+
+</project>

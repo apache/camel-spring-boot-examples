@@ -1,0 +1,24 @@
+spec:
+  template:
+    spec:
+      volumes:
+        - name: truststore-config
+          configMap:
+            name: truststore-config
+            items:
+              - key: truststore.jks
+                path: truststore.jks
+      containers:
+        - volumeMounts:
+            - name: truststore-config
+              mountPath: /deployments/config
+          resources:
+            requests:
+              cpu: "0.2"
+              ### memory: 256Mi
+            limits:
+              cpu: "1.0"
+              ### memory: 256Mi
+          env:
+            - name: SPRING_APPLICATION_JSON
+              value: '{"server":{"tomcat":{"max-threads":1}}}'
