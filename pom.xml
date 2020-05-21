@@ -84,6 +84,10 @@
         <javax.servlet.api.version>4.0.1</javax.servlet.api.version>
         <camel.osgi.export.pkg />
         <fabric8-maven-plugin-version>4.4.0</fabric8-maven-plugin-version>
+        <kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
+        <reactor-version>3.2.15.RELEASE</reactor-version>
+        <testcontainers-version>1.14.0</testcontainers-version>
+        <tomcat-version>9.0.31</tomcat-version>
     </properties>
 
     <dependencyManagement>
