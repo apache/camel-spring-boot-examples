@@ -23,16 +23,20 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ApplicationConfiguration {
+
     @Bean
     public RouteBuilder routesBuilder() {
         return new RouteBuilder() {
             public void configure() throws Exception {
-                from("timer:foo?period=1000")
+                // to be less verbose
+                errorHandler(defaultErrorHandler().logStackTrace(false).logExhaustedMessageHistory(false).logExhausted(false));
+
+                from("timer:foo?bridgeErrorHandler=true&period=4000")
                     .routeId("foo")
                     .process(e -> {
                         throw new RuntimeCamelException("This is a forced exception to have health check monitor this failure (route=foo)"); 
                     });
-                from("timer:bar?period=1000")
+                from("timer:bar?bridgeErrorHandler=true&period=5000")
                     .routeId("bar")
                     .process(e -> {
                         throw new RuntimeCamelException("This is a forced exception to have health check monitor this failure (route=bar)");
