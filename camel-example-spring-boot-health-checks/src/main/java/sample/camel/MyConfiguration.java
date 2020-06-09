@@ -16,34 +16,15 @@
  */
 package sample.camel;
 
-import java.util.Map;
-import java.util.UUID;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import org.apache.camel.health.HealthCheckResultBuilder;
-import org.apache.camel.impl.health.AbstractHealthCheck;
+@Configuration
+public class MyConfiguration {
 
-public class ApplicationCheck extends AbstractHealthCheck {
-    private State state;
-
-    public ApplicationCheck(String group, String id) {
-        super(group, id);
-
-        this.state = State.UP;
-
-        getConfiguration().setEnabled(true);
+    @Bean(name = "monkey")
+    public MonkeyHealthCheck newMonkey() {
+        return new MonkeyHealthCheck();
     }
 
-
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
-    @Override
-    protected void doCall(HealthCheckResultBuilder builder, Map<String, Object> options) {
-        builder.state(state).detail("random.value", UUID.randomUUID().toString());
-    }
 }

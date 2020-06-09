@@ -16,21 +16,26 @@
  */
 package sample.camel;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-//CHECKSTYLE:OFF
-/**
- * A sample Spring Boot application that starts the Camel routes.
- */
-@SpringBootApplication
-public class Application {
+@Component
+public class MyRouteBuilder extends RouteBuilder {
 
-    /**
-     * A main method to start this application.
-     */
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+    // we can inject the bean via this annotation
+    @Autowired
+    MonkeyHealthCheck monkey;
+
+    @Override
+    public void configure() throws Exception {
+        from("timer:foo?period={{myPeriod}}").routeId("timer")
+                .bean(monkey, "chaos")
+                .log("${body}");
+
+        // this route is invalid and fails during startup
+        // the supervising route controller will take over and attempt
+        // to restart this route
+        from("netty:tcp:unknownhost").to("log:dummy").routeId("netty");
     }
 }
-//CHECKSTYLE:ON

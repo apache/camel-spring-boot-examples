@@ -23,6 +23,11 @@ $ http://localhost:8080/actuator/health
 The returned response should include the health checks from Apache Camel,
 and as well two custom checks.
 
+=== JMX Management
+
+You can from JMX see the health-check status in the Camel tree under health and
+find the DefaultHealthCheck MBean.
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
