@@ -1,0 +1,50 @@
+== Spring Boot Example with ArangoDB
+
+=== Introduction
+
+This example demonstrates how you can use Camel-Arangodb Starter component. The example is really simple: put a document in the database and get the document with the same key.
+You'll need a running ArangoDB server to run this example.
+
+=== Build
+
+You can build this example using:
+
+    $ mvn package
+
+=== Run
+
+You can run this example following these steps using:
+
+Run an instance of ArangoDB with the root and password given in application.properties file. Example using the docker image :
+
+    $ docker run -p 8529:8529 -e ARANGO_ROOT_PASSWORD=openSesame arangodb:latest
+
+Execute arangosh in your server. Example with the docker image ( set "openSesame" as password)
+
+    $ docker exec -it <CONTAINER_ID> arangosh --server.username "root"
+
+Create the database "myDb"
+
+    $ db._createDatabase("myDb")
+
+Create the collection "foo"
+
+    $ db._useDatabase("myDb")
+
+    $ db._create("foo")
+
+Run the app
+
+    $ mvn spring-boot:run
+
+And you should see output in the console. You can also see the document created in the foo collection.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
