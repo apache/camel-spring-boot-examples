@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 40 (0 deprecated)
+Number of Examples: 41 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -50,6 +50,8 @@ Number of Examples: 40 (0 deprecated)
 | link:camel-example-spring-boot-clustered-route-controller/readme.adoc[Spring Boot Clustered Route Controller] (camel-example-spring-boot-clustered-route-controller) | Clustering | An example showing how to work with Camel's Clustered Route Controller and Spring Boot
 
 | link:camel-example-spring-boot-master/readme.adoc[Spring Boot Master] (camel-example-spring-boot-master) | Clustering | An example showing how to work with Camel's Master component and Spring Boot
+
+| link:camel-example-spring-boot-arangodb/readme.md[Spring Boot Arangodb] (camel-example-spring-boot-arangodb) | Database | An example showing the Camel ArangoDb component with Spring Boot
 
 | link:camel-example-spring-boot-rest-jpa/README.adoc[Spring Boot REST JPA] (camel-example-spring-boot-rest-jpa) | Database | An example demonstrating how to use Camel REST DSL with JPA to expose a RESTful API that performs CRUD
         operations on a database
