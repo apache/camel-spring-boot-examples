@@ -17,13 +17,13 @@ Number of Examples: 40 (0 deprecated)
 |===
 | Example | Category | Description
 
+| link:camel-example-spring-boot-health-checks/readme.adoc[Spring Boot Health Checks] (camel-example-spring-boot-health-checks) |  | 
+
 | link:camel-example-spring-boot-undertow-spring-security/readme.adoc[Spring Boot Undertow Spring Security] (camel-example-spring-boot-undertow-spring-security) | Advanced | Example on how to use the Camel Undertow component with spring security and Keycloak
 
 | link:camel-example-spring-boot-webhook/readme.adoc[Spring Boot Webhook] (camel-example-spring-boot-webhook) | Advanced | Example on how to use the Camel Webhook component
 
 | link:camel-example-spring-boot/readme.adoc[Spring Boot] (camel-example-spring-boot) | Beginner | An example showing how to work with Camel and Spring Boot
-
-| link:camel-example-spring-boot-health-checks/readme.adoc[Spring Boot Health Checks] (camel-example-spring-boot-health-checks) | Beginner | An example showing how to work with Camel's Health Checks and Spring Boot
 
 | link:camel-example-spring-boot-jira/README.adoc[Spring Boot Jira] (camel-example-spring-boot-jira) | Beginner | An example that uses Jira Camel API
 
