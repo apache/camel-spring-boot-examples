@@ -52,8 +52,8 @@
             <!-- Camel BOM -->
             <dependency>
                 <groupId>org.apache.camel.springboot</groupId>
-                <artifactId>camel-spring-boot-dependencies</artifactId>
-                <version>${project.version}</version>
+                <artifactId>camel-spring-boot-bom</artifactId>
+                <version>${camel-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -136,19 +136,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-maven-plugin</artifactId>
-                <version>${camel-version}</version>
-                <!-- allows to fail if not all routes are covered during testing -->
-                <!--
-                        <configuration>
-                          <failOnError>true</failOnError>
-                          <coverageThreshold>90</coverageThreshold>
-                        </configuration>
-                -->
             </plugin>
         </plugins>
     </build>
