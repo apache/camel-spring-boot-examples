@@ -21,18 +21,17 @@ import java.util.concurrent.TimeUnit;
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-import org.apache.camel.test.spring.junit5.EnableRouteCoverage;
 import org.apache.camel.test.spring.junit5.MockEndpoints;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 
 import static org.junit.Assert.assertTrue;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = MyCamelApplication.class,
     properties = "greeting = Hello foo")
-@EnableRouteCoverage
 @MockEndpoints("log:foo") // mock the log:foo endpoint => mock:log:foo which we then use in the testing
 //@Ignore // enable me to run this test as well so we can cover testing the route completely
 public class FooApplicationJUnit5Test {
