@@ -89,18 +89,13 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-fhir</artifactId>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-fhir-starter</artifactId>
             <version>${camel-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-hl7</artifactId>
-            <version>${camel-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-management</artifactId>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-hl7-starter</artifactId>
             <version>${camel-version}</version>
         </dependency>
         <dependency>
@@ -116,8 +111,17 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-spring</artifactId>
-            <version>${camel-version}</version>
+            <artifactId>camel-test-spring-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-management</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
 

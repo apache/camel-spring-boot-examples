@@ -17,39 +17,32 @@
 package sample.camel;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.apache.camel.EndpointInject;
+import org.apache.camel.CamelContext;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.test.spring.CamelSpringBootRunner;
-import org.apache.camel.test.spring.EnableRouteCoverage;
-import org.apache.camel.test.spring.MockEndpointsAndSkip;
+import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit5.MockEndpointsAndSkip;
 import org.apache.commons.io.FileUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@RunWith(CamelSpringBootRunner.class)
+@CamelSpringBootTest
 @SpringBootTest(classes = MyCamelApplication.class,
     properties = "input = target/work/fhir/testinput")
-@EnableRouteCoverage
 @MockEndpointsAndSkip("fhir*")
 public class MyCamelApplicationTest {
 
-    @EndpointInject("mock:fhir:transaction/withResources")
-    private MockEndpoint mock;
-
-    @Before
-    public void copyData() throws IOException {
-        FileUtils.copyDirectory(new File("src/main/data"), new File("target/work/fhir/testinput"));
-    }
+    @Autowired
+    private CamelContext camelContext;
 
     @Test
-    public void shouldPushConvertedCsvtoFhir() throws Exception {
+    public void shouldPushConvertedHl7toFhir() throws Exception {
+        MockEndpoint mock = camelContext.getEndpoint("mock:fhir:transaction/withResources", MockEndpoint.class);
         mock.expectedMessageCount(1);
+
+        FileUtils.copyDirectory(new File("src/main/data"), new File("target/work/fhir/testinput"));
 
         mock.assertIsSatisfied();
     }
-
 }

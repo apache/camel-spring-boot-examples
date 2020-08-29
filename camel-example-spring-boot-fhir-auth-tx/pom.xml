@@ -90,13 +90,13 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-fhir</artifactId>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-fhir-starter</artifactId>
             <version>${camel-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-csv</artifactId>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-csv-starter</artifactId>
             <version>${camel-version}</version>
         </dependency>
         <dependency>
@@ -117,8 +117,17 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-spring</artifactId>
-            <version>${camel-version}</version>
+            <artifactId>camel-test-spring-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-management</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -137,18 +146,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-maven-plugin</artifactId>
-                <version>${camel-version}</version>
-                <!-- allows to fail if not all routes are fully covered during testing -->
-                <!--
-                        <configuration>
-                          <failOnError>true</failOnError>
-                        </configuration>
-                -->
             </plugin>
         </plugins>
     </build>
