@@ -91,14 +91,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- CDI API -->
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <version>${cdi-api-2.0-version}</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- elastico -->
         <dependency>
             <groupId>co.elastic.apm</groupId>

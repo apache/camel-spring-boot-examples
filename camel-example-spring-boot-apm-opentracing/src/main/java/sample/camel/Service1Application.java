@@ -25,6 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * A Spring Boot application that starts the Camel OpenTracing application.
  * <p/>
  * Notice we use the `@CamelOpenTracing` annotation to enable Camel with OpenTracing.
+ * Also we start APM Agent with `ElasticApmAttacher.attach()`
  */
 @SpringBootApplication
 @CamelOpenTracing
@@ -32,11 +33,8 @@ public class Service1Application {
     /**
      * A main method to start this application.
      */
-
     public static void main(String[] args) {
         ElasticApmAttacher.attach();
         SpringApplication.run(Service1Application.class, args);
     }
-
-
 }
