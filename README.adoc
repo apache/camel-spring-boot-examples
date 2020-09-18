@@ -11,7 +11,7 @@ View the individual example READMEs for details.
 == Examples
 
 // examples: START
-Number of Examples: 41 (0 deprecated)
+Number of Examples: 42 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -67,6 +67,9 @@ Number of Examples: 41 (0 deprecated)
     
 
 | link:camel-example-spring-boot-validator/readme.adoc[Validator Spring Boot] (camel-example-spring-boot-validator) | Input/Output Type Contract | An example showing how to work with declarative validation and Spring Boot
+
+| link:camel-example-spring-boot-apm-opentracing/README.adoc[OpenTracing APM] (camel-example-spring-boot-apm-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing with ElastiCo APM
+    
 
 | link:camel-example-spring-boot-metrics/README.adoc[Spring Boot Metrics] (camel-example-spring-boot-metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
 
