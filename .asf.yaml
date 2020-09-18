@@ -22,7 +22,7 @@ github:
     - camel
     - integration
     - java
-    - spring boot
+    - spring-boot
   enabled_merge_buttons:
     merge: false
     rebase: true
