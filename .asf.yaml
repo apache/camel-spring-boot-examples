@@ -16,7 +16,7 @@
 #
 
 github:
-  description: "Apache Camel Examples"
+  description: "Apache Camel Spring Boot Examples"
   homepage: https://camel.apache.org
   labels:
     - camel
