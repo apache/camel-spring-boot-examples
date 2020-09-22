@@ -30,7 +30,7 @@
     <description>An example showing the Camel AWS2 S3 component with Spring Boot</description>
 
     <properties>
-        <category>Database</category>
+        <category>Cloud</category>
         <spring.boot-version>${spring-boot-version}</spring.boot-version>
     </properties>
 
