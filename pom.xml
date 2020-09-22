@@ -39,6 +39,7 @@
         <module>camel-example-spring-boot-amqp</module>
         <module>camel-example-spring-boot-apm-opentracing</module>
         <module>camel-example-spring-boot-arangodb</module>
+        <module>camel-example-spring-boot-aws2-s3</module>
         <module>camel-example-spring-boot-clustered-route-controller</module>
         <module>camel-example-spring-boot-fhir</module>
         <module>camel-example-spring-boot-fhir-auth-tx</module>
