@@ -3,7 +3,7 @@
 This example shows how to call a REST service defined using Swagger
 specification with the help of Camel Rest Swagger component.
 
-The example is a standalong Spring Boot application that acts as a REST
+The example is a standalone Spring Boot application that acts as a REST
 client, you can run simply by issuing:
 
 ....
