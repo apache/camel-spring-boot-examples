@@ -82,11 +82,9 @@
             <artifactId>camel-http-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-undertow</artifactId>
-            <version>${camel-version}</version>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-undertow-starter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.apache.camel.springboot.example</groupId>
             <artifactId>camel-example-spring-boot-opentracing-loggingtracer</artifactId>
