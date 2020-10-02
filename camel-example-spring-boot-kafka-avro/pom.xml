@@ -36,7 +36,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.boot-version>${spring-boot-version}</spring.boot-version>
     </properties>
-    
+
     <!--necessary to resolve confluent dependencies-->
     <repositories>
         <repository>
@@ -64,10 +64,10 @@
                 <scope>import</scope>
             </dependency>
         </dependencies>
-    </dependencyManagement> 
+    </dependencyManagement>
 
     <dependencies>
-       
+
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -97,38 +97,24 @@
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-stream-starter</artifactId>
         </dependency>
-
-        <!-- camel -->
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
-            <version>${camel-version}</version>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-avro-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-kafka</artifactId>
-            <version>${camel-version}</version>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-kafka-starter</artifactId>
         </dependency>
-         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-support</artifactId>
-            <version>${camel-version}</version>
-        </dependency>
-         <dependency>
-           <groupId>org.apache.camel</groupId>
-           <artifactId>camel-avro</artifactId>
-           <version>${camel-version}</version>
-         </dependency> 
         <dependency>
-           <groupId>io.confluent</groupId>
-           <artifactId>kafka-avro-serializer</artifactId>
-           <version>${kafka-avro-serializer-version}</version>
-        </dependency> 
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>${kafka-avro-serializer-version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-         <!--Avro plugin to  generated classes from schema-->
+            <!--Avro plugin to  generated classes from schema-->
             <!-- <plugin>
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro-maven-plugin</artifactId>
@@ -186,4 +172,4 @@
             </plugin>
         </plugins>
     </build>
-    </project>
+</project>

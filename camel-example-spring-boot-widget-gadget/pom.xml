@@ -28,7 +28,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>camel-example-spring-boot-widget-gadget</artifactId>
-    <name>Camel SB Examples :: </name>
+    <name>Camel SB Examples ::</name>
     <description>The widget and gadget example from EIP book, running on Spring Boot</description>
 
     <properties>
@@ -90,19 +90,14 @@
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-amqp</artifactId>
-            <version>${camel-version}</version>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-amqp-starter</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-jsonpath</artifactId>
-            <version>${camel-version}</version>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-jsonpath-starter</artifactId>
         </dependency>
-
 
         <!-- test -->
         <dependency>

@@ -91,13 +91,6 @@
             <artifactId>camel-spring-boot-starter</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-amqp</artifactId>
-            <version>${camel-version}</version>
-        </dependency>
-
-
         <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

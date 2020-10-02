@@ -100,11 +100,6 @@
             <version>${camel-version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-management</artifactId>
-            <version>${camel-version}</version>
-        </dependency>
-        <dependency>
             <groupId>ca.uhn.hapi</groupId>
             <artifactId>hapi-structures-v24</artifactId>
         </dependency>
