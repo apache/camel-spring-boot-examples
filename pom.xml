@@ -94,6 +94,32 @@
         <tomcat-version>9.0.31</tomcat-version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/snapshots/</url>
+            <name>Apache Snapshot Repo</name>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>apache.snapshots</id>
+            <url>https://repository.apache.org/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencyManagement>
         <dependencies>
             <!--
