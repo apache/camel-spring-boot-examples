@@ -8,6 +8,22 @@ command, Maven will attempt to download the required dependencies from a
 central repository to your local repository.
 View the individual example READMEs for details.
 
+== Executing
+
+Master branch should only be used for development purposes, which will be pointing
+to the SNAPSHOT version of the next release.
+
+To execute the examples, checkout into the tag for the latest release. For example:
+
+`$ git checkout tags/camel-spring-boot-examples-3.5.0`
+
+Then, install the root pom:
+
+`$ mvn install`
+
+After that, you should be able to execute the examples following each example's
+readme's instructions.
+
 == Examples
 
 // examples: START
@@ -17,7 +33,7 @@ Number of Examples: 43 (0 deprecated)
 |===
 | Example | Category | Description
 
-| link:camel-example-spring-boot-health-checks/readme.adoc[Spring Boot Health Checks] (camel-example-spring-boot-health-checks) |  | 
+| link:camel-example-spring-boot-health-checks/readme.adoc[Spring Boot Health Checks] (camel-example-spring-boot-health-checks) |  |
 
 | link:camel-example-spring-boot-undertow-spring-security/readme.adoc[Spring Boot Undertow Spring Security] (camel-example-spring-boot-undertow-spring-security) | Advanced | Example on how to use the Camel Undertow component with spring security and Keycloak
 
@@ -56,8 +72,8 @@ Number of Examples: 43 (0 deprecated)
 | link:camel-example-spring-boot-arangodb/README.adoc[Spring Boot Arangodb] (camel-example-spring-boot-arangodb) | Database | An example showing the Camel ArangoDb component with Spring Boot
 
 | link:camel-example-spring-boot-rest-jpa/README.adoc[Spring Boot REST JPA] (camel-example-spring-boot-rest-jpa) | Database | An example demonstrating how to use Camel REST DSL with JPA to expose a RESTful API that performs CRUD
-        operations on a database
-    
+operations on a database
+
 
 | link:camel-example-spring-boot-hystrix/README.adoc[Spring Boot Hystrix] (camel-example-spring-boot-hystrix) | EIP | An example showing how to use Hystrix EIP as circuit breaker in Camel routes
 
@@ -66,17 +82,17 @@ Number of Examples: 43 (0 deprecated)
 | link:camel-example-spring-boot-fhir/readme.adoc[Spring Boot Fhir] (camel-example-spring-boot-fhir) | Health Care | An example showing how to work with Camel, FHIR and Spring Boot
 
 | link:camel-example-spring-boot-fhir-auth-tx/readme.adoc[Spring Boot Fhir Auth Tx] (camel-example-spring-boot-fhir-auth-tx) | Health Care | An example showing how to work with Camel, FHIR Authorization, FHIR Transaction and Spring Boot
-    
+
 
 | link:camel-example-spring-boot-validator/readme.adoc[Validator Spring Boot] (camel-example-spring-boot-validator) | Input/Output Type Contract | An example showing how to work with declarative validation and Spring Boot
 
 | link:camel-example-spring-boot-apm-opentracing/README.adoc[OpenTracing APM] (camel-example-spring-boot-apm-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing with ElastiCo APM
-    
+
 
 | link:camel-example-spring-boot-metrics/README.adoc[Spring Boot Metrics] (camel-example-spring-boot-metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
 
 | link:camel-example-spring-boot-opentracing/README.adoc[OpenTracing] (camel-example-spring-boot-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing
-    
+
 
 | link:camel-example-spring-boot-supervising-route-controller/readme.adoc[Spring Boot Supervising Route Controller] (camel-example-spring-boot-supervising-route-controller) | Management and Monitoring | An example showing how to work with Camel's Supervising Route Controller and Spring Boot
 
@@ -97,7 +113,7 @@ Number of Examples: 43 (0 deprecated)
 | link:camel-example-spring-boot-widget-gadget/readme.md[Spring Boot Widget Gadget] (camel-example-spring-boot-widget-gadget) | Messaging | The widget and gadget example from EIP book, running on Spring Boot
 
 | link:camel-example-spring-boot-reactive-streams/readme.adoc[Spring Boot Reactive Streams] (camel-example-spring-boot-reactive-streams) | Reactive | An example that shows how Camel can exchange data using reactive streams with Spring Boot reactor
-    
+
 
 | link:camel-example-spring-boot-geocoder/README.adoc[Spring Boot Geocoder] (camel-example-spring-boot-geocoder) | Rest | An example showing the Camel Geocoder component via REST DSL with Spring Boot
 
@@ -113,10 +129,10 @@ Number of Examples: 43 (0 deprecated)
 
 == Help and contributions
 
-If you hit any problem using Camel or have some feedback, 
+If you hit any problem using Camel or have some feedback,
 then please https://camel.apache.org/support.html[let us know].
 
-We also love contributors, 
+We also love contributors,
 so https://camel.apache.org/contributing.html[get involved] :-)
 
 The Camel riders!
