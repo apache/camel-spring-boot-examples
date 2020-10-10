@@ -46,7 +46,8 @@ public class MyRouteBuilder extends RouteBuilder {
         // https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics-endpoint
         from("timer:metricsTimer?period={{metricsPeriod}}")
                 .to("rest:get:/actuator/metrics/system.cpu.usage")
-                .unmarshal().json()
+                .unmarshal()
+                .json()
                 .to("log:INFO");
 
         // Finally, let's see how to shutdown our application using the actuator endpoint
