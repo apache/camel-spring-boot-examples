@@ -35,7 +35,8 @@ public class MyRouteBuilder extends RouteBuilder {
                 .port(8080)
                 .bindingMode(RestBindingMode.json);
 
-        // First, let's show the routes we have exposed.
+        // First, let's show the routes we have exposed. Let's create a timer
+        // consumer that will only fire once and show us the exposed mappings
         from("timer:queryTimer?repeatCount=1")
                 .to("rest:get:/actuator/mappings")
                 .unmarshal()
