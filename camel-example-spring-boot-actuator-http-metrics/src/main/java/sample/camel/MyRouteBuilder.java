@@ -36,7 +36,7 @@ public class MyRouteBuilder extends RouteBuilder {
                 .bindingMode(RestBindingMode.json);
 
         // First, let's show the routes we have exposed.
-        doOnce()
+        from("timer:queryTimer?repeatCount=1")
                 .to("rest:get:/actuator/mappings")
                 .unmarshal()
                 .json()
@@ -53,9 +53,5 @@ public class MyRouteBuilder extends RouteBuilder {
         from("timer:shutdownTimer?delay={{shutdownTime}}&repeatCount=1")
                 .log("Shutting down")
                 .to("rest:post:/actuator/shutdown");
-    }
-
-    private RouteDefinition doOnce() {
-        return from("timer:queryTimer?repeatCount=1");
     }
 }
