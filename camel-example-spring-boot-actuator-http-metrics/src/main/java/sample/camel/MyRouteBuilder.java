@@ -17,6 +17,7 @@
 package sample.camel;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,15 +28,15 @@ public class MyRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        // First, we have to configure our jetty component, which will be the product
+        // First, we have to configure our jetty component, which will be the rest
         // in charge of querying the REST endpoints from actuator
         restConfiguration().component("jetty")
                 .host("0.0.0.0")
                 .port(8080)
                 .bindingMode(RestBindingMode.json);
 
-        // We will first show the routes we have exposed.
-        from("timer:queryTimer?repeatCount=1")
+        // First, let's show the routes we have exposed.
+        doOnce()
                 .to("rest:get:/actuator/mappings")
                 .unmarshal()
                 .json()
@@ -48,6 +49,15 @@ public class MyRouteBuilder extends RouteBuilder {
                 .unmarshal().json()
                 .to("log:INFO");
 
-        // Left to oversee how to stop routes
+        // Finally, let's see how to shutdown our application using the actuator endpoint
+        from("timer:shutdownTimer?delay={{shutdownTime}}&repeatCount=1")
+                .log("Shutting down")
+                .to("rest:post:/actuator/shutdown");
+
+
+    }
+
+    private RouteDefinition doOnce() {
+        return from("timer:queryTimer?repeatCount=1");
     }
 }
