@@ -53,8 +53,6 @@ public class MyRouteBuilder extends RouteBuilder {
         from("timer:shutdownTimer?delay={{shutdownTime}}&repeatCount=1")
                 .log("Shutting down")
                 .to("rest:post:/actuator/shutdown");
-
-
     }
 
     private RouteDefinition doOnce() {
