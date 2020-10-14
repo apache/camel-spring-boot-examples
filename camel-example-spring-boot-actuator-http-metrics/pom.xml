@@ -32,7 +32,7 @@
     <description>Example on how to use Spring Boot's Actuator endpoints to gather info like mappings or metrics</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Management and Monitoring</category>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.boot-version>${spring-boot-version}</spring.boot-version>
