@@ -36,6 +36,7 @@
     <modules>
         <module>camel-example-spring-boot</module>
         <module>camel-example-spring-boot-activemq</module>
+        <module>camel-example-spring-boot-actuator-http-metrics</module>
         <module>camel-example-spring-boot-amqp</module>
         <module>camel-example-spring-boot-apm-opentracing</module>
         <module>camel-example-spring-boot-arangodb</module>
