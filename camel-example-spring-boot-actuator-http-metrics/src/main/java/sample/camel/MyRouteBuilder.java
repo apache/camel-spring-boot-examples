@@ -28,7 +28,7 @@ public class MyRouteBuilder extends RouteBuilder {
 
         // First, we have to configure our jetty component, which will be the rest
         // in charge of querying the REST endpoints from actuator
-        restConfiguration().component("jetty")
+        restConfiguration()
                 .host("0.0.0.0")
                 .port(8080)
                 .bindingMode(RestBindingMode.json);
