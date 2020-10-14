@@ -38,16 +38,16 @@ public class MyRouteBuilder extends RouteBuilder {
         from("timer:queryTimer?repeatCount=1")
                 .to("rest:get:/actuator/mappings")
                 .unmarshal()
-                .json()
-                .to("log:INFO");
+                .json(true)
+                .to("log:INFO?multiline=true");
 
         // Then, we will be querying the cpu consumption periodically. For more options, you can check
         // https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-metrics-endpoint
         from("timer:metricsTimer?period={{metricsPeriod}}")
                 .to("rest:get:/actuator/metrics/system.cpu.usage")
                 .unmarshal()
-                .json()
-                .to("log:INFO");
+                .json(true)
+                .to("log:INFO?multiline=true");
 
         // Finally, let's see how to shutdown our application using the actuator endpoint
         from("timer:shutdownTimer?delay={{shutdownTime}}&repeatCount=1")
