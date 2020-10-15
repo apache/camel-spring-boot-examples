@@ -1,0 +1,44 @@
+== Camel with Actuator - Mappings, Metrics and Shutdown example
+
+This example shows how you can query some of Spring Boot Actuator options from your
+Camel routes.
+
+=== How to run
+
+[source,console]
+----
+mvn compile spring-boot:run
+----
+
+=== Actuator routes
+
+You need to enable the HTTP routes on Actuator to be able to use them. For example,
+in this example we have to expose the metrics, mappings and shutdown routes.
+
+[source, properties]
+----
+management.endpoints.web.exposure.include=mappings,metrics,shutdown
+----
+
+You can see other functionalities and more details in
+https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-endpoints-enabling-endpoints[Actuator's documentation].
+
+=== Shutdown
+
+Shutdown should be handled with care for security reasons. You will need to explicitly enable
+that endpoint for it to be usable.
+
+[source, properties]
+----
+management.endpoint.shutdown.enabled=true
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
