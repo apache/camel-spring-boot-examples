@@ -25,7 +25,7 @@ public class SampleAutowiredAmqRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("activemq:foo")
-            .to("log:sample");
+            .to("mock:activemq");
 
         from("timer:bar")
             .setBody(constant("Hello from Camel"))
