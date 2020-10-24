@@ -1,0 +1,28 @@
+== Camel Example Spring Boot
+
+This example shows two options creating a custom Type Converter with Apache Camel application using Spring Boot.
+
+Option 1 (Camel 2.x) - Converter added to the registry and loaded at the runtime : CustomConverterRuntimeTest and CustomRuntimeConverter.
+
+Option 2 (Camel 3.x) - Converter source code generated during mvn package phase: CustomConverterGeneratedTest and CustomGeneratedConverter.
+Required Camel Maven Package Plugin and build helper plugin - see pom.xml for details.
+
+=== How to run
+
+You can run this example using
+
+    mvn test
+
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
+
+
+
