@@ -1,0 +1,31 @@
+== Camel Example Spring Boot
+
+This example shows several examples of Load Balancer EIP with Apache Camel application using Spring Boot.
+
+1. Round-robin - The exchanges are selected from in a round robin fashion. This is a well known and classic policy, which spreads the load evenly.
+2. Random load - A random endpoint is selected for each exchange.
+3. Sticky - Sticky load balancing using an Expression to calculate a correlation key to perform the sticky load balancing; rather like jsessionid in the web or JMSXGroupID in JMS.
+4. Topic - Topic which sends to all destinations (rather like JMS Topics)
+5. Failover - In case of failures the exchange will be tried on the next endpoint.
+6. Weighted round-robin - The weighted load balancing policy allows you to specify a processing load distribution ratio for each server with respect to the others. In addition to the weight, endpoint selection is then further refined using round-robin distribution based on weight.
+7. Custom - The preferred way of using a custom Load Balancer is to use this policy, as the ref attribute is not supported anymore.
+
+=== How to run
+
+You can run this example using
+
+    mvn test
+
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
+
+
+

@@ -53,6 +53,7 @@
         <module>camel-example-spring-boot-jira</module>
         <module>camel-example-spring-boot-kafka-avro</module>
         <module>camel-example-spring-boot-kafka-offsetrepository</module>
+        <module>camel-example-spring-boot-load-balancer-eip</module>
         <module>camel-example-spring-boot-master</module>
         <module>camel-example-spring-boot-metrics</module>
         <module>camel-example-spring-boot-opentracing</module>
