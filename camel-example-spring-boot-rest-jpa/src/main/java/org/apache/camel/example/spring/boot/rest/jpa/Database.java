@@ -16,17 +16,19 @@
  */
 package org.apache.camel.example.spring.boot.rest.jpa;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Database {
 
-    @Autowired
-    BookRepository books;
+    private final BookRepository books;
 
-    @Autowired
-    OrderRepository orders;
+    private final OrderRepository orders;
+
+    public Database(BookRepository books, OrderRepository orders) {
+        this.books = books;
+        this.orders = orders;
+    }
 
     public Iterable<Book> findBooks() {
         return books.findAll();

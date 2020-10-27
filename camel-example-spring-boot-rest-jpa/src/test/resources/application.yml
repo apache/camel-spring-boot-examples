@@ -18,7 +18,8 @@
 camel:
   springboot:
     name: CamelRestJpa
-
+  rest:
+    component: servlet
   component:
     servlet:
       mapping:
