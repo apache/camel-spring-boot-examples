@@ -14,16 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package sample.camel;
+package org.apache.camel.springboot.example;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+public class MyException extends RuntimeException {
 
-@SpringBootApplication
-public class Application {
+	MyException() {
+	}
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-
+	MyException(String message) {
+		super(message);
+	}
 }
