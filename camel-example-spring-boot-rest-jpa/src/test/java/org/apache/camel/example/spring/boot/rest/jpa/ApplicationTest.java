@@ -39,7 +39,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @CamelSpringBootTest
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@Disabled("Remove if you have running MySQL v8 instance on port 3306 and with user cameluser")
 public class ApplicationTest {
 
     @Autowired

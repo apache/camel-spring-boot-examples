@@ -19,7 +19,8 @@ camel:
   springboot:
     # The Camel context name
     name: CamelRestJpa
-
+  rest:
+    component: servlet
   component:
     servlet:
       mapping:

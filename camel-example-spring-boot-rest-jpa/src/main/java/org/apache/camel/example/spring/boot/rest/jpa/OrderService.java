@@ -24,10 +24,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderService {
 
-    @Autowired
-    private BookRepository books;
+    private final BookRepository books;
 
     private final Random amount = new Random();
+
+    public OrderService(BookRepository books) {
+        this.books = books;
+    }
 
     public Order generateOrder() {
         Order order = new Order();
