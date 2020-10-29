@@ -27,7 +27,7 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 46 (0 deprecated)
+Number of Examples: 47 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -52,6 +52,8 @@ Number of Examples: 46 (0 deprecated)
 | link:camel-example-spring-boot-rest-swagger-simple/README.adoc[REST Swagger] (camel-example-spring-boot-rest-swagger-simple) | Beginner | This example shows how to call a Rest service defined using Swagger specification
 
 | link:camel-example-spring-boot-type-converter/README.adoc[Spring Boot Type Converter] (camel-example-spring-boot-type-converter) | Beginner | An example showing how to create custom type converter with Camel and Spring Boot
+
+| link:camel-example-spring-boot-unit-testing/README.adoc[Spring Boot Unit Testing] (camel-example-spring-boot-unit-testing) | Beginner | An example showing how to write unit tests with Camel and Spring Boot
 
 | link:camel-example-spring-boot-xml/readme.adoc[Spring Boot XML] (camel-example-spring-boot-xml) | Beginner | An example showing how to work with Camel routes in XML files and Spring Boot
 
