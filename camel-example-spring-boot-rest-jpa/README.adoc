@@ -29,7 +29,7 @@ You can run this example with Maven using:
 
 [source,sh]
 ----
-$ mvn spring-boot:run -Dspring.profiles.active=dev
+$ mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ----
 
 Alternatively, you can also run this example using the executable JAR:

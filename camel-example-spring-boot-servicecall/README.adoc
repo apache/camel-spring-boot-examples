@@ -36,12 +36,12 @@ Using multiple shells:
  - start the service-1 service group:
 
   $ cd services
-  $ mvn spring-boot:run -Dspring.profiles.active=service-1
+  $ mvn spring-boot:run -Dspring-boot.run.profiles=service-1
 
   - start the service-2 service group:
 
   $ cd services
-  $ mvn spring-boot:run -Dspring.profiles.active=service-2
+  $ mvn spring-boot:run -Dspring-boot.run.profiles=service-2
 
   - start the consumer
 
