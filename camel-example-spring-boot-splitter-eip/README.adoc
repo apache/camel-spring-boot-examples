@@ -1,0 +1,25 @@
+== Spring Boot and ServiceCall EIP Example
+
+This example show how to use Camel with Splitter EIP with Spring Boot.
+
+Examples
+
+ - Example 1 : Simple splitter.
+ - Example 2 : Splitter with subsequent aggregation.
+ - Example 3 : Splitter with subsequent aggregation using POJO bean instead of AggregationStrategy implementation
+ - Example 4 : Splitter with subsequent aggregation failing on exception.
+ - Example 5: Splitter with subsequent aggregation on failing on aggregation exception.
+
+=== How to run
+
+    mvn clean test
+     
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
