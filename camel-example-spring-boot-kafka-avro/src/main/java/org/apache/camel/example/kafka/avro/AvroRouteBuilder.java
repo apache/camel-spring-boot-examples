@@ -26,7 +26,7 @@ public class AvroRouteBuilder extends RouteBuilder {
         from("timer://foo?period={{period}}")
         .setBody(constant("Hi This is Avro example"))
         .process(new KafkaAvroMessageProcessor())
-            .to("kafka:{{producer.topic}}?brokers={{kafka.bootstrap.url}}&keySerializerClass=org.apache.kafka.common.serialization.StringSerializer&serializerClass=org.apache.camel.example.kafka.avro.CustomKafkaAvroSerializer");
+            .to("kafka:{{producer.topic}}?brokers={{kafka.bootstrap.url}}&keySerializer=org.apache.kafka.common.serialization.StringSerializer&valueSerializer=org.apache.camel.example.kafka.avro.CustomKafkaAvroSerializer");
 
         from("timer://foo?period={{period}}")
         .from("kafka:{{consumer.topic}}?brokers={{kafka.bootstrap.url}}&keyDeserializer=org.apache.kafka.common.serialization.StringDeserializer&valueDeserializer=org.apache.camel.example.kafka.avro.CustomKafkaAvroDeserializer")
