@@ -121,14 +121,13 @@ public class CamelSplitterEIPTests {
 		mockH.reset();
 		mockJ.reset();
 
-		// 'E' is poison message which will lead to an error during aggregation
-		producerTemplate.sendBody("direct:split-aggregate-stop-on-aggregation-exception", "A,B,E,C,D");
-
-		// TODO : THOSE TESTS ARE NOT CORRECT, ANY VALUE WOULD PASS
 		// Received all messages that went into aggregation, including corrupted one
 		mockH.expectedBodiesReceived("A", "B", "E");
 		// Since aggregation stopped, receiving all original messages
 		mockJ.expectedBodiesReceived("A,B,E,C,D");
+
+		// 'E' is poison message which will lead to an error during aggregation
+		producerTemplate.sendBody("direct:split-aggregate-stop-on-aggregation-exception", "A,B,E,C,D");
 
 		mockH.assertIsSatisfied();
 		mockJ.assertIsSatisfied();
