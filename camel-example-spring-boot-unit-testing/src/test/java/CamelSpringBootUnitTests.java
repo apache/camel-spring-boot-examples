@@ -36,7 +36,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.apache.camel.builder.Builder.body;
 import static org.apache.camel.builder.Builder.simple;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @CamelSpringBootTest
