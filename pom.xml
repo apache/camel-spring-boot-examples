@@ -78,8 +78,6 @@
 		<module>camel-example-spring-boot-xml</module>
 		<module>camel-example-spring-boot-zipkin</module>
 		<module>camel-example-spring-boot-strimzi</module>
-		<module>camel-example-spring-cloud-servicecall</module>
-		<module>camel-example-spring-cloud-serviceregistry</module>
 		<module>camel-example-spring-boot-splitter-eip</module>
 		<module>camel-example-spring-boot-widget-gadget</module>
 		<module>camel-example-spring-boot-unit-testing</module>

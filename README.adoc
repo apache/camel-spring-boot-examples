@@ -27,7 +27,7 @@ readme's instructions.
 == Examples
 
 // examples: START
-Number of Examples: 48 (0 deprecated)
+Number of Examples: 46 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -68,10 +68,6 @@ Number of Examples: 48 (0 deprecated)
 | link:camel-example-spring-boot-infinispan/README.adoc[Spring Boot Infinispan] (camel-example-spring-boot-infinispan) | Cloud | An example showing the Camel Infinispan component with Spring Boot
 
 | link:camel-example-spring-boot-servicecall/README.adoc[Spring Boot ServiceCall] (camel-example-spring-boot-servicecall) | Cloud | An example showing how to work with Camel ServiceCall EIP and Spring Boot
-
-| link:camel-example-spring-cloud-servicecall/README.adoc[Spring Cloud Servicecall] (camel-example-spring-cloud-servicecall) | Cloud | An example showing how to work with Camel ServiceCall EIP and Spring Cloud
-
-| link:camel-example-spring-cloud-serviceregistry/README.adoc[Spring Cloud ServiceRegistry] (camel-example-spring-cloud-serviceregistry) | Cloud | An example showing how to work with Camel Service registry and Spring Cloud
 
 | link:camel-example-spring-boot-clustered-route-controller/readme.adoc[Spring Boot Clustered Route Controller] (camel-example-spring-boot-clustered-route-controller) | Clustering | An example showing how to work with Camel's Clustered Route Controller and Spring Boot
 
