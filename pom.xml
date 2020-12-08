@@ -68,6 +68,7 @@
 		<module>camel-example-spring-boot-rest-swagger-simple</module>
 		<module>camel-example-spring-boot-rest-openapi</module>
 		<module>camel-example-spring-boot-rest-openapi-simple</module>
+		<module>camel-example-spring-boot-routetemplate</module>
 		<module>camel-example-spring-boot-servicecall</module>
 		<module>camel-example-spring-boot-supervising-route-controller</module>
 		<module>camel-example-spring-boot-twitter-salesforce</module>
