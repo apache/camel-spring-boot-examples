@@ -13,11 +13,11 @@ This example shows how to work with a simple Apache Camel application using Spri
 
 3. in a separate shell, run the first camel node
 
-    mvn -pl cluster-node spring-boot:run
+    mvn -pl cluster-node spring-boot:run -DnodeId=foo
 
 4. in a separate shell, run the second camel node
 
-    mvn -pl cluster-node spring-boot:run
+    mvn -pl cluster-node spring-boot:run -DnodeId=bar
 
 === Help and contributions
 

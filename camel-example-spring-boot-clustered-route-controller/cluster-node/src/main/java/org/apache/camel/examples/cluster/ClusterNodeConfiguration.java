@@ -16,12 +16,21 @@
  */
 package org.apache.camel.examples.cluster;
 
+import java.util.UUID;
+
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ClusterNodeConfiguration {
+
+    private String nodeId = UUID.randomUUID().toString();
+
+    @Bean
+    public String nodeId() {
+        return nodeId;
+    }
 
     @Bean
     public RouteBuilder routeBuilder() {
@@ -33,13 +42,13 @@ public class ClusterNodeConfiguration {
                 // this node.
                 from("timer:heartbeat?period=10000")
                     .routeId("heartbeat")
-                    .log("HeartBeat route (timer) {{node.id}} ...");
+                    .log("HeartBeat route (timer) ${sys.nodeId} ...");
 
                 // This route is configured to be clustered so it will be started
                 // by the controller only when this node is leader
                 from("timer:clustered?period=5000")
                     .routeId("clustered")
-                    .log("Clustered route (timer) {{node.id}} ...");
+                    .log("Clustered route (timer) ${sys.nodeId} ...");
             }
         };
     }
