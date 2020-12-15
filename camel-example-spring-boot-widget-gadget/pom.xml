@@ -28,7 +28,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>camel-example-spring-boot-widget-gadget</artifactId>
-    <name>Camel SB Examples ::</name>
+    <name>Camel SB Examples :: Widget Gadget</name>
     <description>The widget and gadget example from EIP book, running on Spring Boot</description>
 
     <properties>
