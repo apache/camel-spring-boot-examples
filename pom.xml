@@ -85,18 +85,12 @@
 	</modules>
 
 	<properties>
-		<!-- for symbolicName in OSGi examples we only want the artifactId, eg camel-example-sql -->
-		<!-- as having org.apache.camel as prefix is not needed and makes the name very long -->
-		<camel.osgi.symbolic.name>${project.artifactId}</camel.osgi.symbolic.name>
 		<camel-version>3.7.0-SNAPSHOT</camel-version>
 		<skip.starting.camel.context>false</skip.starting.camel.context>
 		<javax.servlet.api.version>4.0.1</javax.servlet.api.version>
-		<camel.osgi.export.pkg/>
 		<fabric8-maven-plugin-version>4.4.1</fabric8-maven-plugin-version>
 		<kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
 		<reactor-version>3.2.16.RELEASE</reactor-version>
-		<testcontainers-version>1.14.3</testcontainers-version>
-		<tomcat-version>9.0.31</tomcat-version>
 	</properties>
 
 	<repositories>
@@ -129,7 +123,7 @@
 		<dependencies>
 			<!--
 			  CAMEL-13084 Fix the spring-boot examples start up error by overriding servlet API version from camel-parent
-			  Wqe need to clean it up once camel-parent upgrade the servlet api version.
+			  We need to clean it up once camel-parent upgrade the servlet api version.
 			-->
 			<dependency>
 				<groupId>javax.servlet</groupId>
@@ -140,12 +134,6 @@
 	</dependencyManagement>
 
 	<build>
-		<!--<resources>-->
-		<!--<resource>-->
-		<!--<directory>src/main/resources</directory>-->
-		<!--<filtering>true</filtering>-->
-		<!--</resource>-->
-		<!--</resources>-->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
