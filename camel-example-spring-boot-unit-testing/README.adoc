@@ -1,6 +1,6 @@
 == Camel Example Spring Boot
 
-This example different ways to unit test Camel routes in Spring Boot using Mock component and adviceWith techniques.
+This example shows different ways to unit test Camel routes in Spring Boot using Mock component and adviceWith techniques.
 
 === How to run
 
