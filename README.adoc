@@ -106,7 +106,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-zipkin/README.adoc[Spring Boot Zipkin] (camel-example-spring-boot-zipkin) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with Zipkin
 
-| link:camel-example-spring-boot-activemq/readme.adoc[Spring Boot Activemq] (camel-example-spring-boot-activemq) | Messaging | An example showing how to work with Camel, ActiveMQ and Spring Boot
+| link:spring-boot-activemq/readme.adoc[Spring Boot Activemq] (camel-example-spring-boot-activemq) | Messaging | An example showing how to work with Camel, ActiveMQ and Spring Boot
 
 | link:camel-example-spring-boot-amqp/readme.adoc[Spring Boot Amqp] (camel-example-spring-boot-amqp) | Messaging | An example showing how to work with Camel, ActiveMQ Amqp and Spring Boot
 
