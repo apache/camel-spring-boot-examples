@@ -57,7 +57,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:camel-example-spring-boot-type-converter/README.adoc[Spring Boot Type Converter] (camel-example-spring-boot-type-converter) | Beginner | An example showing how to create custom type converter with Camel and Spring Boot
 
-| link:camel-example-spring-boot-unit-testing/README.adoc[Spring Boot Unit Testing] (camel-example-spring-boot-unit-testing) | Beginner | An example showing how to write unit tests with Camel and Spring Boot
+| link:spring-boot-unit-testing/README.adoc[Spring Boot Unit Testing] (camel-example-spring-boot-unit-testing) | Beginner | An example showing how to write unit tests with Camel and Spring Boot
 
 | link:camel-example-spring-boot-xml/readme.adoc[Spring Boot XML] (camel-example-spring-boot-xml) | Beginner | An example showing how to work with Camel routes in XML files and Spring Boot
 
