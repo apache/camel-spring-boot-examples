@@ -35,7 +35,7 @@ public class SampleAmqApplicationTests {
     private CamelContext camelContext;
 
     @Disabled("Requires a running activemq broker")
-//    @Test
+    @Test
     public void shouldProduceMessages() throws Exception {
         NotifyBuilder notify = new NotifyBuilder(camelContext).whenDone(1).create();
 
