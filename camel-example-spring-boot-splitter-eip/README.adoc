@@ -4,11 +4,11 @@ This example show how to use Camel with Splitter EIP with Spring Boot.
 
 Examples
 
- - Example 1 : Simple splitter.
- - Example 2 : Splitter with subsequent aggregation.
+ - Example 1 : Simple splitter
+ - Example 2 : Splitter with subsequent aggregation
  - Example 3 : Splitter with subsequent aggregation using POJO bean instead of AggregationStrategy implementation
- - Example 4 : Splitter with subsequent aggregation failing on exception.
- - Example 5: Splitter with subsequent aggregation on failing on aggregation exception.
+ - Example 4 : Splitter with subsequent aggregation failing on exception
+ - Example 5 : Splitter with subsequent aggregation on failing on aggregation exception
 
 === How to run
 
