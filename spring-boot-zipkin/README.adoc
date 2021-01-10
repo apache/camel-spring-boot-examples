@@ -29,9 +29,7 @@ source file. Client is configured in the
 
 === Build
 
-First, start Zipkin as described below in the
-link:%22Installing%20Zipkin%20Server%22[Installing Zipkin Server]
-section
+First, start Zipkin as described below in the <<Installing Zipkin Server>> section
 
 Then compile this example:
 
