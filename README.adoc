@@ -1,4 +1,4 @@
-# Welcome to the Apache Camel Spring-Boot Examples
+= Welcome to the Apache Camel Spring-Boot Examples
 
 = Introduction
 
