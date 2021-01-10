@@ -92,7 +92,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:camel-example-spring-boot-validator/readme.adoc[Validator Spring Boot] (camel-example-spring-boot-validator) | Input/Output Type Contract | An example showing how to work with declarative validation and Spring Boot
 
-| link:camel-example-spring-boot-actuator-http-metrics/readme.adoc[Spring Boot Actuator Http Metrics] (camel-example-spring-boot-actuator-http-metrics) | Management and Monitoring | Example on how to use Spring Boot's Actuator endpoints to gather info like mappings or metrics
+| link:spring-boot-actuator-http-metrics/readme.adoc[Spring Boot Actuator Http Metrics] (camel-example-spring-boot-actuator-http-metrics) | Management and Monitoring | Example on how to use Spring Boot's Actuator endpoints to gather info like mappings or metrics
 
 | link:camel-example-spring-boot-apm-opentracing/README.adoc[OpenTracing APM] (camel-example-spring-boot-apm-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing with ElastiCo APM
     
