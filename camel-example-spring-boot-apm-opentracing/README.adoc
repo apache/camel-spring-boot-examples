@@ -28,6 +28,7 @@ $ mvn compile
 [source,sh]
 ----
 $ mvn compile spring-boot:run
+----
 
 The client application explicitly instantiates and initializes the
 implementation
