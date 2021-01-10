@@ -38,7 +38,7 @@ public class SampleAmqApplicationTests {
     private CamelContext camelContext;
 
     @Disabled("Requires a running activemq broker")
-//    @Test
+    @Test
     public void shouldProduceMessages() throws Exception {
         MockEndpoint mock = camelContext.getEndpoint("mock:activemq", MockEndpoint.class);
         NotifyBuilder notify = new NotifyBuilder(camelContext).whenDone(1).create();
