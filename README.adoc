@@ -123,7 +123,7 @@ Number of Examples: 47 (0 deprecated)
 | link:camel-example-spring-boot-reactive-streams/readme.adoc[Spring Boot Reactive Streams] (camel-example-spring-boot-reactive-streams) | Reactive | An example that shows how Camel can exchange data using reactive streams with Spring Boot reactor
     
 
-| link:camel-example-spring-boot-geocoder/README.adoc[Spring Boot Geocoder] (camel-example-spring-boot-geocoder) | Rest | An example showing the Camel Geocoder component via REST DSL with Spring Boot
+| link:spring-boot-geocoder/README.adoc[Spring Boot Geocoder] (camel-example-spring-boot-geocoder) | Rest | An example showing the Camel Geocoder component via REST DSL with Spring Boot
 
 | link:camel-example-spring-boot-rest-openapi/README.adoc[Spring Boot Rest Openapi] (camel-example-spring-boot-rest-openapi) | Rest | An example showing Camel REST DSL and OpenApi with Spring Boot
 
