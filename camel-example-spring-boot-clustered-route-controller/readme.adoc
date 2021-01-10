@@ -5,6 +5,7 @@ This example shows how to work with a simple Apache Camel application using Spri
 === How to run
 
 1. build the project:
+
     mvn clean package
 
 2. in a shell, run the cluster node
