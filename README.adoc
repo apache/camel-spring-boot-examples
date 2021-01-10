@@ -53,7 +53,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:camel-example-spring-boot-routetemplate/readme.adoc[Spring Boot Routetemplate] (camel-example-spring-boot-routetemplate) | Beginner | How to use route templates (parameterized routes)
 
-| link:camel-example-spring-boot-splitter-eip/README.adoc[Spring Boot Splitter Eip] (camel-example-spring-boot-splitter-eip) | Beginner | An example showing Splitter EIP with Camel and Spring Boot
+| link:spring-boot-splitter-eip/README.adoc[Spring Boot Splitter Eip] (camel-example-spring-boot-splitter-eip) | Beginner | An example showing Splitter EIP with Camel and Spring Boot
 
 | link:camel-example-spring-boot-type-converter/README.adoc[Spring Boot Type Converter] (camel-example-spring-boot-type-converter) | Beginner | An example showing how to create custom type converter with Camel and Spring Boot
 
