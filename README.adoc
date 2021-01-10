@@ -39,7 +39,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:camel-example-spring-boot-webhook/readme.adoc[Spring Boot Webhook] (camel-example-spring-boot-webhook) | Advanced | Example on how to use the Camel Webhook component
 
-| link:camel-example-spring-boot/readme.adoc[Spring Boot] (camel-example-spring-boot) | Beginner | An example showing how to work with Camel and Spring Boot
+| link:spring-boot/readme.adoc[Spring Boot] (camel-example-spring-boot) | Beginner | An example showing how to work with Camel and Spring Boot
 
 | link:camel-example-spring-boot-jira/README.adoc[Spring Boot Jira] (camel-example-spring-boot-jira) | Beginner | An example that uses Jira Camel API
 
