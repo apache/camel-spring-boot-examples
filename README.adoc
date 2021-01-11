@@ -87,7 +87,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-fhir/readme.adoc[Spring Boot Fhir] (camel-example-spring-boot-fhir) | Health Care | An example showing how to work with Camel, FHIR and Spring Boot
 
-| link:camel-example-spring-boot-fhir-auth-tx/readme.adoc[Spring Boot Fhir Auth Tx] (camel-example-spring-boot-fhir-auth-tx) | Health Care | An example showing how to work with Camel, FHIR Authorization, FHIR Transaction and Spring Boot
+| link:spring-boot-fhir-auth-tx/readme.adoc[Spring Boot Fhir Auth Tx] (camel-example-spring-boot-fhir-auth-tx) | Health Care | An example showing how to work with Camel, FHIR Authorization, FHIR Transaction and Spring Boot
     
 
 | link:camel-example-spring-boot-validator/readme.adoc[Validator Spring Boot] (camel-example-spring-boot-validator) | Input/Output Type Contract | An example showing how to work with declarative validation and Spring Boot
