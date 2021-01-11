@@ -61,7 +61,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-xml/readme.adoc[Spring Boot XML] (camel-example-spring-boot-xml) | Beginner | An example showing how to work with Camel routes in XML files and Spring Boot
 
-| link:camel-example-spring-boot-aws2-s3/README.adoc[Spring Boot Aws2 S3] (camel-example-spring-boot-aws2-s3) | Cloud | An example showing the Camel AWS2 S3 component with Spring Boot
+| link:spring-boot-aws2-s3/README.adoc[Spring Boot Aws2 S3] (camel-example-spring-boot-aws2-s3) | Cloud | An example showing the Camel AWS2 S3 component with Spring Boot
 
 | link:camel-example-spring-boot-grpc/README.adoc[gRPC Spring Boot] (camel-example-spring-boot-grpc) | Cloud | An example showing the Camel gRPC component with Spring Boot
 
