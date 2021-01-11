@@ -51,7 +51,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:camel-example-spring-boot-rest-swagger-simple/README.adoc[REST Swagger] (camel-example-spring-boot-rest-swagger-simple) | Beginner | This example shows how to call a Rest service defined using Swagger specification
 
-| link:camel-example-spring-boot-routetemplate/readme.adoc[Spring Boot Routetemplate] (camel-example-spring-boot-routetemplate) | Beginner | How to use route templates (parameterized routes)
+| link:spring-boot-routetemplate/readme.adoc[Spring Boot Routetemplate] (camel-example-spring-boot-routetemplate) | Beginner | How to use route templates (parameterized routes)
 
 | link:spring-boot-splitter-eip/README.adoc[Spring Boot Splitter Eip] (camel-example-spring-boot-splitter-eip) | Beginner | An example showing Splitter EIP with Camel and Spring Boot
 
