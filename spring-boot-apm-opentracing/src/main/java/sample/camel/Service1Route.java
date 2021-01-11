@@ -26,7 +26,7 @@ public class Service1Route extends RouteBuilder {
     public void configure() throws Exception {
          from("timer:trigger?exchangePattern=InOut&period=30000").streamCaching()
             .bean("counterBean")
-            .log(" Client request: ${body}")
+            .log("Client request: ${body}")
             .to("http://localhost:9090/service1")
             .log("Client response: ${body}");
 
