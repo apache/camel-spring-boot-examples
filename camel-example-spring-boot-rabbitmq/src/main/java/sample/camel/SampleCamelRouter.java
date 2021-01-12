@@ -33,6 +33,10 @@ public class SampleCamelRouter extends RouteBuilder {
             .transform(simple("Random number ${random(0,100)}"))
             .to("spring-rabbitmq:foo?routingKey=mykey");
 
+        from("timer:hello?period=2000")
+            .transform(simple("Bigger random number ${random(100,200)}"))
+            .to("spring-rabbitmq:foo?routingKey=mykey");
+
         from("spring-rabbitmq:foo?queues=myqueue&routingKey=mykey")
             .log("From RabbitMQ: ${body}");
     }
