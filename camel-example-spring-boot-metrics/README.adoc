@@ -23,7 +23,7 @@ To run the example type
 java -jar target/camel-example-spring-boot-metrics.jar
 ....
 
-You will see logging from the ``Fast'' and ``Slow'' routes, and metrics
+You will see logging from the 'Fast' and 'Slow' routes, and metrics
 will be sent to Graphite (or nc) every 5 seconds.
 
 === Configuration
