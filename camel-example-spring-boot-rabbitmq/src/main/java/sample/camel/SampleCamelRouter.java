@@ -31,9 +31,9 @@ public class SampleCamelRouter extends RouteBuilder {
     public void configure() throws Exception {
         from("timer:hello?period=1000")
             .transform(simple("Random number ${random(0,100)}"))
-            .to("rabbitmq:foo");
+            .to("spring-rabbitmq:foo?routingKey=mykey");
 
-        from("rabbitmq:foo")
+        from("spring-rabbitmq:foo?queues=myqueue&routingKey=mykey")
             .log("From RabbitMQ: ${body}");
     }
 
