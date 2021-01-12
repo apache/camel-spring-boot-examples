@@ -56,7 +56,7 @@
 		<module>camel-example-spring-boot-kafka-offsetrepository</module>
 		<module>spring-boot-load-balancer-eip</module>
 		<module>camel-example-spring-boot-master</module>
-		<module>camel-example-spring-boot-metrics</module>
+		<module>spring-boot-metrics</module>
 		<module>camel-example-spring-boot-opentracing</module>
 		<module>camel-example-spring-boot-pojo</module>
 		<module>camel-example-spring-boot-rabbitmq</module>

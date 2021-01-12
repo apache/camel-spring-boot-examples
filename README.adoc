@@ -97,7 +97,7 @@ Number of Examples: 47 (0 deprecated)
 | link:spring-boot-apm-opentracing/README.adoc[OpenTracing APM] (camel-example-spring-boot-apm-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing with ElastiCo APM
     
 
-| link:camel-example-spring-boot-metrics/README.adoc[Spring Boot Metrics] (camel-example-spring-boot-metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
+| link:spring-boot-metrics/README.adoc[Spring Boot Metrics] (camel-example-spring-boot-metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
 
 | link:camel-example-spring-boot-opentracing/README.adoc[OpenTracing] (camel-example-spring-boot-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing
     
