@@ -129,7 +129,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:camel-example-spring-boot-rest-producer/readme.adoc[Spring Boot Rest Producer] (camel-example-spring-boot-rest-producer) | Rest | An example showing how to use Camel Rest to call a REST service
 
-| link:camel-example-spring-boot-rest-swagger/README.adoc[Spring Boot Rest Swagger] (camel-example-spring-boot-rest-swagger) | Rest | An example showing Camel REST DSL and Swagger with Spring Boot
+| link:spring-boot-rest-swagger/README.adoc[Spring Boot Rest Swagger] (camel-example-spring-boot-rest-swagger) | Rest | An example showing Camel REST DSL and Swagger with Spring Boot
 
 | link:camel-example-spring-boot-twitter-salesforce/README.adoc[Spring Boot Twitter Salesforce] (camel-example-spring-boot-twitter-salesforce) | Social | Twitter mentions is created as contacts in Salesforce
 |===

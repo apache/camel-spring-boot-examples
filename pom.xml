@@ -64,7 +64,7 @@
 		<module>camel-example-spring-boot-resilience4j</module>
 		<module>spring-boot-rest-jpa</module>
 		<module>camel-example-spring-boot-rest-producer</module>
-		<module>camel-example-spring-boot-rest-swagger</module>
+		<module>spring-boot-rest-swagger</module>
 		<module>camel-example-spring-boot-rest-swagger-simple</module>
 		<module>camel-example-spring-boot-rest-openapi</module>
 		<module>camel-example-spring-boot-rest-openapi-simple</module>
