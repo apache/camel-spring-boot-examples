@@ -125,7 +125,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-geocoder/README.adoc[Spring Boot Geocoder] (camel-example-spring-boot-geocoder) | Rest | An example showing the Camel Geocoder component via REST DSL with Spring Boot
 
-| link:camel-example-spring-boot-rest-openapi/README.adoc[Spring Boot Rest Openapi] (camel-example-spring-boot-rest-openapi) | Rest | An example showing Camel REST DSL and OpenApi with Spring Boot
+| link:spring-boot-rest-openapi/README.adoc[Spring Boot Rest Openapi] (camel-example-spring-boot-rest-openapi) | Rest | An example showing Camel REST DSL and OpenApi with Spring Boot
 
 | link:camel-example-spring-boot-rest-producer/readme.adoc[Spring Boot Rest Producer] (camel-example-spring-boot-rest-producer) | Rest | An example showing how to use Camel Rest to call a REST service
 
