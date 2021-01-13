@@ -127,7 +127,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-rest-openapi/README.adoc[Spring Boot Rest Openapi] (camel-example-spring-boot-rest-openapi) | Rest | An example showing Camel REST DSL and OpenApi with Spring Boot
 
-| link:camel-example-spring-boot-rest-producer/readme.adoc[Spring Boot Rest Producer] (camel-example-spring-boot-rest-producer) | Rest | An example showing how to use Camel Rest to call a REST service
+| link:spring-boot-rest-producer/readme.adoc[Spring Boot Rest Producer] (camel-example-spring-boot-rest-producer) | Rest | An example showing how to use Camel Rest to call a REST service
 
 | link:spring-boot-rest-swagger/README.adoc[Spring Boot Rest Swagger] (camel-example-spring-boot-rest-swagger) | Rest | An example showing Camel REST DSL and Swagger with Spring Boot
 
