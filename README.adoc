@@ -47,7 +47,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-pojo/README.adoc[Spring Boot Pojo] (camel-example-spring-boot-pojo) | Beginner | An example showing how to work with Camel POJO routing with Spring Boot
 
-| link:camel-example-spring-boot-rest-openapi-simple/README.adoc[REST OpenApi] (camel-example-spring-boot-rest-openapi-simple) | Beginner | This example shows how to call a Rest service defined using OpenApi specification
+| link:spring-boot-rest-openapi-simple/README.adoc[REST OpenApi] (camel-example-spring-boot-rest-openapi-simple) | Beginner | This example shows how to call a Rest service defined using OpenApi specification
 
 | link:camel-example-spring-boot-rest-swagger-simple/README.adoc[REST Swagger] (camel-example-spring-boot-rest-swagger-simple) | Beginner | This example shows how to call a Rest service defined using Swagger specification
 
