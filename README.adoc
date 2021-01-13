@@ -45,7 +45,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-load-balancer-eip/README.adoc[Spring Boot Load Balancer Eip] (camel-example-spring-boot-load-balancer-eip) | Beginner | An example showing Load Balancer EIP with Camel and Spring Boot
 
-| link:camel-example-spring-boot-pojo/README.adoc[Spring Boot Pojo] (camel-example-spring-boot-pojo) | Beginner | An example showing how to work with Camel POJO routing with Spring Boot
+| link:spring-boot-pojo/README.adoc[Spring Boot Pojo] (camel-example-spring-boot-pojo) | Beginner | An example showing how to work with Camel POJO routing with Spring Boot
 
 | link:camel-example-spring-boot-rest-openapi-simple/README.adoc[REST OpenApi] (camel-example-spring-boot-rest-openapi-simple) | Beginner | This example shows how to call a Rest service defined using OpenApi specification
 
