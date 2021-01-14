@@ -57,7 +57,7 @@
 		<module>spring-boot-load-balancer-eip</module>
 		<module>camel-example-spring-boot-master</module>
 		<module>spring-boot-metrics</module>
-		<module>camel-example-spring-boot-opentracing</module>
+		<module>spring-boot-opentracing</module>
 		<module>spring-boot-pojo</module>
 		<module>camel-example-spring-boot-rabbitmq</module>
 		<module>camel-example-spring-boot-reactive-streams</module>

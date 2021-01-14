@@ -99,7 +99,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-metrics/README.adoc[Spring Boot Metrics] (camel-example-spring-boot-metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
 
-| link:camel-example-spring-boot-opentracing/README.adoc[OpenTracing] (camel-example-spring-boot-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing
+| link:spring-boot-opentracing/README.adoc[OpenTracing] (camel-example-spring-boot-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing
     
 
 | link:spring-boot-supervising-route-controller/readme.adoc[Spring Boot Supervising Route Controller] (camel-example-spring-boot-supervising-route-controller) | Management and Monitoring | An example showing how to work with Camel's Supervising Route Controller and Spring Boot
