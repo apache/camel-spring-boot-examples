@@ -69,7 +69,7 @@
 		<module>spring-boot-rest-openapi</module>
 		<module>spring-boot-rest-openapi-simple</module>
 		<module>spring-boot-routetemplate</module>
-		<module>camel-example-spring-boot-servicecall</module>
+		<module>spring-boot-servicecall</module>
 		<module>spring-boot-supervising-route-controller</module>
 		<module>camel-example-spring-boot-twitter-salesforce</module>
 		<module>spring-boot-type-converter</module>
