@@ -60,7 +60,7 @@
 		<module>spring-boot-opentracing</module>
 		<module>spring-boot-pojo</module>
 		<module>camel-example-spring-boot-rabbitmq</module>
-		<module>camel-example-spring-boot-reactive-streams</module>
+		<module>spring-boot-reactive-streams</module>
 		<module>camel-example-spring-boot-resilience4j</module>
 		<module>spring-boot-rest-jpa</module>
 		<module>spring-boot-rest-producer</module>
