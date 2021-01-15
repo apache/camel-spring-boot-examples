@@ -71,7 +71,7 @@ console: https://github.com/Netflix/Hystrix/wiki/Dashboard
 For example using gradle, you can then access the web console locally
 at: `+http://localhost:7979/hystrix-dashboard+`.
 
-The stream is accessinble from the client at:
+The stream is accessible from the client at:
 `+http://localhost:8080/hystrix.stream+` which you can add as stream to
 the web console and then you should see the circuit breakers. In the
 screen shot below, we have just stopped service1, so the Hystrix EIP
