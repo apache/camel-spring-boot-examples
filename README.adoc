@@ -114,7 +114,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:camel-example-spring-boot-kafka-offsetrepository/README.adoc[Spring Boot Kafka Offsetrepository] (camel-example-spring-boot-kafka-offsetrepository) | Messaging | An example for Kafka offsetrepository
 
-| link:camel-example-spring-boot-rabbitmq/readme.adoc[Spring Boot Rabbitmq] (camel-example-spring-boot-rabbitmq) | Messaging | An example showing how to work with Camel and RabbitMQ
+| link:spring-boot-rabbitmq/readme.adoc[Spring Boot Rabbitmq] (camel-example-spring-boot-rabbitmq) | Messaging | An example showing how to work with Camel and RabbitMQ
 
 | link:camel-example-spring-boot-strimzi/README.adoc[Spring Boot Strimzi] (camel-example-spring-boot-strimzi) | Messaging | Camel example which a route is defined in XML for Strimzi integration on Openshift/Kubernetes
 
