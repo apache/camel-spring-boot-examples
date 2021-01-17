@@ -50,7 +50,7 @@
 		<module>camel-example-spring-boot-grpc-kubernetes</module>
 		<module>spring-boot-health-checks</module>
 		<module>spring-boot-hystrix</module>
-		<module>camel-example-spring-boot-infinispan</module>
+		<module>spring-boot-infinispan</module>
 		<module>spring-boot-jira</module>
 		<module>camel-example-spring-boot-kafka-avro</module>
 		<module>camel-example-spring-boot-kafka-offsetrepository</module>

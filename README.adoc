@@ -67,7 +67,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:camel-example-spring-boot-grpc-kubernetes/README.adoc[gRPC Kubernetes] (camel-example-spring-boot-grpc-kubernetes) | Cloud | An example showing the Camel gRPC component with Spring Boot running on Kubernetes
 
-| link:camel-example-spring-boot-infinispan/README.adoc[Spring Boot Infinispan] (camel-example-spring-boot-infinispan) | Cloud | An example showing the Camel Infinispan component with Spring Boot
+| link:spring-boot-infinispan/README.adoc[Spring Boot Infinispan] (camel-example-spring-boot-infinispan) | Cloud | An example showing the Camel Infinispan component with Spring Boot
 
 | link:spring-boot-servicecall/README.adoc[Spring Boot ServiceCall] (camel-example-spring-boot-servicecall) | Cloud | An example showing how to work with Camel ServiceCall EIP and Spring Boot
 
