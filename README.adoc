@@ -81,7 +81,7 @@ Number of Examples: 47 (0 deprecated)
         operations on a database
     
 
-| link:camel-example-spring-boot-hystrix/README.adoc[Spring Boot Hystrix] (camel-example-spring-boot-hystrix) | EIP | An example showing how to use Hystrix EIP as circuit breaker in Camel routes
+| link:spring-boot-hystrix/README.adoc[Spring Boot Hystrix] (camel-example-spring-boot-hystrix) | EIP | An example showing how to use Hystrix EIP as circuit breaker in Camel routes
 
 | link:spring-boot-resilience4j/README.adoc[Spring Boot Resilience4j] (camel-example-spring-boot-resilience4j) | EIP | An example showing how to use Resilience4j EIP as circuit breaker in Camel routes
 
