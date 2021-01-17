@@ -1,10 +1,10 @@
-# Spring Boot Example with gRPC on Kubernetes
+= Spring Boot Example with gRPC on Kubernetes
 
-= Introduction
+== Introduction
 
 This example demonstrates how you can use Camel-gRPC Starter component. The example is composed of a standalone gRPC server and a Camel Spring-boot gRPC route acting as client. We will run this example on Minikube (0.21.0)
 
-== Server
+=== Server
 
 You can build the server under the directory hello-camel-grpc-server with:
 
@@ -36,7 +36,7 @@ Aug 30, 2017 7:31:11 AM org.apache.camel.examples.grpc.HelloCamelServer start
 INFO: Server started. I'm listening on 8080
 ----
 
-== Run the client
+=== Run the client
 
 You can build the client example under the directory hello-camel-grpc-client with:
 
@@ -106,22 +106,26 @@ And you should see this output in the console.
 
 ----
 
-== Cleanup
+=== Cleanup
 
 Undeploy server and client
-```
+
+[source,bash]
+----
 $ cd hello-camel-grpc-client-kubernetes
 $ mvn -Pkubernetes-install fabric8:undeploy
 $ cd ../hello-camel-grpc-server-kubernetes
 $ mvn -Pkubernetes-install fabric8:undeploy
-```
+----
 Make sure no pod is running
-```
+
+[source,bash]
+----
 $ kubectl get pods
 No resources found.
-```
+----
 
-=== Help and contributions
+==== Help and contributions
 
 If you hit any problem using Camel or have some feedback, 
 then please https://camel.apache.org/support.html[let us know].
