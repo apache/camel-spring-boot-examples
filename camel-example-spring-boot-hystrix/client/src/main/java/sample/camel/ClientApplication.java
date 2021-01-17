@@ -40,9 +40,4 @@ public class ClientApplication {
         return new HystrixEventStreamServlet();
     }
 
-    @Bean
-    public ServletRegistrationBean servletRegistrationBean() {
-        return new ServletRegistrationBean(new HystrixEventStreamServlet(), "/hystrix.stream");
-    }
-
 }
