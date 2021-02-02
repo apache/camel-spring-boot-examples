@@ -25,7 +25,7 @@ camel.component.telegram.authorization-token=<put-here-your-token>
 In order to use this example from a standard workstation machine, you need it to be exposed to the internet, for the Telegram servers to be
 able to contact it. Moreover, Telegram requires that the endpoint is exposed using *HTTPS*.
 
-The best way to expose your workstation through a internet HTTPS endpoint is using some tunneling tool, like link:https://serveo.net/[Serveo].
+The best way to expose your workstation through a internet HTTPS endpoint is using some tunneling tool, like link:https://github.com/localtunnel/localtunnel[localtunnel] or link:https://serveo.net/[Serveo].
 A more popular option is link:https://ngrok.com/[Ngrok] but HTTPS endpoints currently require a paid subscription.
 
 With Serveo, you can run in a terminal the following command:
@@ -57,9 +57,9 @@ Now that everything is set up, you can run the example using
 mvn spring-boot:run
 ----
 
-You can now contat your bot using a Telegram client and you'll see all your messages printed in the console.
+You can now contact your bot using a Telegram client, and you'll see all your messages printed in the console.
 
-What's interesting to notice is that in this example, *the Telegram component is not doing any long polling** to the Telegram API, it's just receiving *push notifications*.
+What's interesting to notice is that in this example, *the Telegram component is not doing any long polling* to the Telegram API, it's just receiving *push notifications*.
 
 === Help and contributions
 

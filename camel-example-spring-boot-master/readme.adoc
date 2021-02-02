@@ -8,11 +8,11 @@ This example shows how to work with a simple Apache Camel application using Spri
 
     mvn clean package
 
-2. in a separate shell, run the first camel node
+2. Then run the first camel node:
 
     mvn spring-boot:run
 
-3. in a separate shell, run the second camel node
+3. in a separate shell, run the second camel node:
 
     mvn spring-boot:run
 

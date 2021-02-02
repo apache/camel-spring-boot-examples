@@ -4,22 +4,30 @@
 
 An example which shows how to integrate Camel with Kafka avro  to make use of avro serialize/deserializer
 
-start confluent schema registry but before this kafka server should be started:
-./bin/schema-registry-start etc/schema-registry/schema-registry.properties
+First a kafka server should be started:
+----
+$ ./bin/schema-registry-start etc/schema-registry/schema-registry.properties
+----
 
-register_schema.py is simple custom python script to register the employee.avsc schema in confluent schema registry
-python3.6 src/main/resources/register_schema.py http://localhost:8081 employees-avro src/main/resources/avro/employee.avsc
+Then start confluent schema registry:
+register_schema.py is simple custom python script to register the employee.avsc schema in confluent schema registry:
+----
+$ python3.6 src/main/resources/register_schema.py http://localhost:8081 employees-avro src/main/resources/avro/employee.avsc
 Schema Registry URL: http://localhost:8081
 Topic: employees-avro
 Schema file: src/main/resources/avro/employee.avsc
 Success
+----
 
-
-[camel-example-kafka-avro]$ curl --noproxy '*' http://localhost:8081/subjects/employees-avro-value/versions/1
+----
+$ curl --noproxy '*' http://localhost:8081/subjects/employees-avro-value/versions/1
 {"subject":"employees-avro-value","version":1,"id":2,"schema":"{\"type\":\"record\",\"name\":\"Employee\",\"namespace\":\"com.example.kafkatutorials\",\"fields\":[{\"name\":\"firstName\",\"type\":\"string\"},{\"name\":\"lastName\",\"type\":\"string\"},{\"name\":\"birthDate\",\"type\":\"long\"}]}"}
+----
 
 To delete:
-curl -X DELETE http://localhost:8081/subjects/topic-value/versions/version-no
+----
+$ curl -X DELETE http://localhost:8081/subjects/topic-value/versions/version-no
+----
 
 === Preparing Kafka
 

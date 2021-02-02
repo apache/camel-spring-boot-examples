@@ -35,53 +35,53 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>camel-example-spring-boot</module>
-		<module>camel-example-spring-boot-activemq</module>
-		<module>camel-example-spring-boot-actuator-http-metrics</module>
-		<module>camel-example-spring-boot-amqp</module>
-		<module>camel-example-spring-boot-apm-opentracing</module>
-		<module>camel-example-spring-boot-arangodb</module>
-		<module>camel-example-spring-boot-aws2-s3</module>
-		<module>camel-example-spring-boot-clustered-route-controller</module>
-		<module>camel-example-spring-boot-fhir</module>
-		<module>camel-example-spring-boot-fhir-auth-tx</module>
-		<module>camel-example-spring-boot-geocoder</module>
-		<module>camel-example-spring-boot-grpc</module>
+		<module>spring-boot</module>
+		<module>spring-boot-activemq</module>
+		<module>spring-boot-actuator-http-metrics</module>
+		<module>spring-boot-amqp</module>
+		<module>spring-boot-apm-opentracing</module>
+		<module>spring-boot-arangodb</module>
+		<module>spring-boot-aws2-s3</module>
+		<module>spring-boot-clustered-route-controller</module>
+		<module>spring-boot-fhir</module>
+		<module>spring-boot-fhir-auth-tx</module>
+		<module>spring-boot-geocoder</module>
+		<module>spring-boot-grpc</module>
 		<module>camel-example-spring-boot-grpc-kubernetes</module>
-		<module>camel-example-spring-boot-health-checks</module>
-		<module>camel-example-spring-boot-hystrix</module>
-		<module>camel-example-spring-boot-infinispan</module>
-		<module>camel-example-spring-boot-jira</module>
+		<module>spring-boot-health-checks</module>
+		<module>spring-boot-hystrix</module>
+		<module>spring-boot-infinispan</module>
+		<module>spring-boot-jira</module>
 		<module>camel-example-spring-boot-kafka-avro</module>
 		<module>camel-example-spring-boot-kafka-offsetrepository</module>
-		<module>camel-example-spring-boot-load-balancer-eip</module>
+		<module>spring-boot-load-balancer-eip</module>
 		<module>camel-example-spring-boot-master</module>
-		<module>camel-example-spring-boot-metrics</module>
-		<module>camel-example-spring-boot-opentracing</module>
-		<module>camel-example-spring-boot-pojo</module>
-		<module>camel-example-spring-boot-rabbitmq</module>
-		<module>camel-example-spring-boot-reactive-streams</module>
-		<module>camel-example-spring-boot-resilience4j</module>
-		<module>camel-example-spring-boot-rest-jpa</module>
-		<module>camel-example-spring-boot-rest-producer</module>
-		<module>camel-example-spring-boot-rest-swagger</module>
+		<module>spring-boot-metrics</module>
+		<module>spring-boot-opentracing</module>
+		<module>spring-boot-pojo</module>
+		<module>spring-boot-rabbitmq</module>
+		<module>spring-boot-reactive-streams</module>
+		<module>spring-boot-resilience4j</module>
+		<module>spring-boot-rest-jpa</module>
+		<module>spring-boot-rest-producer</module>
+		<module>spring-boot-rest-swagger</module>
 		<module>camel-example-spring-boot-rest-swagger-simple</module>
-		<module>camel-example-spring-boot-rest-openapi</module>
-		<module>camel-example-spring-boot-rest-openapi-simple</module>
-		<module>camel-example-spring-boot-routetemplate</module>
-		<module>camel-example-spring-boot-servicecall</module>
-		<module>camel-example-spring-boot-supervising-route-controller</module>
+		<module>spring-boot-rest-openapi</module>
+		<module>spring-boot-rest-openapi-simple</module>
+		<module>spring-boot-routetemplate</module>
+		<module>spring-boot-servicecall</module>
+		<module>spring-boot-supervising-route-controller</module>
 		<module>camel-example-spring-boot-twitter-salesforce</module>
-		<module>camel-example-spring-boot-type-converter</module>
-		<module>camel-example-spring-boot-undertow-spring-security</module>
-		<module>camel-example-spring-boot-validator</module>
+		<module>spring-boot-type-converter</module>
+		<module>spring-boot-undertow-spring-security</module>
+		<module>spring-boot-validator</module>
 		<module>camel-example-spring-boot-webhook</module>
-		<module>camel-example-spring-boot-xml</module>
-		<module>camel-example-spring-boot-zipkin</module>
+		<module>spring-boot-xml</module>
+		<module>spring-boot-zipkin</module>
 		<module>camel-example-spring-boot-strimzi</module>
-		<module>camel-example-spring-boot-splitter-eip</module>
-		<module>camel-example-spring-boot-widget-gadget</module>
-		<module>camel-example-spring-boot-unit-testing</module>
+		<module>spring-boot-splitter-eip</module>
+		<module>spring-boot-widget-gadget</module>
+		<module>spring-boot-unit-testing</module>
 	</modules>
 
 	<properties>

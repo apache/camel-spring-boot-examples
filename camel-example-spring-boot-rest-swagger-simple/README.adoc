@@ -20,7 +20,7 @@ $ java -jar target/camel-example-spring-boot-rest-swagger-simple-*.jar
 The example by default uses the PetStore demo hosted on swagger.io and
 invokes the `+getInventory+` operation. You can make it call any API
 that you have Swagger specification for and any operation with simple
-arguments, for instance this retrives a pet from the PetStore demo with
+arguments, for instance this retrieves a pet from the PetStore demo with
 ID `+14+`:
 
 ....
