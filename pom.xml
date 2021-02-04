@@ -47,15 +47,15 @@
 		<module>spring-boot-fhir-auth-tx</module>
 		<module>spring-boot-geocoder</module>
 		<module>spring-boot-grpc</module>
-		<module>camel-example-spring-boot-grpc-kubernetes</module>
+		<module>spring-boot-grpc-kubernetes</module>
 		<module>spring-boot-health-checks</module>
 		<module>spring-boot-hystrix</module>
 		<module>spring-boot-infinispan</module>
 		<module>spring-boot-jira</module>
-		<module>camel-example-spring-boot-kafka-avro</module>
-		<module>camel-example-spring-boot-kafka-offsetrepository</module>
+		<module>spring-boot-kafka-avro</module>
+		<module>spring-boot-kafka-offsetrepository</module>
 		<module>spring-boot-load-balancer-eip</module>
-		<module>camel-example-spring-boot-master</module>
+		<module>spring-boot-master</module>
 		<module>spring-boot-metrics</module>
 		<module>spring-boot-opentracing</module>
 		<module>spring-boot-pojo</module>
@@ -65,20 +65,20 @@
 		<module>spring-boot-rest-jpa</module>
 		<module>spring-boot-rest-producer</module>
 		<module>spring-boot-rest-swagger</module>
-		<module>camel-example-spring-boot-rest-swagger-simple</module>
+		<module>spring-boot-rest-swagger-simple</module>
 		<module>spring-boot-rest-openapi</module>
 		<module>spring-boot-rest-openapi-simple</module>
 		<module>spring-boot-routetemplate</module>
 		<module>spring-boot-servicecall</module>
 		<module>spring-boot-supervising-route-controller</module>
-		<module>camel-example-spring-boot-twitter-salesforce</module>
+		<module>spring-boot-twitter-salesforce</module>
 		<module>spring-boot-type-converter</module>
 		<module>spring-boot-undertow-spring-security</module>
 		<module>spring-boot-validator</module>
-		<module>camel-example-spring-boot-webhook</module>
+		<module>spring-boot-webhook</module>
 		<module>spring-boot-xml</module>
 		<module>spring-boot-zipkin</module>
-		<module>camel-example-spring-boot-strimzi</module>
+		<module>spring-boot-strimzi</module>
 		<module>spring-boot-splitter-eip</module>
 		<module>spring-boot-widget-gadget</module>
 		<module>spring-boot-unit-testing</module>

@@ -37,7 +37,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-undertow-spring-security/readme.adoc[Spring Boot Undertow Spring Security] (camel-example-spring-boot-undertow-spring-security) | Advanced | Example on how to use the Camel Undertow component with spring security and Keycloak
 
-| link:camel-example-spring-boot-webhook/readme.adoc[Spring Boot Webhook] (camel-example-spring-boot-webhook) | Advanced | Example on how to use the Camel Webhook component
+| link:spring-boot-webhook/readme.adoc[Spring Boot Webhook] (camel-example-spring-boot-webhook) | Advanced | Example on how to use the Camel Webhook component
 
 | link:spring-boot/readme.adoc[Spring Boot] (camel-example-spring-boot) | Beginner | An example showing how to work with Camel and Spring Boot
 
@@ -49,7 +49,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-rest-openapi-simple/README.adoc[REST OpenApi] (camel-example-spring-boot-rest-openapi-simple) | Beginner | This example shows how to call a Rest service defined using OpenApi specification
 
-| link:camel-example-spring-boot-rest-swagger-simple/README.adoc[REST Swagger] (camel-example-spring-boot-rest-swagger-simple) | Beginner | This example shows how to call a Rest service defined using Swagger specification
+| link:spring-boot-rest-swagger-simple/README.adoc[REST Swagger] (camel-example-spring-boot-rest-swagger-simple) | Beginner | This example shows how to call a Rest service defined using Swagger specification
 
 | link:spring-boot-routetemplate/readme.adoc[Spring Boot Routetemplate] (camel-example-spring-boot-routetemplate) | Beginner | How to use route templates (parameterized routes)
 
@@ -65,7 +65,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-grpc/README.adoc[gRPC Spring Boot] (camel-example-spring-boot-grpc) | Cloud | An example showing the Camel gRPC component with Spring Boot
 
-| link:camel-example-spring-boot-grpc-kubernetes/README.adoc[gRPC Kubernetes] (camel-example-spring-boot-grpc-kubernetes) | Cloud | An example showing the Camel gRPC component with Spring Boot running on Kubernetes
+| link:spring-boot-grpc-kubernetes/README.adoc[gRPC Kubernetes] (camel-example-spring-boot-grpc-kubernetes) | Cloud | An example showing the Camel gRPC component with Spring Boot running on Kubernetes
 
 | link:spring-boot-infinispan/README.adoc[Spring Boot Infinispan] (camel-example-spring-boot-infinispan) | Cloud | An example showing the Camel Infinispan component with Spring Boot
 
@@ -73,7 +73,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-clustered-route-controller/readme.adoc[Spring Boot Clustered Route Controller] (camel-example-spring-boot-clustered-route-controller) | Clustering | An example showing how to work with Camel's Clustered Route Controller and Spring Boot
 
-| link:camel-example-spring-boot-master/readme.adoc[Spring Boot Master] (camel-example-spring-boot-master) | Clustering | An example showing how to work with Camel's Master component and Spring Boot
+| link:spring-boot-master/readme.adoc[Spring Boot Master] (camel-example-spring-boot-master) | Clustering | An example showing how to work with Camel's Master component and Spring Boot
 
 | link:spring-boot-arangodb/README.adoc[Spring Boot Arangodb] (camel-example-spring-boot-arangodb) | Database | An example showing the Camel ArangoDb component with Spring Boot
 
@@ -110,13 +110,13 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-amqp/readme.adoc[Spring Boot Amqp] (camel-example-spring-boot-amqp) | Messaging | An example showing how to work with Camel, ActiveMQ Amqp and Spring Boot
 
-| link:camel-example-spring-boot-kafka-avro/README.adoc[Spring Boot Kafka Avro] (camel-example-spring-boot-kafka-avro) | Messaging | An example for Kafka avro
+| link:spring-boot-kafka-avro/README.adoc[Spring Boot Kafka Avro] (camel-example-spring-boot-kafka-avro) | Messaging | An example for Kafka avro
 
-| link:camel-example-spring-boot-kafka-offsetrepository/README.adoc[Spring Boot Kafka Offsetrepository] (camel-example-spring-boot-kafka-offsetrepository) | Messaging | An example for Kafka offsetrepository
+| link:spring-boot-kafka-offsetrepository/README.adoc[Spring Boot Kafka Offsetrepository] (camel-example-spring-boot-kafka-offsetrepository) | Messaging | An example for Kafka offsetrepository
 
 | link:spring-boot-rabbitmq/readme.adoc[Spring Boot Rabbitmq] (camel-example-spring-boot-rabbitmq) | Messaging | An example showing how to work with Camel and RabbitMQ
 
-| link:camel-example-spring-boot-strimzi/README.adoc[Spring Boot Strimzi] (camel-example-spring-boot-strimzi) | Messaging | Camel example which a route is defined in XML for Strimzi integration on Openshift/Kubernetes
+| link:spring-boot-strimzi/README.adoc[Spring Boot Strimzi] (camel-example-spring-boot-strimzi) | Messaging | Camel example which a route is defined in XML for Strimzi integration on Openshift/Kubernetes
 
 | link:spring-boot-widget-gadget/README.adoc[Spring Boot Widget Gadget] (camel-example-spring-boot-widget-gadget) | Messaging | The widget and gadget example from EIP book, running on Spring Boot
 
@@ -131,7 +131,7 @@ Number of Examples: 47 (0 deprecated)
 
 | link:spring-boot-rest-swagger/README.adoc[Spring Boot Rest Swagger] (camel-example-spring-boot-rest-swagger) | Rest | An example showing Camel REST DSL and Swagger with Spring Boot
 
-| link:camel-example-spring-boot-twitter-salesforce/README.adoc[Spring Boot Twitter Salesforce] (camel-example-spring-boot-twitter-salesforce) | Social | Twitter mentions is created as contacts in Salesforce
+| link:spring-boot-twitter-salesforce/README.adoc[Spring Boot Twitter Salesforce] (camel-example-spring-boot-twitter-salesforce) | Social | Twitter mentions is created as contacts in Salesforce
 |===
 // examples: END
 
