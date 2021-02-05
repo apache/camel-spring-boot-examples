@@ -10,8 +10,7 @@ image::https://camel.apache.org/components/latest/eips/_images/eip/DistributionA
 
 === Configuration
 
-Before the application can run, rabbitmq must be started. This can be done with docker,
-executing the following command:
+Before the application can run, rabbitmq must be started. This can be done with docker, executing the following command:
 
 [source,sh]
 ----
@@ -26,6 +25,7 @@ After that, you can build this example using:
 
 [source,sh]
 ----
+$ cd spring-boot-widget-gadget
 $ mvn package
 ----
 
