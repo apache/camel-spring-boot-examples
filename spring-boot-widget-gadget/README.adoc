@@ -1,0 +1,49 @@
+== Spring Boot Widget Gadget Example
+
+=== Introduction
+
+This example demonstrates the widget and gadget example from EIP book, running on Spring Boot.
+
+The example with a similar setup (e.g. without rabbitmq) can be found in this illustration https://camel.apache.org/components/latest/eips/composed-message-processor.html[here]:
+
+image::https://camel.apache.org/components/latest/eips/_images/eip/DistributionAggregate.gif[link="https://camel.apache.org/components/latest/eips/composed-message-processor.html"]
+
+=== Configuration
+
+Before the application can run, rabbitmq must be started. This can be done with docker, executing the following command:
+
+[source,sh]
+----
+$ docker run -d -p 5672:5672 -p 15672:15672 --name my-rabbit rabbitmq:3-management
+----
+
+The port can be configured as desired, but do not forget to match the configured port number in your `application.properties`-file!
+
+=== Build
+
+After that, you can build this example using:
+
+[source,sh]
+----
+$ cd spring-boot-widget-gadget
+$ mvn package
+----
+
+=== Run
+
+You can run this example with Maven using:
+
+[source,sh]
+----
+$ mvn spring-boot:run
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
