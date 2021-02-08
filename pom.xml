@@ -148,6 +148,10 @@
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-package-maven-plugin</artifactId>
 				<version>${camel-version}</version>
+				<configuration>
+					<startingFolder></startingFolder>
+					<filter>spring-boot</filter>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
