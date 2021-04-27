@@ -30,9 +30,9 @@ public class MyTemplateBuilder implements ConfigureRouteTemplates {
     public void configure(CamelContext context) {
         // to configure route templates we can use java code as below from a template builder class,
         // gives more power as its java code.
-        // or we can configure as well from application.properties,
-        // less power as its key value pair properties
-        // and you can also use both java and properties together
+        // or we can configure as well from application.yaml,
+        // less power as its key value pair yaml
+        // and you can also use both java and yaml together
 
         // in this example we use properties by default and have disabled java
         /*
