@@ -37,6 +37,15 @@ curl -XGET -s http://localhost:8080/actuator/info
 
 See the `application.properties` to control what information to present in actuator.
 
+=== Route coverage
+
+This example has enabled testing with route coverage, which after running the test dumps a report, if you run:
+
+    mvn test camel-report:route-coverage
+
+See more details about route coverage at:
+https://camel.apache.org/manual/latest/camel-report-maven-plugin.html[camel-report-maven-plugin].
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
