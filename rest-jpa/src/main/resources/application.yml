@@ -19,8 +19,6 @@ camel:
   springboot:
     # The Camel context name
     name: CamelRestJpa
-  rest:
-    component: servlet
   servlet:
     mapping:
       contextPath: /camel-rest-jpa/*
