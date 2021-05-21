@@ -20,10 +20,9 @@ camel:
     name: CamelRestJpa
   rest:
     component: servlet
-  component:
-    servlet:
-      mapping:
-        contextPath: /camel-rest-jpa/*
+  servlet:
+    mapping:
+      contextPath: /camel-rest-jpa/*
 
 example:
   generateOrderPeriod: 1000
