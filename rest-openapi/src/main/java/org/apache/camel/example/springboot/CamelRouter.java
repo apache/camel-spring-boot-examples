@@ -36,7 +36,7 @@ public class CamelRouter extends RouteBuilder {
     @Autowired
     private Environment env;
     
-    @Value("${camel.component.servlet.mapping.context-path}")
+    @Value("${camel.servlet.mapping.context-path}")
     private String contextPath;
 
     @Override
