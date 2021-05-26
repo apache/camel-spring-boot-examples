@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 47 (0 deprecated)
+Number of Examples: 48 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -60,6 +60,8 @@ Number of Examples: 47 (0 deprecated)
 | link:unit-testing/README.adoc[Unit Testing] (unit-testing) | Beginner | An example showing how to write unit tests with Camel and Spring Boot
 
 | link:xml/readme.adoc[Spring Boot XML] (xml) | Beginner | An example showing how to work with Camel routes in XML files and Spring Boot
+
+| link:xml-import/readme.adoc[Spring Boot XML Import] (xml-import) | Beginner | An example showing how to work with Spring XML files imported with embedded CamelContext
 
 | link:aws2-s3/README.adoc[Aws2 S3] (aws2-s3) | Cloud | An example showing the Camel AWS2 S3 component with Spring Boot
 
