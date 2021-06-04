@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 48 (0 deprecated)
+Number of Examples: 49 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -40,6 +40,8 @@ Number of Examples: 48 (0 deprecated)
 | link:webhook/readme.adoc[Webhook] (webhook) | Advanced | Example on how to use the Camel Webhook component
 
 | link:jira/README.adoc[Jira] (jira) | Beginner | An example that uses Jira Camel API
+
+| link:kamelet-chucknorris/readme.adoc[Kamelet Chucknorris] (kamelet-chucknorris) | Beginner | How easy it is to create your own Kamelets
 
 | link:load-balancer-eip/README.adoc[Load Balancer Eip] (load-balancer-eip) | Beginner | An example showing Load Balancer EIP with Camel and Spring Boot
 

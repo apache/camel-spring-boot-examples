@@ -54,6 +54,7 @@
 		<module>jira</module>
 		<module>kafka-avro</module>
 		<module>kafka-offsetrepository</module>
+		<module>kamelet-chucknorris</module>
 		<module>load-balancer-eip</module>
 		<module>master</module>
 		<module>metrics</module>
