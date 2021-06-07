@@ -4,7 +4,7 @@
 
 This example shows how you can build a simple Kamelet and use with your Camel applications.
 
-The kamelet is created as a YAML file in the `src/main/resources/kamelets' directory.
+The kamelet is created as a YAML file in the `src/main/resources/kamelets` directory.
 We have developed a Chuck Norris Kamelet that periodically gets a joke from the Chuck Norris internet database.
 
 A Camel routes is coded in Java in the `src/main/java/samples/camel/MyRoute.java` file
