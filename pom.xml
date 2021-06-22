@@ -25,7 +25,7 @@
 	<parent>
 		<groupId>org.apache.camel.springboot</groupId>
 		<artifactId>spring-boot</artifactId>
-		<version>3.7.0</version>
+		<version>3.7.4</version>
 	</parent>
 
 	<groupId>org.apache.camel.springboot.example</groupId>
@@ -85,7 +85,7 @@
 	</modules>
 
 	<properties>
-		<camel-version>3.7.0</camel-version>
+		<camel-version>3.7.4</camel-version>
 		<skip.starting.camel.context>false</skip.starting.camel.context>
 		<javax.servlet.api.version>4.0.1</javax.servlet.api.version>
 		<fabric8-maven-plugin-version>4.4.1</fabric8-maven-plugin-version>

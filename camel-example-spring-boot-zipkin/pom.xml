@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.camel.springboot.example</groupId>
         <artifactId>examples</artifactId>
-        <version>3.7.0</version>
+        <version>3.7.4</version>
     </parent>
 
     <artifactId>camel-example-spring-boot-zipkin</artifactId>
