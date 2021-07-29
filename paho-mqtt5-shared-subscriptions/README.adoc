@@ -1,0 +1,53 @@
+= Spring Boot Camel PAHO MQTT5 Shared Subscription Quickstart
+
+This quickstart demonstrates how to set up multiple mqtt5 consumers that use shared subscription feature of mqtt5 in order to balance the load across the consumers.
+
+=== MQTT 5.0 protocol introduction-shared subscription
+Shared subscription is a new feature introduced by MQTT 5.0 protocol, which is equivalent to the load balancing function of the subscribers.
+
+We know that the general non-shared subscription message publishing process is like this:
+
+[#img-nonshared]
+image::img/nonSharedSubscription.gif[]
+
+Under this structure, if the subscription node fails, it will cause the publisher's message to be lost (QoS 0) or accumulate in the server (QoS 1, 2). Under normal circumstances, the solution to this problem is to directly increase the subscription node, but this generates a large number of duplicate messages, not only wasting performance, in some business scenarios, the subscription node also needs to remove itself, further increasing the the complexity.
+
+Secondly, when the publisher's production capacity is strong, there may be a situation where the subscriber's consumption capacity cannot keep up in time. At this time, the subscriber can only solve it by implementing load balancing, which again increases the user's development cost.
+
+=== Protocol specification
+Now, in the MQTT 5.0 protocol, you can solve the problems mentioned above through the shared subscription feature. When you use a shared subscription, the flow of messages becomes:
+
+[#img-nonshared]
+image::img/sharedSubscription.gif[]
+
+
+Like non-shared subscriptions, shared subscriptions include a topic filter and subscription options, the only difference is that the topic filter format for shared subscriptions must be in this form *$share/{ShareName}/{filter}*. The meanings of these fields are:
+
+* *$share* The prefix indicates that this will be a shared subscription
+* *{ShareName}* It is a string that does not contain "/", "+" and "#". Subscribe to the session by using the same *{ShareName}* Indicates sharing the same subscription, and messages matching the subscription will only be published to one of the sessions at a time
+* *{filter}* Is the topic filter in non-shared subscriptions
+
+It should be noted that if the server is sending a QoS 2 message to the selected subscriber, and the network is interrupted before the distribution is completed, the server will continue to complete the distribution of the message when the subscriber reconnects. If the subscriber's session is terminated before it reconnects, the server will discard the message without attempting to send it to other subscribers. If it is a QoS 1 message, the server can wait for the subscriber to reconnect and continue to complete the distribution, or it can immediately try to distribute the message to other subscribers when the subscriber disconnects. The MQTT protocol does not mandate it. It depends on the specific implementation. However, if its session is terminated while waiting for the subscriber to reconnect, the server will try to send the message to other subscribers.
+
+
+== Run the Quickstart
+
+This quickstart use a public MQTT 5 test server available at the time of writing.
+It contains one producer and six consumers that are part of the same conversation group (group1)
+
+
+. Build the project
++
+....
+ mvn clean package
+....
+
+. Start the fat jar
++
+....
+ mvn spring-boot:run
+....
++
+In the logs, you should see something like this:
++
+image::https://asciinema.org/a/427793.png[link="https://asciinema.org/a/427793"]
