@@ -59,6 +59,7 @@
 		<module>master</module>
 		<module>metrics</module>
 		<module>opentracing</module>
+		<module>paho-mqtt5-shared-subscriptions</module>
 		<module>pojo</module>
 		<module>rabbitmq</module>
 		<module>reactive-streams</module>
@@ -84,7 +85,7 @@
 		<module>splitter-eip</module>
 		<module>widget-gadget</module>
 		<module>unit-testing</module>
-	</modules>
+    </modules>
 
 	<properties>
 		<camel-version>3.12.0-SNAPSHOT</camel-version>
