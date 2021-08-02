@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 50 (0 deprecated)
+Number of Examples: 51 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -50,6 +50,8 @@ Number of Examples: 50 (0 deprecated)
 | link:rest-openapi-simple/README.adoc[REST OpenApi] (rest-openapi-simple) | Beginner | This example shows how to call a Rest service defined using OpenApi specification
 
 | link:rest-swagger-simple/README.adoc[REST Swagger] (rest-swagger-simple) | Beginner | This example shows how to call a Rest service defined using Swagger specification
+
+| link:routes-configuration/readme.adoc[Routes Configuration] (routes-configuration) | Beginner | Example with global routes configuration for error handling
 
 | link:routetemplate/readme.adoc[Routetemplate] (routetemplate) | Beginner | How to use route templates (parameterized routes)
 
