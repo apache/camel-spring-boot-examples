@@ -28,7 +28,7 @@ public class MyJavaRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
         from("timer:java?period=2s")
             // refer to the route configuration by the id to use for this route
-            .routeConfiguration("javaError")
+            .routeConfigurationId("javaError")
             .setBody(method(MyJavaRouteBuilder.class, "randomNumber"))
             .log("Random number ${body}")
             .filter(simple("${body} < 30"))
