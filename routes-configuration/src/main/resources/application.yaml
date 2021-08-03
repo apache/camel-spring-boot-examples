@@ -22,6 +22,9 @@ camel:
     # keep Camel running
     main-run-controller: true
 
+    # verbose summary so you can see the pairing of routes and routes configurations
+    startup-summary-level: verbose
+
     # dump routes as XML (routes are coded in different DSLs but can be dumped as XML)
     dump-routes: true
 
