@@ -19,26 +19,37 @@
 -->
 <!-- START SNIPPET: e1 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd            http://camel.apache.org/schema/spring       http://camel.apache.org/schema/spring/camel-spring.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
     <!-- END SNIPPET: e1 -->
+
     <!-- START SNIPPET: e2 -->
     <bean class="org.apache.camel.component.kafka.KafkaComponent" id="kafka">
-        <property name="brokers" value="${kafka.bootstrap.url}"/>
+        <property name="configuration">
+            <bean class="org.apache.camel.component.kafka.KafkaConfiguration">
+                <property name="brokers" value="${kafka.bootstrap.url}"/>
+            </bean>
+        </property>
     </bean>
+
     <bean class="java.io.File" id="filerepo">
         <constructor-arg type="java.lang.String" value="${fileOffsetrepoPath}"/>
     </bean>
     <bean class="org.apache.camel.impl.engine.FileStateRepository"
-        factory-method="fileStateRepository" id="offsetRepo" init-method="doStart">
+          factory-method="fileStateRepository" id="offsetRepo" init-method="doStart">
         <constructor-arg ref="filerepo"/>
     </bean>
-    <bean
-        class="org.apache.camel.example.kafka.offsetRepository.KafkaProcessor" id="kafkaProcessor"/>
+
+    <bean class="org.apache.camel.example.kafka.offsetRepository.KafkaProcessor" id="kafkaProcessor"/>
     <!-- END SNIPPET: e2 -->
+
     <!-- START SNIPPET: e3 -->
     <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
         <route id="consumer-route1">
-            <from id="kafka-consumer-1" uri="kafka:{{consumer.topic}}?groupId={{consumer.group}}&amp;offsetRepository=##offsetRepo"/>
+            <from id="kafka-consumer-1"
+                  uri="kafka:{{consumer.topic}}?groupId={{consumer.group}}&amp;offsetRepository=##offsetRepo"/>
             <log id="route-log-1" message="consumer >>> ${body}"/>
         </route>
         <route id="producer-route-1">
