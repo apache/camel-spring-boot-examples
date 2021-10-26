@@ -3,7 +3,10 @@
 This examples shows how to use Route Templates (parameterized routes) to specify a skeleton route
 which can be used for creating and adding new routes via parameters.
 
-The route template is defined via Java or XML DSL (RouteBuilder) in the `MyRouteTemplates.java` source file.
+We have prepared the example with the route template in both XML and Java DSL
+
+The XML (default in use) is located in `src/main/resources/mycamel` folder.
+The Java is in the `MyRouteTemplates.java` source file.
 
 The `application.properties` is used to create two routes from the template using different set of parameters.
 

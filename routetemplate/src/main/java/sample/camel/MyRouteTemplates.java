@@ -29,6 +29,8 @@ public class MyRouteTemplates extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+        // in this example we have created the template in XML and this is disabled
+        /*
         // create a route template with the given name
         routeTemplate("myTemplate")
             // here we define the required input parameters (can have default values)
@@ -40,6 +42,7 @@ public class MyRouteTemplates extends RouteBuilder {
             // we can also use {{propertyName}} to refer to property placeholders
             .from("timer:{{name}}?period={{myPeriod}}")
                 .setBody(simple("{{greeting}} ${body}"))
-                .log("${body}");
+                .log("Java says ${body}");
+         */
     }
 }
