@@ -70,6 +70,7 @@
 		<module>rest-swagger-simple</module>
 		<module>rest-openapi</module>
 		<module>rest-openapi-simple</module>
+		<module>rest-openapi-springdoc</module>
 		<module>routetemplate</module>
 		<module>routes-configuration</module>
 		<module>servicecall</module>
