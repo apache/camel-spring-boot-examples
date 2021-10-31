@@ -19,9 +19,9 @@ package org.apache.camel.example.spring.boot.rest.jpa;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Serivce;
 
-@Component
+@Serivce
 public class OrderService {
 
     private final BookRepository books;
