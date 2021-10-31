@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 51 (0 deprecated)
+Number of Examples: 52 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -134,6 +134,8 @@ Number of Examples: 51 (0 deprecated)
 | link:geocoder/README.adoc[Geocoder] (geocoder) | Rest | An example showing the Camel Geocoder component via REST DSL with Spring Boot
 
 | link:rest-openapi/README.adoc[Rest Openapi] (rest-openapi) | Rest | An example showing Camel REST DSL and OpenApi with Spring Boot
+
+| link:rest-openapi-springdoc/README.adoc[Rest Openapi Springdoc] (rest-openapi-springdoc) | Rest | An example showing Camel REST DSL and OpenApi with a Springdoc UI in a Spring Boot application
 
 | link:rest-producer/readme.adoc[Rest Producer] (rest-producer) | Rest | An example showing how to use Camel Rest to call a REST service
 
