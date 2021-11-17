@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 52 (0 deprecated)
+Number of Examples: 53 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -46,6 +46,8 @@ Number of Examples: 52 (0 deprecated)
 | link:load-balancer-eip/README.adoc[Load Balancer Eip] (load-balancer-eip) | Beginner | An example showing Load Balancer EIP with Camel and Spring Boot
 
 | link:pojo/README.adoc[Pojo] (pojo) | Beginner | An example showing how to work with Camel POJO routing with Spring Boot
+
+| link:quartz/README.adoc[Quartz] (quartz) | Beginner | An example showing how to work with Camel Quartz and Camel Log with Spring Boot
 
 | link:rest-openapi-simple/README.adoc[REST OpenApi] (rest-openapi-simple) | Beginner | This example shows how to call a Rest service defined using OpenApi specification
 
