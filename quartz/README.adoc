@@ -1,0 +1,29 @@
+== Spring Boot Example with Quartz and Log
+
+=== Introduction
+
+This example demonstrates how to use Quartz Starter with Log Starter.
+
+=== Build
+
+You can build this example using:
+
+    $ mvn package
+
+=== Run
+
+You can run this example using:
+
+    $ mvn spring-boot:run
+
+And you should see output in the console with high and low numbers. The example will self stop after one minute.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
