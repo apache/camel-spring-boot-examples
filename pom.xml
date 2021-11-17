@@ -84,6 +84,7 @@
 		<module>xml-import</module>
 		<module>zipkin</module>
 		<module>strimzi</module>
+		<module>quartz</module>
 		<module>splitter-eip</module>
 		<module>widget-gadget</module>
 		<module>unit-testing</module>
