@@ -1,0 +1,11 @@
+spring:
+  output:
+    ansi:
+      enabled: ALWAYS
+camel:
+  component:
+    azure-servicebus:
+      configuration:
+        connectionString: [SERVICEBUS_CONNECTION_STRING]
+        serviceBusType: queue
+

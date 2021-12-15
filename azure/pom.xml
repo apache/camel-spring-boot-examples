@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>examples</artifactId>
+    <groupId>org.apache.camel.springboot.example</groupId>
+    <version>3.14.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>azure</artifactId>
+  <packaging>pom</packaging>
+  <properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+  </properties>
+  <modules>
+
+    <module>camel-example-spring-boot-azure-servicebus-jms</module>
+    <module>camel-example-spring-boot-azure-servicebus</module>
+    <module>camel-example-spring-boot-azure-eventhubs</module>
+  </modules>
+</project>

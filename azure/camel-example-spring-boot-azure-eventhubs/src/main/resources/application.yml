@@ -1,0 +1,11 @@
+camel:
+  component:
+    azure-eventhubs:
+      configuration:
+        # connectionstring for eventhubs instance, with ;EntityPath=<eventhub-name> in the end
+        connectionString: [EVENTHUBS_CONNECTION_STRING]
+        blobAccountName: [BLOB_ACCOUNT_NAME]
+        blobAccessKey: [BLOB_KEY]
+        blobContainerName: [BLOB_CONTAINER_NAME]
+namespaceName: [EVENTHUBS_NAMESPACE]
+eventhubsName: [EVENTHUB_NAME]

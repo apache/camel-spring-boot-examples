@@ -89,7 +89,8 @@
 		<module>splitter-eip</module>
 		<module>widget-gadget</module>
 		<module>unit-testing</module>
-    </modules>
+    <module>azure</module>
+  </modules>
 
 	<properties>
 		<camel-version>3.14.0-SNAPSHOT</camel-version>

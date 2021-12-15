@@ -1,0 +1,8 @@
+camel:
+  component:
+    jms:
+      configuration:
+        # username sasKeyName from connection-string
+        username: [SASKEYNAME]
+        # password sasKeyValue from connection-string
+        password: [SASKEYVALUE]
