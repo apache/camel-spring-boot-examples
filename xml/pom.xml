@@ -86,6 +86,11 @@
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-stream-starter</artifactId>
         </dependency>
+        <!-- support Camel tooling to debug Camel routes -->
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-debug-starter</artifactId>
+        </dependency>
 
         <!-- test -->
         <dependency>
@@ -96,11 +101,6 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-test-spring-junit5</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-management</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
