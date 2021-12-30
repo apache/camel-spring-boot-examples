@@ -18,10 +18,8 @@
 
 -->
 
-<routeConfiguration id="xmlError">
-    <onException>
-        <exception>java.lang.Exception</exception>
-        <handled><constant>true</constant></handled>
-        <log message="XML WARN: ${exception.message}" id="inOnException"/>
-    </onException>
+<routeConfiguration id="xmlInterceptor">
+    <interceptFrom uri="*">
+        <log message="Message intercepted" id="inXmlInterceptor"/>
+    </interceptFrom>
 </routeConfiguration>
