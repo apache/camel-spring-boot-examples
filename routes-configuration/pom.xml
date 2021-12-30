@@ -119,6 +119,13 @@
             <artifactId>camel-test-spring-junit5</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- For debugging -->
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-debug-starter</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

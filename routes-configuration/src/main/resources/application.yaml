@@ -29,4 +29,4 @@ camel:
     dump-routes: true
 
     # which directory(s) to scan for routes/route-configurations which can be xml, yaml or java files
-    routes-include-pattern: classpath:myroutes/*,classpath:myerror/*
+    routes-include-pattern: classpath:myroutes/*,classpath:myerror/*,classpath:myinterceptor/*
