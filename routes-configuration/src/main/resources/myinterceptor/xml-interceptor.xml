@@ -20,6 +20,6 @@
 
 <routeConfiguration id="xmlInterceptor">
     <interceptFrom uri="*">
-        <log message="Message intercepted" id="inXmlInterceptor"/>
+        <log message="Message intercepted from ${header.CamelInterceptedEndpoint}" id="inXmlInterceptor"/>
     </interceptFrom>
 </routeConfiguration>
