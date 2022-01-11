@@ -1,0 +1,117 @@
+== Spring Boot Example with the Dynamic Router EIP Component
+
+=== Example Description
+
+This example demonstrates how you might use the Dynamic Router EIP component in a Spring Boot application.  There are eleven routing participants that subscribe to a "numbers" channel of the Dynamic Router.  The message includes:
+
+ 1. A Predicate that examines the Exchange to determine if an Exchange is appropriate for the participant
+ 2. A destination URI where the Dynamic Router will send Exchanges that match a participant's Predicate
+
+.Routing Participants
+[cols="1,1,2"]
+|===
+|Name |Priority |Description
+
+|Tens
+|1
+|Accepts multiples of 10.
+
+|Nines
+|2
+|Accepts multiples of 9.
+
+|Eights
+|3
+|Accepts multiples of 8.
+
+|Sevens
+|4
+|Accepts multiples of 7.
+
+|Sixes
+|5
+|Accepts multiples of 6.
+
+|Fives
+|6
+|Accepts multiples of 5.
+
+|Fours
+|7
+|Accepts multiples of 4.
+
+|Threes
+|8
+|Accepts multiples of 3.
+
+|Even
+|9
+|Accepts even numbers.
+
+|Odd
+|100
+|Accepts odd numbers.
+
+|Prime
+|10
+|Accepts prime numbers.
+|===
+
+Subscriptions with a lower priority value are evaluated earlier than subscriptions with a higher priority value.  For this reason, even though the number "10" is a multiple of 5, it will be consumed by the Tens participant.
+
+All participants inherit from the link:src/main/java/org/apache/camel/example/springboot/numbers/participants/RoutingParticipant.java[RoutingParticipant] class, so they use a `@Consume` annotation to consume from their registered destination URI.  They add their received number to the link:src/main/java/org/apache/camel/example/springboot/numbers/service/ResultsService.java[ResultsService].
+
+The link:src/main/java/org/apache/camel/example/springboot/numbers/service/NumbersService.java[NumbersService] sends all numbers from one to one million through the Dynamic Router.  After the messages have all been sent and processed, it instructs the ResultsService to print the results.  It will look something like this:
+
+.Example Output
+[source,bash]
+----
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.6.2)
+
+INFO 23130 --- [main] o.a.c.e.s.n.service.NumbersService : Subscribing participants
+INFO 23130 --- [main] o.a.c.e.s.n.service.NumbersService : Sending messages to the dynamic router
+INFO 23130 --- [main] o.a.c.e.s.n.service.NumbersService : Finished
+Dynamic Router Spring Boot Numbers Example Results:
+            odd:  150077
+           even:  114287
+         sevens:  101588
+           tens:  100000
+          nines:  100000
+         eights:   88889
+         primes:   78494
+         threes:   76191
+          fives:   76190
+          sixes:   57142
+          fours:   57142
+Received count: 1000000 in 5709ms
+----
+
+=== Build
+
+You can build this example using:
+
+    $ mvn package
+
+=== Run
+
+You can run this example using:
+
+    $ mvn spring-boot:run
+
+The results should show up in less than ten seconds, and the program will immediately terminate.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so please
+https://camel.apache.org/contributing.html[get involved]
+
+The Camel riders!
