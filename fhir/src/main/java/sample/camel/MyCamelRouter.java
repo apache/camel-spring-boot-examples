@@ -62,6 +62,7 @@ public class MyCamelRouter extends RouteBuilder {
                 })
                 // marshall to JSON for logging
                 .marshal().fhirJson("{{fhirVersion}}")
+                .convertBodyTo(String.class)
                 .log("Inserting Patient: ${body}")
                 // create Patient in our FHIR server
                 .to("fhir://create/resource?inBody=resourceAsString&serverUrl={{serverUrl}}&fhirVersion={{fhirVersion}}")
