@@ -104,6 +104,10 @@ You can run this example using:
 
     $ mvn spring-boot:run
 
+If you want to run the Dynamic Router in "allMatch" receiver mode, run the example with an argument specifying that configuration property:
+
+    $ mvn spring-boot:run -Dspring-boot.run.arguments="--camel.spring-boot.example.dynamic-router-eip.recipient-mode=allMatch"
+
 The results should show up in less than ten seconds, and the program will immediately terminate.
 
 === Help and contributions

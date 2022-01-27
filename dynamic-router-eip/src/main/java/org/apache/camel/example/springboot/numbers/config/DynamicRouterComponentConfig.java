@@ -72,7 +72,8 @@ public class DynamicRouterComponentConfig {
         return new RouteBuilder() {
             @Override
             public void configure() {
-                from(exampleConfig.getStartUri()).to(COMPONENT_SCHEME + ":" + exampleConfig.getRoutingChannel());
+                from(exampleConfig.getStartUri())
+                        .to(COMPONENT_SCHEME + ":" + exampleConfig.getRoutingChannel() + "?recipientMode=" + exampleConfig.getRecipientMode());
             }
         };
     }
