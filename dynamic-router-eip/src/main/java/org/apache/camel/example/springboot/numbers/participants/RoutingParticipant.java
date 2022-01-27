@@ -19,8 +19,8 @@ package org.apache.camel.example.springboot.numbers.participants;
 import org.apache.camel.Consume;
 import org.apache.camel.Predicate;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.component.dynamicrouter.message.DynamicRouterControlMessage;
-import org.apache.camel.component.dynamicrouter.message.DynamicRouterControlMessage.SubscribeMessageBuilder;
+import org.apache.camel.component.dynamicrouter.DynamicRouterControlMessage;
+import org.apache.camel.component.dynamicrouter.DynamicRouterControlMessage.SubscribeMessageBuilder;
 import org.apache.camel.example.springboot.numbers.config.ExampleConfig;
 import org.apache.camel.example.springboot.numbers.service.ResultsService;
 
