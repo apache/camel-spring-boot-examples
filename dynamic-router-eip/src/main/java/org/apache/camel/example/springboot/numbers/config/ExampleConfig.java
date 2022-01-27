@@ -45,6 +45,11 @@ public class ExampleConfig {
      */
     private String startUri;
 
+    /**
+     * The recipient mode -- first matching filter only, or all matching filters.
+     */
+    private String recipientMode;
+
     public String getStartUri() {
         return startUri;
     }
@@ -75,5 +80,13 @@ public class ExampleConfig {
 
     public void setReceiverScheme(String receiverScheme) {
         this.receiverScheme = receiverScheme;
+    }
+
+    public String getRecipientMode() {
+        return this.recipientMode;
+    }
+
+    public void setRecipientMode(String recipientMode) {
+        this.recipientMode = recipientMode;
     }
 }
