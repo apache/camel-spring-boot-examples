@@ -59,6 +59,11 @@
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-undertow-spring-security-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-bean-starter</artifactId>
+        </dependency>
+   
     </dependencies>
 
     <build>
