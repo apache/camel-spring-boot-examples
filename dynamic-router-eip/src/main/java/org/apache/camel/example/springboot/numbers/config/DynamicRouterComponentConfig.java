@@ -19,6 +19,8 @@ package org.apache.camel.example.springboot.numbers.config;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.dynamicrouter.DynamicRouterConfiguration;
+import org.apache.camel.component.dynamicrouter.DynamicRouterConstants;
 import org.apache.camel.example.springboot.numbers.participants.PredicateConstants;
 import org.apache.camel.example.springboot.numbers.participants.RoutingParticipant;
 import org.apache.camel.example.springboot.numbers.service.ResultsService;
@@ -26,7 +28,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.concurrent.CountDownLatch;
+
 import static org.apache.camel.component.dynamicrouter.DynamicRouterConstants.COMPONENT_SCHEME;
+import static org.apache.camel.component.dynamicrouter.DynamicRouterConstants.MODE_FIRST_MATCH;
 import static org.apache.camel.example.springboot.numbers.participants.PredicateConstants.PREDICATE_EIGHTS;
 import static org.apache.camel.example.springboot.numbers.participants.PredicateConstants.PREDICATE_EVEN;
 import static org.apache.camel.example.springboot.numbers.participants.PredicateConstants.PREDICATE_FIVES;
@@ -76,6 +81,29 @@ public class DynamicRouterComponentConfig {
                         .to(COMPONENT_SCHEME + ":" + exampleConfig.getRoutingChannel() + "?recipientMode=" + exampleConfig.getRecipientMode());
             }
         };
+    }
+
+    /**
+     * Create a {@link CountDownLatch} so that we can wait on it for the total
+     * expected number of messages to be received.  Depending on the configured
+     * value of {@link ExampleConfig#getRecipientMode()}, this latch will be
+     * created with {@link ExampleConfig#getExpectedAllMatchMessageCount()} or
+     * {@link ExampleConfig#getExpectedFirstMatchMessageCount()}.
+     *
+     * @see DynamicRouterConstants#MODE_ALL_MATCH
+     * @see DynamicRouterConstants#MODE_FIRST_MATCH
+     * @see DynamicRouterConfiguration#getRecipientMode()
+     * @see ExampleConfig#getRecipientMode()
+     * @see ExampleConfig#getExpectedAllMatchMessageCount()
+     * @see ExampleConfig#getExpectedFirstMatchMessageCount()
+     *
+     * @return a countdown latch set to the number of expected messages
+     */
+    @Bean
+    CountDownLatch countDownLatch() {
+        return new CountDownLatch(MODE_FIRST_MATCH.equals(exampleConfig.getRecipientMode()) ?
+                exampleConfig.getExpectedFirstMatchMessageCount() :
+                exampleConfig.getExpectedAllMatchMessageCount());
     }
 
     /**

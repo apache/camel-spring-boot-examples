@@ -27,9 +27,9 @@ camel:
         receiver-scheme: direct
         start-uri: direct:start
         recipient-mode: firstMatch
-        send-message-count: 1000000
-        expected-first-match-message-count: 1000000
-        expected-all-match-message-count: 2507465
+        send-message-count: 10000
+        expected-first-match-message-count: 1000
+        expected-all-match-message-count: 500000
   component:
     dynamic-router:
       lazy-start-producer: true
@@ -41,5 +41,5 @@ logging:
     root: WARN
     org.apache.camel.example.springboot: INFO
 spring:
-  profiles:
-    active: default
+  main:
+    banner-mode: off

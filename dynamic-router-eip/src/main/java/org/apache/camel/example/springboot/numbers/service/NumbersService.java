@@ -23,14 +23,18 @@ import org.apache.camel.example.springboot.numbers.participants.RoutingParticipa
 import org.apache.camel.util.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
+
+import static java.util.concurrent.TimeUnit.*;
 
 /**
  * Create numbers and send them to the dynamic router so that they can be
@@ -41,6 +45,8 @@ import java.util.stream.IntStream;
 public class NumbersService {
 
     private static final Logger LOG = LoggerFactory.getLogger(NumbersService.class);
+
+    private final NumberFormat numberFormat = NumberFormat.getIntegerInstance();
 
     /**
      * The URI to send the messages to.  This URI feeds the dynamic router in a
@@ -67,32 +73,37 @@ public class NumbersService {
     private final ResultsService resultsService;
 
     /**
-     * The Spring Boot {@link ApplicationContext} so that the app can be
-     * programmatically shut down when we are finished processing all
-     * messages and displaying results.
+     * The {@link CountDownLatch} to wait for the total expected number of
+     * messages to be received.
      */
-    private final ApplicationContext applicationContext;
+    final CountDownLatch countDownLatch;
 
     /**
-     * Create this service with all of the things.
+     * The number of messages to generate.
+     */
+    final int numberOfMessages;
+
+    /**
+     * Create this service with everything.
      *
-     * @param config the configuration object representing the config properties
-     * @param participants the dynamic router participants
-     * @param start the producer template to send messages to the start endpoint
-     * @param resultsService the service that compiles routing results
-     * @param applicationContext the Spring app context for exiting when processing is complete
+     * @param config             the configuration object representing the config properties
+     * @param participants       the dynamic router participants
+     * @param start              the producer template to send messages to the start endpoint
+     * @param resultsService     the service that compiles routing results
+     * @param countDownLatch     the latch to wait for all messages to be received
      */
     public NumbersService(
             final ExampleConfig config,
             final List<RoutingParticipant> participants,
             final ProducerTemplate start,
             final ResultsService resultsService,
-            final ApplicationContext applicationContext) {
+            final CountDownLatch countDownLatch) {
         this.startUri = config.getStartUri();
         this.participants = participants;
         this.start = start;
         this.resultsService = resultsService;
-        this.applicationContext = applicationContext;
+        this.countDownLatch = countDownLatch;
+        this.numberOfMessages = config.getSendMessageCount();
     }
 
     /**
@@ -101,21 +112,23 @@ public class NumbersService {
      * display the results and exit the app.
      */
     @EventListener(ApplicationReadyEvent.class)
-    public void start() {
-        LOG.info("Subscribing participants");
+    public void start() throws InterruptedException {
+        LOG.info("Subscribing {} participants", participants.size());
         participants.forEach(RoutingParticipant::subscribe);
-        StopWatch watch = new StopWatch();
-        LOG.info("Sending messages to the dynamic router");
-        sendMessages();
+        final StopWatch watch = new StopWatch();
+        LOG.info("Sending {} messages to the dynamic router: {}", numberFormat.format(numberOfMessages), getStartUri());
+        CompletableFuture.runAsync(this::sendMessages, Executors.newSingleThreadExecutor());
+        if (!countDownLatch.await(1, MINUTES)) {
+            LOG.warn("Statistics may be inaccurate, since the operation timed out");
+        }
         LOG.info(resultsService.getStatistics(watch));
-        SpringApplication.exit(applicationContext);
     }
 
     /**
      * Sends the messages to the starting endpoint of the route.
      */
     public void sendMessages() {
-        IntStream.rangeClosed(1, 1000000).forEach(start::sendBody);
+        IntStream.rangeClosed(1, numberOfMessages).forEach(start::sendBody);
     }
 
     /**
