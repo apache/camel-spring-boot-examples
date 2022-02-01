@@ -41,7 +41,7 @@ You should see the following output when the application is launched:
 2017-03-05 14:55:44.140  INFO 15312 --- [           main] o.a.c.example.springboot.Application     : Started Application in 6.265 seconds (JVM running for 21.092)
 ----
 
-After the Spring Boot application is started, you can open the following URL in your web browser to access the REST endpoint and retrieve a list of users: http://localhost:8080/camel/users
+After the Spring Boot application is started, you can open the following URL in your web browser to access the REST endpoint and retrieve a list of users: http://localhost:8080/api/users
 
 You can also access the REST endpoint from the command line:
 
