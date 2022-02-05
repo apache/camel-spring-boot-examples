@@ -41,5 +41,5 @@ logging:
     root: WARN
     org.apache.camel.example.springboot: INFO
 spring:
-  profiles:
-    active: default
+  main:
+    banner-mode: off

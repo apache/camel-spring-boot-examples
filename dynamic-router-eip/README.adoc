@@ -110,6 +110,18 @@ If you want to run the Dynamic Router in "allMatch" receiver mode, run the examp
 
 The results should show up in less than ten seconds, and the program will immediately terminate.
 
+=== Run Tests
+
+You can run the tests using:
+
+    $mvn test
+
+There are some demos that run during the test phase.  Currently, there are three:
+
+ 1. AllRecipientsApplicationTest: the recipient mode is set to "allMatch" and 1,000,000 messages are sent through the router.
+ 2. FirstRecipientApplicationTest: the recipient mode is set to "firstMatch" and 1,000,000 messages are sent through the router.
+ 3. LessExpectedApplicationTest: the recipient mode is set to "firstMatch", and 10,000 messages are sent through the router.  The difference, here, is that the expected count is set to only 1,000 messages, so the results are calculated and displayed before all 10,000 messages are routed.
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please

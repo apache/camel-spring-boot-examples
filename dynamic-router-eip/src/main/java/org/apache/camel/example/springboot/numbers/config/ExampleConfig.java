@@ -18,6 +18,8 @@ package org.apache.camel.example.springboot.numbers.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.concurrent.CountDownLatch;
+
 /**
  * The config properties object from the application.yml file.
  */
@@ -50,6 +52,33 @@ public class ExampleConfig {
      */
     private String recipientMode;
 
+    /**
+     * The number of messages to send.
+     */
+    private int sendMessageCount;
+
+    /**
+     * If the recipient mode is "firstMatch", then this is the number of
+     * messages that are expected to be received.  This value is also used
+     * to create a {@link CountDownLatch} so that all messages can be
+     * received before printing out messaging statistics.
+     */
+    private int expectedFirstMatchMessageCount;
+
+    /**
+     * If the recipient mode is "allMatch", then this is the number of
+     * messages that are expected to be received.  There is probably not an
+     * easy way to calculate this number, so the number needs to be known
+     * for a given {@link #sendMessageCount} value.  This value is also used
+     * to create a {@link CountDownLatch} so that all messages can be
+     * received before printing out messaging statistics.
+     */
+    private int expectedAllMatchMessageCount;
+
+    /**
+     * The URI where messages will be sent to as the starting point for the
+     * route that feeds the dynamic router.
+     */
     public String getStartUri() {
         return startUri;
     }
@@ -58,6 +87,9 @@ public class ExampleConfig {
         this.startUri = startUri;
     }
 
+    /**
+     * The dynamic router channel.
+     */
     public String getRoutingChannel() {
         return routingChannel;
     }
@@ -66,6 +98,9 @@ public class ExampleConfig {
         this.routingChannel = routingChannel;
     }
 
+    /**
+     * The dynamic router control channel URI
+     */
     public String getSubscribeUri() {
         return subscribeUri;
     }
@@ -74,6 +109,9 @@ public class ExampleConfig {
         this.subscribeUri = subscribeUri;
     }
 
+    /**
+     * The scheme that routing participants will use to listen for messages.
+     */
     public String getReceiverScheme() {
         return receiverScheme;
     }
@@ -82,11 +120,55 @@ public class ExampleConfig {
         this.receiverScheme = receiverScheme;
     }
 
+    /**
+     * The recipient mode -- first matching filter only, or all matching filters.
+     */
     public String getRecipientMode() {
         return this.recipientMode;
     }
 
     public void setRecipientMode(String recipientMode) {
         this.recipientMode = recipientMode;
+    }
+
+    /**
+     * The number of messages to send.
+     */
+    public int getSendMessageCount() {
+        return sendMessageCount;
+    }
+
+    public void setSendMessageCount(int sendMessageCount) {
+        this.sendMessageCount = sendMessageCount;
+    }
+
+    /**
+     * If the recipient mode is "firstMatch", then this is the number of
+     * messages that are expected to be received.  This value is also used
+     * to create a {@link CountDownLatch} so that all messages can be
+     * received before printing out messaging statistics.
+     */
+    public int getExpectedFirstMatchMessageCount() {
+        return expectedFirstMatchMessageCount;
+    }
+
+    public void setExpectedFirstMatchMessageCount(int expectedFirstMatchMessageCount) {
+        this.expectedFirstMatchMessageCount = expectedFirstMatchMessageCount;
+    }
+
+    /**
+     * If the recipient mode is "allMatch", then this is the number of
+     * messages that are expected to be received.  There is probably not an
+     * easy way to calculate this number, so the number needs to be known
+     * for a given {@link #sendMessageCount} value.  This value is also used
+     * to create a {@link CountDownLatch} so that all messages can be
+     * received before printing out messaging statistics.
+     */
+    public int getExpectedAllMatchMessageCount() {
+        return expectedAllMatchMessageCount;
+    }
+
+    public void setExpectedAllMatchMessageCount(int expectedAllMatchMessageCount) {
+        this.expectedAllMatchMessageCount = expectedAllMatchMessageCount;
     }
 }
