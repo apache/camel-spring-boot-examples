@@ -3,7 +3,7 @@
 === Introduction
 
 This example demonstrates how you can use Camel-Infinispan Starter component. The example is really simple: put a key/value pair in a remote cache and get the same key.
-You'll need a running Infinispan server to run this example.
+This example starts an Infinispan server with Infinispan Docker Image, so it can run OOTB.
 
 === Build
 
