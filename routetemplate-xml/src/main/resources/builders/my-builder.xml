@@ -17,19 +17,15 @@
     limitations under the License.
 
 -->
-<routeTemplates xmlns="http://camel.apache.org/schema/spring">
-
-    <routeTemplate id="myXmlTemplate">
-        <templateParameter name="name"/>
-        <templateParameter name="greeting"/>
-        <templateParameter name="myPeriod" defaultValue="3s"/>
-        <route>
-            <from uri="timer:{{name}}?period={{myPeriod}}"/>
-            <setBody>
-                <simple>{{greeting}} {{name}}</simple>
-            </setBody>
-            <log message="XML says ${body}"/>
-        </route>
-    </routeTemplate>
-
-</routeTemplates>
+<templatedRoutes id="camel" xmlns="http://camel.apache.org/schema/spring">
+    <!-- create two routes from the template -->
+    <templatedRoute routeTemplateRef="myXmlTemplate">
+        <parameter name="name" value="one"/>
+        <parameter name="greeting" value="Hello"/>
+    </templatedRoute>
+    <templatedRoute routeTemplateRef="myXmlTemplate">
+        <parameter name="name" value="deux"/>
+        <parameter name="greeting" value="Bonjour"/>
+        <parameter name="myPeriod" value="5s"/>
+    </templatedRoute>
+</templatedRoutes>
