@@ -10,14 +10,27 @@ The Java is in the `MyRouteTemplates.java` source file.
 
 The `application.properties` is used to create two routes from the template using different set of parameters.
 
-An alternative to create routes is from Java which is done in the `MyConfiguration.java` class.
-See the `MyApplication.java` where you can change the source to use java instead of property file for the template parameters.
+An alternative to create routes is from Java which is done in the `MyTemplateBuilder.java` class.
+
+See the `MyCamelApplication.java` where you can change the source to use java instead of property file for the template parameters.
+
+In case you would like to see how to create rules from a route template in Java, simply uncomment the annotation `@Component` in the classes `MyTemplateBuilder` and `MyRouteTemplates` to allow Spring Boot to automatically discover them.
+
+=== Build
+
+You will need to compile this example first:
+
+----
+$ mvn compile
+----
 
 === How to run
 
 You can run this example using
 
-    mvn spring-boot:run
+----
+$ mvn spring-boot:run
+----
 
 === Help and contributions
 

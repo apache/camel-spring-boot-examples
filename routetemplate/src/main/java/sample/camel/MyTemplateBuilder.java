@@ -16,18 +16,16 @@
  */
 package sample.camel;
 
-import org.apache.camel.CamelContext;
-import org.apache.camel.main.ConfigureRouteTemplates;
-import org.springframework.context.annotation.Configuration;
+import org.apache.camel.builder.RouteBuilder;
 
-@Configuration
-public class MyTemplateBuilder implements ConfigureRouteTemplates {
+//@org.springframework.stereotype.Component
+public class MyTemplateBuilder extends RouteBuilder {
 
     /**
      * Configure and adds routes from route templates.
      */
     @Override
-    public void configure(CamelContext context) {
+    public void configure() throws Exception {
         // to configure route templates we can use java code as below from a template builder class,
         // gives more power as its java code.
         // or we can configure as well from application.yaml,
@@ -35,17 +33,13 @@ public class MyTemplateBuilder implements ConfigureRouteTemplates {
         // and you can also use both java and yaml together
 
         // in this example we use properties by default and have disabled java
-        /*
-        TemplatedRouteBuilder.builder(context, "myTemplate")
-                .parameter("name", "one")
-                .parameter("greeting", "Hello")
-                .add();
+        templatedRoute("myTemplate")
+            .parameter("name", "one")
+            .parameter("greeting", "Hello");
 
-        TemplatedRouteBuilder.builder(context, "myTemplate")
-                .parameter("name", "two")
-                .parameter("greeting", "Bonjour")
-                .parameter("myPeriod", "5s")
-                .add();
-         */
+        templatedRoute("myTemplate")
+            .parameter("name", "deux")
+            .parameter("greeting", "Bonjour")
+            .parameter("myPeriod", "5s");
     }
 }
