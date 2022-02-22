@@ -1,0 +1,33 @@
+== Spring Boot Example with AWS2-S3
+
+=== Introduction
+
+This example demonstrates how you can use Camel-AWS2-S3 Starter component. The example is really simple: load file into your bucket and consume it.
+
+=== Build
+
+You can build this example using:
+
+    $ mvn package
+
+=== Run
+
+You can run this example following these steps using:
+
+In application.properties set all the AWS credentials and the bucket name
+
+Run the app
+
+    $ mvn spring-boot:run
+
+And you should see output in the console. 
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
