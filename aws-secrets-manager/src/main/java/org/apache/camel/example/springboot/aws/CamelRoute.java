@@ -26,7 +26,7 @@ public class CamelRoute extends RouteBuilder {
     public void configure() throws Exception {
 
         from("timer://myTimer?fixedRate=true&period=10000")
-            .toD("https://finnhub.io/api/v1/quote?symbol={{stock}}&token={{aws:finnhub-token-3}}")
+            .toD("https://finnhub.io/api/v1/quote?symbol={{stock}}&token={{aws:finnhub-token}}")
             .log("${body}");
     }
 }
