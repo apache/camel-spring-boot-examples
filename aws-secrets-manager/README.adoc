@@ -2,7 +2,13 @@
 
 === Introduction
 
-This example demonstrates how you can use Camel-AWS-Secrets-Manager Starter component. The example is really simple: load file into your bucket and consume it.
+This example demonstrates how you can use Camel-AWS-Secrets-Manager Starter component, in particular the properties source feature. 
+
+=== Credentials
+
+First of all you'll need to correctly populate the camel.vault.aws.* properties in the application properties.
+
+In your AWS Secret Manager account, create a finnhub-token secret, with a plain finnhub.io token.
 
 === Build
 
