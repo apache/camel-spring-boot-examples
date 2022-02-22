@@ -1,8 +1,8 @@
-== Spring Boot Example with AWS2-S3
+== Spring Boot Example with AWS Secrets Manager
 
 === Introduction
 
-This example demonstrates how you can use Camel-AWS2-S3 Starter component. The example is really simple: load file into your bucket and consume it.
+This example demonstrates how you can use Camel-AWS-Secrets-Manager Starter component. The example is really simple: load file into your bucket and consume it.
 
 === Build
 
