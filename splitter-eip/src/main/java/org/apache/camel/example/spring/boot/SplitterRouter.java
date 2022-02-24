@@ -69,7 +69,7 @@ public class SplitterRouter extends RouteBuilder {
 		// Example 4 : Splitter with subsequent aggregation failing on exception
 		from("direct:split-aggregate-stop-on-exception")
 				.split(body(), AggregationStrategies.bean(AggregationStrategyPojo.class))
-						// stop processing if exception occured durring process of splitting
+						// stop processing if exception occurred during process of splitting
 						.stopOnException()
 						.bean(MyMessageTransformer.class)
 					.to("mock:f")
@@ -94,9 +94,7 @@ public class SplitterRouter extends RouteBuilder {
 						oldExchange.getIn().setBody(existing + "+" + body);
 						return oldExchange;
 					}))
-					// stop processing if exception occurs during aggregation
-					.stopOnAggregateException(true)
-//					.bean(MyMessageTransformer.class)
+					.bean(MyMessageTransformer.class)
 				.to("mock:h")
 				.end()
 			.to("mock:j");
