@@ -46,7 +46,6 @@ public class Application extends SpringBootServletInitializer {
                     .apiProperty("api.title", "Camel REST API")
                     .apiProperty("api.version", "1.0")
                     .apiProperty("cors", "true")
-                    .apiContextRouteId("doc-api")
                     .port(env.getProperty("server.port", "8080"))
                     .bindingMode(RestBindingMode.json);
 
