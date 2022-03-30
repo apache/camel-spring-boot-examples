@@ -101,6 +101,8 @@
 		<fabric8-maven-plugin-version>4.4.1</fabric8-maven-plugin-version>
 		<kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
 		<reactor-version>3.2.16.RELEASE</reactor-version>
+		<testcontainers-version>1.16.3</testcontainers-version>
+		<hapi-structures-v24-version>2.3</hapi-structures-v24-version>
 	</properties>
 
 	<repositories>
