@@ -51,7 +51,6 @@
 		<module>grpc</module>
 		<module>grpc-kubernetes</module>
 		<module>health-checks</module>
-		<module>hystrix</module>
 		<module>infinispan</module>
 		<module>jira</module>
 		<module>kafka-avro</module>

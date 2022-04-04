@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 57 (0 deprecated)
+Number of Examples: 56 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -96,8 +96,6 @@ Number of Examples: 57 (0 deprecated)
     
 
 | link:dynamic-router-eip/README.adoc[Dynamic Router Eip] (dynamic-router-eip) | EIP | An example on how to use the Dynamic Router EIP component in Spring Boot
-
-| link:hystrix/README.adoc[Hystrix] (hystrix) | EIP | An example showing how to use Hystrix EIP as circuit breaker in Camel routes
 
 | link:resilience4j/README.adoc[Resilience4j] (resilience4j) | EIP | An example showing how to use Resilience4j EIP as circuit breaker in Camel routes
 
