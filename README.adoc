@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 56 (0 deprecated)
+Number of Examples: 55 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -84,8 +84,6 @@ Number of Examples: 56 (0 deprecated)
 | link:infinispan/README.adoc[Infinispan] (infinispan) | Cloud | An example showing the Camel Infinispan component with Spring Boot
 
 | link:servicecall/README.adoc[Spring Boot ServiceCall] (servicecall) | Cloud | An example showing how to work with Camel ServiceCall EIP and Spring Boot
-
-| link:clustered-route-controller/readme.adoc[Clustered Route Controller] (clustered-route-controller) | Clustering | An example showing how to work with Camel's Clustered Route Controller and Spring Boot
 
 | link:master/readme.adoc[Master] (master) | Clustering | An example showing how to work with Camel's Master component and Spring Boot
 

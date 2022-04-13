@@ -34,7 +34,6 @@
     <properties>
         <category>Management and Monitoring</category>
 
-        <spring.boot-version>${spring-boot-version}</spring.boot-version>
         <jolokia-version>1.7.1</jolokia-version>
     </properties>
 
@@ -43,7 +42,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot-version}</version>
+                <version>${spring-boot-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
