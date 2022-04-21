@@ -35,7 +35,6 @@
     <properties>
         <category>Management and Monitoring</category>
         <title>OpenTracing APM</title>
-        <spring.boot-version>${spring-boot-version}</spring.boot-version>
     </properties>
 
 
@@ -45,7 +44,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot-version}</version>
+                <version>${spring-boot-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -65,7 +64,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>${spring.boot-version}</version>
+            <version>${spring-boot-version}</version>
         </dependency>
 
         <!-- camel -->

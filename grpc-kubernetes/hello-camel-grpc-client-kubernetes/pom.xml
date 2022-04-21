@@ -32,7 +32,6 @@
 
     <properties>
         <category>Cloud</category>
-        <spring.boot-version>${spring-boot-version}</spring.boot-version>
         <!-- gRPC requires strong own of the Google Guava version -->
         <google-guava-version>${grpc-guava-version}</google-guava-version>
     </properties>
@@ -44,7 +43,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot-version}</version>
+                <version>${spring-boot-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -97,7 +96,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot-version}</version>
+                <version>${spring-boot-version}</version>
                 <executions>
                     <execution>
                         <goals>

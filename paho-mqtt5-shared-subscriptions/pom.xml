@@ -17,7 +17,6 @@
 
     <properties>
         <category>Messaging</category>
-        <spring.boot-version>${spring-boot-version}</spring.boot-version>
     </properties>
 
     <dependencyManagement>
@@ -25,7 +24,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot-version}</version>
+                <version>${spring-boot-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

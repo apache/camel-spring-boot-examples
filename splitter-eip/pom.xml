@@ -37,7 +37,6 @@
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<spring.boot-version>${spring-boot-version}</spring.boot-version>
 	</properties>
 
 	<dependencyManagement>
@@ -46,7 +45,7 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring.boot-version}</version>
+				<version>${spring-boot-version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

@@ -43,7 +43,6 @@
 		<module>arangodb</module>
 		<module>aws-secrets-manager</module>
 		<module>aws2-s3</module>
-		<module>clustered-route-controller</module>
 		<module>dynamic-router-eip</module>
 		<module>fhir</module>
 		<module>fhir-auth-tx</module>
