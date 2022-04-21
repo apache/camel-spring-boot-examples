@@ -31,7 +31,7 @@
 
     <properties>
         <category>Rest</category>
-        <jackson.swagger.version>2.9.10</jackson.swagger.version>
+        <jackson.swagger.version>2.12.6.1</jackson.swagger.version>
     </properties>
 
     <!-- Spring-Boot and Camel BOM -->
