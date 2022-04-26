@@ -1,0 +1,39 @@
+== Spring Boot Example with AWS Secrets Manager
+
+=== Introduction
+
+This example demonstrates how you can use Camel-AWS-Secrets-Manager Starter component, in particular the properties source feature. 
+
+=== Credentials
+
+First of all you'll need to correctly populate the camel.vault.aws.* properties in the application properties.
+
+In your AWS Secret Manager account, create a finnhub-token secret, with a plain finnhub.io token.
+
+=== Build
+
+You can build this example using:
+
+    $ mvn package
+
+=== Run
+
+You can run this example following these steps using:
+
+In application.properties set all the AWS credentials and the bucket name
+
+Run the app
+
+    $ mvn spring-boot:run
+
+And you should see output in the console. 
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!

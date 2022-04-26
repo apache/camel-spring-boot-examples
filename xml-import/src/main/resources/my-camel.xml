@@ -23,10 +23,18 @@
          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
 
+  <!-- define the say bean -->
+  <bean id="myBean" class="sample.camel.SampleBean">
+    <property name="say" value="${greeting}"/> <!-- use spring property ${ } placeholder syntax -->
+  </bean>
+
+  <!-- embed Camel with routes -->
   <camelContext id="SampleCamel" xmlns="http://camel.apache.org/schema/spring">
+
     <route id="hello">
-      <from uri="timer:hello?period={{timer.period}}"/>
+      <from uri="timer:hello?period={{timer.period}}"/> <!-- use camel {{ }} property placeholder syntax -->
       <transform>
+        <!-- call the method on the bean -->
         <method ref="myBean" method="saySomething"/>
       </transform>
       <filter>
@@ -35,6 +43,7 @@
       </filter>
       <to uri="stream:out"/>
     </route>
+
   </camelContext>
 
 </beans>

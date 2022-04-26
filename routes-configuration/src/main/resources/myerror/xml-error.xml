@@ -22,6 +22,6 @@
     <onException>
         <exception>java.lang.Exception</exception>
         <handled><constant>true</constant></handled>
-        <log message="XML WARN: ${exception.message}"/>
+        <log message="XML WARN: ${exception.message}" id="inOnException"/>
     </onException>
 </routeConfiguration>

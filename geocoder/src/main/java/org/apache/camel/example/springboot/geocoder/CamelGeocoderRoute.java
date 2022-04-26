@@ -40,6 +40,9 @@ public class CamelGeocoderRoute extends RouteBuilder {
                 .param().name("address").type(query).description("The address to lookup").dataType("string").endParam()
                 .responseMessage().code(200).message("Geocoder successful").endResponseMessage()
                 // call the geocoder to lookup details from the provided address
+                .to("direct:geo");
+
+            from("direct:geo")
                 .toD("geocoder:address:${header.address})");
     }
 

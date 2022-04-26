@@ -28,6 +28,6 @@ camel:
       -0.greeting: Hello
       -1.template-id: myXmlTemplate
       -1.route-id: second
-      -1.name: two
+      -1.name: deux
       -1.greeting: Bonjour
       -1.my-period: 5s

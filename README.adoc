@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 54 (0 deprecated)
+Number of Examples: 55 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -57,7 +57,9 @@ Number of Examples: 54 (0 deprecated)
 
 | link:routes-configuration/readme.adoc[Routes Configuration] (routes-configuration) | Beginner | Example with global routes configuration for error handling
 
-| link:routetemplate/readme.adoc[Routetemplate] (routetemplate) | Beginner | How to use route templates (parameterized routes)
+| link:routetemplate/README.adoc[Routetemplate] (routetemplate) | Beginner | How to use route templates (parameterized routes)
+
+| link:routetemplate-xml/README.adoc[Routetemplate Xml] (routetemplate-xml) | Beginner | How to use route templates (parameterized routes) in XML
 
 | link:splitter-eip/README.adoc[Splitter Eip] (splitter-eip) | Beginner | An example showing Splitter EIP with Camel and Spring Boot
 
@@ -71,6 +73,8 @@ Number of Examples: 54 (0 deprecated)
 
 | link:xml-import/readme.adoc[Spring Boot XML Import] (xml-import) | Beginner | An example showing how to work with Spring XML files imported with embedded CamelContext
 
+| link:aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Cloud | An example showing the Camel AWS Secrets Manager Properties source with Spring Boot
+
 | link:aws2-s3/README.adoc[Aws2 S3] (aws2-s3) | Cloud | An example showing the Camel AWS2 S3 component with Spring Boot
 
 | link:grpc/README.adoc[gRPC Spring Boot] (grpc) | Cloud | An example showing the Camel gRPC component with Spring Boot
@@ -81,8 +85,6 @@ Number of Examples: 54 (0 deprecated)
 
 | link:servicecall/README.adoc[Spring Boot ServiceCall] (servicecall) | Cloud | An example showing how to work with Camel ServiceCall EIP and Spring Boot
 
-| link:clustered-route-controller/readme.adoc[Clustered Route Controller] (clustered-route-controller) | Clustering | An example showing how to work with Camel's Clustered Route Controller and Spring Boot
-
 | link:master/readme.adoc[Master] (master) | Clustering | An example showing how to work with Camel's Master component and Spring Boot
 
 | link:arangodb/README.adoc[Arangodb] (arangodb) | Database | An example showing the Camel ArangoDb component with Spring Boot
@@ -91,7 +93,7 @@ Number of Examples: 54 (0 deprecated)
         operations on a database
     
 
-| link:hystrix/README.adoc[Hystrix] (hystrix) | EIP | An example showing how to use Hystrix EIP as circuit breaker in Camel routes
+| link:dynamic-router-eip/README.adoc[Dynamic Router Eip] (dynamic-router-eip) | EIP | An example on how to use the Dynamic Router EIP component in Spring Boot
 
 | link:resilience4j/README.adoc[Resilience4j] (resilience4j) | EIP | An example showing how to use Resilience4j EIP as circuit breaker in Camel routes
 

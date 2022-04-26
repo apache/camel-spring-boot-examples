@@ -67,13 +67,14 @@ public class RestExample {
             // The full path should be eg.: http://localhost:8080/camel/sum/23/31
             rest().get("/sum/{num1}/{num2}")
                     .produces("text/plain")
-                    .route()
+                    .to("direct:sum");
+
+            from("direct:sum")
                     .setHeader("num1").simple("headerAs(num1,Long)")
                     .setHeader("num2").simple("headerAs(num2,Long)")
                     .bean("calculator", "sum")
                     .process(new UnwrapStreamProcessor())
                     .setBody().simple("The result is: ${body}");
-
         }
 
     }

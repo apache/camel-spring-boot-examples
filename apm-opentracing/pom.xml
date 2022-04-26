@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.apache.camel.springboot.example</groupId>
         <artifactId>examples</artifactId>
-        <version>3.14.0-SNAPSHOT</version>
+        <version>3.17.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-example-spring-boot-apm-opentracing</artifactId>
@@ -35,7 +35,6 @@
     <properties>
         <category>Management and Monitoring</category>
         <title>OpenTracing APM</title>
-        <spring.boot-version>${spring-boot-version}</spring.boot-version>
     </properties>
 
 
@@ -45,13 +44,13 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot-version}</version>
+                <version>${spring-boot-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.camel.springboot</groupId>
-                <artifactId>camel-spring-boot-dependencies</artifactId>
+                <artifactId>camel-spring-boot-bom</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -65,7 +64,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>${spring.boot-version}</version>
+            <version>${spring-boot-version}</version>
         </dependency>
 
         <!-- camel -->

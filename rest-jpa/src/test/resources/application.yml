@@ -22,6 +22,12 @@ camel:
     mapping:
       contextPath: /camel-rest-jpa/*
 
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
 example:
   generateOrderPeriod: 1000
   processOrderPeriod: 3000

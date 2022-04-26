@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.apache.camel.springboot.example</groupId>
         <artifactId>examples</artifactId>
-        <version>3.14.0-SNAPSHOT</version>
+        <version>3.17.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-example-spring-boot-infinispan</artifactId>
@@ -32,7 +32,6 @@
 
     <properties>
         <category>Cloud</category>
-        <spring.boot-version>${spring-boot-version}</spring.boot-version>
     </properties>
 
     <!-- Spring-Boot and Camel BOM -->
@@ -41,13 +40,13 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot-version}</version>
+                <version>${spring-boot-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.camel.springboot</groupId>
-                <artifactId>camel-spring-boot-dependencies</artifactId>
+                <artifactId>camel-spring-boot-bom</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -65,6 +64,12 @@
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-infinispan-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>${testcontainers-version}</version>
         </dependency>
 
         <!-- Test -->
@@ -86,7 +91,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot-version}</version>
+                <version>${spring-boot-version}</version>
                 <executions>
                     <execution>
                         <goals>

@@ -1,0 +1,37 @@
+== Camel Example Spring Boot Route Template in XML
+
+This examples shows how to use Route Templates (parameterized routes) to specify a skeleton route
+which can be used for creating and adding new routes via parameters in pure XML.
+
+The route template is defined via XML DSL (RouteBuilder) in the resource `templates/my-route-templates.xml`.
+
+The resource `builders/my-template-builder.xml` is used to create two routes from the template using different set of parameters by leveraging the XML DSL.
+
+=== Build
+
+You will need to compile this example first:
+
+----
+$ mvn compile
+----
+
+=== How to run
+
+You can run this example using
+
+----
+$ mvn spring-boot:run
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
+
+
+

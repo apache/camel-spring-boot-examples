@@ -18,15 +18,26 @@
 
 -->
 <routes xmlns="http://camel.apache.org/schema/spring">
+
     <route id="hello">
-      <from uri="timer:hello?period={{timer.period}}"/>
-      <transform>
-        <method ref="myBean" method="saySomething"/>
-      </transform>
-      <filter>
-        <simple>${body} contains 'foo'</simple>
-        <to uri="log:foo"/>
-      </filter>
-      <to uri="stream:out"/>
+        <from uri="timer:hello?period={{timer.period}}"/>
+
+        <transform>
+            <method ref="myBean" method="saySomething"/>
+        </transform>
+
+        <setHeader name="number">
+            <simple>${random(0,10)}</simple>
+        </setHeader>
+
+        <filter>
+            <simple>${header.number} > 4</simple>
+            <transform>
+                <simple>Random ${body}</simple>
+            </transform>
+        </filter>
+
+        <to uri="stream:out"/>
     </route>
+
 </routes>
