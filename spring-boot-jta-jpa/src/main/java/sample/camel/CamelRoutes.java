@@ -29,7 +29,7 @@ public class CamelRoutes extends RouteBuilder {
     @Override
     public void configure() {
         restConfiguration()
-            .contextPath(contextPath.substring(0, contextPath.length() - 2));
+            .contextPath(contextPath);
 
         rest("/messages")
             .produces("text/plain")
@@ -40,14 +40,14 @@ public class CamelRoutes extends RouteBuilder {
                 .to("direct:trans");
 
         from("direct:messages")
-            .to("jpa:it.fvaleri.integ.AuditLog?namedQuery=getAuditLog")
+            .to("jpa:sample.camel.AuditLog?namedQuery=getAuditLog")
             .convertBodyTo(String.class);
 
         from("direct:trans")
             .transacted()
             .setBody(simple("${headers.message}"))
             .to("bean:auditLog?method=createAuditLog(${body})")
-            .to("jpa:it.fvaleri.integ.AuditLog")
+            .to("jpa:sample.camel.AuditLog")
             .setBody(simple("${headers.message}"))
             .to("jms:outbound?disableReplyTo=true")
             .choice()
@@ -61,6 +61,6 @@ public class CamelRoutes extends RouteBuilder {
         from("jms:outbound")
             .log("Message out: ${body}")
             .to("bean:auditLog?method=createAuditLog(${body}-ok)")
-            .to("jpa:it.fvaleri.integ.AuditLog");
+            .to("jpa:sample.camel.AuditLog");
     }
 }
