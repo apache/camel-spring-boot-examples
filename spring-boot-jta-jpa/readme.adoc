@@ -51,7 +51,7 @@ Test the service endpoint from another terminal:
 
 ----
 ADDRESS="http://localhost:8080"
-curl -X POST $ADDRESS/api/message/hello
+curl -X POST $ADDRESS/api/messages/hello
 curl $ADDRESS/api/messages
 ----
 
