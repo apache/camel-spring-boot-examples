@@ -26,7 +26,13 @@ $ mvn package
 
 == Run
 
-You can run this example using:
+Before running your application execute this command to deploy FHIR server:
+
+```
+docker run -p 8081:8080 -e HAPI_FHIR_VERSION=DSTU3 -e HAPI_REUSE_CACHED_SEARCH_RESULTS_MILLIS=-1 hapiproject/hapi:v4.2.0
+```
+
+Then you can run this example using:
 
 ```sh
 $ mvn spring-boot:run
