@@ -34,6 +34,10 @@
 
     <properties>
         <category>Social</category>
+        <camelSalesforce.clientId>3MVG9szVa2RxsqBZXHfqsW3hf9HQp_N6qdSmpjKMzSJaEL4UP161JlDkE32EigL82ra_jM1WuQgF4rYDgzL3u</camelSalesforce.clientId>
+        <camelSalesforce.clientSecret>1039611643161946846</camelSalesforce.clientSecret>
+        <camelSalesforce.userName></camelSalesforce.userName>
+        <camelSalesforce.password></camelSalesforce.password>
     </properties>
 
     <dependencyManagement>
@@ -119,5 +123,69 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>generate-salesforce-dto</id>
+            <activation>
+                <property>
+                    <name>generate.dto</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/Contact.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.camel.maven</groupId>
+                        <artifactId>camel-salesforce-maven-plugin</artifactId>
+                        <version>${project.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <clientId>${camelSalesforce.clientId}</clientId>
+                                    <clientSecret>${camelSalesforce.clientSecret}</clientSecret>
+                                    <userName>${camelSalesforce.userName}</userName>
+                                    <password>${camelSalesforce.password}</password>
+                                    <includes>
+                                        <include>Contact</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>add-source</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>add-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>${project.build.directory}/generated-sources/camel-salesforce</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

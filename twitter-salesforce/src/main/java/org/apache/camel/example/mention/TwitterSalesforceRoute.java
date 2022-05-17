@@ -33,7 +33,9 @@ public class TwitterSalesforceRoute extends RouteBuilder {
                 User user = status.getUser();
                 String name = user.getName();
                 String screenName = user.getScreenName();
-                Contact contact = new Contact(name, screenName);
+                org.apache.camel.salesforce.dto.Contact contact = new org.apache.camel.salesforce.dto.Contact();
+                contact.setLastName(name);
+                contact.setTwitterScreenName__c(screenName);
                 exchange.getIn().setBody(contact);
             })
             .to("salesforce:upsertSObject?sObjectIdName=TwitterScreenName__c")

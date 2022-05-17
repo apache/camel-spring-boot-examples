@@ -69,48 +69,28 @@ Allow access to the application, and you’ll end up on a page with
 
 `+https://login.salesforce.com/services/oauth2/success#access_token=..&refresh_token=+`**<refresh_token>**`+&instance_url=...&issued_at=...&signature=...&scope=...&token_type=Bearer+`
 
-==== How to generate Salesforce Data Transfer Objects (DTOs)
-
-The best way to generate Java representation of Salesforce SObjects is
-to use the `+camel-salesforce-maven-plugin+`, for example:
-
-....
-$ mvn org.apache.camel.maven:camel-salesforce-maven-plugin:generate \
-  -DcamelSalesforce.clientId=<client id> \
-  -DcamelSalesforce.clientSecret=<client secret> \
-  -DcamelSalesforce.userName=<username> \
-  -DcamelSalesforce.password=<password>
-....
-
-You can specify the only the SObjects you’ll integrate with using
-`+camelSalesforce.includePattern+` parameter, like:
-
-....
-$ mvn org.apache.camel.maven:camel-salesforce-maven-plugin:generate \
-  -DcamelSalesforce.clientId=<client id> \
-  -DcamelSalesforce.clientSecret=<client secret> \
-  -DcamelSalesforce.userName=<username> \
-  -DcamelSalesforce.password=<password> \
-  -DcamelSalesforce.includePattern=Contact
-....
-
-To generate only DTOs needed for Contact, but the parameter value can be
-specified using regular expressions.
-
 === Build
 
-You will need to compile this example first:
+You will need to package this example first:
 
 ....
-mvn compile
+mvn -DcamelSalesforce.clientId=<salesforce client Id> -DcamelSalesforce.clientSecret=<salesforce client secret> -DcamelSalesforce.userName=<salesforce username> -DcamelSalesforce.password=<salesforce password> -Pgenerate-salesforce-dto clean package
 ....
+
+Salesforce DTO's will be automatically generated via `camel-salesforce-maven-plugin` in `target/generated-sources/camel-salesforce` folder and added into the package via `build-helper-maven-plugin`
 
 === Run
 
 To run the example type
 
 ....
-mvn spring-boot:run
+java -jar -Dcamel.component.salesforce.clientId=<salesforce client Id> -Dcamel.component.salesforce.clientSecret=<salesforce client secret> -Dcamel.component.salesforce.userName==<salesforce username> -Dcamel.component.salesforce.password=<salesforce password> target/camel-example-spring-boot-twitter-salesforce.jar
+....
+
+or
+
+....
+java -jar -Dcamel.component.salesforce.clientId=<salesforce client Id> -Dcamel.component.salesforce.clientSecret=<salesforce client secret> -Dcamel.component.salesforce.refreshToken==<salesforce refresh token> target/camel-example-spring-boot-twitter-salesforce.jar
 ....
 
 To stop the example hit ctrl+c
