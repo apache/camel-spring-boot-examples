@@ -72,26 +72,18 @@ Allow access to the application, and you’ll end up on a page with
 ==== How to generate Salesforce Data Transfer Objects (DTOs)
 
 The best way to generate Java representation of Salesforce SObjects is
-to use the `+camel-salesforce-maven-plugin+`, for example:
+to use the `+camel-salesforce-maven-plugin+` and specify the desired DTO in <configuration> section, for example:
 
 ....
-$ mvn org.apache.camel.maven:camel-salesforce-maven-plugin:generate \
-  -DcamelSalesforce.clientId=<client id> \
-  -DcamelSalesforce.clientSecret=<client secret> \
-  -DcamelSalesforce.userName=<username> \
-  -DcamelSalesforce.password=<password>
-....
-
-You can specify the only the SObjects you’ll integrate with using
-`+camelSalesforce.includePattern+` parameter, like:
-
-....
-$ mvn org.apache.camel.maven:camel-salesforce-maven-plugin:generate \
-  -DcamelSalesforce.clientId=<client id> \
-  -DcamelSalesforce.clientSecret=<client secret> \
-  -DcamelSalesforce.userName=<username> \
-  -DcamelSalesforce.password=<password> \
-  -DcamelSalesforce.includePattern=Contact
+        <configuration>
+            <clientId>${camelSalesforce.clientId}</clientId>
+            <clientSecret>${camelSalesforce.clientSecret}</clientSecret>
+            <userName>${camelSalesforce.userName}</userName>
+            <password>${camelSalesforce.password}</password>
+            <includes>
+                <include>Contact</include>
+            </includes>
+        </configuration>
 ....
 
 To generate only DTOs needed for Contact, but the parameter value can be
@@ -107,10 +99,13 @@ mvn compile
 
 === Run
 
-To run the example type
+To run the example type using _generate.dto_ profile
 
 ....
-mvn spring-boot:run
+mvn -DcamelSalesforce.clientId=3<client id> \
+    -DcamelSalesforce.clientSecret=<client secret> \
+    -DcamelSalesforce.userName=<username> \
+    -DcamelSalesforce.password=<password> -Dgenerate.dto spring-boot:run
 ....
 
 To stop the example hit ctrl+c
