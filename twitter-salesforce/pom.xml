@@ -33,12 +33,11 @@
     <description>Twitter mentions is created as contacts in Salesforce</description>
 
 	<properties>
-		<category>Social</category>
-		<spring.boot-version>${spring-boot-version}</spring.boot-version>
-		<camelSalesforce.clientId>3MVG9szVa2RxsqBZXHfqsW3hf9HQp_N6qdSmpjKMzSJaEL4UP161JlDkE32EigL82ra_jM1WuQgF4rYDgzL3u</camelSalesforce.clientId>
-		<camelSalesforce.clientSecret>1039611643161946846</camelSalesforce.clientSecret>
-		<camelSalesforce.userName>testUser@gmail.com</camelSalesforce.userName>
-		<camelSalesforce.password>testPassword</camelSalesforce.password>
+		<camelSalesforce.clientId></camelSalesforce.clientId>
+		<camelSalesforce.clientSecret></camelSalesforce.clientSecret>
+		<camelSalesforce.userName></camelSalesforce.userName>
+		<camelSalesforce.password></camelSalesforce.password>
+		<camelSalesforce.loginUrl>https://login.salesforce.com</camelSalesforce.loginUrl>
 	</properties>
 
     <dependencyManagement>
@@ -113,14 +112,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring.boot-version}</version>
+				<version>${spring-boot-version}</version>
 				<configuration>
 					<systemPropertyVariables>
 						<camel.component.salesforce.clientId>${camelSalesforce.clientId}</camel.component.salesforce.clientId>
 						<camel.component.salesforce.clientSecret>${camelSalesforce.clientSecret}</camel.component.salesforce.clientSecret>
 						<camel.component.salesforce.userName>${camelSalesforce.userName}</camel.component.salesforce.userName>
 						<camel.component.salesforce.password>${camelSalesforce.password}</camel.component.salesforce.password>
-						<camel.component.salesforce.loginUrl>https://login.salesforce.com</camel.component.salesforce.loginUrl>
+						<camel.component.salesforce.loginUrl>${camelSalesforce.loginUrl}</camel.component.salesforce.loginUrl>
 					</systemPropertyVariables>
 				</configuration>
 				<executions>
@@ -166,6 +165,7 @@
 					<plugin>
 						<groupId>org.apache.camel.maven</groupId>
 						<artifactId>camel-salesforce-maven-plugin</artifactId>
+						<version>${camel-version}</version>
 						<executions>
 							<execution>
 								<goals>
