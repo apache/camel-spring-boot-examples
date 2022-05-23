@@ -16,6 +16,9 @@
  */
 package org.apache.camel.example.mention;
 
+import java.lang.Class;
+import java.lang.reflect.Method;
+import org.apache.camel.salesforce.draftdto.Contact;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 import twitter4j.Status;
@@ -33,8 +36,20 @@ public class TwitterSalesforceRoute extends RouteBuilder {
                 User user = status.getUser();
                 String name = user.getName();
                 String screenName = user.getScreenName();
-                Contact contact = new Contact(name, screenName);
-                exchange.getIn().setBody(contact);
+                Class contact = null;
+                if (Class.forName("org.apache.camel.salesforce.dto.Contact") != null) {
+                    contact = Class.forName("org.apache.camel.salesforce.dto.Contact");
+                } else {
+                    contact = Contact.class;
+                }
+
+                Object contactObject = contact.newInstance();
+                Method setLastName = contact.getMethod("setLastName", String.class);
+                Method setTwitterScreenName__c = contact.getMethod("setTwitterScreenName__c", String.class);
+                setLastName.invoke(contactObject, name);
+                setTwitterScreenName__c.invoke(contactObject, screenName);
+                exchange.getIn().setBody(contactObject);
+
             })
             .to("salesforce:upsertSObject?sObjectIdName=TwitterScreenName__c")
             .log("SObject ID: ${body?.id}");

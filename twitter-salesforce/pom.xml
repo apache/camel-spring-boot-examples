@@ -32,9 +32,14 @@
     <name>Camel SB Examples :: Twitter Salesforce</name>
     <description>Twitter mentions is created as contacts in Salesforce</description>
 
-    <properties>
-        <category>Social</category>
-    </properties>
+	<properties>
+		<category>Social</category>
+		<spring.boot-version>${spring-boot-version}</spring.boot-version>
+		<camelSalesforce.clientId>3MVG9szVa2RxsqBZXHfqsW3hf9HQp_N6qdSmpjKMzSJaEL4UP161JlDkE32EigL82ra_jM1WuQgF4rYDgzL3u</camelSalesforce.clientId>
+		<camelSalesforce.clientSecret>1039611643161946846</camelSalesforce.clientSecret>
+		<camelSalesforce.userName>testUser@gmail.com</camelSalesforce.userName>
+		<camelSalesforce.password>testPassword</camelSalesforce.password>
+	</properties>
 
     <dependencyManagement>
         <dependencies>
@@ -104,20 +109,84 @@
         <!-- we do not want version in the JAR name -->
         <finalName>${project.artifactId}</finalName>
 
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot-version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot-version}</version>
+				<configuration>
+					<systemPropertyVariables>
+						<camel.component.salesforce.clientId>${camelSalesforce.clientId}</camel.component.salesforce.clientId>
+						<camel.component.salesforce.clientSecret>${camelSalesforce.clientSecret}</camel.component.salesforce.clientSecret>
+						<camel.component.salesforce.userName>${camelSalesforce.userName}</camel.component.salesforce.userName>
+						<camel.component.salesforce.password>${camelSalesforce.password}</camel.component.salesforce.password>
+						<camel.component.salesforce.loginUrl>https://login.salesforce.com</camel.component.salesforce.loginUrl>
+					</systemPropertyVariables>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/camel-salesforce</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>generate-salesforce-dto</id>
+			<activation>
+				<property>
+					<name>generate.dto</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.camel.maven</groupId>
+						<artifactId>camel-salesforce-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<configuration>
+									<clientId>${camelSalesforce.clientId}</clientId>
+									<clientSecret>${camelSalesforce.clientSecret}</clientSecret>
+									<userName>${camelSalesforce.userName}</userName>
+									<password>${camelSalesforce.password}</password>
+									<includes>
+										<include>Contact</include>
+									</includes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
