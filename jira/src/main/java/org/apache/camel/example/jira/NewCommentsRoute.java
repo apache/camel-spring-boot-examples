@@ -32,7 +32,7 @@ public class NewCommentsRoute extends RouteBuilder {
 
         LOG.info(" >>>>>>>>>>>>>>>>>>>>> jira example - retrieve only new comments");
         // change the fields accordinly to your target jira server
-        from("jira://newComments?jql=RAW(project=COM AND resolution = Unresolved)&delay=4000")
+        from("jira://newComments?jql=RAW(project={{example.jira.project-key}} AND resolution = Unresolved)&delay=4000")
                 .process(exchange -> {
                     Comment comment = (Comment) exchange.getIn().getBody();
                     LOG.info("new jira comment id: {} - by: {}: {}", comment.getId(), comment.getAuthor().getDisplayName(),
