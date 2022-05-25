@@ -21,6 +21,7 @@ import java.util.Date;
 import org.apache.camel.builder.RouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import static org.apache.camel.component.jira.JiraConstants.ISSUE_PRIORITY_NAME;
@@ -33,14 +34,20 @@ public class AddIssueRoute extends RouteBuilder {
 
     private static final Logger LOG = LoggerFactory.getLogger(AddIssueRoute.class);
 
+    @Value("${example.jira.project-key}")
+    private String project;
+
+    @Value("${example.jira.issue-type}")
+    private String issueType;
+
     @Override
     public void configure() {
 
         LOG.info(" >>>>>>>>>>>>>>>>>>>>> jira example - add new issue");
         // change the fields accordingly to your target jira server
         from("timer://foo?fixedRate=true&period=50000")
-                .setHeader(ISSUE_PROJECT_KEY, () -> "COM")
-                .setHeader(ISSUE_TYPE_NAME, () -> "Bug")
+                .setHeader(ISSUE_PROJECT_KEY, () -> project)
+                .setHeader(ISSUE_TYPE_NAME, () -> issueType)
                 .setHeader(ISSUE_SUMMARY, () -> "Example Demo Bug jira " + (new Date()))
                 .setHeader(ISSUE_PRIORITY_NAME, () -> "Low")
 
@@ -52,7 +59,8 @@ public class AddIssueRoute extends RouteBuilder {
                 // })
                 .setBody(constant("A small description for a test issue. "))
                 .log("  JIRA new issue: ${body}")
-                .to("jira://addIssue");
+                .to("jira://addIssue")
+                .log("Issue created: ${body.key}");
     }
 
 }
