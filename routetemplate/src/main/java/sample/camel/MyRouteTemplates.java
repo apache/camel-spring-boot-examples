@@ -18,12 +18,15 @@ package sample.camel;
 
 import org.apache.camel.builder.RouteBuilder;
 
+import org.springframework.context.annotation.Profile;
+
 /**
  * Route templates using {@link RouteBuilder} which allows
  * us to define a number of templates (parameterized routes)
  * which we can create routes from.
  */
-//@org.springframework.stereotype.Component
+@org.springframework.stereotype.Component
+@Profile("java")
 public class MyRouteTemplates extends RouteBuilder {
 
     @Override
