@@ -15,10 +15,17 @@
 # limitations under the License.
 #
 
-spring:
-  profiles:
-    active: xml
-
 camel:
   springboot:
-    name: MyCamel
+    routes-include-pattern: classpath:mycamel/*.xml
+  route-template:
+    config:
+      -0.template-id: myXmlTemplate
+      -0.route-id: first
+      -0.name: one
+      -0.greeting: Hello
+      -1.template-id: myXmlTemplate
+      -1.route-id: second
+      -1.name: deux
+      -1.greeting: Bonjour
+      -1.my-period: 5s

@@ -18,7 +18,10 @@ package sample.camel;
 
 import org.apache.camel.builder.RouteBuilder;
 
-//@org.springframework.stereotype.Component
+import org.springframework.context.annotation.Profile;
+
+@org.springframework.stereotype.Component
+@Profile("java")
 public class MyTemplateBuilder extends RouteBuilder {
 
     /**
