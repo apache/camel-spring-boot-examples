@@ -1,4 +1,4 @@
-#== Camel Example Spring Boot Route Template#
+== Camel Example Spring Boot Route Template
 
 This examples shows how to use Route Templates (parameterized routes) to specify a skeleton route
 which can be used for creating and adding new routes via parameters.
