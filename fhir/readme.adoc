@@ -10,7 +10,7 @@ This example will read HL7V2 patients from a directory and convert them to FHIR 
 
 The example installs hapiproject/hapi:v4.2.0 docker image as local FHIR server
 
-By default, the example uses `\http://localhost:8080/hapi-fhir-jpaserver/fhir` as the FHIR server URL, DSTU3 as the FHIR version and `target/work/fhir/input`
+By default, the example uses `\http://localhost:8081/hapi-fhir-jpaserver/fhir` as the FHIR server URL, DSTU3 as the FHIR version and `target/work/fhir/input`
 as the directory to look for HL7V2 patients.
 However, you can edit the `application.properties` file to override the defaults and provide your own configuration.
 
