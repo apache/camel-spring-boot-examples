@@ -2,7 +2,7 @@
 
 This example shows how to work with a simple Apache Camel application using Spring Boot and a Master component.
 
-=== How to run
+=== How to run in local
 
 1. build the project:
 
@@ -15,6 +15,37 @@ This example shows how to work with a simple Apache Camel application using Spri
 3. in a separate shell, run the second camel node:
 
     mvn spring-boot:run
+
+=== How to run on OpenShift cluster
+
+1. create openshift project:
+
+    oc new-project camel-master
+
+2. create dedicated service account:
+
+    oc create sa camel-sa
+
+3. create project role to manage leases:
+
+    oc create role camel-leases --verb=get,list,watch,create,update,patch,delete --resource=leases -n camel-master
+
+4. create project role to manage pods:
+
+    oc create role camel-pods --verb=get,list,watch,create,update,patch,delete --resource=pods -n camel-master
+
+5. add roles to service account:
+
+    oc policy add-role-to-user camel-leases -z camel-sa -n camel-master --role-namespace camel-master
+
+    oc policy add-role-to-user camel-pods -z camel-sa -n camel-master --role-namespace camel-master
+
+6. run the build and deploy using profile `openshift`:
+
+    mvn clean package -Popenshift
+
+
+the generated deployment config will scale to 2 pods so that we can verify that only one will be the cluster leader, so it will be the only one consuming the message
 
 === Help and contributions
 

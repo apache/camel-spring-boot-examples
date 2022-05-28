@@ -80,6 +80,12 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -95,4 +101,56 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>file</id>
+            <properties>
+                <sbProfile>file</sbProfile>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>openshift</id>
+            <properties>
+                <sbProfile>openshift</sbProfile>
+                <jkube.generator.from>registry.access.redhat.com/ubi8/openjdk-17</jkube.generator.from>
+            </properties>
+            <activation>
+                <property>
+                    <name>openshift</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.camel.springboot</groupId>
+                    <artifactId>camel-kubernetes-starter</artifactId>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>openshift-maven-plugin</artifactId>
+                        <groupId>org.eclipse.jkube</groupId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>resource</goal>
+                                    <goal>build</goal>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <resources>
+                                <replicas>2</replicas>
+                                <serviceAccount>camel-sa</serviceAccount>
+                            </resources>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
