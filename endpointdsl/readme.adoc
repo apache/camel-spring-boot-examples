@@ -1,0 +1,53 @@
+== Camel Example Endpoint DSL
+
+This example shows how to work with the type-safe Endpoint DSL to build Camel routes
+in Java code where endpoints are configured using a chain of Java method calls,
+instead of using the Camel endpoint URI style.
+
+The example generates messages using timer trigger, writes them to standard output.
+
+=== Camel routes
+
+The Camel route is embedded directly in the main class `MyCamelApplication` as a Spring Boot `@Bean` method.
+The route starts from a timer, that triggers every 2nd second and calls a Spring Bean `MyBean`
+which returns a message, that is routed to a stream endpoint which writes to standard output.
+
+=== How to run
+
+You can run this example using
+
+[source,bash]
+----
+mvn spring-boot:run
+----
+
+=== To get health check
+
+To show a summary of spring boot health check
+
+[source,bash]
+----
+curl -XGET -s http://localhost:8080/actuator/health
+----
+
+And you can see some info details as well
+
+[source,bash]
+----
+curl -XGET -s http://localhost:8080/actuator/info
+----
+
+See the `application.properties` to control what information to present in actuator.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
+
+
+
