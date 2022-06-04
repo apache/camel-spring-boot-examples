@@ -144,18 +144,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-maven-plugin</artifactId>
-                <version>${camel-version}</version>
-                <!-- allows to fail if not all routes are fully covered during testing -->
-                <!--
-                        <configuration>
-                          <failOnError>true</failOnError>
-                        </configuration>
-                -->
-            </plugin>
         </plugins>
     </build>
 </project>

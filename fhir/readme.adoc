@@ -20,38 +20,44 @@ There is an example of a test in the `MyCamelApplicationTest` class, which mocks
 
 You can build this example using:
 
-```sh
-$ mvn package
-```
+[source,bash]
+----
+mvn package
+----
 
 == Run
 
 Before running your application execute this command to deploy FHIR server:
 
-```
+[source,bash]
+----
 docker run -p 8081:8080 -e HAPI_FHIR_VERSION=DSTU3 -e HAPI_REUSE_CACHED_SEARCH_RESULTS_MILLIS=-1 hapiproject/hapi:v4.2.0
-```
+----
 
 Then you can run this example using:
 
-```sh
-$ mvn spring-boot:run
-```
+[source,bash]
+----
+mvn spring-boot:run
+----
 
 When the Camel application runs, you should see a folder created under `target/work/fhir/input`. Copy the file `hl7v2.patient`
 located in the `src/main/data` folder into it. You should see the following output:
-```
+
+[source,text
+----
 2018-07-24 11:52:51.615  INFO 30666 --- [work/fhir/input] fhir-example: Converting hl7v2.patient
 2018-07-24 11:52:52.700  INFO 30666 --- [work/fhir/input] fhir-example: Inserting Patient: {"resourceType":"Patient","id":"100005056","name":[{"family":"Freeman","given":["Vincent"]}]}
 2018-07-24 11:52:56.995  INFO 30666 --- [ #2 - CamelFhir] fhir-example: Patient created successfully: ca.uhn.fhir.rest.api.MethodOutcome@270f03f1
-```
+----
 
 The Camel application can be stopped pressing kbd:[Ctrl+c] in the shell.
 
-== To get health check
+=== To get health check
 
 To show a summary of spring boot health check
 
+[source,bash]
 ----
 curl -XGET -s http://localhost:8080/actuator/health
 ----
