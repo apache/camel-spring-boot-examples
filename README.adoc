@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 56 (0 deprecated)
+Number of Examples: 57 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -37,9 +37,13 @@ Number of Examples: 56 (0 deprecated)
 
 | link:spring-boot-jta-jpa/readme.adoc[Spring Boot Jta Jpa] (spring-boot-jta-jpa) |  | An example showing JTA with Spring Boot
 
+| link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) |  | Twitter mentions is created as contacts in Salesforce
+
 | link:undertow-spring-security/readme.adoc[Undertow Spring Security] (undertow-spring-security) | Advanced | Example on how to use the Camel Undertow component with spring security and Keycloak
 
 | link:webhook/readme.adoc[Webhook] (webhook) | Advanced | Example on how to use the Camel Webhook component
+
+| link:endpointdsl/readme.adoc[Endpointdsl] (endpointdsl) | Beginner | Using type-safe Endpoint DSL
 
 | link:jira/README.adoc[Jira] (jira) | Beginner | An example that uses Jira Camel API
 
@@ -148,8 +152,6 @@ Number of Examples: 56 (0 deprecated)
 | link:rest-producer/readme.adoc[Rest Producer] (rest-producer) | Rest | An example showing how to use Camel Rest to call a REST service
 
 | link:rest-swagger/README.adoc[Rest Swagger] (rest-swagger) | Rest | An example showing Camel REST DSL and Swagger with Spring Boot
-
-| link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) | Social | Twitter mentions is created as contacts in Salesforce
 |===
 // examples: END
 
