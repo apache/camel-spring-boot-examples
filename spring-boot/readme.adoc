@@ -37,14 +37,20 @@ curl -XGET -s http://localhost:8080/actuator/info
 
 See the `application.properties` to control what information to present in actuator.
 
-=== Route coverage
+=== Camel Developer Console
 
-This example has enabled testing with route coverage, which after running the test dumps a report, if you run:
+This application includes `camel-console-starter` which is a basic developer console
+that is accessible as a Spring Boot actuator endpoint via:
 
-    mvn test camel-report:route-coverage
+----
+curl -XGET -s http://localhost:8080/actuator/camel
+----
 
-See more details about route coverage at:
-https://camel.apache.org/manual/latest/camel-report-maven-plugin.html[camel-report-maven-plugin].
+For example to get route information:
+
+----
+curl -XGET -s http://localhost:8080/actuator/camel/routes
+----
 
 === Help and contributions
 
