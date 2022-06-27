@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+
+keyname: SAP JCO
+keyvendor: sap.com
+keylocation: SAP SE
+
+sapjco release: 3.1
+sapjco patch level: 4
+sapjco os: linuxx86_64
