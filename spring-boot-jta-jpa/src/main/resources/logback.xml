@@ -29,6 +29,7 @@
     </root>
 
     <logger name="sample.camel" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
     <logger name="com.arjuna" level="INFO"/>
     <logger name="org.apache.camel" level="INFO"/>
     <logger name="org.hibernate" level="INFO"/>

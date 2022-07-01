@@ -35,7 +35,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <node.identifier>${project.artifactId}-0</node.identifier>
     </properties>
 
     <dependencyManagement>

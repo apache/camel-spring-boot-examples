@@ -34,7 +34,7 @@ public class AuditLog {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private String id;
+	private long id;
 	private String message;
 
 	public String getMessage() {
