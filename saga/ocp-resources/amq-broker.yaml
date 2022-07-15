@@ -1,0 +1,138 @@
+apiVersion: apps.openshift.io/v1
+kind: List
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: amq-broker
+      csbexample: saga
+    name: amq-broker
+  spec:
+    ports:
+    - name: amq-broker-console
+      port: 8161
+      protocol: TCP
+      targetPort: 8161
+    - name: amq-broker
+      port: 61616
+      protocol: TCP
+      targetPort: 61616
+    selector:
+      app: amq-broker
+      deploymentconfig: amq-broker
+    type: ClusterIP
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    labels:
+      app: amq-broker
+      csbexample: saga
+    name: amq-broker
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 600Mi
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    labels:
+      app: amq-broker
+      csbexample: saga
+    name: amq-broker
+  spec:
+    lookupPolicy:
+      local: true
+    tags:
+    - from:
+        kind: DockerImage
+        name: registry.redhat.io/amq7/amq-broker-rhel8:7.10
+      generation: 0
+      importPolicy: {}
+      name: "latest"
+      referencePolicy:
+        type: Source
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    generation: 1
+    labels:
+      app: amq-broker
+      csbexample: saga
+    name: amq-broker
+  spec:
+    replicas: 1
+    selector:
+      app: amq-broker
+      deploymentconfig: amq-broker
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          app: amq-broker
+          csbexample: saga
+          deploymentconfig: amq-broker
+      spec:
+        containers:
+        - imagePullPolicy: IfNotPresent
+          image: "amq-broker:latest"
+          env:
+            - name: AMQ_USER
+              value: admin
+            - name: AMQ_PASSWORD
+              value: admin
+            - name: AMQ_REQUIRE_LOGIN
+              value: "true"
+            - name: AMQ_DATA_DIR
+              value: /data
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8161
+              scheme: HTTP
+            initialDelaySeconds: 180
+          name: amq-broker
+          ports:
+          - containerPort: 8161
+            protocol: TCP
+          - containerPort: 61616
+            protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8161
+              scheme: HTTP
+            initialDelaySeconds: 10
+          volumeMounts:
+          - mountPath: /data
+            name: amq-broker-data
+        volumes:
+        - name: amq-broker-data
+          persistentVolumeClaim:
+            claimName: amq-broker
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - amq-broker
+        from:
+          kind: ImageStreamTag
+          name: "amq-broker:latest"
+      type: ImageChange
+- kind: Route
+  apiVersion: route.openshift.io/v1
+  metadata:
+    name: amq-broker-console
+    labels:
+      app: amq-broker
+      csbexample: saga
+  spec:
+    to:
+      kind: Service
+      name: amq-broker
+    port:
+      targetPort: amq-broker-console
