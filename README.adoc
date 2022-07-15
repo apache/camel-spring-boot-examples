@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 57 (0 deprecated)
+Number of Examples: 58 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -102,6 +102,8 @@ Number of Examples: 57 (0 deprecated)
 | link:dynamic-router-eip/README.adoc[Dynamic Router Eip] (dynamic-router-eip) | EIP | An example on how to use the Dynamic Router EIP component in Spring Boot
 
 | link:resilience4j/README.adoc[Resilience4j] (resilience4j) | EIP | An example showing how to use Resilience4j EIP as circuit breaker in Camel routes
+
+| link:saga/readme.adoc[Saga] (saga) | EIP | This example shows how to work with a simple Apache Camel application using Spring Boot and Narayana LRA Coordinator to manage distributed actions implementing SAGA pattern
 
 | link:fhir/readme.adoc[Fhir] (fhir) | Health Care | An example showing how to work with Camel, FHIR and Spring Boot
 

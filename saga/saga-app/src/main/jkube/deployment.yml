@@ -1,0 +1,11 @@
+spec:
+  template:
+    spec:
+      containers:
+        - env:
+            - name: CAMEL_LRA_COORDINATOR_URL
+              value: http://lra-coordinator:8080
+            - name: CAMEL_LRA_LOCAL_PARTICIPANT_URL
+              value: http://${project.artifactId}:8080/api
+            - name: CAMEL_COMPONENT_ACTIVEMQ_BROKER-URL
+              value: tcp://amq-broker:61616
