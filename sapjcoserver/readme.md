@@ -1,4 +1,4 @@
-# integrate sap JCOServer with Springboot and Apache Camel 
+# Integrate Sap JCOServer with Springboot and Apache Camel 
 
 ### The usecase
 
@@ -13,7 +13,7 @@ mvn spring-boot:run
 ```
 ![image-1](readme.assets/Picture1.png)
 
-
+ 
 ### execute ABAP function in SAP System
 ```
 Execute Tcode se37 -> STFC_CONNECTION (SAP Test Function) 
