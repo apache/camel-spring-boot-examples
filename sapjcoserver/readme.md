@@ -20,7 +20,7 @@ Execute Tcode se37 -> STFC_CONNECTION (SAP Test Function)
 ```
 ![image-2](readme.assets/Picture2.png)
 
-put RFC Target System (it is as same as progid configured in application.yaml file) and input parameter
+put RFC Target System (it is ...not... as same as progid configured in application.yaml file) and input parameter
 ![image-3](readme.assets/Picture3.png)
 
 ### check result and output 
