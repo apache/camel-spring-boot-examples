@@ -16,7 +16,7 @@ mvn spring-boot:run
  
 ### execute ABAP function in SAP System
 ```
-Execute Tcode se37 -> STFC_CONNECTION (SAP Test Function) 
+Execute Tcode se37 -> STFC_CONNECTION (SAP default Test Function) 
 ```
 ![image-2](readme.assets/Picture2.png)
 
