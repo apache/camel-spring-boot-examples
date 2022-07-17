@@ -19,10 +19,10 @@
 -->
 <properties>
     <!-- must be unique across all instances to ensure TMs can coordinate the same RMs -->
-    <entry key="CoreEnvironmentBean.nodeIdentifier">${node.identifier}</entry>
+    <entry key="CoreEnvironmentBean.nodeIdentifier">${env.NODE_IDENTIFIER:changeit}</entry>
 
     <!-- by default the ObjectStore is crated under user.home -->
-    <entry key="ObjectStoreEnvironmentBean.objectStoreDir">target/store/${node.identifier}</entry>
+    <entry key="ObjectStoreEnvironmentBean.objectStoreDir">target/store/${env.NODE_IDENTIFIER:changeit}</entry>
 
     <!-- transaction timeout in seconds after which it is automatically rolled back -->
     <entry key="CoordinatorEnvironmentBean.defaultTimeout">120</entry>
