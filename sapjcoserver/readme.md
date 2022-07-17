@@ -6,9 +6,10 @@ SAP ABAP RFC call -> SpringBoot+ApacheCamel -> FileSystem
 
 I wrote a  springboot+Apachecamel Application to demonstrate how to receive the ABAP function's result and store it at file system.
 
-### prepare sap sap jco connector libs
+### prepare  sap jco connector libs
 
 copy jco jars, .dll (for windows), and .so(for linux) files to lib directory as below shown
+
 ![image-jco lib](readme.assets/sapjco.png)
  
 
