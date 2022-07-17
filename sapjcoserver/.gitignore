@@ -28,7 +28,6 @@
 /log/
 *.log
 *.gz
-*.txt
 
 #### jar ###
 *.jar
