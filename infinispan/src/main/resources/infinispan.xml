@@ -29,6 +29,7 @@
 		<security>
 			<authorization/>
 		</security>
+		<distributed-cache name="default"/>
 	</cache-container>
 
 	<server xmlns="urn:infinispan:server:13.0">
