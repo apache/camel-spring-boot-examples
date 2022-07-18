@@ -1,5 +1,6 @@
 
-# please copy below jco jars and dll files to sapjcoserver/lib directory due to SAP license
+# please download sap's jco's lib , and copy jco jars and dll files to sapjcoserver/lib directory due to SAP license.
+Below is example for sapjco3, if you use different version, please modify jar's name in pom.xml.
 
  sapjco3.jar
  sapidoc3.jar
