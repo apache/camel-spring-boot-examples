@@ -25,10 +25,13 @@ For windows
 set ASHOST=<jco client ashost>
 set GWHOST=<jco server gwhost>
 ```
-
+run test
+```
+mvn -Dtest=sample.camel.SampleJCOServerApplicationTests   test
+```
+run program
 ```
 mvn spring-boot:run 
-mvn -Dtest=sample.camel.SampleJCOServerApplicationTests   test
 ```
 ![image-1](readme.assets/Picture1.png)
 
