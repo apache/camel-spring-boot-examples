@@ -28,7 +28,6 @@ import org.apache.camel.component.infinispan.remote.InfinispanRemoteComponent;
 import org.apache.camel.component.infinispan.remote.InfinispanRemoteConfiguration;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
-import org.infinispan.configuration.cache.CacheMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -56,7 +55,7 @@ public class Application {
     private static final String DEFAULT_PASSWORD = "password";
     private static final int CONTAINER_PORT = 11222;
     
-    private GenericContainer container;
+    private GenericContainer<?> container;
     /**
      * Main method to start the application.
      */
@@ -115,21 +114,15 @@ public class Application {
         public InfinispanRemoteComponent infinispanRemoteComponent() {
             initContainer();
             InfinispanRemoteConfiguration infinispanRemoteConfiguration = new InfinispanRemoteConfiguration();
-
             infinispanRemoteConfiguration.setHosts("localhost" + ":" + CONTAINER_PORT);
-
             infinispanRemoteConfiguration.setUsername(DEFAULT_USERNAME);
             infinispanRemoteConfiguration.setPassword(DEFAULT_PASSWORD);
 
             RemoteCacheManager cacheContainer = new RemoteCacheManager(getConfiguration().build());
-            cacheContainer.administration()
-                .getOrCreateCache("default", new org.infinispan.configuration.cache.ConfigurationBuilder()
-                    .clustering().cacheMode(CacheMode.DIST_SYNC).build());
-
             infinispanRemoteConfiguration.setCacheContainer(cacheContainer);
+
             InfinispanRemoteComponent component = new InfinispanRemoteComponent();
             component.setConfiguration(infinispanRemoteConfiguration);
-
             return component;
         }
     }
