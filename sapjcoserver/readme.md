@@ -15,8 +15,20 @@ copy jco jars, .dll (for windows), and .so(for linux) files to lib directory as 
 
 ### run apache camel springboot application 
 
+For linux
+```
+export ASHOST=<jco client ashost>
+export GWHOST=<jco server gwhost>
+```
+For windows
+```
+set ASHOST=<jco client ashost>
+set GWHOST=<jco server gwhost>
+```
+
 ```
 mvn spring-boot:run 
+mvn -Dtest=sample.camel.SampleJCOServerApplicationTests   test
 ```
 ![image-1](readme.assets/Picture1.png)
 

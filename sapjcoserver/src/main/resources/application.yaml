@@ -7,7 +7,7 @@ sap:
     name: TESTSAP
 jco:
     client:
-        ashost: 192.180.32.18
+        ashost: ${ASHOST}
         client: 600
         lang: en
         sysnr: 01
@@ -17,7 +17,7 @@ jco:
 
     server:
         connection_count: 2
-        gwhost: 192.180.14.42
+        gwhost: ${GWHOST}
         gwserv: 3300
         progid: PROGID
         repository_destination: TESTSAP

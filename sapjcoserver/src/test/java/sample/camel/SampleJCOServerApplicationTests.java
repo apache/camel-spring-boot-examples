@@ -16,16 +16,12 @@
  */
 package sample.camel;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.concurrent.TimeUnit;
 
 import org.apache.camel.CamelContext;
-import org.apache.camel.EndpointInject;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.builder.NotifyBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit5.MockEndpoints;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,8 +30,9 @@ import org.springframework.test.annotation.DirtiesContext.MethodMode;
 
 @CamelSpringBootTest
 @SpringBootTest
+@MockEndpoints("file:sapoutput")
 public class SampleJCOServerApplicationTests {
-
+	
     @Autowired
     ProducerTemplate producerTemplate;
     
@@ -46,7 +43,7 @@ public class SampleJCOServerApplicationTests {
     @Test
     @DirtiesContext(methodMode = MethodMode.AFTER_METHOD)
     public void testSendMsg() throws Exception {
-        MockEndpoint mockfile = camelContext.getEndpoint("mock:activemq", MockEndpoint.class);
+        MockEndpoint mockfile = camelContext.getEndpoint("mock:file:sapoutput", MockEndpoint.class);
         String msg="ABAP RFC TEST";
     	  mockfile.expectedBodiesReceived(msg);
           producerTemplate.sendBody("direct:saprfc", msg);
