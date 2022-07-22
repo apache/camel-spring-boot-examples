@@ -1,0 +1,62 @@
+schemaVersion: 2.1.0
+metadata:
+  name: csb-ubi8
+  version: 0.0.1
+  displayName: CSB Java ubi8
+  description: CSB and ubi8 image
+  icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/java-maven.jpg
+  tags: ['Java', 'Spring', 'Camel']
+  projectType: 'spring'
+  language: 'java'
+components:
+  - name: tools
+    container:
+      image: registry.access.redhat.com/ubi8/openjdk-11
+      mountSources: true
+      volumeMounts:
+        - name: mvnrepo
+          path: /home/jboss/.m2/repository
+      endpoints:
+      - name: http-8778
+        targetPort: 8778
+      - name: http-8080
+        targetPort: 8080
+      - name: http-8443
+        targetPort: 8443
+  - name: mvnrepo
+    volume:
+      size: 1Gi
+commands:
+  - id: init-compile
+    exec:
+      component: tools
+      commandLine: 'source /opt/jboss/container/maven/default/maven.sh && maven_init 
+        && mvn package -s /home/jboss/.m2/settings.xml -f ${PROJECT_SOURCE}/${SUB_FOLDER}/pom.xml -DskipTests -Dcom.redhat.xpaas.repo.redhatga
+        && cp ${PROJECT_SOURCE}/${SUB_FOLDER}/target/*.jar /deployments'
+      workingDir: $PROJECT_SOURCE
+  - id: dev-run
+    exec:
+      component: tools
+      commandLine: '/usr/local/s2i/run'
+      hotReloadCapable: true
+      group:
+        kind: run
+        isDefault: true
+      workingDir: $PROJECTS_ROOT
+  - id: dev-debug
+    exec:
+      component: tools
+      commandLine: '/usr/local/s2i/run'
+      hotReloadCapable: true
+      env:
+        - name: JAVA_DEBUG
+          value: 'true'
+        - name: JAVA_DEBUG_PORT
+          value: ${DEBUG_PORT}
+      group:
+        kind: debug
+        isDefault: true
+      workingDir: $PROJECTS_ROOT
+events:
+  postStart:
+    - init-compile

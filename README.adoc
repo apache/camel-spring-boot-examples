@@ -157,6 +157,43 @@ Number of Examples: 58 (0 deprecated)
 |===
 // examples: END
 
+== Deploying the examples in openshift or dev-sandbox using devfiles
+
+=== Pre-requisites
+
+- https://odo.dev/docs/overview/installation[Install odo (Preferred odo version - 2.x)]
+
+=== Steps:
+
+- First login to your openshift or dev-sandbox and create a new project. Here $EXAMPLE  is the name of the example you want to deploy:
+
+        $ oc new-project csbex-$EXAMPLE
+
+- Create an odo component using the devfile.yaml
+
+        $ odo create csb-ubi8 --app $EXAMPLE 
+
+- To set the specific example you want to deploy as an env variable (SUB_FOLDER):
+
+        $ odo config set --env SUB_FOLDER=$EXAMPLE
+
+- Then push it to openshift cluster:
+
+        $ odo push
+
+=== Note: 
+
+- Only few examples can be deployed using devfile:
+
+        fhir-auth-tx, geocoder, health-checks, kamelet-chucknorris, load-balancer-eip, metrics, paho-mqtt5-shared-subscriptions, pojo, quartz, reactive-streams, rest-jpa, rest-openapi-springdoc,
+        rest-openapi, rest-producer, rest-swagger, route-reload, routetemplate, splitter-eip, spring-boot, supervising-route-controller, type-converter, unit-testing, validator, xml-import and xml.
+
+- Please delete `.odo folder` in your repository before starting to deploy another example, so that it will delete the components related to previous example.
+
+- If you have an internal repository, set the MAVEN_MIRROR_URL environment with your maven repo before pushing:
+
+        $ odo config set --env MAVEN_MIRROR_URL=https://my-maven-mirror/
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback,
