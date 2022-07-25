@@ -1,0 +1,32 @@
+camel:
+    springboot:
+        main-run-controller: 'true'
+
+sap:
+  system:
+    name: TESTSAP
+jco:
+    client:
+        ashost: ${ASHOST}
+        client: 600
+        lang: en
+        sysnr: 01
+        user: username
+        passwd: password
+        network: lan
+
+    server:
+        connection_count: 2
+        gwhost: ${GWHOST}
+        gwserv: 3300
+        progid: PROGID
+        repository_destination: TESTSAP
+
+        rfc:
+            name: STFC_CONNECTION 
+            exportparam:
+                exist: false
+            importparam:
+                exist: true
+            tableparam:
+                exist: false
