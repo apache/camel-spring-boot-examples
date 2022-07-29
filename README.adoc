@@ -154,6 +154,8 @@ Number of Examples: 58 (0 deprecated)
 | link:rest-producer/readme.adoc[Rest Producer] (rest-producer) | Rest | An example showing how to use Camel Rest to call a REST service
 
 | link:rest-swagger/README.adoc[Rest Swagger] (rest-swagger) | Rest | An example showing Camel REST DSL and Swagger with Spring Boot
+
+| link:sapjcoserver/readme.md[SAP JCOServer] (sapjcoserver) | SAP | An example showing to receive SAP ABAP call's result then direct it to Camel File with Spring Boot
 |===
 // examples: END
 
