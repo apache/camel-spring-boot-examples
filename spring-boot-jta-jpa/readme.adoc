@@ -59,7 +59,7 @@ curl $ADDRESS/messages
 Test rollback by calling the service with "fail" content:
 
 ----
-curl -X POST $ADDRESS/message/fail
+curl -X POST $ADDRESS/messages/fail
 ----
 
 You should not find any trace of the message in the `audit_log` table.
