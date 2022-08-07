@@ -1,0 +1,30 @@
+camel:
+    springboot:
+        main-run-controller: 'true'
+
+jco:
+    client:
+        # set as ${SAPSYSTEM}
+        sapSystemName: ${SAPSYSTEM}
+        # set as ${SAPCLIENTID}
+        id: ${SAPCLIENTID}
+        # set as ${ASHOST}
+        ashost: ${ASHOST}
+        lang: en
+        sysnr: '01'
+        # set as  ${USERNAME}
+        user:  ${USERNAME}
+        # set as  ${PASSWORD}
+        passwd: ${PASSWORD}
+        network: lan
+        # using STFC_CONNECTION as default Test function
+        rfcName: STFC_CONNECTION 
+
+    destination:
+        expiration_check_period: 120000
+        expiration_time: 600000
+        pool_capacity: 10
+        repository_roundtrip_optimization: 1
+
+
+           
