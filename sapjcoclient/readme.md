@@ -4,7 +4,7 @@
 
 Camel Timer-> SAP ABAP RFC call(via Camel Processor) ->  FileSystem
 
-I wrote a  SpringBoot+Apachecamel Application to demonstrate how to call SAP's ABAP function' and store the result at file system.
+I wrote a  SpringBoot+Apachecamel Application to demonstrate how to call SAP's ABAP function' via Camel Processor and store the result at file system.
 
 ### prepare  sap jco connector libs
 
