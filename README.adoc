@@ -155,7 +155,9 @@ Number of Examples: 58 (0 deprecated)
 
 | link:rest-swagger/README.adoc[Rest Swagger] (rest-swagger) | Rest | An example showing Camel REST DSL and Swagger with Spring Boot
 
-| link:sapjcoserver/readme.md[SAP JCOServer] (sapjcoserver) | SAP | An example showing to receive SAP ABAP call's result then direct it to Camel File with Spring Boot
+| link:sapjcoserver/readme.md[SAP JCOServer] (sapjcoserver) | SAP | An example showing how to receive SAP ABAP CallBack's result then direct it to Camel File in Spring Boot application
+
+| link:sapjcoclient/readme.md[SAP JCOClient] (sapjcoclient) | SAP | An example showing how to call SAP ABAP Function via Camel Processor then store the result to Camel File in Spring Boot application
 |===
 // examples: END
 
