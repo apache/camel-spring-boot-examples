@@ -18,14 +18,20 @@ copy jco jars, .dll (for windows), and .so(for linux) files to lib directory as 
 - For linux
 
 ```
-export ASHOST=<jco client ashost>
-export GWHOST=<jco server gwhost>
+set SAPSYSTEM=<sap system name>
+set ASHOST=<jco client ashost>
+set SAPCLIENTID=<sap system clientId>
+set USERNAME=<sap username>
+set PASSWORD=<sap password>
 ```
 - For windows
 
 ```
-set ASHOST=<jco client ashost>
-set GWHOST=<jco server gwhost>
+export SAPSYSTEM=<sap system name>
+export ASHOST=<jco client ashost>
+export SAPCLIENTID=<sap system clientId>
+export USERNAME=<sap username>
+export PASSWORD=<sap password>
 ```
 
 run test
