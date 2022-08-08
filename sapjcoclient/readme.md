@@ -15,7 +15,7 @@ copy jco jars, .dll (for windows), and .so(for linux) files to lib directory as 
 
 ### run apache camel springboot application 
 
-- For linux
+- Windows
 
 ```
 set SAPSYSTEM=<sap system name>
@@ -24,7 +24,7 @@ set SAPCLIENTID=<sap system clientId>
 set USERNAME=<sap username>
 set PASSWORD=<sap password>
 ```
-- For windows
+- Linux
 
 ```
 export SAPSYSTEM=<sap system name>
