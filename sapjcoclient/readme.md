@@ -35,10 +35,12 @@ export PASSWORD=<sap password>
 ```
 
 run test
+
 ```
 mvn -Dtest=sample.camel.SampleJCOClientApplicationTests   test
 ```
 run program
+
 ```
 mvn spring-boot:run 
 ```

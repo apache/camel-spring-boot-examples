@@ -15,7 +15,7 @@ public class TimerToSapClientRouteBuilder extends RouteBuilder {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(TimerToSapClientRouteBuilder.class);
 	public void configure() throws Exception {
-		from("timer://foo?repeatCount=1").id("route_direct_saprfc")
+		from("timer://foo?repeatCount=1").routeId("route_direct_saprfc")
 		.process(callSapProcessor).id("callSapProcessor")
 	    .to("file:sapoutput")
 	    .log("received ABAP call's result ..... ${body}");
