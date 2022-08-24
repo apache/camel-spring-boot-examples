@@ -11,6 +11,9 @@ You can build this example using:
 
     $ mvn package
 
+=== Start Infinispan server :
+    $ docker run -e USER=admin -e PASS=password -p 11222:11222 -v /${SAMPLE_DIR}/:/user-config/ quay.io/infinispan/server:13.0.5.Final-1 -c /user-config/infinispan.xml    
+
 === Run
 
 You can run this example using:
