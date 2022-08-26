@@ -16,46 +16,29 @@
  */
 package org.apache.camel.example.springboot.infinispan;
 
-import java.util.Properties;
-import java.util.function.Consumer;
-
-import com.github.dockerjava.api.command.CreateContainerCmd;
-import com.github.dockerjava.api.model.ExposedPort;
-import com.github.dockerjava.api.model.PortBinding;
-import com.github.dockerjava.api.model.Ports;
-
 import org.apache.camel.component.infinispan.remote.InfinispanRemoteComponent;
 import org.apache.camel.component.infinispan.remote.InfinispanRemoteConfiguration;
+
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.testcontainers.containers.BindMode;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.output.OutputFrame;
-import org.testcontainers.containers.output.Slf4jLogConsumer;
-import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.shaded.org.apache.commons.lang.SystemUtils;
+
+import java.util.Properties;
 
 
 // CHECKSTYLE:OFF
 @SpringBootApplication
 public class Application {
-    
-    
+
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
-    
-    private static final String CONTAINER_IMAGE = "quay.io/infinispan/server:13.0.5.Final-1";
-    private static final String CONTAINER_NAME = "infinispan";
-    private static final String DEFAULT_USERNAME = "admin";
-    private static final String DEFAULT_PASSWORD = "password";
-    private static final int CONTAINER_PORT = 11222;
-    
-    private GenericContainer<?> container;
+
     /**
      * Main method to start the application.
      */
@@ -63,32 +46,19 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
     
-    
-    
     @Configuration
+    @ConfigurationProperties(prefix = "infinispan")
     public class InfinispanConfiguration {
 
-        private void initContainer() {
-            LOG.info("start infinispan docker container");
-            Consumer<CreateContainerCmd> cmd = e -> {
-                e.getHostConfig().withPortBindings(new PortBinding(Ports.Binding.bindPort(CONTAINER_PORT),
-                                                   new ExposedPort(CONTAINER_PORT)));
+        private String host;
+        
+        private Integer port;
 
-            };
-            final Logger containerLog = LoggerFactory.getLogger("container." + CONTAINER_NAME);
-            final Consumer<OutputFrame> logConsumer = new Slf4jLogConsumer(containerLog);
+        private String username;
 
-            container = new GenericContainer<>(CONTAINER_IMAGE).withNetworkAliases(CONTAINER_NAME)
-                .withEnv("USER", DEFAULT_USERNAME).withEnv("PASS", DEFAULT_PASSWORD)
-                .withLogConsumer(logConsumer)
-                .withClasspathResourceMapping("infinispan.xml", "/user-config/infinispan.xml",
-                                              BindMode.READ_ONLY)
-                .withCommand("-c", "/user-config/infinispan.xml").withExposedPorts(CONTAINER_PORT)
-                .withCreateContainerCmdModifier(cmd).waitingFor(Wait.forListeningPort())
-                .waitingFor(Wait.forLogMessage(".*Infinispan.*Server.*started.*", 1));
-            container.start();
+        private String password;
 
-        }
+        private String serverName;
 
         protected ConfigurationBuilder getConfiguration() {
             ConfigurationBuilder clientBuilder = new ConfigurationBuilder();
@@ -96,11 +66,11 @@ public class Application {
             clientBuilder.forceReturnValues(true);
 
 
-            clientBuilder.addServer().host("localhost").port(CONTAINER_PORT);
+            clientBuilder.addServer().host(getHost()).port(getPort());
 
             // add security info
-            clientBuilder.security().authentication().username(DEFAULT_USERNAME).password(DEFAULT_PASSWORD)
-                .serverName("infinispan").saslMechanism("DIGEST-MD5").realm("default");
+            clientBuilder.security().authentication().username(getUsername()).password(getPassword())
+                .serverName(getServerName()).saslMechanism("DIGEST-MD5").realm("default");
             if (SystemUtils.IS_OS_MAC) {
                 Properties properties = new Properties();
                 properties.put("infinispan.client.hotrod.client_intelligence", "BASIC");
@@ -112,11 +82,10 @@ public class Application {
 
         @Bean(name = "infinispanRemoteComponent")
         public InfinispanRemoteComponent infinispanRemoteComponent() {
-            initContainer();
             InfinispanRemoteConfiguration infinispanRemoteConfiguration = new InfinispanRemoteConfiguration();
-            infinispanRemoteConfiguration.setHosts("localhost" + ":" + CONTAINER_PORT);
-            infinispanRemoteConfiguration.setUsername(DEFAULT_USERNAME);
-            infinispanRemoteConfiguration.setPassword(DEFAULT_PASSWORD);
+            infinispanRemoteConfiguration.setHosts(getHost() + ":" + getPort());
+            infinispanRemoteConfiguration.setUsername(getUsername());
+            infinispanRemoteConfiguration.setPassword(getPassword());
 
             RemoteCacheManager cacheContainer = new RemoteCacheManager(getConfiguration().build());
             infinispanRemoteConfiguration.setCacheContainer(cacheContainer);
@@ -124,6 +93,46 @@ public class Application {
             InfinispanRemoteComponent component = new InfinispanRemoteComponent();
             component.setConfiguration(infinispanRemoteConfiguration);
             return component;
+        }
+
+        public String getHost() {
+            return host;
+        }
+
+        public void setHost(final String host) {
+            this.host = host;
+        }
+
+        public Integer getPort() {
+            return port;
+        }
+
+        public void setPort(final Integer port) {
+            this.port = port;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(final String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(final String password) {
+            this.password = password;
+        }
+
+        public String getServerName() {
+            return serverName;
+        }
+
+        public void setServerName(final String serverName) {
+            this.serverName = serverName;
         }
     }
 

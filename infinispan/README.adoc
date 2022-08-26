@@ -5,13 +5,17 @@
 This example demonstrates how you can use Camel-Infinispan Starter component. The example is really simple: put a key/value pair in a remote cache and get the same key.
 This example starts an Infinispan server with Infinispan Docker Image, so it can run OOTB.
 
-=== Build
+=== Build and test
 
 You can build this example using:
 
     $ mvn package
 
 === Run
+
+Start Infinispan container in a separate terminal:
+
+    $ docker run --rm -e USER=admin -e PASS=password -p 11222:11222 -v $PWD/src/test/resources:/user-config/ quay.io/infinispan/server:13.0.5.Final-1 -c /user-config/infinispan.xml
 
 You can run this example using:
 
