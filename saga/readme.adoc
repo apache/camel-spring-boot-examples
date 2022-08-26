@@ -41,7 +41,11 @@ First the app starts the saga LRA, passing the id to the entry point REST
 
 [source,shell]
 ----
+#local environment
 curl -X POST http://localhost:8084/api/saga?id=1
+
+#Openshift cluster
+curl -X POST "http://$(oc get route camel-example-spring-boot-saga-app -o go-template --template='{{.spec.host}}')/api/saga?id=1"
 ----
 
 in the log
@@ -121,6 +125,8 @@ Transaction http://localhost:8080/lra-coordinator/0_ffff7f000001_8aad_62d16f11_7
 Go to https://developers.redhat.com/developer-sandbox/get-started after login, click on `Start using your sandbox` button.
 
 Then login into the Openshift and copy the command login clicking on the link `Copy Login Command` in the OpenShift console (the command will be something similar to `oc login --token=sha256~xxxx --server=https://api.sandbox-xxxx.openshiftapps.com:6443`).
+
+Select your project `oc project xxxxxx-dev`
 
 Run that command on the terminal and then run the installation script `./install-ocp-ephemeral.sh`
 
