@@ -19,6 +19,7 @@ package org.apache.camel.example.springboot.infinispan;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.infinispan.InfinispanConstants;
 import org.apache.camel.component.infinispan.InfinispanOperation;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,7 +30,11 @@ public class CamelInfinispanRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+
         from("timer://foo?period=10000&repeatCount=1")
+        .to("direct:put-cache");
+
+        from("direct:put-cache")
         .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
         .setHeader(InfinispanConstants.KEY).constant("1")
         .setHeader(InfinispanConstants.VALUE).constant("test")
