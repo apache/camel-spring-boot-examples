@@ -31,7 +31,7 @@ items:
     tags:
     - from:
         kind: DockerImage
-        name: docker.io/jbosstm/lra-coordinator:latest
+        name: quay.io/jbosstm/lra-coordinator:latest
       generation: 0
       importPolicy: {}
       name: "latest"
@@ -80,6 +80,12 @@ items:
               port: 8080
               scheme: HTTP
             initialDelaySeconds: 10
+          volumeMounts:
+            - mountPath: /home/jboss/ObjectStore
+              name: lra-coordinator-data
+        volumes:
+          - name: lra-coordinator-data
+            emptyDir: {}
     triggers:
     - type: ConfigChange
     - imageChangeParams:

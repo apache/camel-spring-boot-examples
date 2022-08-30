@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   lra-coordinator:
-    image: "docker.io/jbosstm/lra-coordinator:latest"
+    image: "quay.io/jbosstm/lra-coordinator:latest"
     network_mode: "host"
   amq-broker:
     image: "registry.redhat.io/amq7/amq-broker-rhel8:7.10"
