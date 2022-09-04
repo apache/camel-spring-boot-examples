@@ -124,8 +124,6 @@ Number of Examples: 58 (0 deprecated)
 
 | link:supervising-route-controller/readme.adoc[Supervising Route Controller] (supervising-route-controller) | Management and Monitoring | An example showing how to work with Camel's Supervising Route Controller and Spring Boot
 
-| link:zipkin/README.adoc[Zipkin] (zipkin) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with Zipkin
-
 | link:activemq/readme.adoc[Activemq] (activemq) | Messaging | An example showing how to work with Camel, ActiveMQ and Spring Boot
 
 | link:amqp/readme.adoc[Amqp] (amqp) | Messaging | An example showing how to work with Camel, ActiveMQ Amqp and Spring Boot

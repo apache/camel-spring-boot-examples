@@ -87,7 +87,6 @@
 		<module>webhook</module>
 		<module>xml</module>
 		<module>xml-import</module>
-		<module>zipkin</module>
 		<module>strimzi</module>
 		<module>quartz</module>
 		<module>splitter-eip</module>
