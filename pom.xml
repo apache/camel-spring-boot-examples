@@ -62,6 +62,7 @@
 		<module>metrics</module>
 		<module>opentracing</module>
 		<module>paho-mqtt5-shared-subscriptions</module>
+		<module>platform-http</module>
 		<module>pojo</module>
 		<module>rabbitmq</module>
 		<module>reactive-streams</module>
