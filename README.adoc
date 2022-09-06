@@ -134,6 +134,8 @@ Number of Examples: 58 (0 deprecated)
 
 | link:paho-mqtt5-shared-subscriptions/README.adoc[Paho Mqtt5 Shared Subscriptions] (paho-mqtt5-shared-subscriptions) | Messaging | An example showing  how to set up multiple mqtt5 consumers that use shared subscription feature of MQTT5
 
+| link:platform-http/README.adoc[Platform HTTP] (platform-http) | Rest | An example showing how to use the platform-http component and the servlet-starter
+
 | link:rabbitmq/readme.adoc[Rabbitmq] (rabbitmq) | Messaging | An example showing how to work with Camel and RabbitMQ
 
 | link:strimzi/README.adoc[Strimzi] (strimzi) | Messaging | Camel example which a route is defined in XML for Strimzi integration on Openshift/Kubernetes

@@ -1,0 +1,122 @@
+== Spring Boot Example with Camel REST DSL and Platform HTTP
+
+=== Introduction
+
+This example illustrates how to use https://projects.spring.io/spring-boot/[Spring Boot] with http://camel.apache.org[Camel]. It provides a simple REST service that is created with http://camel.apache.org/rest-dsl.html[Camel REST DSL] and https://camel.apache.org/components/3.18.x/platform-http-component.html[platform-http].
+
+The project uses the `camel-spring-boot-starter` dependency, a Spring Boot starter dependency for Camel that simplifies the Maven configuration. 
+
+The project also uses `camel-servlet-starter` component as the implementation for platform-http-engine.
+
+=== Build
+
+You can build this example using:
+
+    $ mvn package
+
+=== Run
+
+You can run this example using:
+
+    $ mvn spring-boot:run
+
+You should see the following output when the application is launched:
+
+[source,text]
+----
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ ...
+2022-09-05 12:00:31.101  INFO 16692 --- [           main] o.a.c.c.s.CamelHttpTransportServlet      : Initialized CamelHttpTransportServlet[name=CamelServlet, contextPath=]
+2022-09-05 12:00:31.113  INFO 16692 --- [           main] io.undertow                              : starting server: Undertow - 2.2.19.Final
+2022-09-05 12:00:31.128  INFO 16692 --- [           main] org.xnio                                 : XNIO version 3.8.7.Final
+2022-09-05 12:00:31.144  INFO 16692 --- [           main] org.xnio.nio                             : XNIO NIO Implementation Version 3.8.7.Final
+2022-09-05 12:00:31.354  INFO 16692 --- [           main] org.jboss.threads                        : JBoss Threads version 3.1.0.Final
+2022-09-05 12:00:31.453  INFO 16692 --- [           main] o.s.b.w.e.undertow.UndertowWebServer     : Undertow started on port(s) 8080 (http)
+2022-09-05 12:00:31.955  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 3.19.0-SNAPSHOT (MyCamel) is starting
+2022-09-05 12:00:31.989  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Routes startup (started:7)
+2022-09-05 12:00:31.989  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route1 (direct://test)
+2022-09-05 12:00:31.989  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route2 (rest://get:/todos)
+2022-09-05 12:00:31.989  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route3 (rest://get:/todos:/%7Bid%7D)
+2022-09-05 12:00:31.990  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route4 (rest://patch:/todos:/%7Bid%7D)
+2022-09-05 12:00:31.990  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route5 (rest://post:/todos)
+2022-09-05 12:00:31.990  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route6 (rest://delete:/todos)
+2022-09-05 12:00:31.991  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route7 (rest://delete:/todos:/%7Bid%7D)
+2022-09-05 12:00:31.992  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 3.19.0-SNAPSHOT (MyCamel) started in 552ms (build:95ms init:421ms start:36ms)
+2022-09-05 12:00:32.005  INFO 16692 --- [           main] o.a.c.example.springboot.Application     : Started Application in 13.737 seconds (JVM running for 14.657)
+----
+
+After the Spring Boot application is started, you can execute the following HTTP requests:
+
+Create a TODO
+
+[source,text]
+----
+$ curl -d '{"title":"Todo title", "completed":"false", "order": 1, "url":""}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/todos
+----
+
+The command will produce the following output:
+
+[source,json]
+----
+{"id":1,"title":"Todo title","completed":false,"order":1,"url":""}
+----
+
+Retrieve all TODOs
+
+[source,text]
+----
+$ curl http://localhost:8080/api/todos
+----
+
+The command will produce the following output:
+
+[source,json]
+----
+[{"id":1,"title":"Todo title","completed":false,"order":1,"url":""}]
+----
+
+Update one TODO
+
+[source,text]
+----
+$ curl -d '{"title":"Todo title", "completed":"true", "order": 1, "url":""}' -H "Content-Type: application/json" -X PATCH http://localhost:8080/api/todos/1
+----
+
+The command will produce the following output:
+
+[source,json]
+----
+{"id":1,"title":"Todo title","completed":true,"order":1,"url":""}
+----
+
+Delete completed TODOs
+
+[source,text]
+----
+$ curl -X "DELETE" http://localhost:8080/api/todos
+----
+
+The command will produce the following output:
+
+[source,json]
+----
+1
+----
+
+The Spring Boot application can be stopped pressing `[CTRL] + [C]` in the shell.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
