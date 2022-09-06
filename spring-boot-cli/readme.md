@@ -9,6 +9,6 @@ Camel examples for running routes using Spring Boot CLI
 
 ### Quickstart
 
-` sdk install springboot`
+`sdk install springboot`
 
 `spring run hello.groovy`
