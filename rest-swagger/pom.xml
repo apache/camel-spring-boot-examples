@@ -30,7 +30,8 @@
     <description>An example showing Camel REST DSL and Swagger with Spring Boot</description>
 
     <properties>
-        <category>Rest</category>    </properties>
+        <category>Rest</category>
+    </properties>
 
     <!-- Spring-Boot and Camel BOM -->
     <dependencyManagement>
