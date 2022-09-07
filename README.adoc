@@ -27,17 +27,11 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 58 (0 deprecated)
+Number of Examples: 59 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
 | Example | Category | Description
-
-| link:health-checks/readme.adoc[Health Checks] (health-checks) |  | 
-
-| link:spring-boot-jta-jpa/readme.adoc[Spring Boot Jta Jpa] (spring-boot-jta-jpa) |  | An example showing JTA with Spring Boot
-
-| link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) |  | Twitter mentions is created as contacts in Salesforce
 
 | link:undertow-spring-security/readme.adoc[Undertow Spring Security] (undertow-spring-security) | Advanced | Example on how to use the Camel Undertow component with spring security and Keycloak
 
@@ -99,6 +93,8 @@ Number of Examples: 58 (0 deprecated)
         operations on a database
     
 
+| link:spring-boot-jta-jpa/readme.adoc[Spring Boot Jta Jpa] (spring-boot-jta-jpa) | Database | An example showing JTA with Spring Boot
+
 | link:dynamic-router-eip/README.adoc[Dynamic Router Eip] (dynamic-router-eip) | EIP | An example on how to use the Dynamic Router EIP component in Spring Boot
 
 | link:resilience4j/README.adoc[Resilience4j] (resilience4j) | EIP | An example showing how to use Resilience4j EIP as circuit breaker in Camel routes
@@ -117,6 +113,8 @@ Number of Examples: 58 (0 deprecated)
 | link:apm-opentracing/README.adoc[OpenTracing APM] (apm-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing with ElastiCo APM
     
 
+| link:health-checks/readme.adoc[Health Checks] (health-checks) | Management and Monitoring | 
+
 | link:metrics/README.adoc[Metrics] (metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
 
 | link:opentracing/README.adoc[OpenTracing] (opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing
@@ -134,8 +132,6 @@ Number of Examples: 58 (0 deprecated)
 
 | link:paho-mqtt5-shared-subscriptions/README.adoc[Paho Mqtt5 Shared Subscriptions] (paho-mqtt5-shared-subscriptions) | Messaging | An example showing  how to set up multiple mqtt5 consumers that use shared subscription feature of MQTT5
 
-| link:platform-http/README.adoc[Platform HTTP] (platform-http) | Rest | An example showing how to use the platform-http component and the servlet-starter
-
 | link:rabbitmq/readme.adoc[Rabbitmq] (rabbitmq) | Messaging | An example showing how to work with Camel and RabbitMQ
 
 | link:strimzi/README.adoc[Strimzi] (strimzi) | Messaging | Camel example which a route is defined in XML for Strimzi integration on Openshift/Kubernetes
@@ -147,6 +143,8 @@ Number of Examples: 58 (0 deprecated)
 
 | link:geocoder/README.adoc[Geocoder] (geocoder) | Rest | An example showing the Camel Geocoder component via REST DSL with Spring Boot
 
+| link:platform-http/README.adoc[Platform Http] (platform-http) | Rest | An example showing Camel REST DSL with platform HTTP
+
 | link:rest-openapi/README.adoc[Rest Openapi] (rest-openapi) | Rest | An example showing Camel REST DSL and OpenApi with Spring Boot
 
 | link:rest-openapi-springdoc/README.adoc[Rest Openapi Springdoc] (rest-openapi-springdoc) | Rest | An example showing Camel REST DSL and OpenApi with a Springdoc UI in a Spring Boot application
@@ -155,7 +153,9 @@ Number of Examples: 58 (0 deprecated)
 
 | link:rest-swagger/README.adoc[Rest Swagger] (rest-swagger) | Rest | An example showing Camel REST DSL and Swagger with Spring Boot
 
-| link:sapjcoserver/readme.md[SAP JCOServer] (sapjcoserver) | SAP | An example showing to receive SAP ABAP call's result then direct it to Camel File with Spring Boot
+| link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) | SaaS | Twitter mentions is created as contacts in Salesforce
+
+| link:sapjcoserver/readme.md[Sapjcoserver] (sapjcoserver) | SAP | An example showing how to work with Camel,SAP JCOServer and Spring Boot
 |===
 // examples: END
 
