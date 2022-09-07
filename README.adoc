@@ -101,7 +101,7 @@ Number of Examples: 58 (0 deprecated)
 | link:apm-opentracing/README.adoc[OpenTracing APM] (apm-opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing with ElastiCo APM
     
 
-| link:health-checks/readme.adoc[Health Checks] (health-checks) | Management and Monitoring | 
+| link:health-checks/readme.adoc[Health Checks] (health-checks) | Management and Monitoring | An example how to use custom health-checks
 
 | link:metrics/README.adoc[Metrics] (metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
 

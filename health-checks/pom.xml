@@ -29,6 +29,7 @@
 
     <artifactId>camel-example-spring-boot-health-checks</artifactId>
     <name>Camel SB Examples :: Health Checks</name>
+    <description>An example how to use custom health-checks</description>
 
     <properties>
         <category>Management and Monitoring</category>
