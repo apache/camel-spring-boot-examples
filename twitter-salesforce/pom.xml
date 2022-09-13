@@ -33,6 +33,8 @@
     <description>Twitter mentions is created as contacts in Salesforce</description>
 
 	<properties>
+        <category>SaaS</category>
+
 		<camelSalesforce.clientId></camelSalesforce.clientId>
 		<camelSalesforce.clientSecret></camelSalesforce.clientSecret>
 		<camelSalesforce.userName></camelSalesforce.userName>

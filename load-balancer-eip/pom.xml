@@ -14,7 +14,7 @@
 	<description>An example showing Load Balancer EIP with Camel and Spring Boot</description>
 
 	<properties>
-		<category>Beginner</category>
+		<category>EIP</category>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

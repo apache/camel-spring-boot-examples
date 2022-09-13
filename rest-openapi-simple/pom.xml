@@ -31,7 +31,7 @@
     <description>This example shows how to call a Rest service defined using OpenApi specification</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Rest</category>
         <title>REST OpenApi</title>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -31,7 +31,7 @@
     <description>This example shows how to call a Rest service defined using Swagger specification</description>
 
     <properties>
-        <category>Beginner</category>
+        <category>Rest</category>
         <title>REST Swagger</title>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
