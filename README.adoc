@@ -33,6 +33,8 @@ Number of Examples: 58 (0 deprecated)
 |===
 | Example | Category | Description
 
+| link:debezium-postgresql/readme.adoc[Debezium Postgresql] (debezium-postgresql) | Beginner | An example showing how to work with Camel and Spring Boot
+
 | link:endpointdsl/readme.adoc[Endpointdsl] (endpointdsl) | Beginner | Using type-safe Endpoint DSL
 
 | link:kamelet-chucknorris/readme.adoc[Kamelet Chucknorris] (kamelet-chucknorris) | Beginner | How easy it is to create your own Kamelets
@@ -148,8 +150,6 @@ Number of Examples: 58 (0 deprecated)
 | link:jira/README.adoc[Jira] (jira) | SaaS | An example that uses Jira Camel API
 
 | link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) | SaaS | Twitter mentions is created as contacts in Salesforce
-
-| link:sapjcoserver/readme.md[Sapjcoserver] (sapjcoserver) | SAP | An example showing how to work with Camel,SAP JCOServer and Spring Boot
 
 | link:undertow-spring-security/readme.adoc[Undertow Spring Security] (undertow-spring-security) | Security | Example on how to use the Camel Undertow component with spring security and Keycloak
 
