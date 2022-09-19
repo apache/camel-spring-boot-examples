@@ -76,6 +76,8 @@ Number of Examples: 49 (0 deprecated)
 
 | link:webhook/readme.adoc[Webhook] (webhook) | Cloud | Example on how to use the Camel Webhook component
 
+| link:soap-cxf/README.adoc[Spring Boot SOAP CXF] (cxf-soap) | CXF | An example showing how to work with Camel SOAP CXF and Spring Boot
+
 | link:master/readme.adoc[Master] (master) | Clustering | An example showing how to work with Camel's Master component and Spring Boot
 
 | link:arangodb/README.adoc[Arangodb] (arangodb) | Database | An example showing the Camel ArangoDb component with Spring Boot

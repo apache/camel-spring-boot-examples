@@ -74,6 +74,7 @@
 		<module>route-reload</module>
 		<module>routes-configuration</module>
 		<module>saga</module>
+		<module>soap-cxf</module>
 		<module>supervising-route-controller</module>
 		<module>twitter-salesforce</module>
 		<module>type-converter</module>
