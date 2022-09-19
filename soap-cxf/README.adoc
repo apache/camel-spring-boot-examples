@@ -1,0 +1,46 @@
+== Camel SOAP CXF example
+
+This example shows how to serve a SOAP CXF service with the help of Camel SOAP CXF component.
+
+The example is a standalone Spring Boot application that expose SOAP services that let you interact with a list of contact, you can run it with:
+
+....
+$ mvn spring-boot:run
+....
+
+Or by packaging it and running it using `+java+` CLI:
+
+....
+$ mvn package
+$ java -jar target/camel-example-spring-boot-soap-cxf-*.jar
+....
+
+=== Java to WSDL Service
+
+The example expose the wsdl which is generated from the `ContactService.java` by camel-soap-cxf:
+
+....
+$ curl http://localhost:8080/services/contact\?wsdl
+....
+
+In order to interact with the application a SOAP client like SoapUI can be used, or you can use the PojoClientTest as a reference to use the CXF client programmatically.
+
+=== WSDL to Java Service
+
+The example expose another SOAP service which is generated starting from the `CustomerService.wsdl`:
+
+....
+$ curl http://localhost:8080/services/customers\?wsdl
+....
+
+In order to interact with the application a SOAP client like SoapUI can be used, or you can use the WsdlClientTest as a reference to use the CXF client programmatically.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
