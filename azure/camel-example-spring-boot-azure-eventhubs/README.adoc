@@ -1,0 +1,50 @@
+== Spring Boot Example with Azure Event Hubs
+
+=== Introduction
+
+This example demonstrates how you can use the Camel Azure Event Hubs Starter component.
+
+NOTE: Running this sample will be charged by Azure. You can check the usage and bill at this https://azure.microsoft.com/get-started/azure-portal/[link].
+
+=== Create Event Hubs on Azure
+
+1. Create an Azure Event Hubs by following this https://learn.microsoft.com/azure/event-hubs/event-hubs-create[link].
+
+2. Create an Azure Storage account for checkpoint use by following this https://learn.microsoft.com/azure/storage/common/storage-account-create?tabs=azure-portal[link].
+
+=== Configuration
+
+You need to configure the details in the file:
+
+`src/main/resources/application.yml`
+
+=== How to run
+
+Run this example using:
+
+[source,console]
+----
+mvn spring-boot:run
+----
+
+You should see the following output in the console.
+
+[source,console]
+----
+Received: Event Test
+The content is Event Test
+...
+Received: Event Test
+The content is Event Test
+...
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!

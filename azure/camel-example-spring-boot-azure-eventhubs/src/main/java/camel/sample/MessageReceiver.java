@@ -27,7 +27,7 @@ public class MessageReceiver {
     private static final Logger logger = LoggerFactory.getLogger(MessageReceiver.class);
 
     public void onMessage(String message) {
-        logger.info("Receiverd: {}", message);
+        logger.info("Received: {}", message);
     }
 
 }
