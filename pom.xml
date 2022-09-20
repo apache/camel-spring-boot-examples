@@ -92,6 +92,7 @@
 		<module>splitter-eip</module>
 		<module>widget-gadget</module>
 		<module>unit-testing</module>
+		<module>azure</module>
     </modules>
 
 	<properties>

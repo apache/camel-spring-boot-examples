@@ -1,0 +1,48 @@
+== Spring Boot Example with Azure Service Bus
+
+=== Introduction
+
+This example demonstrates how you can use the Camel Azure Service Bus Starter component.
+
+NOTE: Running this sample will be charged by Azure. You can check the usage and bill at this https://azure.microsoft.com/get-started/azure-portal/[link].
+
+=== Create Service Bus on Azure
+
+Create an Azure Service Bus namespace and queue by following this https://learn.microsoft.com/azure/service-bus-messaging/service-bus-quickstart-portal[link].
+
+=== Configuration
+
+You need to configure the details in the file:
+
+`src/main/resources/application.yml`
+
+=== How to run
+
+Run this example using:
+
+[source,console]
+----
+mvn spring-boot:run
+----
+
+You should see the following output in the console.
+
+[source,console]
+----
+Received: Service Bus Test
+The content is Service Bus Test
+...
+Received: Service Bus Test
+The content is Service Bus Test
+...
+----
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
