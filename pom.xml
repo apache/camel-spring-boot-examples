@@ -93,7 +93,7 @@
 		<module>widget-gadget</module>
 		<module>unit-testing</module>
     <module>azure</module>
-    </modules>
+  </modules>
 
 	<properties>
 		<camel-version>3.19.0-SNAPSHOT</camel-version>
