@@ -35,9 +35,9 @@
     </bean>
 
     <bean id="jtaDataSource" class="com.mysql.cj.jdbc.MysqlXADataSource">
-        <property name="url" value="jdbc:mysql://localhost:3306/testdb"/>
-        <property name="user" value="admin"/>
-        <property name="password" value="admin"/>
+        <property name="url" value="${mysql.url}"/>
+        <property name="user" value="${mysql.user}"/>
+        <property name="password" value="${mysql.password}"/>
     </bean>
 
     <!-- Pooled JTA aware data source -->
@@ -82,9 +82,9 @@
     </bean>
 
     <bean id="jtaConnectionFactory" class="org.apache.activemq.artemis.jms.client.ActiveMQXAConnectionFactory">
-        <constructor-arg value="tcp://localhost:61616"/>
-        <constructor-arg value="admin"/>
-        <constructor-arg value="admin"/>
+        <constructor-arg value="${broker.url}"/>
+        <constructor-arg value="${broker.user}"/>
+        <constructor-arg value="${broker.password}"/>
     </bean>
 
     <!-- Pooled JTA aware connection factory -->
