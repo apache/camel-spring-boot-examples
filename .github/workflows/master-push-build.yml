@@ -23,6 +23,7 @@ on:
       - main
 jobs:
   build:
+    if: github.repository == 'apache/camel-spring-boot-examples'
     runs-on: ubuntu-latest
     strategy:
       matrix:
