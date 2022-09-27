@@ -58,6 +58,7 @@
 		<module>kafka-offsetrepository</module>
 		<module>kamelet-chucknorris</module>
 		<module>load-balancer-eip</module>
+		<module>mail-ms-exchange-oauth2</module>
 		<module>master</module>
 		<module>metrics</module>
 		<module>opentracing</module>
