@@ -27,13 +27,19 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 58 (0 deprecated)
+Number of Examples: 61 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
 | Example | Category | Description
 
-| link:debezium-postgresql/readme.adoc[Debezium Postgresql] (debezium-postgresql) | Beginner | An example showing how to work with Camel and Spring Boot
+| link:camel-example-spring-boot-azure-eventhubs/README.adoc[Spring Boot Azure Eventhubs] (camel-example-spring-boot-azure-eventhubs) |  | An example showing how to work with Camel, Azure Event Hubs and Spring Boot
+
+| link:camel-example-spring-boot-azure-servicebus/README.adoc[Spring Boot Azure Servicebus] (camel-example-spring-boot-azure-servicebus) |  | An example showing how to work with Camel, Azure Service Bus and Spring Boot
+
+| link:camel-example-spring-boot-azure-servicebus-jms/README.adoc[Spring Boot Azure Servicebus Jms] (camel-example-spring-boot-azure-servicebus-jms) |  | An example showing how to work with Camel, Azure Service Bus JMS and Spring Boot
+
+| link:mail-oauth2/readme.md[Mail Oauth2] (mail-oauth2) |  | 
 
 | link:endpointdsl/readme.adoc[Endpointdsl] (endpointdsl) | Beginner | Using type-safe Endpoint DSL
 
