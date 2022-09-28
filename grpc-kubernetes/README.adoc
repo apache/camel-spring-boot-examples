@@ -12,7 +12,7 @@ You can build the server under the directory hello-camel-grpc-server with:
 
 and then run the server with
 
-    $ mvn -Pkubernetes-install fabric8:deploy
+    $ mvn -Pkubernetes k8s:deploy
 
 then check your pod status with
 
@@ -44,7 +44,7 @@ You can build the client example under the directory hello-camel-grpc-client wit
 
 and then run the server with
 
-    $ mvn -Pkubernetes-install fabric8:deploy
+    $ mvn -Pkubernetes k8s:deploy
 
 then check your pod status with
 
@@ -113,9 +113,9 @@ Undeploy server and client
 [source,bash]
 ----
 $ cd hello-camel-grpc-client-kubernetes
-$ mvn -Pkubernetes-install fabric8:undeploy
+$ mvn -Pkubernetes k8s:undeploy
 $ cd ../hello-camel-grpc-server-kubernetes
-$ mvn -Pkubernetes-install fabric8:undeploy
+$ mvn -Pkubernetes k8s:undeploy
 ----
 Make sure no pod is running
 

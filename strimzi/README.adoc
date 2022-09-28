@@ -120,11 +120,11 @@ chmod +x prepare-truststore.sh && ./prepare-truststore.sh
 
 This script will create a truststore.jks in your local application root path, and a configmap with the same file included for Kubernetes/OpenShift deployment.
 
-Now we can deploy the Camel application on Kubernetes/OpenShift run fabric8:deploy maven command for platform kubernetes:
+Now we can deploy the Camel application on Kubernetes/OpenShift run k8s:deploy maven command for platform kubernetes:
 
 [source,shell]
 ----
-mvn fabric8:deploy -Pkubernetes
+mvn k8s:deploy -Pkubernetes
 ----
 
 Check the application is built, deployed and run properly:
