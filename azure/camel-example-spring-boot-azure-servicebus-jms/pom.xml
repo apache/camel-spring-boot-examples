@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.apache.camel.springboot.example</groupId>
     <artifactId>camel-example-spring-boot-azure</artifactId>
-    <version>3.19.0-SNAPSHOT</version>
+    <version>3.20.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>camel-example-spring-boot-azure-servicebus-jms</artifactId>

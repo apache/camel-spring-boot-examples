@@ -38,7 +38,7 @@ You should see the following output when the application is launched:
 2022-09-05 12:00:31.144  INFO 16692 --- [           main] org.xnio.nio                             : XNIO NIO Implementation Version 3.8.7.Final
 2022-09-05 12:00:31.354  INFO 16692 --- [           main] org.jboss.threads                        : JBoss Threads version 3.1.0.Final
 2022-09-05 12:00:31.453  INFO 16692 --- [           main] o.s.b.w.e.undertow.UndertowWebServer     : Undertow started on port(s) 8080 (http)
-2022-09-05 12:00:31.955  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 3.19.0-SNAPSHOT (MyCamel) is starting
+2022-09-05 12:00:31.955  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 3.20.0-SNAPSHOT (MyCamel) is starting
 2022-09-05 12:00:31.989  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Routes startup (started:7)
 2022-09-05 12:00:31.989  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route1 (direct://test)
 2022-09-05 12:00:31.989  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route2 (rest://get:/todos)
@@ -47,7 +47,7 @@ You should see the following output when the application is launched:
 2022-09-05 12:00:31.990  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route5 (rest://post:/todos)
 2022-09-05 12:00:31.990  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route6 (rest://delete:/todos)
 2022-09-05 12:00:31.991  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started route7 (rest://delete:/todos:/%7Bid%7D)
-2022-09-05 12:00:31.992  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 3.19.0-SNAPSHOT (MyCamel) started in 552ms (build:95ms init:421ms start:36ms)
+2022-09-05 12:00:31.992  INFO 16692 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 3.20.0-SNAPSHOT (MyCamel) started in 552ms (build:95ms init:421ms start:36ms)
 2022-09-05 12:00:32.005  INFO 16692 --- [           main] o.a.c.example.springboot.Application     : Started Application in 13.737 seconds (JVM running for 14.657)
 ----
 
