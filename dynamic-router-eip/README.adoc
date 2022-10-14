@@ -125,9 +125,9 @@ There are some demos that run during the test phase.  Currently, there are three
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
-https://camel.apache.org/support.html[let us know].
+https://camel.apache.org/community/support/[let us know].
 
 We also love contributors, so please
-https://camel.apache.org/contributing.html[get involved]
+https://camel.apache.org/community/contributing/[get involved]
 
 The Camel riders!
