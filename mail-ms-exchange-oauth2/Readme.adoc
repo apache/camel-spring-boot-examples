@@ -1,0 +1,64 @@
+== Camel Spring Boot Microsoft Exchange IMAP Oauth2 Authentication
+
+This is an example that shows how to use Camel on Spring Boot to connect with
+IMAP protocol and access email data for Office 365 users using OAuth2 authentication.
+
+The application will use the client credentials grant flow to get the access token
+and use it to authenticate IMAP connections.
+
+
+=== Prerequisite
+
+* To use OAuth, an application must be registered with Azure Active Directory.
+Follow the instructions listed in https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app[Register an application with the Microsoft identity platform] to register a new application.
+
+* Enable application to access Exchange mailboxes via client credentials flow adding *IMAP.AccessAsApp* permission. Instructions https://learn.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth#add-the-pop-and-imap-permissions-to-your-aad-application[here]
+
+* Create and register your Azure Active Directory application's service principal
+in Exchange via Exchange Online PowerShell. Instructions https://learn.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth#register-service-principals-in-exchange[here]
+
+* Edit the link:src/main/resources/application.properties[application.properties] adding the values to the properties marked with ``<FILL-ME>`` tag
+
+=== How to run
+
+You can run this example using:
+
+[source%nowrap, console]
+----
+mvn spring-boot:run
+----
+And you should see this output:
+
+[source%nowrap, console]
+----
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.5)
+
+2022-10-24 19:19:58.705  INFO 2274709 --- [           main] o.a.c.e.mail.oauth2.CamelApplication     : Starting CamelApplication
+2022-10-24 19:19:58.707  INFO 2274709 --- [           main] o.a.c.e.mail.oauth2.CamelApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-10-24 19:20:00.777  INFO 2274709 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel is starting
+2022-10-24 19:20:00.785  INFO 2274709 --- [           main] c.s.b.CamelSpringBootApplicationListener : Starting CamelMainRunController to ensure the main thread keeps running
+2022-10-24 19:20:00.785  INFO 2274709 --- [inRunController] org.apache.camel.main.MainSupport        : Apache Camel (Main)  is starting
+2022-10-24 19:20:00.813  INFO 2274709 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Routes startup (started:1)
+2022-10-24 19:20:00.813  INFO 2274709 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Started camel-mail-ms-exchange (imaps://outlook.office365.com:993)
+2022-10-24 19:20:00.813  INFO 2274709 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel (CamelMailExchangeOAuth2) started in 1s226ms (build:29ms init:1s163ms start:34ms)
+2022-10-24 19:20:00.819  INFO 2274709 --- [           main] o.a.c.e.mail.oauth2.CamelApplication     : Started CamelApplication in 2.407 seconds (JVM running for 2.883)
+2022-10-24 19:20:04.842  INFO 2274709 --- [fice365.com:993] camel-mail-ms-exchange                   : message Received:
+From: John Doe <jdoe@example.com>
+Subj: Test
+Body:
+This is a Test!!!
+
+2022-10-24 19:20:05.167  INFO 2274709 --- [fice365.com:993] camel-mail-ms-exchange                   : message Received:
+From: Teigan Moore <teigan@xyz.com>
+Subj: Prova
+Body:
+Prova Prova Prova
+--
+Teigan Moore
+----
