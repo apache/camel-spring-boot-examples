@@ -46,7 +46,7 @@ Take note of the URL that is returned and place it in the `application.propertie
 The full property should look like:
 
 ----
-camel.component.webhook.configuration.webhook-external-url=https://the-subdomain-returned.loca.lt
+camel.component.webhook.webhook-external-url=https://the-subdomain-returned.loca.lt
 ----
 
 === Running the example
