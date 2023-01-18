@@ -18,7 +18,7 @@ package org.apache.camel.example.reactive.streams;
 
 import java.io.InputStream;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.reactive.streams.api.CamelReactiveStreamsService;
