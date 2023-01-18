@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 51 (0 deprecated)
+Number of Examples: 50 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -69,8 +69,6 @@ Number of Examples: 51 (0 deprecated)
 | link:aws-secrets-manager/README.adoc[Aws Secrets Manager] (aws-secrets-manager) | Cloud | An example showing the Camel AWS Secrets Manager Properties source with Spring Boot
 
 | link:aws2-s3/README.adoc[Aws2 S3] (aws2-s3) | Cloud | An example showing the Camel AWS2 S3 component with Spring Boot
-
-| link:grpc/README.adoc[gRPC Spring Boot] (grpc) | Cloud | An example showing the Camel gRPC component with Spring Boot
 
 | link:infinispan/README.adoc[Infinispan] (infinispan) | Cloud | An example showing the Camel Infinispan component with Spring Boot
 
