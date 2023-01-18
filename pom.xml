@@ -46,7 +46,6 @@
 		<module>fhir</module>
 		<module>fhir-auth-tx</module>
 		<module>grpc</module>
-		<module>grpc-kubernetes</module>
 		<module>health-checks</module>
 		<module>infinispan</module>
 		<module>jira</module>
@@ -57,16 +56,12 @@
 		<module>mail-ms-exchange-oauth2</module>
 		<module>master</module>
 		<module>metrics</module>
-		<module>opentracing</module>
 		<module>paho-mqtt5-shared-subscriptions</module>
 		<module>platform-http</module>
 		<module>pojo</module>
 		<module>rabbitmq</module>
 		<module>reactive-streams</module>
 		<module>resilience4j</module>
-		<module>rest-jpa</module>
-		<module>rest-producer</module>
-		<module>rest-swagger</module>
 		<module>rest-swagger-simple</module>
 		<module>rest-openapi</module>
 		<module>rest-openapi-simple</module>
@@ -75,7 +70,7 @@
 		<module>routetemplate-xml</module>
 		<module>route-reload</module>
 		<module>routes-configuration</module>
-		<module>saga</module>
+		<!--<module>saga</module>-->
 		<module>supervising-route-controller</module>
 		<module>twitter-salesforce</module>
 		<module>type-converter</module>
@@ -88,7 +83,6 @@
 		<module>quartz</module>
 		<module>splitter-eip</module>
 		<module>widget-gadget</module>
-		<module>unit-testing</module>
 		<module>azure</module>
     </modules>
 
