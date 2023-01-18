@@ -23,7 +23,7 @@ import com.microsoft.aad.msal4j.IAuthenticationResult;
 import com.microsoft.aad.msal4j.IClientCredential;
 import org.apache.camel.component.mail.MailAuthenticator;
 
-import javax.mail.PasswordAuthentication;
+import jakarta.mail.PasswordAuthentication;
 import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.Set;
