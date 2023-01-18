@@ -72,7 +72,6 @@
 		<module>supervising-route-controller</module>
 		<module>twitter-salesforce</module>
 		<module>type-converter</module>
-		<module>undertow-spring-security</module>
 		<module>validator</module>
 		<module>webhook</module>
 		<module>xml</module>

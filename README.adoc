@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 50 (0 deprecated)
+Number of Examples: 49 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -127,8 +127,6 @@ Number of Examples: 50 (0 deprecated)
 | link:rest-openapi-simple/README.adoc[REST OpenApi] (rest-openapi-simple) | Rest | This example shows how to call a Rest service defined using OpenApi specification
 
 | link:rest-openapi-springdoc/README.adoc[Rest Openapi Springdoc] (rest-openapi-springdoc) | Rest | An example showing Camel REST DSL and OpenApi with a Springdoc UI in a Spring Boot application
-
-| link:rest-swagger-simple/README.adoc[REST Swagger] (rest-swagger-simple) | Rest | This example shows how to call a Rest service defined using Swagger specification
 
 | link:jira/README.adoc[Jira] (jira) | SaaS | An example that uses Jira Camel API
 
