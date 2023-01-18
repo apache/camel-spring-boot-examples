@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 49 (0 deprecated)
+Number of Examples: 48 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -131,8 +131,6 @@ Number of Examples: 49 (0 deprecated)
 | link:jira/README.adoc[Jira] (jira) | SaaS | An example that uses Jira Camel API
 
 | link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) | SaaS | Twitter mentions is created as contacts in Salesforce
-
-| link:undertow-spring-security/readme.adoc[Undertow Spring Security] (undertow-spring-security) | Security | Example on how to use the Camel Undertow component with spring security and Keycloak
 |===
 // examples: END
 
