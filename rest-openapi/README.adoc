@@ -75,6 +75,10 @@ $ curl http://localhost:8080/api/api-doc
 
 The Spring Boot application can be stopped pressing `[CTRL] + [C]` in the shell.
 
+=== Actuator
+
+The actuator is available at: `http://localhost:8080/actuator/` such as metrics for Prometheus: `http://localhost:8080/actuator/prometheus`.
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
