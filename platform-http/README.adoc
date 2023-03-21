@@ -57,7 +57,7 @@ Create a TODO
 
 [source,text]
 ----
-$ curl -d '{"title":"Todo title", "completed":"false", "order": 1, "url":""}' -H "Content-Type: application/json" -X POST http://localhost:8080/api/todos
+$ curl -d '{"title":"Todo title", "completed":"false", "order": 1, "url":""}' -H "Content-Type: application/json" -X POST http://localhost:8080/todos
 ----
 
 The command will produce the following output:
@@ -71,7 +71,7 @@ Retrieve all TODOs
 
 [source,text]
 ----
-$ curl http://localhost:8080/api/todos
+$ curl http://localhost:8080/todos
 ----
 
 The command will produce the following output:
@@ -85,7 +85,7 @@ Update one TODO
 
 [source,text]
 ----
-$ curl -d '{"title":"Todo title", "completed":"true", "order": 1, "url":""}' -H "Content-Type: application/json" -X PATCH http://localhost:8080/api/todos/1
+$ curl -d '{"title":"Todo title", "completed":"true", "order": 1, "url":""}' -H "Content-Type: application/json" -X PATCH http://localhost:8080/todos/1
 ----
 
 The command will produce the following output:
@@ -99,7 +99,7 @@ Delete completed TODOs
 
 [source,text]
 ----
-$ curl -X "DELETE" http://localhost:8080/api/todos
+$ curl -X "DELETE" http://localhost:8080/todos
 ----
 
 The command will produce the following output:
