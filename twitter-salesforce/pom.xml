@@ -39,6 +39,7 @@
 		<camelSalesforce.clientSecret></camelSalesforce.clientSecret>
 		<camelSalesforce.userName></camelSalesforce.userName>
 		<camelSalesforce.password></camelSalesforce.password>
+		<camelSalesforce.sslContextParameters.secureSocketProtocol>TLSv1.3</camelSalesforce.sslContextParameters.secureSocketProtocol>
 		<camelSalesforce.loginUrl>https://login.salesforce.com</camelSalesforce.loginUrl>
 	</properties>
 
@@ -178,6 +179,9 @@
 									<clientSecret>${camelSalesforce.clientSecret}</clientSecret>
 									<userName>${camelSalesforce.userName}</userName>
 									<password>${camelSalesforce.password}</password>
+									<sslContextParameters>
+										<secureSocketProtocol>${camelSalesforce.sslContextParameters.secureSocketProtocol}</secureSocketProtocol>
+									</sslContextParameters>
 									<includes>
 										<include>Contact</include>
 									</includes>
