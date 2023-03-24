@@ -73,6 +73,7 @@
         </dependency>
 
         <!-- Camel -->
+        <!-- must use camel-spring-boot-xml-starter for support for Spring XML <beans> files -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-boot-xml-starter</artifactId>
@@ -94,8 +95,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-management</artifactId>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-management-starter</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
