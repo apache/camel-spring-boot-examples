@@ -67,24 +67,6 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- Spring Boot not yet upgraded to http client 5.2.x -->
-        <!-- TODO: this can be removed when SB works with 5.2.x -->
-        <dependency>
-            <groupId>org.apache.httpcomponents.client5</groupId>
-            <artifactId>httpclient5</artifactId>
-            <version>${httpclient-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents.core5</groupId>
-            <artifactId>httpcore5</artifactId>
-            <version>${httpcore-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents.core5</groupId>
-            <artifactId>httpcore5-h2</artifactId>
-            <version>${httpcore-version}</version>
-        </dependency>
-
         <!-- Camel -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
