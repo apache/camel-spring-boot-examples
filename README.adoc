@@ -39,7 +39,8 @@ Number of Examples: 61 (0 deprecated)
 
 | link:camel-example-spring-boot-azure-servicebus-jms/README.adoc[Spring Boot Azure Servicebus Jms] (camel-example-spring-boot-azure-servicebus-jms) |  | An example showing how to work with Camel, Azure Service Bus JMS and Spring Boot
 
-| link:mail-oauth2/readme.md[Mail Oauth2] (mail-oauth2) |  | 
+| link:mail-ms-exchange-oauth2/Readme.adoc[Mail Ms Exchange Oauth2] (mail-ms-exchange-oauth2) |  | An example showing how to use Camel on Spring Boot to connect
+        with IMAP protocol and access email data for Office 365 users using OAuth2 authentication
 
 | link:endpointdsl/readme.adoc[Endpointdsl] (endpointdsl) | Beginner | Using type-safe Endpoint DSL
 
