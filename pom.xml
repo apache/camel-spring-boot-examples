@@ -55,6 +55,7 @@
 		<module>mail-ms-exchange-oauth2</module>
 		<module>master</module>
 		<module>metrics</module>
+		<module>observation</module>
 		<module>paho-mqtt5-shared-subscriptions</module>
 		<module>platform-http</module>
 		<module>pojo</module>
