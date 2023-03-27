@@ -1,0 +1,35 @@
+version: "3"
+services:
+    zipkin:
+        container_name: camel_observation_zipkin
+        image: openzipkin/zipkin
+        extra_hosts: ['host.docker.internal:host-gateway']
+        ports:
+            - 9411:9411
+    prometheus:
+        image: prom/prometheus
+        container_name: camel_observation_prometheus
+        extra_hosts: ['host.docker.internal:host-gateway']
+        command:
+            - --enable-feature=exemplar-storage
+            - --config.file=/etc/prometheus/prometheus.yml
+        volumes:
+            - ./docker/config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+        ports:
+            - 9090:9090
+    grafana:
+        image: grafana/grafana
+        container_name: camel_observation_grafana
+        extra_hosts: ['host.docker.internal:host-gateway']
+        environment:
+            - GF_AUTH_ANONYMOUS_ENABLED=true
+            - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+            - GF_AUTH_DISABLE_LOGIN_FORM=true
+        volumes:
+            - ./docker/config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+            - ./docker/config/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+        ports:
+            - 3000:3000
+# Zipkin: http://localhost:9411/zipkin/
+# Prometheus: http://localhost:9090/
+# Grafana: http://localhost:3000/
