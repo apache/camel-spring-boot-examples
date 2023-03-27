@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 47 (0 deprecated)
+Number of Examples: 48 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -98,6 +98,9 @@ Number of Examples: 47 (0 deprecated)
 | link:health-checks/readme.adoc[Health Checks] (health-checks) | Management and Monitoring | An example how to use custom health-checks
 
 | link:metrics/README.adoc[Metrics] (metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
+
+| link:observation/README.adoc[Micrometer Observation] (observation) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with Micrometer Observation
+    
 
 | link:supervising-route-controller/readme.adoc[Supervising Route Controller] (supervising-route-controller) | Management and Monitoring | An example showing how to work with Camel's Supervising Route Controller and Spring Boot
 
