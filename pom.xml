@@ -102,6 +102,7 @@
 		<javax.servlet.api.version>4.0.1</javax.servlet.api.version>
 		<jkube-maven-plugin-version>1.9.1</jkube-maven-plugin-version>
 		<kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
+		<mysql-connector.version>8.0.28</mysql-connector.version>
 		<reactor-version>3.2.16.RELEASE</reactor-version>
 		<testcontainers-version>1.16.3</testcontainers-version>
 		<hapi-structures-v24-version>2.3</hapi-structures-v24-version>
@@ -144,6 +145,14 @@
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
 				<version>${javax.servlet.api.version}</version>
+			</dependency>
+			<!--
+			  CAMEL-19207 Add a version for mysql-connector
+			-->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql-connector.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
