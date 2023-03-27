@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 61 (0 deprecated)
+Number of Examples: 62 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -39,7 +39,8 @@ Number of Examples: 61 (0 deprecated)
 
 | link:camel-example-spring-boot-azure-servicebus-jms/README.adoc[Spring Boot Azure Servicebus Jms] (camel-example-spring-boot-azure-servicebus-jms) |  | An example showing how to work with Camel, Azure Service Bus JMS and Spring Boot
 
-| link:mail-oauth2/readme.md[Mail Oauth2] (mail-oauth2) |  | 
+| link:mail-ms-exchange-oauth2/Readme.adoc[Mail Ms Exchange Oauth2] (mail-ms-exchange-oauth2) |  | An example showing how to use Camel on Spring Boot to connect
+        with IMAP protocol and access email data for Office 365 users using OAuth2 authentication
 
 | link:endpointdsl/readme.adoc[Endpointdsl] (endpointdsl) | Beginner | Using type-safe Endpoint DSL
 
@@ -112,6 +113,9 @@ Number of Examples: 61 (0 deprecated)
 | link:health-checks/readme.adoc[Health Checks] (health-checks) | Management and Monitoring | An example how to use custom health-checks
 
 | link:metrics/README.adoc[Metrics] (metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
+
+| link:observation/README.adoc[Micrometer Observation] (observation) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with Micrometer Observation
+    
 
 | link:opentracing/README.adoc[OpenTracing] (opentracing) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with OpenTracing
     
