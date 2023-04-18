@@ -4,7 +4,7 @@ services:
     image: "quay.io/jbosstm/lra-coordinator:latest"
     network_mode: "host"
   amq-broker:
-    image: "registry.redhat.io/amq7/amq-broker-rhel8:7.10"
+    image: "registry.redhat.io/amq7/amq-broker-rhel8:7.11.0"
     environment:
       - AMQ_USER=admin
       - AMQ_PASSWORD=admin

@@ -26,13 +26,13 @@ public class TrainRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("activemq:queue:{{example.services.train}}")
+        from("jms:queue:{{example.services.train}}")
             .saga()
                 .propagation(SagaPropagation.MANDATORY)
                 .option("id", header("id"))
                 .compensation("direct:cancelPurchase")
                 .log("Buying train #${header.id}")
-                .to("activemq:queue:{{example.services.payment}}?exchangePattern=InOut" +
+                .to("jms:queue:{{example.services.payment}}?exchangePattern=InOut" +
                         "&replyTo={{example.services.payment}}.train.reply")
                 .log("Payment for train #${header.id} done with transaction ${body}")
             .end();

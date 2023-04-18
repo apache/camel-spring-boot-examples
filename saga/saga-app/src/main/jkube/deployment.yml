@@ -7,5 +7,5 @@ spec:
               value: http://lra-coordinator:8080
             - name: CAMEL_LRA_LOCAL_PARTICIPANT_URL
               value: http://${project.artifactId}:8080/api
-            - name: CAMEL_COMPONENT_ACTIVEMQ_BROKER-URL
+            - name: SPRING_ARTEMIS_BROKER_URL
               value: tcp://amq-broker:61616

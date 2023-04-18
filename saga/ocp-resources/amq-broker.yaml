@@ -48,7 +48,7 @@ items:
     tags:
     - from:
         kind: DockerImage
-        name: registry.redhat.io/amq7/amq-broker-rhel8:7.10
+        name: registry.redhat.io/amq7/amq-broker-rhel8:7.11.0
       generation: 0
       importPolicy: {}
       name: "latest"
