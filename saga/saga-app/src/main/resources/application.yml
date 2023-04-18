@@ -15,18 +15,21 @@
 ## limitations under the License.
 ## ---------------------------------------------------------------------------
 
+spring:
+  artemis:
+    mode: native
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    pool.enabled: true
 camel:
   servlet:
     mapping:
       enabled: true
       context-path: /api/*
   component:
-    activemq:
-      use-pooled-connection: true
+    jms:
       test-connection-on-startup: true
-      password: admin
-      username: admin
-      broker-url: tcp://localhost:61616
       concurrent-consumers: 5
   lra:
     enabled: true
