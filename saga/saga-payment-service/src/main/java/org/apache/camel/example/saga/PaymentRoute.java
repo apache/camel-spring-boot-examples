@@ -27,7 +27,7 @@ public class PaymentRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-                from("activemq:queue:{{example.services.payment}}")
+                from("jms:queue:{{example.services.payment}}")
                 .routeId("payment-service")
                 .saga()
                     .propagation(SagaPropagation.MANDATORY)

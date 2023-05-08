@@ -30,7 +30,7 @@ The communication between services and LRA coordinator (blue connectors) is via 
 so every service expose REST endpoints called by the LRA, moreover it calls LRA via REST endpoint
 
 The communication between services (red connectors) is via AMQ broker (using OPENWIRE protocol),
-implemented using Camel ActiveMQ component and RequestReply EIP
+implemented using Camel JMS component and RequestReply EIP
 obtaining a synchronous behavior using asynchronous protocol
 
 ==== Analyzing logs
@@ -193,7 +193,7 @@ https://www.narayana.io/lra/index.html[Narayana LRA project]
 
 https://download.eclipse.org/microprofile/microprofile-lra-1.0/microprofile-lra-spec-1.0.html[Microprofile LRA specification]
 
-https://camel.apache.org/components/latest/activemq-component.html[Camel ActiveMQ component]
+https://camel.apache.org/components/latest/jms-component.html[Camel JMS component]
 
 https://camel.apache.org/components/latest/eips/requestReply-eip.html[Camel RequestReply EIP]
 
