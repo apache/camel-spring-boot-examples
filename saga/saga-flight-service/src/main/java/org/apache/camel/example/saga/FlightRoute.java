@@ -26,13 +26,13 @@ public class FlightRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("activemq:queue:{{example.services.flight}}")
+        from("jms:queue:{{example.services.flight}}")
             .saga()
                 .propagation(SagaPropagation.MANDATORY)
                 .option("id", header("id"))
                 .compensation("direct:cancelPurchase")
                 .log("Buying flight #${header.id}")
-                .to("activemq:queue:{{example.services.payment}}?exchangePattern=InOut" +
+                .to("jms:queue:{{example.services.payment}}?exchangePattern=InOut" +
                         "&replyTo={{example.services.payment}}.flight.reply")
                 .log("Payment for flight #${header.id} done with transaction ${body}")
             .end();
