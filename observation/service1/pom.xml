@@ -84,7 +84,6 @@
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-observation-starter</artifactId>
-            <version>${camel-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
