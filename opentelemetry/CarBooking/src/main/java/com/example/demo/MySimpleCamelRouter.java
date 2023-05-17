@@ -18,14 +18,13 @@ public class MySimpleCamelRouter extends RouteBuilder {
                 .to("direct:bookCar");
 
         from("direct:bookCar").routeId("bookCar-http")
-                .log(LoggingLevel.INFO, "New book car request with traceId=${header.x-b3-traceid}")
+                .log(LoggingLevel.INFO, "New book car request with trace=${header.traceparent}")
                 .bean(new AvailableCars(),"getAvailableCar")
                 .unmarshal().json(JsonLibrary.Jackson);
 
         // kafka based 
         from("kafka:car_input?brokers=kafka:9092").routeId("bookCar-kafka")
                 .log(LoggingLevel.INFO, "New book car request via Kafka topic")
-                // .to("log:debug?showAll=true&multiline=true")
                 .bean(new AvailableCars(),"getAvailableCar")
                 .to("kafka:car_output?brokers=kafka:9092");
 

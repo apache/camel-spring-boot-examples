@@ -21,7 +21,7 @@ public class MySimpleCamelRouter extends RouteBuilder {
         from("direct:bookTrip")
                 .routeId("bookTrip-http")
                 .routeDescription("This is demo service for demonstration telemetry aspects")
-                .log(LoggingLevel.INFO, "New book trip request with traceId=${header.x-b3-traceid}")
+                .log(LoggingLevel.INFO, "New book trip request with trace=${header.traceparent}")
                 .multicast(new MergeAggregationStrategy()).parallelProcessing()
                          .to("http://localhost:8081/camel/bookCar?bridgeEndpoint=true")
                          .to("http://localhost:8082/camel/bookFlight?bridgeEndpoint=true")
