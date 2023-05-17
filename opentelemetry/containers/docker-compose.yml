@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.2.5
+    container_name: zookeeper
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+      - ZOOKEEPER_TICK_TIME=2000
+      - ZOOKEEPER_SYNC_LIMIT=2
+    ports:
+      - 2181:2181
+  kafka:
+    image: confluentinc/cp-kafka:7.2.5
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+  jaeger:
+    image: jaegertracing/all-in-one:1.25
+    container_name: jaeger
+    ports:
+      - 5775:5775/udp
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 5778:5778
+      - 9411:9411
+      - 16686:16686
+      - 14268:14268
+      - 14269:14269
+      - 14250:14250
+  otel-collector:
+    image: otel/opentelemetry-collector:0.75.0
+    container_name: otel-collector
+    command: [ "--config=/etc/otel-collector-config.yaml" ]
+    volumes:
+      - ./docker/otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "1888:1888"   # pprof extension
+      - "8888:8888"   # Prometheus metrics exposed by the collector
+      - "8889:8889"   # Prometheus exporter metrics
+      - "13133:13133" # health_check extension
+      - "4317:4317"   # OTLP gRPC receiver
+      - "55670:55679" # zpages extension
+  prometheus:
+    image: prom/prometheus:v2.37.6
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./docker/prometheusConfig.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
