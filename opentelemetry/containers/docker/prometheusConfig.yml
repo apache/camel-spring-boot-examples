@@ -1,0 +1,14 @@
+#Global configurations
+global:
+  scrape_interval:     5s # Set the scrape interval to every 5 seconds.
+  evaluation_interval: 5s # Evaluate rules every 5 seconds.
+scrape_configs:
+  - job_name: 'jaeger'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['jaeger:14269']
+  - job_name: 'otel-collector'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['otel-collector:8889']
+      - targets: ['otel-collector:8888']
