@@ -23,18 +23,18 @@ You will need to compile this example first:
 
 [source,sh]
 ----
-$ mvn compile
+mvn compile
 ----
 
 All the following docker-compose commands should be run from this directory.
 
 === Run the example
 
-You may want to remove any old containers to start clean:
+You may want to remove any old containers to start cleaning:
 
 [source,sh]
 ----
-$ docker rm -f kafka zookeeper prometheus jaeger otel-collector
+docker rm -f kafka zookeeper prometheus jaeger otel-collector
 ----
 
 We suggest using multiple terminal windows to start the following components:
@@ -51,7 +51,7 @@ We suggest using multiple terminal windows to start the following components:
 
 [source,sh]
 ----
-$ docker-compose -f containers/docker-compose.xml up
+docker-compose -f containers/docker-compose.yml up
 ----
 
 ==== Startup demo apps
@@ -60,25 +60,25 @@ Please use four different shells for each application:
 ===== CarBooking
 [source,sh]
 ----
-$ mvn compile spring-boot:run -f CarBooking/pom.xml
+mvn clean spring-boot:run -f CarBooking/pom.xml
 ----
 
 ===== HotelBooking
 [source,sh]
 ----
-$ mvn compile spring-boot:run -f HotelBooking/pom.xml
+mvn clean spring-boot:run -f HotelBooking/pom.xml
 ----
 
 ===== FlightBooking
 [source,sh]
 ----
-$ mvn compile spring-boot:run -f FlightBooking/pom.xml
+mvn clean spring-boot:run -f FlightBooking/pom.xml
 ----
 
 ===== TripBooking
 [source,sh]
 ----
-$ mvn compile spring-boot:run -f TripBooking/pom.xml
+mvn clean spring-boot:run -f TripBooking/pom.xml
 ----
 
 ==== Testing
@@ -91,14 +91,14 @@ Sync communication (over HTTP):
 
 [source,sh]
 ----
-$ curl http://127.0.0.1:8080/camel/bookTrip
+curl http://127.0.0.1:8080/camel/bookTrip
 ----
 
 Async communication (over Kafka):
 
 [source,sh]
 ----
-$ curl http://127.0.0.1:8080/camel/asyncBookTrip
+curl http://127.0.0.1:8080/camel/asyncBookTrip
 ----
 
 ==== Links
@@ -128,13 +128,13 @@ image::adoc/img/trace-async-dag.png[]
 
 ==== Metrics
 
-You will get Camel related metrics similar to these:
+You will get Camel-related metrics similar to these:
 
 image::adoc/img/metrics.png[]
 
 ==== Logging
 
-MDC Logging is enabled, and tracing information printing into the logs to find corresponding trace logs entries. For example:
+MDC Logging is enabled, and tracing information printing into the logs to be able to find corresponding trace logs entries. For example:
 
 [source,sh]
 ----
