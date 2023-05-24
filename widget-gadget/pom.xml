@@ -79,11 +79,6 @@
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-amqp-starter</artifactId>
-        </dependency>
-
         <!-- Camel -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
