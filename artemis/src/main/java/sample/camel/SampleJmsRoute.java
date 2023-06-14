@@ -25,12 +25,12 @@ public class SampleJmsRoute extends RouteBuilder {
    
     @Override
     public void configure() throws Exception {
-        from("file:src/main/data")
+        from("file:src/main/data?noop=true")
             .to("jms:queue:SCIENCEQUEUE");
 
        
         from("jms:queue:SCIENCEQUEUE")
-            .setBody(constant("Hello from Camel"))
+            //.setBody(constant("Hello from Camel"))
             .log("${body}");
     }
 

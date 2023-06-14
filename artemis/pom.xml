@@ -86,6 +86,11 @@
              <version>${artemis-jms-client-version}</version> 
         </dependency>
 
+       <dependency>
+           <groupId>org.apache.activemq</groupId>
+           <artifactId>artemis-jms-server</artifactId>
+           <version>${artemis-jms-client-version}</version> 
+       </dependency>
                
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
