@@ -36,6 +36,7 @@
 
 	<modules>
 		<module>spring-boot</module>
+                <module>artemis</module>
 		<module>actuator-http-metrics</module>
 		<module>amqp</module>
 		<module>arangodb</module>
@@ -95,6 +96,7 @@
 		<testcontainers-version>1.16.3</testcontainers-version>
 		<hapi-structures-v24-version>2.3</hapi-structures-v24-version>
 		<narayana-spring-boot-version>2.6.3</narayana-spring-boot-version>
+                <artemis-jms-client-version>2.28.0</artemis-jms-client-version>
 	</properties>
 
 	<repositories>
