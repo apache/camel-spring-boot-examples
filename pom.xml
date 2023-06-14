@@ -39,6 +39,7 @@
 		<module>actuator-http-metrics</module>
 		<module>amqp</module>
 		<module>arangodb</module>
+                <module>artemis</module>  
 		<module>aws-secrets-manager</module>
 		<module>aws2-s3</module>
 		<module>dynamic-router-eip</module>
@@ -95,6 +96,7 @@
 		<testcontainers-version>1.16.3</testcontainers-version>
 		<hapi-structures-v24-version>2.3</hapi-structures-v24-version>
 		<narayana-spring-boot-version>2.6.3</narayana-spring-boot-version>
+                <artemis-jakarta-version>2.28.0</artemis-jakarta-version>
 	</properties>
 
 	<repositories>

@@ -1,0 +1,4 @@
+
+== Camel Example Spring Boot and ActiveMQ Artemis ==
+The APACHE Camel riders!
+
