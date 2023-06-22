@@ -38,8 +38,9 @@
 		<module>spring-boot</module>
 		<module>actuator-http-metrics</module>
 		<module>amqp</module>
+		<module>aot-basic</module>
 		<module>arangodb</module>
-                <module>artemis</module>  
+		<module>artemis</module>
 		<module>aws-secrets-manager</module>
 		<module>aws2-s3</module>
 		<module>dynamic-router-eip</module>

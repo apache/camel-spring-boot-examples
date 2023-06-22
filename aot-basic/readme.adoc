@@ -1,0 +1,78 @@
+== Camel with Spring Boot AOT
+
+This example shows how you can build and execute a native image by leveraging Spring Boot AOT to launch
+Camel routes written in Java, XML and YAML in native mode.
+
+=== How to build
+
+To be able to build a GraalVM Native Image, you need to have GraalVM installed on your local machine.
+
+1. So first, download it from https://github.com/graalvm/graalvm-ce-builds/releases, choose Java 17 and the archive corresponding to your platform.
+2. Then, sets the environment variable `JAVA_HOME` to the home directory of GraalVM.
+3. Finally, install `native-image` with the command `$JAVA_HOME/bin/gu install native-image`
+
+Once, the 3 steps done properly, you can build the application with the next command:
+
+[source,console]
+----
+mvn -Pnative native:compile
+----
+
+Building a GraalVM Native Image is a relatively slow process, so be patient, it should take a couple of minutes.
+
+=== How to run
+
+A GraalVM Native Image is a complete, platform-specific executable. At this point, you don't need any Java Virtual
+Machine to launch your application.
+
+So just, launch the executable file created in the target directory as next:
+
+[source,console]
+----
+./target/camel-example-spring-boot-aot-basic
+----
+
+Your application will start in native mode. The output of the application should be of the next type:
+
+[source]
+----
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.0)
+
+2023-06-22T20:22:57.135+02:00  INFO 12741 --- [           main] sample.camel.Application                 : Starting AOT-processed Application using Java 17.0.7 with PID 12741 (xxx/camel-spring-boot-examples/aot-basic/target/camel-example-spring-boot-aot-basic started by yyy in xxx/camel-spring-boot-examples/aot-basic)
+2023-06-22T20:22:57.135+02:00 DEBUG 12741 --- [           main] sample.camel.Application                 : Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-06-22T20:22:57.135+02:00  INFO 12741 --- [           main] sample.camel.Application                 : No active profile set, falling back to 1 default profile: "default"
+2023-06-22T20:22:57.155+02:00 DEBUG 12741 --- [           main] o.a.c.i.h.DefaultHealthCheckRegistry     : HealthCheckRepository with id registry-health-check-repository successfully registered
+2023-06-22T20:22:57.251+02:00  INFO 12741 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.0.0-SNAPSHOT (MyCamelNative) is starting
+2023-06-22T20:22:57.251+02:00  INFO 12741 --- [           main] c.s.b.CamelSpringBootApplicationListener : Starting CamelMainRunController to ensure the main thread keeps running
+2023-06-22T20:22:57.251+02:00  INFO 12741 --- [inRunController] org.apache.camel.main.MainSupport        : Apache Camel (Main) 4.0.0-SNAPSHOT is starting
+2023-06-22T20:22:57.265+02:00  INFO 12741 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Routes startup (started:3)
+2023-06-22T20:22:57.266+02:00  INFO 12741 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started helloJava (timer://java)
+2023-06-22T20:22:57.266+02:00  INFO 12741 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started helloYAML (timer://yaml)
+2023-06-22T20:22:57.266+02:00  INFO 12741 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started helloXML (timer://xml)
+2023-06-22T20:22:57.266+02:00  INFO 12741 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.0.0-SNAPSHOT (MyCamelNative) started in 14ms (build:0ms init:0ms start:14ms)
+2023-06-22T20:22:57.266+02:00  INFO 12741 --- [           main] sample.camel.Application                 : Started Application in 0.144 seconds (process running for 0.159)
+2023-06-22T20:22:58.258+02:00  INFO 12741 --- [ - timer://java] helloJava                                : Hello World From Java I am invoked 1 times at Thu Jun 22 20:22:58 CEST 2023
+2023-06-22T20:22:58.269+02:00  INFO 12741 --- [ - timer://yaml] demo-route.yaml:6                        : Hello World from YAML at Thu Jun 22 20:22:58 CEST 2023
+2023-06-22T20:22:58.269+02:00  INFO 12741 --- [3 - timer://xml] my-route.xml:30                          : Hello World From XML at Thu Jun 22 20:22:58 CEST 2023
+----
+
+As you can see the application took only *159* milliseconds to fully start while the exact same application in JVM mode
+starts in more than *2* seconds.
+
+For more details, please check the related https://docs.spring.io/spring-boot/docs/current/reference/html/native-image.html[Spring Boot documentation].
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!

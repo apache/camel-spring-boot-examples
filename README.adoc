@@ -27,11 +27,13 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 48 (0 deprecated)
+Number of Examples: 49 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
 | Example | Category | Description
+
+| link:aot-basic/readme.adoc[AOT Basic] (aot-basic) |  | An example showing how to leverage Spring Boot AOT to build a native Camel Spring Boot application
 
 | link:azure/camel-example-spring-boot-azure-eventhubs/README.adoc[Spring Boot Azure Eventhubs] (camel-example-spring-boot-azure-eventhubs) |  | An example showing how to work with Camel, Azure Event Hubs and Spring Boot
 
