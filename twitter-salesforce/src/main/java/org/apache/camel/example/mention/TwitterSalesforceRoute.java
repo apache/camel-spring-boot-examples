@@ -21,8 +21,8 @@ import java.lang.reflect.Method;
 import org.apache.camel.salesforce.draftdto.Contact;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
-import twitter4j.Status;
-import twitter4j.User;
+import twitter4j.v1.Status;
+import twitter4j.v1.User;
 
 @Component
 public class TwitterSalesforceRoute extends RouteBuilder {
