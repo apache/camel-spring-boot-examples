@@ -15,7 +15,7 @@ to the SNAPSHOT version of the next release.
 
 To execute the examples, checkout into the tag for the latest release. For example:
 
-`$ git checkout tags/camel-spring-boot-examples-3.5.0`
+`$ git checkout tags/camel-spring-boot-examples-4.0.0`
 
 Then, install the root pom:
 
