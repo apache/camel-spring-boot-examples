@@ -1,0 +1,44 @@
+== Camel Example Spring JDBC
+
+This example shows how `transacted()` routes create a jdbc local transaction integrating Camel and Spring Transaction
+
+=== How to run
+Run the database container
+
+    podman run --rm --name db -e POSTGRES_PASSWORD=password -p 5432:5432 docker.io/library/postgres:latest
+
+You can run this example using
+
+    mvn spring-boot:run
+
+To execute the routes:
+
+1. verify the table is empty (no data on response)
+
+    curl http://localhost:8080/api/horses
+
+2. insert data
+
+     curl -X POST http://localhost:8080/api/horses -H "name: Varenne" -H "age: 8"
+
+3. verify the data has been persisted
+
+    curl http://localhost:8080/api/horses
+
+4. force to rollback after the insert (setting header "fail: true")
+
+    curl -X POST http://localhost:8080/api/horses -H "name: Seabiscuit" -H "age: 9" -H "fail: true"
+
+5. verify the same content of the step 3
+
+    curl http://localhost:8080/api/horses
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!

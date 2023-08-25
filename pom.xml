@@ -81,6 +81,7 @@
 		<module>xml</module>
 		<module>xml-import</module>
 		<module>strimzi</module>
+		<module>spring-jdbc</module>
 		<module>quartz</module>
 		<module>splitter-eip</module>
 		<module>widget-gadget</module>

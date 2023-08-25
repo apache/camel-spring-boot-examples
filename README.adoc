@@ -60,6 +60,8 @@ Number of Examples: 49 (0 deprecated)
 
 | link:spring-boot/readme.adoc[Spring Boot] (spring-boot) | Beginner | An example showing how to work with Camel and Spring Boot
 
+| link:spring-jdbc/readme.adoc[Spring Jdbc] (spring-jdbc) | Beginner | Camel transacted routes integrating local Spring Transaction
+
 | link:type-converter/README.adoc[Type Converter] (type-converter) | Beginner | An example showing how to create custom type converter with Camel and Spring Boot
 
 | link:xml/readme.adoc[Spring Boot XML] (xml) | Beginner | An example showing how to work with Camel routes in XML files and Spring Boot
