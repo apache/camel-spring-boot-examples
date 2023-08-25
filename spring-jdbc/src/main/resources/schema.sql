@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS horses;
+CREATE TABLE horses (
+  name VARCHAR(255),
+  age INT,
+  ts TIMESTAMP NOT NULL DEFAULT now()
+);
