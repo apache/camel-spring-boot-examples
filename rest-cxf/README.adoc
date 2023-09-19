@@ -1,0 +1,91 @@
+== Spring Boot Example with Camel exposing REST services using Apache CXF
+
+=== Introduction
+
+This example illustrates how to use https://projects.spring.io/spring-boot/[Spring Boot] with http://camel.apache.org[Camel]. It provides a simple REST service that is created using https://cxf.apache.org/[Apache CXF].
+
+
+=== Build
+
+You can build this example using:
+
+    $ mvn package
+
+=== Run
+
+You can run this example using:
+
+    $ mvn spring-boot:run
+
+After the Spring Boot application is started, you can open the following URL in your web browser to access the list of services: http://localhost:8080/services/ including WADL definition
+
+You can also access the REST endpoint from the command line:
+
+List all the users
+[source,text]
+----
+$ curl http://localhost:8080/services/api/user -s | jq .
+----
+
+The command will produce the following output:
+
+[source,json]
+----
+[ {
+  "id" : 1,
+  "name" : "John Coltrane"
+}, {
+  "id" : 2,
+  "name" : "Miles Davis"
+}, {
+  "id" : 3,
+  "name" : "Sonny Rollins"
+} ]
+----
+
+Retrieve a specific user
+[source,text]
+----
+$ curl http://localhost:8080/services/api/user/1 -s | jq .
+----
+
+The command will produce the following output:
+
+[source,json]
+----
+{
+  "id": 1,
+  "name": "John Coltrane"
+}
+----
+
+Insert/update user
+
+[source,text]
+----
+$ curl -X PUT http://localhost:8080/services/api/user --data '{"id":4,"name":"Charlie Parker"}' -H 'Content-Type: application/json' -v
+----
+
+The http status code of the response will be https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml#http-status-codes-1[201]
+
+Moreover, the input user is validated according to the annotations on the link:src/main/java/org/apache/camel/example/springboot/cxf/User.java[User bean]
+
+[source,text]
+----
+$ curl -X PUT http://localhost:8080/services/api/user --data '{"id":4,"name":"C"}' -H 'Content-Type: application/json'
+----
+
+will produce a validation error
+
+
+The Spring Boot application can be stopped pressing `[CTRL] + [C]` in the shell.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
