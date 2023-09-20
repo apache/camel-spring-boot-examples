@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 import com.example.customerservice.Customer;
 import com.example.customerservice.CustomerType;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

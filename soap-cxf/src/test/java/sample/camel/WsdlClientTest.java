@@ -19,6 +19,7 @@ package sample.camel;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import jakarta.xml.ws.WebServiceException;
 import org.apache.cxf.ext.logging.LoggingFeature;
 import org.apache.cxf.frontend.ClientProxyFactoryBean;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
@@ -34,8 +35,6 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import com.example.customerservice.Customer;
 import com.example.customerservice.CustomerService;
 import com.example.customerservice.NoSuchCustomerException;
-
-import javax.xml.ws.soap.SOAPFaultException;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -81,7 +80,7 @@ public class WsdlClientTest {
 	@Test
 	public void testInvalidRequest() {
 		Assertions.assertThatThrownBy(() -> cxfClient.getCustomersByName("a"))
-				.isInstanceOf(SOAPFaultException.class);
+				.isInstanceOf(WebServiceException.class);
 	}
 
 	@Test

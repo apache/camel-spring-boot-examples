@@ -16,7 +16,7 @@
  */
 package sample.camel.service;
 
-import javax.validation.constraints.Pattern;
+import jakarta.validation.constraints.Pattern;
 
 public class Address {
 
