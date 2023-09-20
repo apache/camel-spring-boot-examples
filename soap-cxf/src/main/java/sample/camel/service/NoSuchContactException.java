@@ -16,7 +16,7 @@
  */
 package sample.camel.service;
 
-import javax.xml.ws.WebFault;
+import jakarta.xml.ws.WebFault;
 
 @WebFault(name = "NoSuchContact")
 public class NoSuchContactException extends Exception {
