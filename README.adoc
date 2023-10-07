@@ -27,13 +27,11 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 49 (0 deprecated)
+Number of Examples: 54 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
 | Example | Category | Description
-
-| link:aot-basic/readme.adoc[AOT Basic] (aot-basic) |  | An example showing how to leverage Spring Boot AOT to build a native Camel Spring Boot application
 
 | link:azure/camel-example-spring-boot-azure-eventhubs/README.adoc[Spring Boot Azure Eventhubs] (camel-example-spring-boot-azure-eventhubs) |  | An example showing how to work with Camel, Azure Event Hubs and Spring Boot
 
@@ -41,6 +39,8 @@ Number of Examples: 49 (0 deprecated)
 
 | link:mail-ms-exchange-oauth2/Readme.adoc[Mail Ms Exchange Oauth2] (mail-ms-exchange-oauth2) |  | An example showing how to use Camel on Spring Boot to connect
         with IMAP protocol and access email data for Office 365 users using OAuth2 authentication
+
+| link:aot-basic/readme.adoc[Aot Basic] (aot-basic) | AOT | Example on how to leverage Spring Boot AOT in Camel Spring Boot
 
 | link:endpointdsl/readme.adoc[Endpointdsl] (endpointdsl) | Beginner | Using type-safe Endpoint DSL
 
@@ -76,9 +76,9 @@ Number of Examples: 49 (0 deprecated)
 
 | link:webhook/readme.adoc[Webhook] (webhook) | Cloud | Example on how to use the Camel Webhook component
 
-| link:soap-cxf/README.adoc[Spring Boot SOAP CXF] (cxf-soap) | CXF | An example showing how to work with Camel SOAP CXF and Spring Boot
-
 | link:master/readme.adoc[Master] (master) | Clustering | An example showing how to work with Camel's Master component and Spring Boot
+
+| link:soap-cxf/README.adoc[Soap Cxf] (soap-cxf) | CXF | An example showing the Camel SOAP CXF
 
 | link:arangodb/README.adoc[Arangodb] (arangodb) | Database | An example showing the Camel ArangoDb component with Spring Boot
 
@@ -108,9 +108,14 @@ Number of Examples: 49 (0 deprecated)
 | link:observation/README.adoc[Micrometer Observation] (observation) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with Micrometer Observation
     
 
+| link:opentelemetry/README.adoc[OpenTelemetry] (opentelemetry) | Management and Monitoring | An example showing how to use Camel with OpenTelemetry
+    
+
 | link:supervising-route-controller/readme.adoc[Supervising Route Controller] (supervising-route-controller) | Management and Monitoring | An example showing how to work with Camel's Supervising Route Controller and Spring Boot
 
 | link:amqp/readme.adoc[Amqp] (amqp) | Messaging | An example showing how to work with Camel, ActiveMQ Amqp and Spring Boot
+
+| link:artemis/readme.adoc[Artemis] (artemis) | Messaging | An example showing how to work with Camel, ActiveMQ Artemis and Spring Boot
 
 | link:kafka-avro/README.adoc[Kafka Avro] (kafka-avro) | Messaging | An example for Kafka avro
 
