@@ -32,16 +32,17 @@ public class CamelInfinispanRoute extends RouteBuilder {
     public void configure() throws Exception {
 
         from("timer://foo?period=10000&repeatCount=1")
-        .to("direct:put-cache");
+            .to("direct:put-cache");
 
         from("direct:put-cache")
-        .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
-        .setHeader(InfinispanConstants.KEY).constant("1")
-        .setHeader(InfinispanConstants.VALUE).constant("test")
-        .to("infinispanRemoteComponent://default")
-        .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.GET)
-        .setHeader(InfinispanConstants.KEY).constant("1")
-        .to("infinispanRemoteComponent://default").log("Received body: ${body}");
+            .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
+            .setHeader(InfinispanConstants.KEY).constant("1")
+            .setHeader(InfinispanConstants.VALUE).constant("test")
+            .to("infinispanRemoteComponent://default")
+            .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.GET)
+            .setHeader(InfinispanConstants.KEY).constant("1")
+            .to("infinispanRemoteComponent://default")
+            .log("Received body: ${body}");
     }
 
 }
