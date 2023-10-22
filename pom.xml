@@ -94,13 +94,13 @@
 		<camel-version>4.2.0-SNAPSHOT</camel-version>
 		<skip.starting.camel.context>false</skip.starting.camel.context>
 		<javax.servlet.api.version>4.0.1</javax.servlet.api.version>
-		<jkube-maven-plugin-version>1.9.1</jkube-maven-plugin-version>
+		<jkube-maven-plugin-version>1.14.0</jkube-maven-plugin-version>
 		<kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
-		<reactor-version>3.2.16.RELEASE</reactor-version>
-		<testcontainers-version>1.16.3</testcontainers-version>
+		<reactor-version>3.5.11</reactor-version>
+		<testcontainers-version>1.19.1</testcontainers-version>
 		<hapi-structures-v24-version>2.3</hapi-structures-v24-version>
-		<narayana-spring-boot-version>2.6.3</narayana-spring-boot-version>
-        <artemis-jakarta-version>2.28.0</artemis-jakarta-version>
+		<narayana-spring-boot-version>2.6.7</narayana-spring-boot-version>
+        <artemis-jakarta-version>2.31.0</artemis-jakarta-version>
 	</properties>
 
 	<repositories>
