@@ -33,13 +33,6 @@ Number of Examples: 54 (0 deprecated)
 |===
 | Example | Category | Description
 
-| link:azure/camel-example-spring-boot-azure-eventhubs/README.adoc[Spring Boot Azure Eventhubs] (camel-example-spring-boot-azure-eventhubs) |  | An example showing how to work with Camel, Azure Event Hubs and Spring Boot
-
-| link:azure/camel-example-spring-boot-azure-servicebus/README.adoc[Spring Boot Azure Servicebus] (camel-example-spring-boot-azure-servicebus) |  | An example showing how to work with Camel, Azure Service Bus and Spring Boot
-
-| link:mail-ms-exchange-oauth2/Readme.adoc[Mail Ms Exchange Oauth2] (mail-ms-exchange-oauth2) |  | An example showing how to use Camel on Spring Boot to connect
-        with IMAP protocol and access email data for Office 365 users using OAuth2 authentication
-
 | link:aot-basic/readme.adoc[Aot Basic] (aot-basic) | AOT | Example on how to leverage Spring Boot AOT in Camel Spring Boot
 
 | link:endpointdsl/readme.adoc[Endpointdsl] (endpointdsl) | Beginner | Using type-safe Endpoint DSL
@@ -72,6 +65,10 @@ Number of Examples: 54 (0 deprecated)
 
 | link:aws2-s3/README.adoc[Aws2 S3] (aws2-s3) | Cloud | An example showing the Camel AWS2 S3 component with Spring Boot
 
+| link:azure/camel-example-spring-boot-azure-eventhubs/README.adoc[Spring Boot Azure Eventhubs] (camel-example-spring-boot-azure-eventhubs) | Cloud | An example showing how to work with Camel, Azure Event Hubs and Spring Boot
+
+| link:azure/camel-example-spring-boot-azure-servicebus/README.adoc[Spring Boot Azure Servicebus] (camel-example-spring-boot-azure-servicebus) | Cloud | An example showing how to work with Camel, Azure Service Bus and Spring Boot
+
 | link:infinispan/README.adoc[Infinispan] (infinispan) | Cloud | An example showing the Camel Infinispan component with Spring Boot
 
 | link:webhook/readme.adoc[Webhook] (webhook) | Cloud | Example on how to use the Camel Webhook component
@@ -98,6 +95,9 @@ Number of Examples: 54 (0 deprecated)
     
 
 | link:validator/readme.adoc[Validator Spring Boot] (validator) | Input/Output Type Contract | An example showing how to work with declarative validation and Spring Boot
+
+| link:mail-ms-exchange-oauth2/Readme.adoc[Mail Ms Exchange Oauth2] (mail-ms-exchange-oauth2) | Mail | An example showing how to use Camel on Spring Boot to connect
+        with IMAP protocol and access email data for Office 365 users using OAuth2 authentication
 
 | link:actuator-http-metrics/readme.adoc[Actuator Http Metrics] (actuator-http-metrics) | Management and Monitoring | Example on how to use Spring Boot's Actuator endpoints to gather info like mappings or metrics
 

@@ -32,6 +32,10 @@
   <name>Camel SB Examples :: Azure Event Hubs</name>
   <description>An example showing how to work with Camel, Azure Event Hubs and Spring Boot</description>
 
+  <properties>
+    <category>Cloud</category>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>

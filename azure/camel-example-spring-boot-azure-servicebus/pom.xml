@@ -32,6 +32,10 @@
   <name>Camel SB Examples :: Azure Service Bus</name>
   <description>An example showing how to work with Camel, Azure Service Bus and Spring Boot</description>
 
+  <properties>
+    <category>Cloud</category>
+  </properties>
+  
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
