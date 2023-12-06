@@ -1,0 +1,62 @@
+== Spring Boot Example with the Dynamic Router EIP Component in a multi-module application stack
+
+=== Example Description
+
+This example demonstrates how you might use the Dynamic Router EIP component in a Spring Boot application stack where
+you want to route messages between different applications or JVMs.  Unlike the single-application example, this example
+uses Kafka as the transport that sends messages between apps/JVMs to get messages between the dynamic router and all of
+its subscribing routing participants.
+
+The modules in this stack each provide routing participants:
+
+.Routing Participants
+[cols="1,1,2"]
+|===
+|Name |Priority |Description
+
+|Even Numbers
+|9
+|Accepts even numbers.
+
+|Odd Numbers
+|100
+|Accepts odd numbers.
+
+|All Numbers
+|10
+|Accepts prime numbers.
+
+|Main Router
+|??
+|Receives subscription messages, generates number messages, and compiles statistics
+|===
+
+Explanation stuff here...
+
+=== Build
+
+You can build this example using:
+
+    $ mvn package
+
+=== Run
+
+You can run this example using:
+
+    $ mvn spring-boot:run
+
+If you want to run the Dynamic Router in "allMatch" receiver mode, run the example with an argument specifying that configuration property:
+
+    $ mvn spring-boot:run -Dspring-boot.run.arguments="--camel.spring-boot.example.dynamic-router-eip.recipient-mode=allMatch"
+
+The results should show up in less than ten seconds, and the program will immediately terminate.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so please
+https://camel.apache.org/community/contributing/[get involved]
+
+The Camel riders!
