@@ -27,7 +27,7 @@
             uri: "log:yaml"
             parameters:
               showBodyType: false
-              showEchangePattern: false
+              showExchangePattern: false
         - throwException:
             exceptionType: "java.lang.IllegalArgumentException"
             message: "Error from yaml"
