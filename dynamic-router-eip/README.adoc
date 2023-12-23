@@ -1,128 +1,147 @@
-== Spring Boot Example with the Dynamic Router EIP Component
+= Camel Dynamic Router EIP Component Spring Boot Examples
 
-=== Example Description
+This Camel Dynamic Router Spring Boot example module contains applications highlighting the two main use cases
+of the Dynamic Router EIP component.
 
-This example demonstrates how you might use the Dynamic Router EIP component in a Spring Boot application.  There are eleven routing participants that subscribe to a "numbers" channel of the Dynamic Router.  The message includes:
+== Single JVM Example
 
- 1. A Predicate that examines the Exchange to determine if an Exchange is appropriate for the participant
- 2. A destination URI where the Dynamic Router will send Exchanges that match a participant's Predicate
+This example shows how you can route messages within a single application, or JVM.
 
-.Routing Participants
-[cols="1,1,2"]
-|===
-|Name |Priority |Description
+=== Build the Single JVM Example
 
-|Tens
-|1
-|Accepts multiples of 10.
+    mvn clean package -pl :camel-example-spring-boot-dynamic-router-eip-single
 
-|Nines
-|2
-|Accepts multiples of 9.
+=== Run the Single JVM Example
 
-|Eights
-|3
-|Accepts multiples of 8.
+    mvn spring-boot:run -pl :camel-example-spring-boot-dynamic-router-eip-single
 
-|Sevens
-|4
-|Accepts multiples of 7.
+==== Access the Swagger UI
 
-|Sixes
-|5
-|Accepts multiples of 6.
+Next, point your browser to http://localhost:8080/dynamic-router-example/swagger-ui.html.  Here, you will find
+a single endpoint to interact with, called [.olive-background]#/generate#.  Expand the section by clicking on
+the colored bar, and click on the `Try it out` button.  There is only one field to fill in, and that is the number
+of messages that you want to send through the dynamic router.  Enter a number, and then press the
+[.blue-background]#Execute# button.  You will see a `Loading` animation while the messages are being processed.
 
-|Fives
-|6
-|Accepts multiples of 5.
+== Multiple JVM (Multimodule) Example
 
-|Fours
-|7
-|Accepts multiples of 4.
+This example shows how you can route messages between separate modules, where each runs in its own JVM.
 
-|Threes
-|8
-|Accepts multiples of 3.
+=== Build the Multimodule Example
 
-|Even
-|9
-|Accepts even numbers.
+==== For systems with Docker
 
-|Odd
-|100
-|Accepts odd numbers.
+    mvn clean package -f dynamic-router-eip/dynamic-router-eip-stack -Pdocker
 
-|Prime
-|10
-|Accepts prime numbers.
-|===
+==== For systems with Podman
 
-Subscriptions with a lower priority value are evaluated earlier than subscriptions with a higher priority value.  For this reason, even though the number "10" is a multiple of 5, it will be consumed by the Tens participant.
+    mvn clean package -f dynamic-router-eip/dynamic-router-eip-stack -Ppodman
 
-All participants inherit from the link:src/main/java/org/apache/camel/example/springboot/numbers/participants/RoutingParticipant.java[RoutingParticipant] class, so they use a `@Consume` annotation to consume from their registered destination URI.  They add their received number to the link:src/main/java/org/apache/camel/example/springboot/numbers/service/ResultsService.java[ResultsService].
+On a system with Podman, your output might resemble the following:
 
-The link:src/main/java/org/apache/camel/example/springboot/numbers/service/NumbersService.java[NumbersService] sends all numbers from one to one million through the Dynamic Router.  After the messages have all been sent and processed, it instructs the ResultsService to print the results.  It will look something like this:
-
-.Example Output
-[source,bash]
+[source,text]
 ----
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v2.6.2)
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+>>>> Executing external compose provider "/usr/bin/docker-compose". Please refer to the documentation for details. <<<<
 
-INFO 23130 --- [main] o.a.c.e.s.n.service.NumbersService : Subscribing participants
-INFO 23130 --- [main] o.a.c.e.s.n.service.NumbersService : Sending messages to the dynamic router
-INFO 23130 --- [main] o.a.c.e.s.n.service.NumbersService : Finished
-Dynamic Router Spring Boot Numbers Example Results:
-            odd:  150077
-           even:  114287
-         sevens:  101588
-           tens:  100000
-          nines:  100000
-         eights:   88889
-         primes:   78494
-         threes:   76191
-          fives:   76190
-          sixes:   57142
-          fours:   57142
-Received count: 1000000 in 5709ms
+[+] Running 6/6
+ ✔ Network docker_test-dynamic-router  Created  0.0s
+ ✔ Container broker                    Healthy  0.1s
+ ✔ Container main_router_service       Healthy  0.1s
+ ✔ Container odd_numbers_service       Started  0.1s
+ ✔ Container even_numbers_service      Started  0.1s
+ ✔ Container all_numbers_service       Started  0.1s
 ----
 
-=== Build
+=== Run the Multimodule Example
 
-You can build this example using:
+When running the application stack for the Multimodule example, it should be the same, whether you have
+Docker or Podman installed.  For Podman, please confirm that you have `podman compose` installed to ensure
+that you can emulate the Docker CLI when using Podman.
 
-    $ mvn package
+    docker compose -f dynamic-router-eip/dynamic-router-eip-stack/project-resources/docker/docker-compose.yaml up -d
 
-=== Run
+==== Access the Swagger UI
 
-You can run this example using:
+Next, point your browser to http://localhost:8082/main-router/swagger-ui.html.  Here, you will find a few
+endpoints to interact with.
 
-    $ mvn spring-boot:run
+===== Generate number messages
 
-If you want to run the Dynamic Router in "allMatch" receiver mode, run the example with an argument specifying that configuration property:
+The first endpoint is [.olive-background]#/generate#.  Expand the section by clicking on the colored bar, and
+click on the `Try it out` button.  There is only one field to fill in, and that is the number of messages that
+you want to send through the dynamic router.  Enter a number, and then press the [.blue-background]#Execute#
+button.  You will see a `Loading` animation while the messages are being generated.  This will be very brief,
+since the message generation happens in its own thread, and everything at this point happens asynchronously.
 
-    $ mvn spring-boot:run -Dspring-boot.run.arguments="--camel.spring-boot.example.dynamic-router-eip.recipient-mode=allMatch"
+===== Retrieve number statistics
 
-The results should show up in less than ten seconds, and the program will immediately terminate.
+From the moment messages begin to flow through the system, statistics are compiled.  You can monitor the progress
+by using the next endpoint: [.blue-background]#/counts#.  Expand the section by clicking on the colored bar, and
+click on the `Try it out` button.  Click the [.blue-background]#Execute# button, and the current statistics will
+be displayed.  These will continue to count upward until the current batch of messages has completed.
 
-=== Run Tests
+A run of one million messages might yield output that resembles the following:
 
-You can run the tests using:
+[source,json]
+----
+{
+  "all": 1000000,
+  "odd": 500000,
+  "elapsed seconds": 19,
+  "even": 500000
+}
+----
 
-    $mvn test
+===== View subscriber information
 
-There are some demos that run during the test phase.  Currently, there are three:
+This endpoint allows you to see the routing participants that have subscribed for dynamic routing.  Expand the
+endpoint for [.blue-background]#/list{channel}#.  Clicking the `Try it out` button will allow you to enter the
+channel name.  For this example app, you should enter `numbers` in that field, and then click the
+[.blue-background]#Execute# button.  The returned text should look like this, although the formatting has been
+altered for better documentation clarity:
 
- 1. AllRecipientsApplicationTest: the recipient mode is set to "allMatch" and 1,000,000 messages are sent through the router.
- 2. FirstRecipientApplicationTest: the recipient mode is set to "firstMatch" and 1,000,000 messages are sent through the router.
- 3. LessExpectedApplicationTest: the recipient mode is set to "firstMatch", and 10,000 messages are sent through the router.  The difference, here, is that the expected count is set to only 1,000 messages, so the results are calculated and displayed before all 10,000 messages are routed.
+[source,text]
+----
+[
+  PrioritizedFilterProcessor [
+    id: processAllNumbers,
+    priority: 5,
+    predicate: SpelExpression[
+      #{headers.command == 'processNumber' or headers.command == 'resetStats'}
+    ],
+    endpoint: kafka://numbers_all?groupInstanceId=numbers_all_consumer&headerDeserializer=#stringValueHeaderDeserializer
+  ],
+  PrioritizedFilterProcessor [
+    id: processEvenNumbers,
+    priority: 10,
+    predicate: SpelExpression[
+      #{(headers.command == 'processNumber' and headers.number matches '\d*[02468]') or
+          headers.command == 'resetStats'}
+    ],
+    endpoint: kafka://numbers_even?groupInstanceId=numbers_even_consumer&headerDeserializer=#stringValueHeaderDeserializer
+  ],
+  PrioritizedFilterProcessor [
+    id: processNumberStats,
+    priority: 10,
+    predicate: SpelExpression[
+      #{headers.command == 'stats'}
+    ],
+    endpoint: kafka://main_router?groupInstanceId=main_router_consumer&headerDeserializer=#stringValueHeaderDeserializer
+  ],
+  PrioritizedFilterProcessor [
+    id: processOddNumbers,
+    priority: 10,
+    predicate: SpelExpression[
+      #{(headers.command == 'processNumber' and headers.number matches '\d*[13579]') or
+          headers.command == 'resetStats'}
+    ],
+    endpoint: kafka://numbers_odd?groupInstanceId=numbers_odd_consumer&headerDeserializer=#stringValueHeaderDeserializer
+  ]
+]
+----
 
-=== Help and contributions
+== Help and Contributions
 
 If you hit any problem using Camel or have some feedback, then please
 https://camel.apache.org/community/support/[let us know].

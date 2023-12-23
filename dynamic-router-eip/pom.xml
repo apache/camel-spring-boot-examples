@@ -26,11 +26,19 @@
     </parent>
 
     <artifactId>camel-example-spring-boot-dynamic-router-eip</artifactId>
-    <name>Camel SB Examples :: Dynamic Router EIP</name>
-    <description>An example on how to use the Dynamic Router EIP component in Spring Boot</description>
+    <packaging>pom</packaging>
+
+    <name>Camel SB Examples :: Dynamic Router EIP :: Examples</name>
+    <description>Dynamic Router EIP component examples</description>
+
+    <modules>
+        <module>dynamic-router-eip-single</module>
+        <module>dynamic-router-eip-stack</module>
+    </modules>
 
     <properties>
         <category>EIP</category>
+        <spring-statemachine.version>4.0.0</spring-statemachine.version>
     </properties>
 
     <!-- Spring-Boot and Camel BOM -->
@@ -50,77 +58,131 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.statemachine</groupId>
+                <artifactId>spring-statemachine-bom</artifactId>
+                <version>${spring-statemachine.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <!-- Camel -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-spring-starter</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-dynamic-router-starter</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-direct-starter</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-bean-starter</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-version}</version>
+                    <configuration combine.children="append">
+                        <image>
+                            <name>docker.io/library/${project.artifactId}</name>
+                            <env>
+                                <BPE_DELIM_JAVA_TOOL_OPTIONS xml:space="preserve"> </BPE_DELIM_JAVA_TOOL_OPTIONS>
+                                <BPE_APPEND_JAVA_TOOL_OPTIONS>--add-opens=java.base/sun.net=ALL-UNNAMED</BPE_APPEND_JAVA_TOOL_OPTIONS>
+                                <BP_HEALTH_CHECKER_ENABLED>true</BP_HEALTH_CHECKER_ENABLED>
+                                <THC_PATH>/actuator/health</THC_PATH>
+                            </env>
+                            <buildpacks>
+                                <buildpack>urn:cnb:builder:paketo-buildpacks/java</buildpack>
+                                <buildpack>gcr.io/paketo-buildpacks/health-checker:latest</buildpack>
+                            </buildpacks>
+                        </image>
+                        <layers>
+                            <enabled>true</enabled>
+                        </layers>
+                        <jvmArguments>--add-opens=java.base/sun.net=ALL-UNNAMED</jvmArguments>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot-version}</version>
                 <executions>
                     <execution>
+                        <id>process-aot</id>
                         <goals>
-                            <goal>repackage</goal>
+                            <goal>process-aot</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-package-maven-plugin</artifactId>
-                <version>${camel-version}</version>
-                <executions>
-                    <execution>
-                        <id>generate</id>
-                        <goals>
-                            <goal>generate-component</goal>
-                        </goals>
-                        <phase>process-classes</phase>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
+    <profiles>
+        <profile>
+            <id>podman</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <docker>
+                                <host>${XDG_RUNTIME_DIR}/podman/podman.sock</host>
+                                <bindHostToBuilder>true</bindHostToBuilder>
+                            </docker>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>build-image-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>docker</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <docker>
+                                <host>/var/run/docker.sock</host>
+                                <bindHostToBuilder>true</bindHostToBuilder>
+                            </docker>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>build-image-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

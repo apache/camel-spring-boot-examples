@@ -1,0 +1,141 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+version: "3.7"
+
+services:
+  redpanda_broker:
+    image: docker.io/vectorized/redpanda:v23.2.19
+    container_name: broker
+    networks:
+      - test-dynamic-router
+    volumes:
+      - broker:/var/lib/redpanda/data:rw
+    user: "101:101"
+    cap_add:
+      - SYS_NICE
+    privileged: true
+    command:
+      - redpanda start
+      - --overprovisioned
+      - --smp 1
+      - --memory 1G
+      - --reserve-memory 0M
+      - --kafka-addr internal://broker:9092
+      - --advertise-kafka-addr internal://broker:9092
+      - --pandaproxy-addr internal://broker:8082
+      - --advertise-pandaproxy-addr internal://broker:8082
+      - --schema-registry-addr internal://0.0.0.0:8081
+      - --rpc-addr broker:33145
+      - --advertise-rpc-addr broker:33145
+      - --mode dev-container
+      - --default-log-level=warn
+    healthcheck:
+      test: ["CMD-SHELL", "rpk cluster health | grep -E 'Healthy:.+true' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  main_router_service:
+    image: docker.io/library/main-router:latest
+    container_name: main_router_service
+    ports:
+      - "8082:8082"
+    networks:
+      - test-dynamic-router
+    environment:
+      - THC_PATH=/main-router/actuator/health
+      - THC_PORT=8082
+    healthcheck:
+      test: [ "CMD", "/cnb/process/health-check" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    depends_on:
+      redpanda_broker:
+        condition: service_healthy
+
+  all_numbers_service:
+    image: docker.io/library/all-numbers-service:latest
+    container_name: all_numbers_service
+    ports:
+      - "8911:8911"
+    networks:
+      - test-dynamic-router
+    environment:
+      - THC_PATH=/all-numbers/actuator/health
+      - THC_PORT=8911
+    healthcheck:
+      test: [ "CMD", "/cnb/process/health-check" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    depends_on:
+      main_router_service:
+        condition: service_healthy
+
+  even_numbers_service:
+    image: docker.io/library/even-numbers-service:latest
+    container_name: even_numbers_service
+    ports:
+      - "8902:8902"
+    networks:
+      - test-dynamic-router
+    environment:
+      - THC_PATH=/even-numbers/actuator/health
+      - THC_PORT=8902
+    healthcheck:
+      test: [ "CMD", "/cnb/process/health-check" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    depends_on:
+      main_router_service:
+        condition: service_healthy
+
+  odd_numbers_service:
+    image: docker.io/library/odd-numbers-service:latest
+    container_name: odd_numbers_service
+    ports:
+      - "8901:8901"
+    networks:
+      - test-dynamic-router
+    environment:
+      - THC_PATH=/odd-numbers/actuator/health
+      - THC_PORT=8901
+    healthcheck:
+      test: [ "CMD", "/cnb/process/health-check" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    depends_on:
+      main_router_service:
+        condition: service_healthy
+
+networks:
+  test-dynamic-router:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+
+volumes:
+  broker: null

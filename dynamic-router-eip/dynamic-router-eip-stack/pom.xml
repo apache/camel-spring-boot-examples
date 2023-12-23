@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.apache.camel.springboot.example</groupId>
+    <artifactId>camel-example-spring-boot-dynamic-router-eip</artifactId>
+    <version>4.4.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>camel-example-spring-boot-dynamic-router-eip-stack</artifactId>
+  <packaging>pom</packaging>
+
+  <name>Camel SB Examples :: Dynamic Router EIP :: Examples :: Multimodule</name>
+  <description>Dynamic Router EIP component example in Spring Boot with multiple modules</description>
+
+  <modules>
+    <module>numbers-common</module>
+    <module>main-router</module>
+    <module>all-numbers-service</module>
+    <module>even-numbers-service</module>
+    <module>odd-numbers-service</module>
+  </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-kafka-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.statemachine</groupId>
+      <artifactId>spring-statemachine-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-jackson-starter</artifactId>
+    </dependency>
+  </dependencies>
+</project>
