@@ -28,14 +28,9 @@ camel:
         receiver-scheme: direct
         start-uri: direct:start
         recipient-mode: firstMatch
-        send-message-count: 1000000
-        expected-first-match-message-count: 1000000
-        expected-all-match-message-count: 2507465
   component:
     dynamic-router:
       lazy-start-producer: true
-  cloud:
-    enabled: false
 logging:
   level:
     root: WARN
@@ -49,12 +44,3 @@ spring:
     base-path: "/dynamic-router-example"
 server:
   port: 8080
-management:
-  endpoints:
-    enabled-by-default: false
-    web:
-      exposure:
-        include: "health"
-  endpoint:
-    health:
-      enabled: true

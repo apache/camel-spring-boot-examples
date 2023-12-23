@@ -22,6 +22,9 @@ import jakarta.validation.constraints.Pattern;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
+import static org.apache.camel.component.dynamicrouter.routing.DynamicRouterConstants.MODE_ALL_MATCH;
+import static org.apache.camel.component.dynamicrouter.routing.DynamicRouterConstants.MODE_FIRST_MATCH;
+
 /**
  * @param routingChannel    The dynamic router channel.
  * @param recipientMode     The recipient mode -- first matching filter only, or all matching filters.
@@ -32,5 +35,5 @@ public record DynamicRouterComponentConfig(
 
         @NotBlank String routingChannel,
 
-        @NotBlank @Pattern(regexp = "^firstMatch|allMatch$") String recipientMode) {
+        @NotBlank @Pattern(regexp = "^" + MODE_FIRST_MATCH + "|" + MODE_ALL_MATCH + "$") String recipientMode) {
 }

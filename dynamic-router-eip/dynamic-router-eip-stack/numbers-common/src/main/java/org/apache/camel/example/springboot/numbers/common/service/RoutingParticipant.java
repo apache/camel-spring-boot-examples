@@ -83,7 +83,7 @@ public abstract class RoutingParticipant {
 
     protected final CamelContext camelContext;
 
-    public RoutingParticipant(
+    protected RoutingParticipant( // NOSONAR
             String subscriberId,
             String subscribeUri,
             String routingChannel,
@@ -136,7 +136,7 @@ public abstract class RoutingParticipant {
      *
      * @param body the serialized command message
      */
-    public abstract void consumeMessage(final String body, @Header(value = "number") String number) throws Exception;
+    public abstract void consumeMessage(final String body, @Header(value = "number") String number);
 
     /**
      * Create a {@link DynamicRouterControlMessage} based on parameters from the

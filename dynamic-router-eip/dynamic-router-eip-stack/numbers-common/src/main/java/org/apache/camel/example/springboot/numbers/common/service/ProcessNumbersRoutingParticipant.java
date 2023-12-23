@@ -21,17 +21,17 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Consume;
 import org.apache.camel.Header;
 import org.apache.camel.ProducerTemplate;
-import org.apache.camel.builder.ExchangeBuilder;
-import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.example.springboot.numbers.common.model.CommandMessage;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.apache.camel.example.springboot.numbers.common.model.MessageTypes.*;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.COMMAND_RESET_STATS;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.COMMAND_STATS;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.HEADER_COMMAND;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.HEADER_NUMBER;
 
 public abstract class ProcessNumbersRoutingParticipant extends RoutingParticipant {
 
@@ -47,7 +47,7 @@ public abstract class ProcessNumbersRoutingParticipant extends RoutingParticipan
      */
     protected final AtomicInteger reportedCount = new AtomicInteger(0);
 
-    public ProcessNumbersRoutingParticipant(
+    protected ProcessNumbersRoutingParticipant( // NOSONAR
             String numberName,
             String subscriberId,
             String subscribeUri,
@@ -73,8 +73,8 @@ public abstract class ProcessNumbersRoutingParticipant extends RoutingParticipan
      */
     @Override
     @Consume(property = "consumeUri")
-    public void consumeMessage(final String body, @Header(value = "number") String number) {
-        if (RESET_STATS_COMMAND.equals(body)) {
+    public void consumeMessage(final String body, @Header(value = HEADER_NUMBER) String number) {
+        if (COMMAND_RESET_STATS.equals(body)) {
             processedCount.set(0);
             reportedCount.set(0);
         } else {
@@ -86,8 +86,8 @@ public abstract class ProcessNumbersRoutingParticipant extends RoutingParticipan
     public void sendStats() {
         int pCount = processedCount.get();
         if (pCount > reportedCount.get()) {
-            CommandMessage command = new CommandMessage(STATS_COMMAND, Map.of(numberName, String.valueOf(pCount)));
-            producerTemplate.sendBodyAndHeader(commandUri, command.toString(), "command", STATS_COMMAND);
+            CommandMessage command = new CommandMessage(COMMAND_STATS, Map.of(numberName, String.valueOf(pCount)));
+            producerTemplate.sendBodyAndHeader(commandUri, command.toString(), HEADER_COMMAND, COMMAND_STATS);
             reportedCount.set(pCount);
         }
     }

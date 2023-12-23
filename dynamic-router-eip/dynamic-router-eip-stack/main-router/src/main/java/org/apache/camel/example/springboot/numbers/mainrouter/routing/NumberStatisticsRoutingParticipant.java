@@ -24,20 +24,15 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.dynamicrouter.control.DynamicRouterControlMessage;
 import org.apache.camel.example.springboot.numbers.common.service.RoutingParticipant;
 import org.apache.camel.example.springboot.numbers.mainrouter.service.NumberStatisticsService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import static org.apache.camel.component.dynamicrouter.control.DynamicRouterControlConstants.COMPONENT_SCHEME_CONTROL;
+import static org.apache.camel.component.dynamicrouter.control.DynamicRouterControlConstants.CONTROL_ACTION_SUBSCRIBE;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.HEADER_NUMBER;
 
 @Service
 public class NumberStatisticsRoutingParticipant extends RoutingParticipant {
-
-    protected static final Logger LOG = LoggerFactory.getLogger(NumberStatisticsRoutingParticipant.class);
 
     private final NumberStatisticsService numberStatisticsService;
 
@@ -62,18 +57,7 @@ public class NumberStatisticsRoutingParticipant extends RoutingParticipant {
     @Override
     protected void subscribe() {
         DynamicRouterControlMessage message = createSubscribeMessage();
-        producerTemplate.sendBody("dynamic-router-control:subscribe", message);
-    }
-
-    /**
-     * After the application is started and ready, subscribe for messages.
-     */
-    @Override
-    @EventListener(ApplicationReadyEvent.class)
-    protected void start() {
-        LOG.info("Application ready -- scheduling number statistics routing subscription");
-        Executors.newScheduledThreadPool(1)
-                .schedule(this::subscribe, 10, TimeUnit.SECONDS);
+        producerTemplate.sendBody(COMPONENT_SCHEME_CONTROL + ":" + CONTROL_ACTION_SUBSCRIBE, message);
     }
 
     /**
@@ -85,7 +69,7 @@ public class NumberStatisticsRoutingParticipant extends RoutingParticipant {
      */
     @Override
     @Consume(property = "consumeUri")
-    public void consumeMessage(final String body, @Header(value = "number") String number) throws Exception {
+    public void consumeMessage(final String body, @Header(value = HEADER_NUMBER) String number) {
         this.numberStatisticsService.updateStats(body);
     }
 }

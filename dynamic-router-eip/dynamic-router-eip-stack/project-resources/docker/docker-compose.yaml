@@ -14,33 +14,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-version: "3.5"
+version: "3.7"
 
 services:
-  kafka_broker:
-    image: docker.io/bitnami/kafka:3.6.1
+  redpanda_broker:
+    image: docker.io/vectorized/redpanda:v23.2.19
     container_name: broker
     networks:
       - test-dynamic-router
-    environment:
-    - KAFKA_ENABLE_KRAFT=yes
-    - KAFKA_CFG_NODE_ID=1
-    - KAFKA_CFG_PROCESS_ROLES=broker,controller
-    - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
-    - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
-    - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
-    - KAFKA_CFG_LISTENERS=PLAINTEXT://broker:9092,CONTROLLER://broker:9093
-    - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://broker:9092
-    - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@broker:9093
-    - KAFKA_CFG_NUM_PARTITIONS=64
-    - ALLOW_PLAINTEXT_LISTENER=yes
-    - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
-    - KAFKA_SOCKET_REQUEST_MAX_BYTES=104857600
-    - KAFKA_NUM_NETWORK_THREADS=16
-    - KAFKA_NUM_IO_THREADS=16
-    - KAFKA_PRODUCER_ACKS=0
+    volumes:
+      - broker:/var/lib/redpanda/data:rw
+    user: "101:101"
+    cap_add:
+      - SYS_NICE
+    privileged: true
+    command:
+      - redpanda start
+      - --overprovisioned
+      - --smp 1
+      - --memory 1G
+      - --reserve-memory 0M
+      - --kafka-addr internal://broker:9092
+      - --advertise-kafka-addr internal://broker:9092
+      - --pandaproxy-addr internal://broker:8082
+      - --advertise-pandaproxy-addr internal://broker:8082
+      - --schema-registry-addr internal://0.0.0.0:8081
+      - --rpc-addr broker:33145
+      - --advertise-rpc-addr broker:33145
+      - --mode dev-container
+      - --default-log-level=warn
     healthcheck:
-      test: [ "CMD", "kafka-topics.sh", "--bootstrap-server", "broker:9092", "--list" ]
+      test: ["CMD-SHELL", "rpk cluster health | grep -E 'Healthy:.+true' || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -63,7 +67,7 @@ services:
       retries: 5
       start_period: 10s
     depends_on:
-      kafka_broker:
+      redpanda_broker:
         condition: service_healthy
 
   all_numbers_service:
@@ -132,3 +136,6 @@ networks:
     ipam:
       config:
         - subnet: 10.5.0.0/16
+
+volumes:
+  broker: null

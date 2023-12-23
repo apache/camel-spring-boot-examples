@@ -18,7 +18,6 @@
 package org.apache.camel.example.springboot.numbers.mainrouter.web;
 
 import org.apache.camel.example.springboot.numbers.mainrouter.service.NumberStatisticsService;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -37,11 +36,5 @@ public class NumberStatisticsController {
     @GetMapping(path = "/counts")
     public Mono<Map<String, Long>> getCounts() {
         return Mono.just(numberStatisticsService.getCounts());
-    }
-
-    @DeleteMapping(path = "/counts")
-    public Mono<Void> resetCounts() {
-        numberStatisticsService.resetStats();
-        return Mono.empty();
     }
 }

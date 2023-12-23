@@ -1,3 +1,152 @@
 = Camel Dynamic Router EIP Component Spring Boot Examples
+
 This Camel Dynamic Router Spring Boot example module contains applications highlighting the two main use cases
 of the Dynamic Router EIP component.
+
+== Single JVM Example
+
+This example shows how you can route messages within a single application, or JVM.
+
+=== Build the Single JVM Example
+
+    mvn clean package -pl :camel-example-spring-boot-dynamic-router-eip-single
+
+=== Run the Single JVM Example
+
+    mvn spring-boot:run -pl :camel-example-spring-boot-dynamic-router-eip-single
+
+==== Access the Swagger UI
+
+Next, point your browser to http://localhost:8080/dynamic-router-example/swagger-ui.html.  Here, you will find
+a single endpoint to interact with, called [.olive-background]#/generate#.  Expand the section by clicking on
+the colored bar, and click on the `Try it out` button.  There is only one field to fill in, and that is the number
+of messages that you want to send through the dynamic router.  Enter a number, and then press the
+[.blue-background]#Execute# button.  You will see a `Loading` animation while the messages are being processed.
+
+== Multiple JVM (Multimodule) Example
+
+This example shows how you can route messages between separate modules, where each runs in its own JVM.
+
+=== Build the Multimodule Example
+
+==== For systems with Docker
+
+    mvn clean package -f dynamic-router-eip/dynamic-router-eip-stack -Pdocker
+
+==== For systems with Podman
+
+    mvn clean package -f dynamic-router-eip/dynamic-router-eip-stack -Ppodman
+
+On a system with Podman, your output might resemble the following:
+
+[source,text]
+----
+Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
+>>>> Executing external compose provider "/usr/bin/docker-compose". Please refer to the documentation for details. <<<<
+
+[+] Running 6/6
+ ✔ Network docker_test-dynamic-router  Created  0.0s
+ ✔ Container broker                    Healthy  0.1s
+ ✔ Container main_router_service       Healthy  0.1s
+ ✔ Container odd_numbers_service       Started  0.1s
+ ✔ Container even_numbers_service      Started  0.1s
+ ✔ Container all_numbers_service       Started  0.1s
+----
+
+=== Run the Multimodule Example
+
+When running the application stack for the Multimodule example, it should be the same, whether you have
+Docker or Podman installed.  For Podman, please confirm that you have `podman compose` installed to ensure
+that you can emulate the Docker CLI when using Podman.
+
+    docker compose -f dynamic-router-eip/dynamic-router-eip-stack/project-resources/docker/docker-compose.yaml up -d
+
+==== Access the Swagger UI
+
+Next, point your browser to http://localhost:8082/main-router/swagger-ui.html.  Here, you will find a few
+endpoints to interact with.
+
+===== Generate number messages
+
+The first endpoint is [.olive-background]#/generate#.  Expand the section by clicking on the colored bar, and
+click on the `Try it out` button.  There is only one field to fill in, and that is the number of messages that
+you want to send through the dynamic router.  Enter a number, and then press the [.blue-background]#Execute#
+button.  You will see a `Loading` animation while the messages are being generated.  This will be very brief,
+since the message generation happens in its own thread, and everything at this point happens asynchronously.
+
+===== Retrieve number statistics
+
+From the moment messages begin to flow through the system, statistics are compiled.  You can monitor the progress
+by using the next endpoint: [.blue-background]#/counts#.  Expand the section by clicking on the colored bar, and
+click on the `Try it out` button.  Click the [.blue-background]#Execute# button, and the current statistics will
+be displayed.  These will continue to count upward until the current batch of messages has completed.
+
+A run of one million messages might yield output that resembles the following:
+
+[source,json]
+----
+{
+  "all": 1000000,
+  "odd": 500000,
+  "elapsed seconds": 19,
+  "even": 500000
+}
+----
+
+===== View subscriber information
+
+This endpoint allows you to see the routing participants that have subscribed for dynamic routing.  Expand the
+endpoint for [.blue-background]#/list{channel}#.  Clicking the `Try it out` button will allow you to enter the
+channel name.  For this example app, you should enter `numbers` in that field, and then click the
+[.blue-background]#Execute# button.  The returned text should look like this, although the formatting has been
+altered for better documentation clarity:
+
+[source,text]
+----
+[
+  PrioritizedFilterProcessor [
+    id: processAllNumbers,
+    priority: 5,
+    predicate: SpelExpression[
+      #{headers.command == 'processNumber' or headers.command == 'resetStats'}
+    ],
+    endpoint: kafka://numbers_all?groupInstanceId=numbers_all_consumer&headerDeserializer=#stringValueHeaderDeserializer
+  ],
+  PrioritizedFilterProcessor [
+    id: processEvenNumbers,
+    priority: 10,
+    predicate: SpelExpression[
+      #{(headers.command == 'processNumber' and headers.number matches '\d*[02468]') or
+          headers.command == 'resetStats'}
+    ],
+    endpoint: kafka://numbers_even?groupInstanceId=numbers_even_consumer&headerDeserializer=#stringValueHeaderDeserializer
+  ],
+  PrioritizedFilterProcessor [
+    id: processNumberStats,
+    priority: 10,
+    predicate: SpelExpression[
+      #{headers.command == 'stats'}
+    ],
+    endpoint: kafka://main_router?groupInstanceId=main_router_consumer&headerDeserializer=#stringValueHeaderDeserializer
+  ],
+  PrioritizedFilterProcessor [
+    id: processOddNumbers,
+    priority: 10,
+    predicate: SpelExpression[
+      #{(headers.command == 'processNumber' and headers.number matches '\d*[13579]') or
+          headers.command == 'resetStats'}
+    ],
+    endpoint: kafka://numbers_odd?groupInstanceId=numbers_odd_consumer&headerDeserializer=#stringValueHeaderDeserializer
+  ]
+]
+----
+
+== Help and Contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so please
+https://camel.apache.org/community/contributing/[get involved]
+
+The Camel riders!

@@ -22,15 +22,12 @@ import org.apache.camel.example.springboot.numbers.common.service.StringValueHea
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @Configuration
-@PropertySources({
-        @PropertySource(value = "classpath:application.yaml", factory = YamlPropertySourceFactory.class, ignoreResourceNotFound = true),
-        @PropertySource(value = "classpath:common.yaml", factory = YamlPropertySourceFactory.class, ignoreResourceNotFound = true)
-})
+@PropertySource(value = "classpath:application.yaml", factory = YamlPropertySourceFactory.class, ignoreResourceNotFound = true)
+@PropertySource(value = "classpath:common.yaml", factory = YamlPropertySourceFactory.class, ignoreResourceNotFound = true)
 public class CommonConfig {
 
     @Bean

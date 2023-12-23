@@ -18,8 +18,6 @@ package org.apache.camel.example.springboot.numbers.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.concurrent.CountDownLatch;
-
 /**
  * The config properties object from the application.yml file.
  */

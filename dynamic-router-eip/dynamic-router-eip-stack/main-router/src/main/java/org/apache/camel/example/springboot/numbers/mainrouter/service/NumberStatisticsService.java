@@ -1,5 +1,6 @@
 package org.apache.camel.example.springboot.numbers.mainrouter.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.example.springboot.numbers.common.model.CommandMessage;
@@ -11,7 +12,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static org.apache.camel.example.springboot.numbers.common.model.MessageTypes.RESET_STATS_COMMAND;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.COMMAND_RESET_STATS;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.ENDPOINT_DIRECT_COMMAND;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.HEADER_COMMAND;
 
 @Service
 public class NumberStatisticsService {
@@ -35,21 +38,25 @@ public class NumberStatisticsService {
         this.objectMapper = objectMapper;
     }
 
-    public void resetStats() {
-        LOG.info("Resetting statistics");
+    public String resetStats() {
         start = System.currentTimeMillis();
         countsMap.clear();
         currentMs.set(0L);
-        producerTemplate.sendBodyAndHeader("direct:command", RESET_STATS_COMMAND, "command", RESET_STATS_COMMAND);
+        producerTemplate.sendBodyAndHeader(ENDPOINT_DIRECT_COMMAND, COMMAND_RESET_STATS, HEADER_COMMAND, COMMAND_RESET_STATS);
+        return "OK - Statistics have been reset.";
     }
 
-    public void updateStats(final String body) throws Exception {
-        CommandMessage message = objectMapper.readValue(body, CommandMessage.class);
-        long now = System.currentTimeMillis();
-        long newTime = now - start;
-        long elapsed = currentMs.updateAndGet(cv -> Math.max(cv, newTime));
-        countsMap.put("elapsed seconds", elapsed / 1000);
-        message.params().forEach((key, val) -> countsMap.merge(key, Long.parseLong(val), Math::max));
+    public void updateStats(final String body) {
+        try {
+            CommandMessage message = objectMapper.readValue(body, CommandMessage.class);
+            long now = System.currentTimeMillis();
+            long newTime = now - start;
+            long elapsed = currentMs.updateAndGet(cv -> Math.max(cv, newTime));
+            countsMap.put("elapsed seconds", elapsed / 1000);
+            message.params().forEach((key, val) -> countsMap.merge(key, Long.parseLong(val), Math::max));
+        } catch (JsonProcessingException e) {
+            LOG.warn("Error when trying to update number statistics", e);
+        }
     }
 
     public Map<String, Long> getCounts() {

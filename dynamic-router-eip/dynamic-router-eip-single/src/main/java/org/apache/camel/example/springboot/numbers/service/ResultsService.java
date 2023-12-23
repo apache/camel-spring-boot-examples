@@ -16,7 +16,6 @@
  */
 package org.apache.camel.example.springboot.numbers.service;
 
-import org.apache.camel.example.springboot.numbers.config.ExampleConfig;
 import org.apache.camel.util.StopWatch;
 import org.springframework.stereotype.Service;
 
@@ -40,16 +39,10 @@ public class ResultsService {
     private final ConcurrentSkipListMap<String, ConcurrentSkipListSet<Integer>> results;
 
     /**
-     * The number of sent messages.
-     */
-    private final int numberSent;
-
-    /**
      * Create the service and initialize the results map.
      */
-    public ResultsService(final ExampleConfig config) {
+    public ResultsService() {
         this.results = new ConcurrentSkipListMap<>();
-        this.numberSent = config.getSendMessageCount();
     }
 
     /**
@@ -71,32 +64,35 @@ public class ResultsService {
         return results;
     }
 
+    public void resetStatistics() {
+        results.clear();
+    }
+
     /**
      * Get a message that contains the statistics of the messaging.
      *
      * @param watch a {@link StopWatch} that was started at the beginning of messaging
      * @return a message that contains the statistics of the messaging
      */
-    public String getStatistics(final StopWatch watch) {
+    public String getStatistics(final StopWatch watch, int numberSent) {
         final long taken = watch.taken();
         final int totalCount = getResults().values()
                 .stream()
                 .mapToInt(Collection::size)
                 .sum();
-        final int numberLength = numberFormat.format(totalCount)
-                .length();
+        final int numberLength = numberFormat.format(totalCount).length();
         StringBuilder statistics = new StringBuilder("Finished in ")
                 .append(taken).append("ms")
                 .append("\nDynamic Router Spring Boot Numbers Example Results:\n");
         getResults().entrySet().stream()
                 .sorted((o1, o2) -> o2.getValue().size() - o1.getValue().size())
-                .map(e -> String.format("%7s: %" + numberLength + "s [%3d%% routed, %3d%% sent]",
+                .map(e -> String.format("%7s: %" + numberLength + "s [%3d%% routed, %3d%% sent]", // NOSONAR
                         e.getKey(), numberFormat.format(e.getValue().size()),
                         e.getValue().size() * 100 / totalCount,
                         e.getValue().size() * 100 / numberSent))
                 .forEach(s -> statistics.append("\n\t").append(s));
         statistics.append("\n\n\t")
-                .append(String.format("%7s: %" + numberLength + "s [%3d%% routed, %3d%% sent]",
+                .append(String.format("%7s: %" + numberLength + "s [%3d%% routed, %3d%% sent]", // NOSONAR
                         "total", numberFormat.format(totalCount),
                         totalCount * 100 / totalCount,
                         totalCount * 100 / numberSent));

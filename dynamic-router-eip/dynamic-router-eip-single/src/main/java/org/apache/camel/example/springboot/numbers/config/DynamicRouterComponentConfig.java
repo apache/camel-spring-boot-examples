@@ -30,7 +30,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.function.Function;
 
@@ -77,7 +76,7 @@ public class DynamicRouterComponentConfig {
         this.camelContext = camelContext;
     }
 
-    private static final Function<ExampleConfig, String> createCommandUri = (cfg) ->
+    private static final Function<ExampleConfig, String> createCommandUri = cfg ->
             "%s:%s?recipientMode=%s&executorService=%s".formatted(
                     COMPONENT_SCHEME_ROUTING,
                     cfg.getRoutingChannel(),
@@ -105,16 +104,6 @@ public class DynamicRouterComponentConfig {
                 from(exampleConfig.getStartUri()).to(createCommandUri.apply(exampleConfig));
             }
         };
-    }
-
-    /**
-     * Create a {@link CountDownLatch} so that we can wait until all messages have been processed.
-     *
-     * @return a countdown latch
-     */
-    @Bean
-    CountDownLatch countDownLatch() {
-        return new CountDownLatch(1);
     }
 
     @Bean

@@ -21,9 +21,8 @@ public class YamlPropertySourceFactory implements PropertySourceFactory {
         String resourceFileName = Optional.ofNullable(resource.getFilename())
                 .orElseThrow(() -> new IllegalArgumentException("Resource file name must not be null"));
         factory.setResources(resource);
-        Optional.ofNullable(factory.getObject())
+        Properties properties = Optional.ofNullable(factory.getObject())
                 .orElseThrow(() -> new IllegalArgumentException("Properties factory object must not be null"));
-        Properties properties = factory.getObject();
         return new PropertiesPropertySource(resourceFileName, properties);
     }
 }

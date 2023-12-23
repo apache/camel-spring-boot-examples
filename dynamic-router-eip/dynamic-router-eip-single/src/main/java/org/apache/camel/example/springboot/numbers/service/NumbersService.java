@@ -23,15 +23,11 @@ import org.apache.camel.example.springboot.numbers.participants.RoutingParticipa
 import org.apache.camel.util.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.publisher.ParallelFlux;
 import reactor.core.scheduler.Schedulers;
 
-import java.text.NumberFormat;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -46,8 +42,6 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 public class NumbersService {
 
     private static final Logger LOG = LoggerFactory.getLogger(NumbersService.class);
-
-    private final NumberFormat numberFormat = NumberFormat.getIntegerInstance();
 
     /**
      * The URI to send the messages to.  This URI feeds the dynamic router in a
@@ -77,7 +71,7 @@ public class NumbersService {
      * The {@link CountDownLatch} to wait for the total expected number of
      * messages to be received.
      */
-    final CountDownLatch countDownLatch;
+    private CountDownLatch countDownLatch;
 
     /**
      * The number of messages to generate.
@@ -91,19 +85,16 @@ public class NumbersService {
      * @param participants       the dynamic router participants
      * @param start              the producer template to send messages to the start endpoint
      * @param resultsService     the service that compiles routing results
-     * @param countDownLatch     the latch to wait for all messages to be received
      */
     public NumbersService(
             final ExampleConfig config,
             final List<RoutingParticipant> participants,
             final ProducerTemplate start,
-            final ResultsService resultsService,
-            final CountDownLatch countDownLatch) {
+            final ResultsService resultsService) {
         this.startUri = config.getStartUri();
         this.participants = participants;
         this.start = start;
         this.resultsService = resultsService;
-        this.countDownLatch = countDownLatch;
         this.numberOfMessages = config.getSendMessageCount();
     }
 
@@ -112,18 +103,19 @@ public class NumbersService {
      * participant to subscribe, and then send the messages.  Afterward,
      * display the results and exit the app.
      */
-    @EventListener(ApplicationReadyEvent.class)
-    public void start() throws InterruptedException {
+    public String start(int limit) throws InterruptedException {
+        resultsService.resetStatistics();
         LOG.info("Subscribing {} participants", participants.size());
         participants.forEach(RoutingParticipant::subscribe);
+        countDownLatch = new CountDownLatch(1);
         final StopWatch watch = new StopWatch();
-        LOG.info("Sending {} messages to the dynamic router: {}", numberFormat.format(numberOfMessages), getStartUri());
-        Mono<Void> msgFlux = sendMessages();
+        LOG.info("Sending {} messages to the dynamic router: {}", limit, getStartUri());
+        Mono<Integer> msgFlux = sendMessages(limit);
         msgFlux.subscribe();
         if (!countDownLatch.await(1, MINUTES)) {
             LOG.warn("Statistics may be inaccurate, since the operation timed out");
         }
-        LOG.info(resultsService.getStatistics(watch));
+        return resultsService.getStatistics(watch, limit);
     }
 
     /**
@@ -131,12 +123,12 @@ public class NumbersService {
      *
      * @return an empty Mono
      */
-    public Mono<Void> sendMessages() {
-        return Flux.range(1, numberOfMessages)
+    public Mono<Integer> sendMessages(int limit) {
+        return Flux.range(1, limit)
                 .parallel()
                 .runOn(Schedulers.boundedElastic())
                 .doOnNext(n -> start.sendBodyAndHeader(n, "number", n))
-                .then()
+                .reduce((a, b) -> b)
                 .doFinally(signal -> countDownLatch.countDown());
     }
 

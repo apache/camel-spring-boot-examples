@@ -2,17 +2,25 @@ package org.apache.camel.example.springboot.numbers.mainrouter.service;
 
 import jakarta.validation.constraints.NotNull;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.example.springboot.numbers.mainrouter.model.StateMachineEvent;
+import org.apache.camel.example.springboot.numbers.mainrouter.util.MainRouterUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.Map;
-import java.util.stream.IntStream;
 
-import static org.apache.camel.example.springboot.numbers.common.model.MessageTypes.PROCESS_NUMBER_COMMAND;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.COMMAND_PROCESS_NUMBER;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.ENDPOINT_DIRECT_COMMAND;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.HEADER_COMMAND;
+import static org.apache.camel.example.springboot.numbers.common.util.NumbersCommonUtil.HEADER_NUMBER;
+import static org.apache.camel.example.springboot.numbers.mainrouter.util.MainRouterUtil.Events.GENERATE_NUMBERS_COMPLETE;
 
 @Service
 public class NumberGeneratorService {
@@ -21,73 +29,13 @@ public class NumberGeneratorService {
 
     private final ProducerTemplate producerTemplate;
 
-    private final NumberStatisticsService numberStatisticsService;
+    private final ApplicationEventPublisher eventPublisher;
 
     public NumberGeneratorService(@NotNull final ProducerTemplate producerTemplate,
-                                  final NumberStatisticsService numberStatisticsService) {
+                                  ApplicationEventPublisher eventPublisher) {
         this.producerTemplate = producerTemplate;
-        this.numberStatisticsService = numberStatisticsService;
+        this.eventPublisher = eventPublisher;
         producerTemplate.start();
-    }
-
-    /**
-     * With this approach, it completed 1000000 messages in 88 seconds.
-     *
-     * @param limit number of messages to send
-     */
-    void parallelStreamApproach(int limit) {
-            IntStream.rangeClosed(1, limit)
-                    .parallel()
-                    .mapToObj(Integer::toString)
-                    .forEach(n -> producerTemplate.sendBodyAndHeaders("direct:command", n, Map.of(
-                            "command", PROCESS_NUMBER_COMMAND,
-                            "number", n)));
-    }
-
-    /**
-     * With this approach, it completed 1000000 messages in 327 seconds.
-     *
-     * @param limit number of messages to send
-     */
-    void fluxPublishOnApproach(int limit) {
-        Flux.range(1, limit)
-                .publishOn(Schedulers.boundedElastic())
-                .map(Object::toString)
-                .doOnNext(n -> producerTemplate.sendBodyAndHeaders("direct:command", n, Map.of(
-                        "command", PROCESS_NUMBER_COMMAND,
-                        "number", n)))
-                .subscribe();
-    }
-
-    /**
-     * With this approach, it completed 1000000 messages in 81 seconds.
-     *
-     * @param limit number of messages to send
-     */
-    void fluxParallelElasticApproach(int limit) {
-        Flux.range(1, limit)
-                .parallel()
-                .runOn(Schedulers.boundedElastic())
-                .map(Object::toString)
-                .doOnNext(n -> producerTemplate.sendBodyAndHeaders("direct:command", n, Map.of(
-                        "command", PROCESS_NUMBER_COMMAND,
-                        "number", n)))
-                .subscribe();
-    }
-
-    /**
-     * With this approach, it completed 1000000 messages in 45 seconds.
-     *
-     * @param limit number of messages to send
-     */
-    void fluxFlatMapApproach(int limit) {
-        Flux.range(1, limit)
-                .flatMap(n -> Mono.just(n)
-                        .map(Object::toString)
-                        .subscribeOn(Schedulers.boundedElastic())
-                        .doOnNext(strN -> producerTemplate.sendBodyAndHeaders("direct:command", strN,
-                                Map.of("command", PROCESS_NUMBER_COMMAND, "number", strN))))
-                .subscribe();
     }
 
     /**
@@ -98,41 +46,25 @@ public class NumberGeneratorService {
      *
      * @param limit the count of numbers to produce (zero means Integer.MAX_VALUE)
      */
-    public void generateNumbers(int limit, ParallelApproachType parallelApproach) {
+    public void generateNumbers(int limit) {
+        String msg;
         try {
             LOG.info("Generating numbers from 1 to {}", limit);
-            numberStatisticsService.resetStats();
-            long begin = System.currentTimeMillis();
-            switch (parallelApproach) {
-                case FLUX_FLAT_MAP: {
-                    fluxFlatMapApproach(limit);
-                    break;
-                }
-                case FLUX_PARALLEL: {
-                    fluxParallelElasticApproach(limit);
-                    break;
-                }
-                case PARALLEL_STREAM: {
-                    parallelStreamApproach(limit);
-                    break;
-                }
-                case FLUX_PUBLISH_ON_BOUNDED_ELASTIC: {
-                    fluxPublishOnApproach(limit);
-                    break;
-                }
-                default:
-                    throw new IllegalArgumentException("Invalid parallelism approach specified: " + parallelApproach);
-            }
-            LOG.info("Generated numbers in {}s", (System.currentTimeMillis() - begin) / 1000);
+            Flux.range(1, limit)
+                    .flatMap(n -> Mono.just(n)
+                            .map(Object::toString)
+                            .subscribeOn(Schedulers.boundedElastic())
+                            .doOnNext(strN -> producerTemplate.sendBodyAndHeaders(ENDPOINT_DIRECT_COMMAND, strN,
+                                    Map.of(HEADER_COMMAND, COMMAND_PROCESS_NUMBER, HEADER_NUMBER, strN))))
+                    .doFinally(x -> {
+                        Message<MainRouterUtil.Events> message =
+                                MessageBuilder.withPayload(GENERATE_NUMBERS_COMPLETE).build();
+                        eventPublisher.publishEvent(new StateMachineEvent(this, message));
+                    })
+                    .subscribe();
         } catch (Exception e) {
-            LOG.warn("########## Exception when trying to send number messages", e);
+            msg = String.format("Exception when trying to send number messages: %s", e.getMessage());
+            LOG.warn(msg, e);
         }
-    }
-
-    public enum ParallelApproachType {
-        FLUX_FLAT_MAP,
-        FLUX_PARALLEL,
-        PARALLEL_STREAM,
-        FLUX_PUBLISH_ON_BOUNDED_ELASTIC
     }
 }
