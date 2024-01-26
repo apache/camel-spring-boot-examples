@@ -25,22 +25,36 @@ import org.springframework.stereotype.Component;
 @Component
 public class SampleAutowiredAmqpRoute extends RouteBuilder {
 
-    @Autowired JmsConnectionFactory amqpConnectionFactory;
+    /* tmielke: I don't think the commented code is needed.
+       The demo runs fine without it.
+       The connectionFactory is autowired from the AmqpConfig class.
+     */
+    // @Autowired JmsConnectionFactory amqpConnectionFactory;
+
+    /*
     @Bean
     public org.apache.camel.component.amqp.AMQPComponent amqpConnection() {
         org.apache.camel.component.amqp.AMQPComponent amqp = new org.apache.camel.component.amqp.AMQPComponent();
         amqp.setConnectionFactory(amqpConnectionFactory);
         return amqp;
     }
+    */
 
     @Override
     public void configure() throws Exception {
         from("file:src/main/data?noop=true")
+            .id("file-consumer-route")
             .to("amqp:queue:SCIENCEQUEUE");
 
-        /*from("timer:bar")
+        from("timer:bar")
+            .id("timer-consumer-route")
             .setBody(constant("Hello from Camel"))
-            .to("amqp:queue:SCIENCEQUEUE");*/
+            .to("amqp:queue:SCIENCEQUEUE")
+            .log("Message sent from route ${routeId} to SCIENCEQUEUE");
+        
+        from("amqp:queue:SCIENCEQUEUE?receiveTimeout=10000")
+            .id("amqp-consumer-route")
+	        .id("consumer-route")
+	        .to("log:MyLogger?showBody=true");
     }
-
 }

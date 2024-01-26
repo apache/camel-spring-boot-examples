@@ -16,6 +16,7 @@
  */
 package sample.camel;
 
+import org.messaginghub.pooled.jms.JmsPoolConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,21 +24,30 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AmqpConfig {
 
-    @Value("${AMQP_HOST}")
-    private String amqpHost;
-    @Value("${AMQP_SERVICE_PORT}")
-    private String amqpPort;
-    @Value("${AMQP_SERVICE_USERNAME}")
-    private String userName;
-    @Value("${AMQP_SERVICE_PASSWORD}")
-    private String pass;
+    /* tmielke: None of this code is really needed.  If we rather want to configure
+       camel-amqp using camel.component.amqp.* properties, then these aren't
+       needed. I struggle to have a strong opinion on whether we want to configure
+       username and password directly on the ConnectionFactory below or via
+       camel.component.amqp.password and camel.component.amqp.username. 
+       I guess there are arguments either way.
+
+    */
+    // @Value("${AMQP_HOST}")
+    // private String amqpHost;
+    // @Value("${AMQP_SERVICE_PORT}")
+    // private String amqpPort;
+    // @Value("${AMQP_SERVICE_USERNAME}")
+    // private String userName;
+    // @Value("${AMQP_SERVICE_PASSWORD}")
+    // private String pass;
     @Value("${AMQP_REMOTE_URI}")
     private String remoteUri;
 
+    /*
     public String getAmqpHost() {
         return amqpHost;
     }
-
+    
     public void setAmqpHost(String amqpHost) {
         this.amqpHost = amqpHost;
     }
@@ -65,7 +75,10 @@ public class AmqpConfig {
     public void setPass(String pass) {
         this.pass = pass;
     }
+    */
 
+    // the only really required config property, as it cannot be set
+    // via camel.component.amqp.* properties
     public String getRemoteUri() {
         return remoteUri;
     }
@@ -74,13 +87,30 @@ public class AmqpConfig {
         this.remoteUri = remoteUri;
     }
 
-    @Bean
+    
+    /* tmielke: I would even disable @Bean on this method and only enable it on the next method
+       that creates the JmsPoolConnectionFactory. 
+    */
+    // @Bean
     public org.apache.qpid.jms.JmsConnectionFactory amqpConnectionFactory() {
         org.apache.qpid.jms.JmsConnectionFactory jmsConnectionFactory = new org.apache.qpid.jms.JmsConnectionFactory();
         jmsConnectionFactory.setRemoteURI(remoteUri);
-        jmsConnectionFactory.setUsername(userName);
-        jmsConnectionFactory.setPassword(pass);
+        // jmsConnectionFactory.setUsername(userName);
+        // jmsConnectionFactory.setPassword(pass);
         return jmsConnectionFactory;
     }
+    
 
+    /* tmielke: Recommendation should be to use connection pooling. By using a named bean
+       we could directly reference it in 
+       camel.component.amqp.connection-factory = #connectionPoolFactory
+       but its technically not needed if there is only one connectionFactory registered in 
+       the Spring Boot registry 
+    */ 
+    @Bean(name = "connectionPoolFactory", initMethod = "start", destroyMethod = "stop")
+    public JmsPoolConnectionFactory jmsPoolConnectionFactory() {
+        JmsPoolConnectionFactory jmsPoolConnectionFactory = new JmsPoolConnectionFactory();
+        jmsPoolConnectionFactory.setConnectionFactory(amqpConnectionFactory());
+        return jmsPoolConnectionFactory;
+    }
 }
