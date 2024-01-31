@@ -1,4 +1,4 @@
-example project which connects to A-MQ 7 from Fuse 7, using remote A-MQ address
+Example project which connects to A-MQ 7, using the standard AMQP protocol.
 
 There is the code, from that project, which instantiates component, and sends message
 
@@ -6,38 +6,21 @@ public class CamelRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-			JmsComponent component = createArtemisComponent();
-			getContext().addComponent("artemis", component);
-		
-			from("timer://foo?fixedRate=true&period=60000&repeatCount=2")
-				.setBody().constant("HELLO")
-				.to("artemis:queue:test")
-				.log("Sent --> ${body}")
-			;	
-	}
-
-	private JmsComponent createArtemisComponent() {
-
-		ActiveMQJMSConnectionFactory connectionFactory= new ActiveMQJMSConnectionFactory("tcp://localhost:61616");
-		connectionFactory.setUser("admin");
-		connectionFactory.setPassword("admin");
-
-		JmsComponent component = new JmsComponent();
-		component.setConnectionFactory(connectionFactory);
-		
-		return component;
+        from("timer:bar")
+            .id("timer-consumer-route")
+            .setBody(constant("Hello from Camel"))
+            .to("amqp:queue:SCIENCEQUEUE")
+            .log("Message sent from route ${routeId} to SCIENCEQUEUE");
 	}
 }
 
-Please see pom file, I don't specify pom versions, because they come in the BOM
+Please also see the pom file, no need to specify pom versions, 
+because they come from the imported BOM.
 
     <dependency>
-    <groupId>org.apache.activemq</groupId>
-    <artifactId>artemis-jms-client</artifactId>
+        <groupId>org.apache.camel.springboot</groupId>
+        <artifactId>camel-amqp-starter</artifactId>
     </dependency>
-     <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-jms</artifactId>
-    </dependency>
+
 
 
