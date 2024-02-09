@@ -31,7 +31,7 @@ public class KafkaProcessor implements Processor {
     @Override
     public void process(Exchange exc) throws Exception {
         @SuppressWarnings("unchecked")
-        List<RecordMetadata> recordMetaData1 = (List<RecordMetadata>) exc.getIn().getHeader(KafkaConstants.KAFKA_RECORDMETA);
+        List<RecordMetadata> recordMetaData1 = (List<RecordMetadata>) exc.getIn().getHeader(KafkaConstants.KAFKA_RECORD_META);
         for (RecordMetadata rd: recordMetaData1) {
             LOG.info("producer partition is:"  + rd.partition());
         }
