@@ -14,7 +14,7 @@ spec:
   definition:
     title: "Chuck Norris Source"
     description: |-
-      Gets peridically Chuck Norris jokes from http://www.icndb.com/
+      Gets periodically Chuck Norris jokes from http://www.icndb.com/
     type: object
     properties:
       period:
