@@ -37,7 +37,7 @@
     <bean class="java.io.File" id="filerepo">
         <constructor-arg type="java.lang.String" value="${fileOffsetrepoPath}"/>
     </bean>
-    <bean class="org.apache.camel.impl.engine.FileStateRepository"
+    <bean class="org.apache.camel.support.processor.state.FileStateRepository"
           factory-method="fileStateRepository" id="offsetRepo" init-method="doStart">
         <constructor-arg ref="filerepo"/>
     </bean>
