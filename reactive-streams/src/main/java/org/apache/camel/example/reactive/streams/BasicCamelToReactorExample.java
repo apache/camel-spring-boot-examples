@@ -81,12 +81,12 @@ public class BasicCamelToReactorExample {
         public void configure() throws Exception {
 
             // Generating numbers every 5 seconds and forwarding to the stream "numbers"
-            from("timer:clock?period=5000")
+            from("timer:clock?period=5000&includeMetadata=true")
                     .setBody().header(Exchange.TIMER_COUNTER)
                     .to("reactive-streams:numbers");
 
             // Generating strings every 4.9 seconds and forwarding to the stream "strings"
-            from("timer:clock2?period=4900&delay=2000")
+            from("timer:clock2?period=4900&delay=2000&includeMetadata=true")
                     .setBody().simple("Hello World ${header.CamelTimerCounter}!")
                     .to("reactive-streams:strings");
 

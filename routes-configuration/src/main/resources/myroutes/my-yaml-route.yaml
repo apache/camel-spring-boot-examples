@@ -19,7 +19,7 @@
     # refer to the route configuration by the id to use for this route
     routeConfigurationId: "yamlError"
     from:
-      uri: "timer:yaml?period=3s"
+      uri: "timer:yaml?period=3s&includeMetadata=true"
       steps:
         - setBody:
             simple: "Timer fired ${header.CamelTimerCounter} times"
