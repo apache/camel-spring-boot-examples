@@ -80,7 +80,7 @@ public class BasicCamelToReactorInOutExample {
         public void configure() throws Exception {
 
             // Generate a Id and retrieve user data from reactor
-            from("timer:clock?period=9000&delay=1500")
+            from("timer:clock?period=9000&delay=1500&includeMetadata=true")
                     .setBody().header(Exchange.TIMER_COUNTER).convertBodyTo(Long.class) // Sample ID
                     .bean("userBean", "getUserInfo") // Get the user info from reactor code
                     .process(new UnwrapStreamProcessor()) // Unwrap the Publisher
