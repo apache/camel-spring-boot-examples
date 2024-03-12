@@ -58,7 +58,7 @@ Your application will start in native mode. The output of the application should
 2023-06-22T20:22:57.266+02:00  INFO 12741 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.0.0-SNAPSHOT (MyCamelNative) started in 14ms (build:0ms init:0ms start:14ms)
 2023-06-22T20:22:57.266+02:00  INFO 12741 --- [           main] sample.camel.Application                 : Started Application in 0.144 seconds (process running for 0.159)
 2023-06-22T20:22:58.258+02:00  INFO 12741 --- [ - timer://java] helloJava                                : Hello World From Java I am invoked 1 times at Thu Jun 22 20:22:58 CEST 2023
-2023-06-22T20:22:58.269+02:00  INFO 12741 --- [ - timer://yaml] demo-route.yaml:6                        : Hello World from YAML at Thu Jun 22 20:22:58 CEST 2023
+2023-06-22T20:22:58.269+02:00  INFO 12741 --- [ - timer://yaml] demo-route.camel.yaml:6                        : Hello World from YAML at Thu Jun 22 20:22:58 CEST 2023
 2023-06-22T20:22:58.269+02:00  INFO 12741 --- [3 - timer://xml] my-route.xml:30                          : Hello World From XML at Thu Jun 22 20:22:58 CEST 2023
 ----
 
