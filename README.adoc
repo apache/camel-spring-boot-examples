@@ -127,7 +127,7 @@ Number of Examples: 55 (0 deprecated)
 
 | link:rabbitmq/readme.adoc[Rabbitmq] (rabbitmq) | Messaging | An example showing how to work with Camel and RabbitMQ
 
-| link:strimzi/README.adoc[Strimzi] (strimzi) | Messaging | Camel example which a route is defined in XML for Strimzi integration on Openshift/Kubernetes
+| link:strimzi/README.adoc[Strimzi] (strimzi) | Messaging | Camel example which a route is defined in XML for Strimzi integration on OpenShift/Kubernetes
 
 | link:widget-gadget/README.adoc[Widget Gadget] (widget-gadget) | Messaging | The widget and gadget example from EIP book, running on Spring Boot
 
