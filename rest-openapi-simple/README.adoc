@@ -3,7 +3,7 @@
 This example shows how to call a REST service defined using OpenApi
 specification with the help of Camel Rest OpenApi component.
 
-The example is a standalong Spring Boot application that acts as a REST
+The example is a standalone Spring Boot application that acts as a REST
 client, you can run simply by issuing:
 
 ....
@@ -20,7 +20,7 @@ $ java -jar target/camel-example-spring-boot-rest-openapi-simple-*.jar
 The example by default uses the PetStore demo hosted on swagger.io and
 invokes the `+logoutUser+` operation. You can make it call any API
 that you have OpenApi specification for and any operation with simple
-arguments, for instance this retrives a pet from the PetStore demo with
+arguments, for instance this retrieves a pet from the PetStore demo with
 ID `+14+`:
 
 ....

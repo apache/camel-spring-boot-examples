@@ -18,7 +18,7 @@ This example shows how to work with a simple Apache Camel application using Spri
 
 === How to run on OpenShift cluster
 
-1. create openshift project:
+1. create an OpenShift project:
 
     oc new-project camel-master
 
