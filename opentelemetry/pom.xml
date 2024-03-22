@@ -30,8 +30,7 @@
     <artifactId>camel-example-spring-boot-opentelemetry</artifactId>
     <packaging>pom</packaging>
     <name>Camel SB Examples :: OpenTelemetry</name>
-    <description>An example showing how to use Camel with OpenTelemetry
-    </description>
+    <description>An example showing how to use Camel with OpenTelemetry</description>
 
     <properties>
         <category>Management and Monitoring</category>
