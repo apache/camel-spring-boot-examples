@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 58 (0 deprecated)
+Number of Examples: 59 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -76,6 +76,8 @@ Number of Examples: 58 (0 deprecated)
 | link:webhook/readme.adoc[Webhook] (webhook) | Cloud | Example on how to use the Camel Webhook component
 
 | link:master/readme.adoc[Master] (master) | Clustering | An example showing how to work with Camel's Master component and Spring Boot
+
+| link:rest-cxf-opentelemetry/README.adoc[Rest Cxf Opentelemetry] (rest-cxf-opentelemetry) | CXF | An example showing Camel REST using CXF and OpenTelemetry with Spring Boot
 
 | link:soap-cxf/README.adoc[Soap Cxf] (soap-cxf) | CXF | An example showing the Camel SOAP CXF
 
