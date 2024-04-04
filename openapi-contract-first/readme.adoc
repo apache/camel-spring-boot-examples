@@ -35,7 +35,6 @@ curl -XPUT -H "Content-Type: application/json" --data "@daisy.json" http://0.0.0
 ----
 
 
-
 === Camel CLI
 
 This application is integrated with the Camel CLI (camel-jbang) via the `camel-cli-connector-starter` dependency (see `pom.xml`).
@@ -48,6 +47,11 @@ And then use the CLI to see status:
     $camel get
       PID   NAME           CAMEL  PLATFORM            PROFILE  READY  STATUS   RELOAD  AGE  ROUTE  MSG/S  TOTAL  FAIL  INFLIGHT  LAST  DELTA  SINCE-LAST
      87918  CamelPetStore  4.6.0  Spring Boot v3.2.4            1/1   Running       0   7s    3/3   0.00      0     0         0                    -/-/-
+
+To see which Rest APIs that are available in the running Camel application, you can use camel-jbang as follows:
+
+    $camel get service
+
 
 === Help and contributions
 
