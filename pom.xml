@@ -59,6 +59,7 @@
 		<module>master</module>
 		<module>metrics</module>
 		<module>observation</module>
+		<module>openapi-contract-first</module>
 		<module>opentelemetry</module>
 		<module>paho-mqtt5-shared-subscriptions</module>
 		<module>platform-http</module>

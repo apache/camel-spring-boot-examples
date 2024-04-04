@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 55 (0 deprecated)
+Number of Examples: 56 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -132,6 +132,8 @@ Number of Examples: 55 (0 deprecated)
 
 | link:reactive-streams/readme.adoc[Reactive Streams] (reactive-streams) | Reactive | An example that shows how Camel can exchange data using reactive streams with Spring Boot reactor
     
+
+| link:openapi-contract-first/readme.adoc[Openapi Contract First] (openapi-contract-first) | Rest | Contract First OpenAPI example
 
 | link:platform-http/README.adoc[Platform Http] (platform-http) | Rest | An example showing Camel REST DSL with platform HTTP
 
