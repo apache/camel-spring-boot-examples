@@ -18,8 +18,10 @@ package sample.camel;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.xml.ws.WebServiceException;
+
 import org.apache.cxf.ext.logging.LoggingFeature;
 import org.apache.cxf.frontend.ClientProxyFactoryBean;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
@@ -39,6 +41,9 @@ import com.example.customerservice.NoSuchCustomerException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class WsdlClientTest {
@@ -62,6 +67,43 @@ public class WsdlClientTest {
 	public void before() {
 		cxfClient = createCustomerClient();
 	}
+	
+	@Test
+        public void testRequestLimiting() throws Exception {
+            CountDownLatch latch = new CountDownLatch(50);
+
+            ExecutorService executor = Executors.newFixedThreadPool(200);
+
+            for (int i = 0; i < 50; i++) {
+                executor.execute(new SendRequest(latch));
+            }
+            latch.await();
+        }
+
+        class SendRequest implements Runnable {
+
+            CountDownLatch latch;
+
+            SendRequest(CountDownLatch latch) {
+                this.latch = latch;
+            }
+
+            @Override
+            public void run() {
+                try {
+                    List<Customer> customers = cxfClient.getCustomersByName("test");
+                    assertEquals(customers.get(0).getName(), "test");
+                    assertEquals(customers.get(0).getCustomerId(), 1);
+
+                } catch (Exception ex) {
+                    // some requests are expected to fail and receive 503 error
+                    // cause Server side limit the concurrent request
+                    assertTrue(ex.getCause().getMessage().contains("503: Service Unavailable"));
+                } finally {
+                    latch.countDown();
+                }
+            }
+        }
 
 	@Test
 	public void testGetCustomer() throws Exception {
