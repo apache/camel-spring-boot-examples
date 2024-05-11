@@ -96,14 +96,6 @@
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-xml-io-dsl-starter</artifactId>
         </dependency>
-        <!-- OR -->
-        <!-- xml-io with slow jaxb xml route loader -->
-        <!--
-        <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-xml-jaxb-dsl-starter</artifactId>
-        </dependency>
-        -->
         <!-- yaml route loader -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
