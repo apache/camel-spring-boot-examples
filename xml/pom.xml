@@ -75,11 +75,11 @@
         <!-- Camel -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-spring-boot-xml-starter</artifactId>
+            <artifactId>camel-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-xml-jaxb-dsl-starter</artifactId>
+            <artifactId>camel-xml-io-dsl-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
