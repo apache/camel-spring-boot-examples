@@ -1,0 +1,66 @@
+== Spring Boot Example with HTTP and SSL
+
+=== Introduction
+
+This example shows how to configure SSL in different scenarios:
+
+1. one way SSL, the server exposes REST API using SSL and the client trusts the server certificate. The SSL server configuration is managed by Spring Boot and the Camel inherit it, the SSL client configuration is managed by Camel in HTTP component
+2. two ways SSL, the server and the client check both certificates in a mutual trusted handshake
+3. same scenario as point 1 but the server configuration is managed directly in Camel (undertow component) instead of Spring Boot
+
+=== Prerequisites
+
+keytool installed and available on PATH
+
+Generate certificates and keystores
+
+    $ ./generate-certificates.sh
+
+=== Run using one way ssl (server validation on client side)
+
+Start ssl-server in a separate terminal:
+
+    $ mvn spring-boot:run -f ssl-server/pom.xml
+
+Start ssl-client in a separate terminal:
+
+    $ mvn spring-boot:run -f ssl-client/pom.xml
+
+=== Run using two ways ssl (mutual validation)
+
+Start ssl-server in a separate terminal:
+
+    $ mvn spring-boot:run -f ssl-server/pom.xml -Ptwoways
+
+Start ssl-client in a separate terminal:
+
+    $ mvn spring-boot:run -f ssl-client/pom.xml -Ptwoways
+
+=== Run using Camel component as server
+
+Start ssl-camel-server in a separate terminal:
+
+    $ mvn spring-boot:run -f ssl-camel-server/pom.xml
+
+Start ssl-client in a separate terminal:
+
+    $ mvn spring-boot:run -f ssl-client/pom.xml
+
+=== Call service to start handshake
+
+    $ curl http://localhost:8080/ping
+
+==== Tip
+
+to show the full handshake it is possible to add `-Dspring-boot.run.jvmArguments="-Djavax.net.debug=all"` in the start command line
+
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
