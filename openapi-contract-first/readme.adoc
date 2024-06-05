@@ -50,7 +50,7 @@ And then use the CLI to see status:
 
 To see which Rest APIs that are available in the running Camel application, you can use camel-jbang as follows:
 
-    $camel get service
+    $camel get platform-http
 
 
 === Help and contributions
