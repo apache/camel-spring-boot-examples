@@ -18,7 +18,7 @@
         with IMAP protocol and access email data for Office 365 users using OAuth2 authentication</description>
 
     <properties>
-        <msal4j-version>1.13.2</msal4j-version>
+        <msal4j-version>1.15.1</msal4j-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <category>Mail</category>
     </properties>
