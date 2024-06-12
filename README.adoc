@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 57 (0 deprecated)
+Number of Examples: 58 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -150,6 +150,8 @@ Number of Examples: 57 (0 deprecated)
 | link:jira/README.adoc[Jira] (jira) | SaaS | An example that uses Jira Camel API
 
 | link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) | SaaS | Twitter mentions is created as contacts in Salesforce
+
+| link:vault/README.adoc[HashiCorp Vault] (vault) | Bean Configuration | Configure a DataSource using HashiCorp Vault
 |===
 // examples: END
 

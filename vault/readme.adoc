@@ -1,0 +1,49 @@
+== Camel Example HashiCorp Vault
+
+This example shows how `camel-hashicorp-vault` can be used to configure beans using data from HashiCorp Vault
+
+=== How to run
+Run HashiCorp Vault
+
+    docker run --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=myroot' -e 'VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200' -p 8200:8200 hashicorp/vault:1.16.1`
+
+Go to `http://localhost:8200/ui/vault/secrets/secret/kv/list` login with method Token and token `myroot` and create the following secrets:
+
+* a secret named `myDatabase`
+* a secret data `myPassword` with value `mysecretpassword`
+* a secret data `myUsername` with value `postgres`
+* a secret data `myJdbcURL` with value `jdbc:postgresql://localhost:5432/postgres`
+
+image::img/secret-database.png[]
+
+Run the database container
+
+    docker run -p 5432:5432 --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres
+
+You can run this example using
+
+    mvn spring-boot:run
+
+To execute the routes:
+
+1. verify the table is empty (no data on response)
+
+    curl http://localhost:8080/api/cars
+
+2. insert data
+
+     curl --header "Content-Type: application/json" --request POST --data '{"brand": "Ford", "model": "Mustang", "year": 2024}' http://localhost:8080/api/cars
+
+3. verify the data has been persisted
+
+    curl http://localhost:8080/api/cars
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
