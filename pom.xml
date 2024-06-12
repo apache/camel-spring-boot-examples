@@ -92,6 +92,7 @@
 		<module>widget-gadget</module>
 		<module>azure</module>
 		<module>variables</module>
+		<module>vault</module>
     </modules>
 
 	<properties>
