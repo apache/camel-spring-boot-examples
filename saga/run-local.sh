@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo running amq broker and lra-coordinator
-docker-compose -f local-resources/docker-compose.yml up -d
+docker compose -f local-resources/compose.yaml up -d
 
 echo compiling project
 mvn clean package

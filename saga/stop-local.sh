@@ -13,4 +13,4 @@ echo stopping payment service
 kill -9 $(cat payment.pid) && rm payment.pid
 
 echo stopping amq broker and lra-coordinator
-docker-compose -f local-resources/docker-compose.yml stop
+docker compose -f local-resources/compose.yaml stop
