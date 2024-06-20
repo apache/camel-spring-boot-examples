@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   lra-coordinator:
     image: "quay.io/jbosstm/lra-coordinator:latest"

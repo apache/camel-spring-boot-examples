@@ -42,7 +42,7 @@ On a system with Podman, your output might resemble the following:
 [source,text]
 ----
 Emulate Docker CLI using podman. Create /etc/containers/nodocker to quiet msg.
->>>> Executing external compose provider "/usr/bin/docker-compose". Please refer to the documentation for details. <<<<
+>>>> Executing external compose provider "/usr/bin/docker compose". Please refer to the documentation for details. <<<<
 
 [+] Running 6/6
  ✔ Network docker_test-dynamic-router  Created  0.0s
@@ -59,7 +59,7 @@ When running the application stack for the Multimodule example, it should be the
 Docker or Podman installed.  For Podman, please confirm that you have `podman compose` installed to ensure
 that you can emulate the Docker CLI when using Podman.
 
-    docker compose -f dynamic-router-eip/dynamic-router-eip-stack/project-resources/docker/docker-compose.yaml up -d
+    docker compose -f dynamic-router-eip/dynamic-router-eip-stack/project-resources/docker/compose.yaml up -d
 
 ==== Access the Swagger UI
 

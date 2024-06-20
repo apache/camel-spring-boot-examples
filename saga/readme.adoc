@@ -163,7 +163,7 @@ oc logs -f deploymentconfig/camel-example-spring-boot-saga-payment
 
 ==== Requirements
 
-- `docker-compose` installed (https://docs.docker.com/compose/install/[guide])
+- `docker compose` installed (https://docs.docker.com/compose/install/[guide])
 
 ==== Run script to execute services locally
 
