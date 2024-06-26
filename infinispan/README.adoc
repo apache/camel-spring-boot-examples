@@ -15,7 +15,7 @@ You can build this example using:
 
 Start Infinispan container in a separate terminal:
 
-    $ docker run --rm -e USER=admin -e PASS=password -p 11222:11222 -v $PWD/src/test/resources:/user-config/ quay.io/infinispan/server:13.0.5.Final-1 -c /user-config/infinispan.xml
+    $ docker run --rm -e USER=admin -e PASS=password -p 11222:11222 -v $PWD/src/test/resources:/user-config/ quay.io/infinispan/server:15.0.5.Final -c /user-config/infinispan.xml
 
 You can run this example using:
 
