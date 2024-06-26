@@ -6,11 +6,11 @@ This is an example application of the `camel-fhir` component. We'll be using `ca
 
 The Camel route is located in the `MyCamelRouter` class.
 
-This example will read HL7V2 patients from a directory and convert them to FHIR dtsu3 patients and upload them to a configured FHIR server. 
+This example will read HL7V2 patients from a directory and convert them to FHIR R4 patients and upload them to a configured FHIR server.
 
 The example installs hapiproject/hapi:v4.2.0 docker image as local FHIR server
 
-By default, the example uses `\http://localhost:8081/hapi-fhir-jpaserver/fhir` as the FHIR server URL, DSTU3 as the FHIR version and `target/work/fhir/input`
+By default, the example uses `\http://localhost:8081/fhir` as the FHIR server URL, R4 as the FHIR version and `target/work/fhir/input`
 as the directory to look for HL7V2 patients.
 However, you can edit the `application.properties` file to override the defaults and provide your own configuration.
 
@@ -31,7 +31,7 @@ Before running your application execute this command to deploy FHIR server:
 
 [source,bash]
 ----
-docker run -p 8081:8080 -e HAPI_FHIR_VERSION=DSTU3 -e HAPI_REUSE_CACHED_SEARCH_RESULTS_MILLIS=-1 hapiproject/hapi:v4.2.0
+docker run -p 8081:8080 -e hapi.fhir.fhir_version=R4 -e hapi.fhir.reuse_cached_search_results_millis=-1 hapiproject/hapi:v6.8.3
 ----
 
 Then you can run this example using:
