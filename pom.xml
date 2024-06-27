@@ -102,7 +102,7 @@
 		<jkube-maven-plugin-version>1.14.0</jkube-maven-plugin-version>
 		<kafka-avro-serializer-version>5.2.2</kafka-avro-serializer-version>
 		<reactor-version>3.5.11</reactor-version>
-		<testcontainers-version>1.19.1</testcontainers-version>
+		<testcontainers-version>1.19.8</testcontainers-version>
 		<hapi-structures-v24-version>2.3</hapi-structures-v24-version>
 		<narayana-spring-boot-version>2.6.7</narayana-spring-boot-version>
         <artemis-jakarta-version>2.31.0</artemis-jakarta-version>
