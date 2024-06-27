@@ -16,66 +16,38 @@
  */
 package sample.camel;
 
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
+import org.apache.camel.spring.boot.CamelContextConfiguration;
+import org.apache.camel.test.infra.fhir.services.FhirService;
+import org.apache.camel.test.infra.fhir.services.FhirServiceFactory;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.apache.commons.io.FileUtils;
-
+import org.hl7.fhir.r4.model.Patient;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import org.hl7.fhir.dstu3.model.Patient;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.wait.strategy.Wait;
-
-import com.github.dockerjava.api.command.CreateContainerCmd;
-import com.github.dockerjava.api.model.ExposedPort;
-import com.github.dockerjava.api.model.PortBinding;
-import com.github.dockerjava.api.model.Ports;
-
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
+import org.springframework.context.annotation.Bean;
 
 @CamelSpringBootTest
-@SpringBootTest(classes = MyCamelApplication.class,
+@SpringBootTest(classes = {MyCamelApplication.class, MyCamelApplicationTest.class},
 		properties = "input = target/work/fhir/testinput")
 public class MyCamelApplicationTest {
 
-	private static final int CONTAINER_PORT = 8080;
-	private static final int EXPOSED_PORT = 8081;
-	private static final String CONTAINER_IMAGE = "hapiproject/hapi:v4.2.0";
-
-	private static GenericContainer container;
+	@RegisterExtension
+	public static FhirService service = FhirServiceFactory.createSingletonService();
 
 	@Autowired
 	private CamelContext camelContext;
 
 	@Autowired
 	private ProducerTemplate producerTemplate;
-
-	@BeforeAll
-	public static void startServer() throws Exception {
-		Consumer<CreateContainerCmd> cmd = e -> {
-			e.withPortBindings(new PortBinding(Ports.Binding.bindPort(EXPOSED_PORT),
-					new ExposedPort(CONTAINER_PORT)));
-		};
-
-		container = new GenericContainer(CONTAINER_IMAGE)
-				.withNetworkAliases("fhir")
-				.withExposedPorts(CONTAINER_PORT)
-				.withCreateContainerCmdModifier(cmd)
-				.withEnv("HAPI_FHIR_VERSION", "DSTU3")
-				.withEnv("HAPI_REUSE_CACHED_SEARCH_RESULTS_MILLIS", "-1")
-				.waitingFor(Wait.forListeningPort())
-				.waitingFor(Wait.forHttp("/hapi-fhir-jpaserver/fhir/metadata"));
-		;
-		container.start();
-	}
 
 	@Test
 	public void shouldPushConvertedHl7toFhir() throws Exception {
@@ -88,5 +60,20 @@ public class MyCamelApplicationTest {
 
 		mock.assertIsSatisfied();
 		Assertions.assertEquals("Freeman", mock.getExchanges().get(0).getIn().getBody(Patient.class).getName().get(0).getFamily());
+	}
+
+	@Bean
+	CamelContextConfiguration contextConfiguration() {
+		return new CamelContextConfiguration() {
+			@Override
+			public void beforeApplicationStart(CamelContext context) {
+				context.getPropertiesComponent().addInitialProperty("serverUrl", service.getServiceBaseURL());
+			}
+
+			@Override
+			public void afterApplicationStart(CamelContext camelContext) {
+
+			}
+		};
 	}
 }

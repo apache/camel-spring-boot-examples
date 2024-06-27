@@ -22,7 +22,7 @@ import ca.uhn.hl7v2.model.v24.segment.PID;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.http.ProtocolException;
-import org.hl7.fhir.dstu3.model.Patient;
+import org.hl7.fhir.r4.model.Patient;
 import org.springframework.stereotype.Component;
 
 /**
