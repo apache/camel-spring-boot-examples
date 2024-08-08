@@ -1,0 +1,58 @@
+== Camel Spring Boot example with Tomcat and database connection
+
+This example shows how to work with a simple Apache Camel Spring Boot application deploying to Tomcat and using its JDBC data source.
+
+The example generates 2 routes:
+
+. The first route is triggered by a timer and writes messages to the database.
+. The second route is triggered by a timer and read the COUNT of messages from the database.
+
+=== Classes
+
+* `MyCamelRouter`: where the camel routes are defined
+* `MyBean`: used to generate a simple message with a counter
+* `MyCamelApplication`: the Spring Boot servlet initializer
+
+=== How to deploy
+
+. Run the database container
+[source,console]
+podman run --rm --name db -e POSTGRES_PASSWORD=password -p 5432:5432 docker.io/library/postgres:latest
+
+. Run the tests and package the `war` file
+[source,console]
+mvn clean package
+
+. Copy the `war` file to your tomcat `webapps` directory
+[source,console]
+cp target/camel-example-spring-boot.war <your_tomcat_dir>/webapps/
+
+. Run tomcat
+[source,console]
+sh <your_tomcat_dir>/bin/catalina.sh run
+
+. Look for the log messages in the console
+[source,log]
+[- timer://hello] ... Body: insert into messages(message) values('Hello World I am invoked 1 times')]
+[- timer://query] ... Body: There are 0 messages in the database.]
+[- timer://query] ... Body: There are 1 messages in the database.]
+[- timer://hello] ... Body: insert into messages(message) values('Hello World I am invoked 2 times')]
+[- timer://query] ... Body: There are 2 messages in the database.]
+[- timer://hello] ... Body: insert into messages(message) values('Hello World I am invoked 3 times')]
+[- timer://query] ... Body: There are 3 messages in the database.]
+[- timer://hello] ... Body: insert into messages(message) values('Hello World I am invoked 4 times')]
+[- timer://hello] ... Body: insert into messages(message) values('Hello World I am invoked 5 times')]
+[- timer://query] ... Body: There are 4 messages in the database.]
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
+
+
+
