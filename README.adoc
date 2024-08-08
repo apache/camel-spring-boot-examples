@@ -55,6 +55,8 @@ Number of Examples: 58 (0 deprecated)
 
 | link:spring-jdbc/readme.adoc[Spring Jdbc] (spring-jdbc) | Beginner | Camel transacted routes integrating local Spring Transaction
 
+| link:tomcat-jdbc/readme.adoc[Tomcat Jdbc] (tomcat-jdbc) | Beginner | An example showing how to deploy a Camel Spring Boot application in Tomcat using its JDBC Data Source
+
 | link:type-converter/README.adoc[Type Converter] (type-converter) | Beginner | An example showing how to create custom type converter with Camel and Spring Boot
 
 | link:xml/readme.adoc[Spring Boot XML] (xml) | Beginner | An example showing how to work with Camel routes in XML files and Spring Boot
@@ -150,8 +152,6 @@ Number of Examples: 58 (0 deprecated)
 | link:jira/README.adoc[Jira] (jira) | SaaS | An example that uses Jira Camel API
 
 | link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) | SaaS | Twitter mentions is created as contacts in Salesforce
-
-| link:vault/README.adoc[HashiCorp Vault] (vault) | Bean Configuration | Configure a DataSource using HashiCorp Vault
 |===
 // examples: END
 
