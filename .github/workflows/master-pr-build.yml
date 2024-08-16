@@ -36,3 +36,5 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: mvn build
         run: ./mvnw -f pom.xml -V --no-transfer-progress clean install -DskipTests
+      - name: mvn test
+        run: ./mvnw -f pom.xml -V --no-transfer-progress test
