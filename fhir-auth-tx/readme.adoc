@@ -10,7 +10,7 @@ The Camel route is located in the `MyCamelRouter` class.
 This example will read patients stored in csv files from a directory and convert them to FHIR dtsu3 patients and upload them to a configured FHIR server. Each file is uploaded in a new transaction.
 
 The example assumes you have a running FHIR server at your disposal, which is configured for basic authentication.
-You may use [hapi-fhir-jpa-server-example](https://github.com/rkorytkowski/hapi-fhir/tree/basic-auth/hapi-fhir-jpaserver-example). You can start it up by running `mvn jetty:run`.
+You may use https://github.com/rkorytkowski/hapi-fhir/tree/basic-auth/hapi-fhir-jpaserver-example[hapi-fhir-jpa-server-example]. You can start it up by running `mvn jetty:run`.
 
 By default, the example uses `\http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3` as the FHIR server URL, DSTU3 as the FHIR version, BASIC authentication (`admin` as username and `Admin123` as password) and `target/work/fhir/input`
 as the directory to look for csv patients. 
