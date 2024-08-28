@@ -69,6 +69,7 @@
 		<module>reactive-streams</module>
 		<module>resilience4j</module>
 		<module>rest-cxf</module>
+		<module>rest-cxf-opentelemetry</module>
 		<module>rest-openapi</module>
 		<module>rest-openapi-simple</module>
 		<module>rest-openapi-springdoc</module>
