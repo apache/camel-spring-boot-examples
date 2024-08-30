@@ -1,0 +1,75 @@
+== Camel Spring Boot with multiple pooled datasources and 2PC
+
+This example shows how to set up multiple pooled datasources with Camel Spring Boot and have them working with two-phase commit.
+
+One of the databases has a non-unique `name` column, while the other has a unique one. When trying to insert repeated names in both databases at the same time, the second `prepare` should fail making the transaction rollback for both databases.
+
+=== Classes and resources
+
+* `MyCamelRouter`: where the camel routes are defined
+* `DataSourcesConfig`: where the datasources' beans are created
+* `MyCamelApplication`: the Spring Boot main class
+* `application.properties`: configuration for the datasources and others
+* `schema-ds1.sql` and `schema-ds2.sql`: initializers for the databases
+
+=== How to run
+
+. Run the database containers. Notice the commands have extra arguments to enable initialization and two-phase commit.
++
+[source,console]
+----
+podman run --rm --name db1 -e POSTGRES_PASSWORD=password -p 5432:5432 -v ./src/main/resources/schema-ds1.sql:/docker-entrypoint-initdb.d/init.sql:Z docker.io/library/postgres:latest -c max_prepared_transactions=10
+----
++
+[source,console]
+----
+podman run --rm --name db2 -e POSTGRES_PASSWORD=password -p 5433:5432 -v ./src/main/resources/schema-ds2.sql:/docker-entrypoint-initdb.d/init.sql:Z docker.io/library/postgres:latest -c max_prepared_transactions=10
+----
+
+. Then run the example using
+[source,console]
+mvn spring-boot:run
+
+. Every few seconds you can see in the logs that a new insert is created, but when it tries to insert a non-unique name then the transaction rollbacks and the names are not inserted in any of the databases.
++
+[source,log]
+----
+[read #8 - Delay] info                  : Exchange[ExchangePattern: InOnly, BodyType: String, Body: There are 4 names in the ds2 database.]
+[timer://runOnce] info                  : Exchange[Id: 0B8F2317CCE5D8D-000000000000000D, RouteGroup: null, RouteId: route2, ExchangePattern: InOnly, Properties: {CamelAggregationStrategy={split1=UseOriginalAggregationStrategy}, CamelCorrelationId=0B8F2317CCE5D8D-0000000000000000, CamelSplitComplete=false, CamelSplitIndex=4, CamelSplitSize=6, CamelStreamCacheUnitOfWork=DefaultUnitOfWork, CamelToEndpoint=log://info?showAll=true}, Headers: {}, BodyType: String, Body: Maria]
+[timer://runOnce] route2                : insert into the first database (non-unique)
+[timer://runOnce] route2                : insert into the second database (unique)
+[timer://runOnce] com.arjuna.ats.jta    : ARJUNA016041: prepare on < formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffff0a057e34:aedb:66cc8122:39, node_name=1, branch_uid=0:ffff0a057e34:aedb:66cc8122:3f, subordinatenodename=null, eis_name=java:comp/env/jdbc/ds2 > (io.agroal.narayana.BaseXAResource@65fecc5) failed with exception XAException.XA_RBINTEGRITY
+...
+Caused by: org.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "names_name_key"
+...
+[timer://runOnce] com.arjuna.ats.arjuna : ARJUNA012073: BasicAction.End() - prepare phase of action-id 0:ffff0a057e34:aedb:66cc8122:39 failed.
+[timer://runOnce] com.arjuna.ats.arjuna : ARJUNA012075: Action Aborting
+----
+
+=== Cleanup
+
+. Clear Narayana transaction logs:
+[source,console]
+rm -rf transaction-logs
+
+. Stop the running containers
+
+=== Running the tests
+
+. Run the tests using
+[source,console]
+mvn clean test
+
+=== Extra details
+
+The `name` column in the second database is set up with `UNIQUE DEFERRABLE INITIALLY DEFERRED`. This configuration delays the constraint check to only be evaluated in the commit phase. Without this argument there would be an exception thrown immediately during the `INSERT` command, causing the transaction to be rolled-back immediately. This is only set up this way to make the example clearer.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
