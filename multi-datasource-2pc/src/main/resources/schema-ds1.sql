@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS names;
+CREATE TABLE names (
+    name VARCHAR(255)
+);
