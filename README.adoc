@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 60 (0 deprecated)
+Number of Examples: 61 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -108,6 +108,8 @@ Number of Examples: 60 (0 deprecated)
 | link:actuator-http-metrics/readme.adoc[Actuator Http Metrics] (actuator-http-metrics) | Management and Monitoring | Example on how to use Spring Boot's Actuator endpoints to gather info like mappings or metrics
 
 | link:health-checks/readme.adoc[Health Checks] (health-checks) | Management and Monitoring | An example how to use custom health-checks
+
+| link:jolokia/README.adoc[Jolokia] (jolokia) | Management and Monitoring | An example that uses Jolokia to monitor and to manage Camel Routes
 
 | link:metrics/README.adoc[Metrics] (metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
 

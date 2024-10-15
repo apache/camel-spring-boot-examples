@@ -52,6 +52,7 @@
 		<module>http-ssl</module>
 		<module>infinispan</module>
 		<module>jira</module>
+		<module>jolokia</module>
 		<module>kafka-avro</module>
 		<module>kafka-offsetrepository</module>
 		<module>kamelet-chucknorris</module>
