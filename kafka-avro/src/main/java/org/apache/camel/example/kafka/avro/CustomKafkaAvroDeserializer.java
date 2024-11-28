@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import io.confluent.common.config.ConfigException;
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
 import io.confluent.kafka.serializers.AbstractKafkaAvroDeserializer;
 import io.confluent.kafka.serializers.KafkaAvroDeserializerConfig;
@@ -37,16 +36,10 @@ public class CustomKafkaAvroDeserializer extends AbstractKafkaAvroDeserializer  
         LOG.info("ENTER CustomKafkaAvroDeserializer  : configure method ");
         LOG.info("ENTER CustomKafkaAvroDeserializer  : SCHEMA_REGISTRY_URL " + SCHEMA_REGISTRY_URL);
 
-        try {
+        final List<String> schemas = Collections.singletonList(SCHEMA_REGISTRY_URL);
+        this.schemaRegistry = new CachedSchemaRegistryClient(schemas, Integer.MAX_VALUE);
+        this.useSpecificAvroReader = true;
 
-            final List<String> schemas = Collections.singletonList(SCHEMA_REGISTRY_URL);
-            this.schemaRegistry = new CachedSchemaRegistryClient(schemas, Integer.MAX_VALUE);
-            this.useSpecificAvroReader = true;
-
-        } catch (ConfigException e) {
-            e.printStackTrace();
-            throw new org.apache.kafka.common.config.ConfigException(e.getMessage());
-        }
         LOG.info("EXIT CustomKafkaAvroDeserializer  : configure method ");
 
     }

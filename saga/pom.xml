@@ -37,7 +37,6 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jkube.generator.from>registry.access.redhat.com/ubi8/openjdk-17</jkube.generator.from>
     </properties>
 
     <modules>

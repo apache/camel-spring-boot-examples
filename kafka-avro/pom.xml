@@ -62,6 +62,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- manages conflict forcing CSB/Camel version -->
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${avro-version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

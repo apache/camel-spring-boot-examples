@@ -20,9 +20,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import io.confluent.kafka.schemaregistry.avro.AvroSchema;
+import io.confluent.kafka.schemaregistry.avro.AvroSchemaUtils;
 import io.confluent.kafka.schemaregistry.client.CachedSchemaRegistryClient;
 import io.confluent.kafka.serializers.AbstractKafkaAvroSerializer;
-import io.confluent.kafka.serializers.AvroSchemaUtils;
 import io.confluent.kafka.serializers.KafkaAvroSerializerConfig;
 import org.apache.kafka.common.config.ConfigException;
 import org.apache.kafka.common.serialization.Serializer;
@@ -46,8 +47,9 @@ public class CustomKafkaAvroSerializer extends AbstractKafkaAvroSerializer  impl
         LOG.info("****************serialize*******************************");
         LOG.info("Serialize method: topic " + topic);
         LOG.info("Serialize method: byte " + record);
+        AvroSchema schema = new AvroSchema(AvroSchemaUtils.getSchema(record));
         return serializeImpl(
-             getSubjectName(topic, isKey, record, AvroSchemaUtils.getSchema(record)), record);
+                getSubjectName(topic, isKey, record, schema), record, schema);
     }
 
     @Override
