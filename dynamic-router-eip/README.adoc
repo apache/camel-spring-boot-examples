@@ -31,11 +31,11 @@ This example shows how you can route messages between separate modules, where ea
 
 ==== For systems with Docker
 
-    mvn clean package -f dynamic-router-eip/dynamic-router-eip-stack -Pdocker
+    mvn clean package -f dynamic-router-eip-stack/pom.xml -Pdocker
 
 ==== For systems with Podman
 
-    mvn clean package -f dynamic-router-eip/dynamic-router-eip-stack -Ppodman
+    mvn clean package -f dynamic-router-eip-stack/pom.xml -Ppodman
 
 On a system with Podman, your output might resemble the following:
 
@@ -59,7 +59,7 @@ When running the application stack for the Multimodule example, it should be the
 Docker or Podman installed.  For Podman, please confirm that you have `podman compose` installed to ensure
 that you can emulate the Docker CLI when using Podman.
 
-    docker compose -f dynamic-router-eip/dynamic-router-eip-stack/project-resources/docker/compose.yaml up -d
+    docker compose -f dynamic-router-eip-stack/project-resources/docker/compose.yaml up -d
 
 ==== Access the Swagger UI
 
