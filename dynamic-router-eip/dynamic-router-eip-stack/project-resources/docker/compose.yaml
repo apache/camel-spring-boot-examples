@@ -60,7 +60,7 @@ services:
       - THC_PATH=/main-router/actuator/health
       - THC_PORT=8082
     healthcheck:
-      test: [ "CMD", "/cnb/process/health-check" ]
+      test: [ "CMD", "/workspace/health-check" ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -80,7 +80,7 @@ services:
       - THC_PATH=/all-numbers/actuator/health
       - THC_PORT=8911
     healthcheck:
-      test: [ "CMD", "/cnb/process/health-check" ]
+      test: [ "CMD", "/workspace/health-check" ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -100,7 +100,7 @@ services:
       - THC_PATH=/even-numbers/actuator/health
       - THC_PORT=8902
     healthcheck:
-      test: [ "CMD", "/cnb/process/health-check" ]
+      test: [ "CMD", "/workspace/health-check" ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -120,7 +120,7 @@ services:
       - THC_PATH=/odd-numbers/actuator/health
       - THC_PORT=8901
     healthcheck:
-      test: [ "CMD", "/cnb/process/health-check" ]
+      test: [ "CMD", "/workspace/health-check" ]
       interval: 30s
       timeout: 10s
       retries: 5
