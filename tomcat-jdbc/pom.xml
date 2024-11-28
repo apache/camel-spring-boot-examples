@@ -27,7 +27,7 @@
         <version>4.9.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>camel-example-spring-boot</artifactId>
+    <artifactId>camel-example-tomcat-jdbc</artifactId>
     <name>Camel SB Examples :: Tomcat JDBC</name>
     <description>An example showing how to deploy a Camel Spring Boot application in Tomcat using its JDBC Data Source</description>
     <packaging>war</packaging>
