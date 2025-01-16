@@ -1,0 +1,79 @@
+services:
+
+  #################################### KAFKA BROKER ####################################
+  kafka:
+    image: strimzi/example-kafka
+    build: kafka/target
+    container_name: kafka
+    ports:
+      - 9091:9091
+      - 9092:9092
+
+      # javaagent debug port
+      #- 5005:5005
+    command:
+      - /bin/bash
+      - -c
+      - cd /opt/kafka && ./start.sh --kraft
+
+    environment:
+
+      # Java Debug
+      #KAFKA_DEBUG: y
+      #DEBUG_SUSPEND_FLAG: y
+      #JAVA_DEBUG_PORT: 5005
+
+      #
+      # KAFKA Configuration
+      #
+      LOG_DIR: /home/kafka/logs
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_NODE_ID: "1"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9091"
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_SASL_MECHANISM_CONTROLLER_PROTOCOL: PLAIN
+
+      KAFKA_LISTENERS: "CONTROLLER://kafka:9091,CLIENT://kafka:9092"
+      KAFKA_ADVERTISED_LISTENERS: "CLIENT://kafka:9092"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:SASL_PLAINTEXT,CLIENT:SASL_PLAINTEXT"
+
+      KAFKA_INTER_BROKER_LISTENER_NAME: CLIENT
+      KAFKA_SASL_MECHANISM_INTER_BROKER_PROTOCOL: OAUTHBEARER
+
+      KAFKA_PRINCIPAL_BUILDER_CLASS: "io.strimzi.kafka.oauth.server.OAuthKafkaPrincipalBuilder"
+
+      KAFKA_LISTENER_NAME_CONTROLLER_SASL_ENABLED_MECHANISMS: PLAIN
+      KAFKA_LISTENER_NAME_CONTROLLER_PLAIN_SASL_JAAS_CONFIG: "org.apache.kafka.common.security.plain.PlainLoginModule required    username=\"admin\"    password=\"admin-password\"    user_admin=\"admin-password\"    user_bobby=\"bobby-secret\" ;"
+
+      KAFKA_LISTENER_NAME_CLIENT_SASL_ENABLED_MECHANISMS: OAUTHBEARER
+      KAFKA_LISTENER_NAME_CLIENT_OAUTHBEARER_SASL_JAAS_CONFIG: "org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;"
+      KAFKA_LISTENER_NAME_CLIENT_OAUTHBEARER_SASL_LOGIN_CALLBACK_HANDLER_CLASS: io.strimzi.kafka.oauth.client.JaasClientOauthLoginCallbackHandler
+      KAFKA_LISTENER_NAME_CLIENT_OAUTHBEARER_SASL_SERVER_CALLBACK_HANDLER_CLASS: io.strimzi.kafka.oauth.server.JaasServerOauthValidatorCallbackHandler
+
+      KAFKA_SUPER_USERS: "User:admin,User:service-account-kafka-broker"
+
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+
+      #
+      # Strimzi OAuth Configuration
+      #
+
+      # Authentication config
+      OAUTH_CLIENT_ID: "kafka-broker"
+      OAUTH_CLIENT_SECRET: "kafka-broker-secret"
+      OAUTH_TOKEN_ENDPOINT_URI: "http://${KEYCLOAK_HOST:-keycloak}:8080/realms/${REALM:-demo}/protocol/openid-connect/token"
+
+      # Validation config
+      OAUTH_VALID_ISSUER_URI: "https://${KEYCLOAK_HOST:-keycloak}:8443/realms/${REALM:-demo}"
+      OAUTH_JWKS_ENDPOINT_URI: "http://${KEYCLOAK_HOST:-keycloak}:8080/realms/${REALM:-demo}/protocol/openid-connect/certs"
+      #OAUTH_INTROSPECTION_ENDPOINT_URI: "http://${KEYCLOAK_HOST:-keycloak}:8080/realms/${REALM:-demo}/protocol/openid-connect/token/introspect"
+
+
+      # username extraction from JWT token claim
+      OAUTH_USERNAME_CLAIM: preferred_username
+      OAUTH_CONNECT_TIMEOUT_SECONDS: "20"
+
+      # For start.sh script to know where the keycloak is listening
+      KEYCLOAK_HOST: ${KEYCLOAK_HOST:-keycloak}
+      KEYCLOAK_URI: https://keycloak:8443

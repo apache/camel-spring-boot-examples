@@ -1,0 +1,19 @@
+services:
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    volumes:
+      - ./realms:/opt/keycloak/data/import
+      - ./certificates/keycloak.server.keystore.p12:/opt/keycloak/data/certs/keycloak.server.keystore.p12
+
+    command: "-v start --import-realm --features=token-exchange,authorization,scripts --https-key-store-file=/opt/keycloak/data/certs/keycloak.server.keystore.p12 --https-key-store-password=changeit"
+
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      - KC_HOSTNAME=keycloak
+      - KC_HOSTNAME_ADMIN_URL=https://keycloak:8443
+      - KC_HTTP_ENABLED=true

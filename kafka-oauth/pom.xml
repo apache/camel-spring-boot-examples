@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.apache.camel.springboot.example</groupId>
+        <artifactId>examples</artifactId>
+        <version>4.10.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>camel-example-spring-boot-kafka-oauth</artifactId>
+    <name>Camel SB Examples :: Kafka :: OAuth</name>
+    <description>An example of Kafka authentication using OAuth.</description>
+
+    <properties>
+        <category>Messaging</category>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <strimzi.version>0.15.0</strimzi.version>
+        <nimbus.jose.version>9.37.2</nimbus.jose.version>
+    </properties>
+
+    <dependencyManagement>
+         <dependencies>
+            <!-- Camel BOM -->
+            <dependency>
+                <groupId>org.apache.camel.springboot</groupId>
+                <artifactId>camel-spring-boot-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Boot BOM -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <!-- Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator</artifactId>
+        </dependency>
+
+        <!-- Camel -->
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-kafka-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-timer-starter</artifactId>
+        </dependency>
+
+        <!-- Strimzi OAuth -->
+        <dependency>
+            <groupId>io.strimzi</groupId>
+            <artifactId>kafka-oauth-common</artifactId>
+            <version>${strimzi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.strimzi</groupId>
+            <artifactId>kafka-oauth-client</artifactId>
+            <version>${strimzi.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                <filesets>
+                    <fileset>
+                        <directory>${basedir}/docker/kafka-oauth-strimzi/kafka/target</directory>
+                    </fileset>
+                </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!-- copy the truststore CA to the camel-spring-boot, so the strimzi-oauth jaas login module 
+                             connects to the keycloak https and trust the CA
+                        -->
+                        <id>copy-resources</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/classes</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/docker/certificates/</directory>
+                                    <includes>
+                                        <include>ca-truststore.p12</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- copy the required files to build the strimzi-oauth-kafka image -->
+                        <id>copy-resources-strimzi</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/docker/kafka-oauth-strimzi/kafka/target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/docker/kafka-oauth-strimzi/kafka</directory>
+                                    <includes>
+                                        <include>functions.sh</include>
+                                        <include>start.sh</include>
+                                        <include>simple_kafka_config.sh</include>
+                                        <include>Dockerfile</include>
+                                        <include>config/</include>
+                                        <include>certificates/</include>
+                                    </includes>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>io.strimzi</groupId>
+                            <artifactId>kafka-oauth-client</artifactId>
+                            <version>${strimzi.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>io.strimzi</groupId>
+                            <artifactId>kafka-oauth-server</artifactId>
+                            <version>${strimzi.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>io.strimzi</groupId>
+                            <artifactId>kafka-oauth-server-plain</artifactId>
+                            <version>${strimzi.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>io.strimzi</groupId>
+                            <artifactId>kafka-oauth-common</artifactId>
+                            <version>${strimzi.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>io.strimzi</groupId>
+                            <artifactId>kafka-oauth-keycloak-authorizer</artifactId>
+                            <version>${strimzi.version}</version>
+                        </artifactItem>
+                        <artifactItem>
+                            <groupId>com.nimbusds</groupId>
+                            <artifactId>nimbus-jose-jwt</artifactId>
+                            <version>${nimbus.jose.version}</version>
+                        </artifactItem>
+                    </artifactItems>
+                    <outputDirectory>${basedir}/docker/kafka-oauth-strimzi/kafka/target/libs</outputDirectory>
+                    <overWriteReleases>false</overWriteReleases>
+                    <overWriteSnapshots>true</overWriteSnapshots>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
