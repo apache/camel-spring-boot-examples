@@ -35,7 +35,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <strimzi.version>0.15.0</strimzi.version>
-        <nimbus.jose.version>9.37.2</nimbus.jose.version>
     </properties>
 
     <dependencyManagement>
@@ -101,16 +100,6 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <configuration>
-                <filesets>
-                    <fileset>
-                        <directory>${basedir}/docker/kafka-oauth-strimzi/kafka/target</directory>
-                    </fileset>
-                </filesets>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-version}</version>
@@ -121,107 +110,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <!-- copy the truststore CA to the camel-spring-boot, so the strimzi-oauth jaas login module 
-                             connects to the keycloak https and trust the CA
-                        -->
-                        <id>copy-resources</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>target/classes</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/docker/certificates/</directory>
-                                    <includes>
-                                        <include>ca-truststore.p12</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <!-- copy the required files to build the strimzi-oauth-kafka image -->
-                        <id>copy-resources-strimzi</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/docker/kafka-oauth-strimzi/kafka/target</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/docker/kafka-oauth-strimzi/kafka</directory>
-                                    <includes>
-                                        <include>functions.sh</include>
-                                        <include>start.sh</include>
-                                        <include>simple_kafka_config.sh</include>
-                                        <include>Dockerfile</include>
-                                        <include>config/</include>
-                                        <include>certificates/</include>
-                                    </includes>
-                                    <filtering>false</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <artifactItems>
-                        <artifactItem>
-                            <groupId>io.strimzi</groupId>
-                            <artifactId>kafka-oauth-client</artifactId>
-                            <version>${strimzi.version}</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>io.strimzi</groupId>
-                            <artifactId>kafka-oauth-server</artifactId>
-                            <version>${strimzi.version}</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>io.strimzi</groupId>
-                            <artifactId>kafka-oauth-server-plain</artifactId>
-                            <version>${strimzi.version}</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>io.strimzi</groupId>
-                            <artifactId>kafka-oauth-common</artifactId>
-                            <version>${strimzi.version}</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>io.strimzi</groupId>
-                            <artifactId>kafka-oauth-keycloak-authorizer</artifactId>
-                            <version>${strimzi.version}</version>
-                        </artifactItem>
-                        <artifactItem>
-                            <groupId>com.nimbusds</groupId>
-                            <artifactId>nimbus-jose-jwt</artifactId>
-                            <version>${nimbus.jose.version}</version>
-                        </artifactItem>
-                    </artifactItems>
-                    <outputDirectory>${basedir}/docker/kafka-oauth-strimzi/kafka/target/libs</outputDirectory>
-                    <overWriteReleases>false</overWriteReleases>
-                    <overWriteSnapshots>true</overWriteSnapshots>
-                </configuration>
             </plugin>
         </plugins>
     </build>

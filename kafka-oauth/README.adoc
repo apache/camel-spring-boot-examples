@@ -2,9 +2,9 @@
 
 === Introduction
 
-An example which shows how to integrate https://camel.apache.org/components/next/kafka-component.html[Camel with Kafka] with OAuth authentication using a client secret. The authentication is handled by Keycloak.
+An example that shows how to integrate https://camel.apache.org/components/next/kafka-component.html[Camel with Kafka] with OAuth authentication using a client secret. The authentication is handled by Keycloak.
 
-This example requires docker-compose as it will build and run a keycloak and kafka broker (setup with kraft mode). 
+This example requires podman.
 
 On the Kafka side it uses https://github.com/strimzi/strimzi-kafka-oauth[Strimzi Oauth for Apache Kafka], this library must also be set on the client side.
 
@@ -20,7 +20,7 @@ camel.component.kafka.sasl-jaas-config = org.apache.kafka.common.security.oauthb
   oauth.client.id="kafka-producer-client" \
   oauth.client.secret="kafka-producer-client-secret" \
   oauth.username.claim="preferred_username" \
-  oauth.ssl.truststore.location="docker/certificates/ca-truststore.p12" \
+  oauth.ssl.truststore.location="containers/certificates/ca-truststore.p12" \
   oauth.ssl.truststore.type="pkcs12" \
   oauth.ssl.truststore.password="changeit" \
   oauth.token.endpoint.uri="https://keycloak:8443/realms/demo/protocol/openid-connect/token" ;
@@ -31,24 +31,16 @@ camel.component.kafka.additional-properties[sasl.login.callback.handler.class]=i
 
 * Set the hosts in /etc/hosts
 
-We have to set the IP addresses in /etc/hosts (check your OS how to do it), verify the current IP address and correctly set it as the example shows.
+We have to set the IP addresses in /etc/hosts (check your OS how to do it), verify the current IP address and correctly set it as the example shows. This is essential for the client application to reach keycloak and kafka hosts. In a production scenario those hosts names is going to be resolved by DNS.
 ----
 192.168.0.104   keycloak
 192.168.0.104   kafka
 ----
 
-* Build the project
-
-This command will download the required Strimzi OAuth libraries for Kafka and add it to the Kafka Broker directory, it will also build the camel spring boot example.
-----
-mvn package
-----
-
-* Launch the Keycloak server
+* Launch the Keycloak server. Note that the scripts runs a podman container with `host` network, so the keycloak and kafka server shares the same network as the client, this is for demo purposes only.
 
 ----
-cd docker
-docker-compose -f keycloak/compose.yml up 
+./start_keycloak.sh
 ----
 
 It must show the `demo` realm was imported successfully.
@@ -61,19 +53,18 @@ It must show the `demo` realm was imported successfully.
 It also shows the server started.
 ----
 [io.quarkus] (main) Keycloak 26.0.8 on JVM (powered by Quarkus 3.15.1) started in 9.169s. Listening on: http://0.0.0.0:8080 and https://0.0.0.0:8443
-[io.quarkus] (main) Profile prod activated. 
+[io.quarkus] (main) Profile prod activated.
 [io.quarkus] (main) Installed features: [agroal, cdi, hibernate-orm, jdbc-h2, keycloak, narayana-jta, opentelemetry, reactive-routes, rest, rest-jackson, smallrye-context-propagation, vertx]
 ----
 
 * Launch the Kafka broker
 
-Open another terminal console and go to the docker directory:
+Open another terminal console and launch kafka broker:
 ----
-cd docker
-docker-compose -f kafka-oauth-strimzi/compose.yml up --build
+./start_kafka.sh
 ----
 
-It should show the kafka broker authenticated to the keycloak server using the kafka-broker client id.
+It should show the kafka broker authenticates to the keycloak server using the `kafka-broker` client id.
 ----
 loginWithClientSecret() - tokenEndpointUrl: http://keycloak:8080/realms/demo/protocol/openid-connect/token, clientId: kafka-broker, clientSecret: k*********, scope: null, audience: null, connectTimeout: 20, readTimeout
 : 60, retries: 0, retryPauseMillis: 0 (io.strimzi.kafka.oauth.common.OAuthAuthenticator)
@@ -82,16 +73,15 @@ loginWithClientSecret() - tokenEndpointUrl: http://keycloak:8080/realms/demo/pro
 It should show the kafka broker started
 ----
 Kafka version: 3.9.0 (org.apache.kafka.common.utils.AppInfoParser)
-
 [KafkaRaftServer nodeId=1] Kafka Server started (kafka.server.KafkaRaftServer)
 ----
 
 === Run the camel example
 
-As the project was already built, it's ready to run:
+Build and run the quickstart.
 
 ----
-mvn spring-boot:run
+mvn compile spring-boot:run
 ----
 
 It should display the kafka OAuth settings, example:
@@ -116,10 +106,10 @@ Press `Ctrl-C` to exit.
 
 === Help and contributions
 
-If you hit any problem using Camel or have some feedback, 
+If you hit any problem using Camel or have some feedback,
 then please https://camel.apache.org/community/support/[let us know].
 
-We also love contributors, 
+We also love contributors,
 so https://camel.apache.org/community/contributing/[get involved] :-)
 
 The Camel riders!
