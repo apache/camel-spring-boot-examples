@@ -38,10 +38,10 @@ public class CamelInfinispanRoute extends RouteBuilder {
             .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.PUT)
             .setHeader(InfinispanConstants.KEY).constant("1")
             .setHeader(InfinispanConstants.VALUE).constant("test")
-            .to("infinispanRemoteComponent://default")
+            .to("infinispan://default")
             .setHeader(InfinispanConstants.OPERATION).constant(InfinispanOperation.GET)
             .setHeader(InfinispanConstants.KEY).constant("1")
-            .to("infinispanRemoteComponent://default")
+            .to("infinispan://default")
             .log("Received body: ${body}");
     }
 
