@@ -16,7 +16,7 @@ items:
       targetPort: 8080
     selector:
       app: lra-coordinator
-      deploymentconfig: lra-coordinator
+      deployment: lra-coordinator
     type: ClusterIP
 - apiVersion: v1
   kind: PersistentVolumeClaim
@@ -50,8 +50,8 @@ items:
       name: "latest"
       referencePolicy:
         type: Source
-- apiVersion: apps.openshift.io/v1
-  kind: DeploymentConfig
+- apiVersion: apps/v1
+  kind: Deployment
   metadata:
     generation: 1
     labels:
@@ -61,8 +61,9 @@ items:
   spec:
     replicas: 1
     selector:
-      app: lra-coordinator
-      deploymentconfig: lra-coordinator
+      matchLabels:
+        app: lra-coordinator
+        deployment: lra-coordinator
     strategy:
       type: Recreate
     template:
@@ -70,10 +71,11 @@ items:
         labels:
           app: lra-coordinator
           csbexample: saga
-          deploymentconfig: lra-coordinator
+          deployment: lra-coordinator
       spec:
         containers:
         - imagePullPolicy: IfNotPresent
+          image: "lra-coordinator:latest"
           env:
           - name: AB_JOLOKIA_OFF
             value: "true"
@@ -100,13 +102,3 @@ items:
         - name: lra-coordinator-data
           persistentVolumeClaim:
             claimName: lra-coordinator
-    triggers:
-    - type: ConfigChange
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-        - lra-coordinator
-        from:
-          kind: ImageStreamTag
-          name: "lra-coordinator:latest"
-      type: ImageChange
