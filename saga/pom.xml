@@ -134,15 +134,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <artifactId>openshift-maven-plugin</artifactId>
-                    <groupId>org.eclipse.jkube</groupId>
-                    <version>${jkube-maven-plugin-version}</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
 </project>
