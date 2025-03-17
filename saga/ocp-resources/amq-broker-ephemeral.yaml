@@ -20,7 +20,7 @@ items:
       targetPort: 61616
     selector:
       app: amq-broker
-      deploymentconfig: amq-broker
+      deployment: amq-broker
     type: ClusterIP
 - apiVersion: image.openshift.io/v1
   kind: ImageStream
@@ -41,8 +41,8 @@ items:
       name: "latest"
       referencePolicy:
         type: Source
-- apiVersion: apps.openshift.io/v1
-  kind: DeploymentConfig
+- apiVersion: apps/v1
+  kind: Deployment
   metadata:
     generation: 1
     labels:
@@ -52,8 +52,9 @@ items:
   spec:
     replicas: 1
     selector:
-      app: amq-broker
-      deploymentconfig: amq-broker
+      matchLabels:
+        app: amq-broker
+        deployment: amq-broker
     strategy:
       type: Recreate
     template:
@@ -61,7 +62,7 @@ items:
         labels:
           app: amq-broker
           csbexample: saga
-          deploymentconfig: amq-broker
+          deployment: amq-broker
       spec:
         containers:
         - imagePullPolicy: IfNotPresent
@@ -91,16 +92,6 @@ items:
               port: 8161
               scheme: HTTP
             initialDelaySeconds: 10
-    triggers:
-    - type: ConfigChange
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-        - amq-broker
-        from:
-          kind: ImageStreamTag
-          name: "amq-broker:latest"
-      type: ImageChange
 - kind: Route
   apiVersion: route.openshift.io/v1
   metadata:

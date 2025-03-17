@@ -156,7 +156,7 @@ tail logs of the application:
 
 [source,shell]
 ----
-oc logs -f deploymentconfig/camel-example-spring-boot-saga-payment
+oc logs -f deployment/camel-example-spring-boot-saga-payment
 ----
 
 === Running on local environment
