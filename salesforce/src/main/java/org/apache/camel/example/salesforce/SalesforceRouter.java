@@ -74,6 +74,7 @@ public class SalesforceRouter extends RouteBuilder {
         
         // Define route that queries Salesforce contacts
         from("direct:getContacts")
+            .id("getContacts")
             // Execute SOQL query to get Contact objects from Salesforce
             .to("salesforce:queryAll?sObjectQuery=SELECT Id, Name, Email FROM Contact")
             // Uncommented debug logging line
@@ -83,6 +84,7 @@ public class SalesforceRouter extends RouteBuilder {
 
         // Define route that queries Salesforce contacts
         from("direct:getContactById")
+            .id("getContactById")
             // Execute SOQL query to get Contact objects from Salesforce
             .toD("salesforce:getSObject?sObjectName=Contact&sObjectId=${header.id}")
             // Uncommented debug logging line
@@ -92,6 +94,7 @@ public class SalesforceRouter extends RouteBuilder {
         
         // Define route that updates a Salesforce contact by ID
         from("direct:updateContactById")
+            .id("updateContactById")
             // Convert the input body to JSON format using Jackson library
             .marshal().json(JsonLibrary.Jackson)
             // Convert the JSON to String format for Salesforce update
