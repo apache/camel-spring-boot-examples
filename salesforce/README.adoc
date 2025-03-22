@@ -1,0 +1,101 @@
+= Camel Salesforce Example
+
+The example provides REST API endpoints for managing Salesforce contacts (list all, get by ID, update) and implements real-time monitoring of Contact changes through Change Data Capture (CDC) events.
+
+== Features
+
+* REST API endpoints to fetch all Salesforce contacts, get contact by ID and update a contact by ID
+* Listens continuously for Change Data Capture events (CDC)
+* Salesforce authentication using client credentials flow
+
+== Prerequisites
+
+* Java 17 or higher
+* Maven 3.6+
+* Salesforce developer account
+* Salesforce Connected App credentials
+
+== Configuration
+
+1. Create a Connected App in your Salesforce org:
+   * Go to Setup > Apps > App Manager > New Connected App
+   * Enable OAuth Settings
+   * Set Callback URL (can be http://localhost:8080)
+   * Add 'Perform requests at any time' to Selected OAuth Scopes
+   * Save and wait for activation
+
+2. Enable CDC events for Contact object:
+   * Go to Setup > Integrations > Change Data Capture
+   * Add `Contact (Contact)` to Selected Entities
+   * Save
+
+3. Copy `src/main/resources/application.properties.example` to `src/main/resources/application.properties`
+
+4. Update the properties with your Connected App credentials:
+[source,properties]
+----
+camel.component.salesforce.client-id=<YOUR_CLIENT_ID>         # Consumer Key from Connected App
+camel.component.salesforce.client-secret=<YOUR_CLIENT_SECRET> # Consumer Secret from Connected App
+camel.component.salesforce.instance-url=<YOUR_DOMAIN>         # e.g. https://your-org.my.salesforce.com
+camel.component.salesforce.login-url=<YOUR_DOMAIN>            # Same as instance-url
+----
+
+== Building
+
+[source,bash]
+----
+mvn clean install
+----
+
+== Running
+
+[source,bash]
+----
+mvn spring-boot:run
+----
+
+The application will start on port 8080.
+
+== Testing
+
+=== REST Endpoints
+
+1. Fetch all contacts:
+[source,bash]
+----
+curl -X GET http://localhost:8080/camel/contacts | jq
+----
+
+2. Fetch a specific contact:
+[source,bash]
+----
+curl -X GET http://localhost:8080/camel/contacts/003XXXXXXXXXXXXXXX | jq
+----
+Replace `003XXXXXXXXXXXXXXX` with an actual Salesforce Contact ID.
+
+3. Update a specific contact:
+[source,bash]
+----
+curl --location --request PUT 'http://localhost:8080/camel/contacts/003XXXXXXXXXXXXXXX' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "LastName": "Smith",
+    "FirstName": "John",
+    "Salutation": "Mr.",
+    "Email": "jsmith@gmail.com",
+    "Description": "Test description"
+}'
+----
+Replace `003XXXXXXXXXXXXXXX` with an actual Salesforce Contact ID.
+
+== Monitor CDC events
+Listens continuously for Contact Change Events (CDC):
+
+   * Make changes to contacts in Salesforce or update a specific contact
+   * Watch the application logs for real-time change events
+
+== Project Structure
+
+* `SalesforceRouter.java`: Contains Camel route definitions
+* `SalesforceApp.java`: Spring Boot application entry point
+* `application.properties`: Configuration properties

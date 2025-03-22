@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 61 (0 deprecated)
+Number of Examples: 62 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -98,7 +98,7 @@ Number of Examples: 61 (0 deprecated)
 | link:fhir/readme.adoc[Fhir] (fhir) | Health Care | An example showing how to work with Camel, FHIR and Spring Boot
 
 | link:fhir-auth-tx/readme.adoc[Fhir Auth Tx] (fhir-auth-tx) | Health Care | An example showing how to work with Camel, FHIR Authorization, FHIR Transaction and Spring Boot
-
+    
 
 | link:validator/readme.adoc[Validator Spring Boot] (validator) | Input/Output Type Contract | An example showing how to work with declarative validation and Spring Boot
 
@@ -114,7 +114,7 @@ Number of Examples: 61 (0 deprecated)
 | link:metrics/README.adoc[Metrics] (metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
 
 | link:observation/README.adoc[Micrometer Observation] (observation) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with Micrometer Observation
-
+    
 
 | link:opentelemetry/README.adoc[OpenTelemetry] (opentelemetry) | Management and Monitoring | An example showing how to use Camel with OpenTelemetry
 
@@ -128,7 +128,7 @@ Number of Examples: 61 (0 deprecated)
 
 | link:kafka-avro/README.adoc[Kafka Avro] (kafka-avro) | Messaging | An example for Kafka avro
 
-| link:kafka-oauth/README.adoc[Kafka OAuth] (kafka-oauth) | Messaging | An example for Kafka authentication using OAuth
+| link:kafka-oauth/README.adoc[Kafka Oauth] (kafka-oauth) | Messaging | An example of Kafka authentication using OAuth.
 
 | link:kafka-offsetrepository/README.adoc[Kafka Offsetrepository] (kafka-offsetrepository) | Messaging | An example for Kafka offsetrepository
 
@@ -141,7 +141,7 @@ Number of Examples: 61 (0 deprecated)
 | link:widget-gadget/README.adoc[Widget Gadget] (widget-gadget) | Messaging | The widget and gadget example from EIP book, running on Spring Boot
 
 | link:reactive-streams/readme.adoc[Reactive Streams] (reactive-streams) | Reactive | An example that shows how Camel can exchange data using reactive streams with Spring Boot reactor
-
+    
 
 | link:http-ssl/README.adoc[Http Ssl] (http-ssl) | Rest | An example showing the Camel HTTP component with Spring Boot and SSL
 
@@ -160,6 +160,9 @@ Number of Examples: 61 (0 deprecated)
 | link:jira/README.adoc[Jira] (jira) | SaaS | An example that uses Jira Camel API
 
 | link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) | SaaS | Twitter mentions is created as contacts in Salesforce
+
+| link:salesforce/README.adoc[Salesforce] (salesforce) | SaaS | How to work with Salesforce contacts using REST endpoints and Streaming API
+
 |===
 // examples: END
 
