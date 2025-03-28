@@ -1,0 +1,8 @@
+spring.application.name=Salesforce Example
+camel.component.salesforce.config.raw-payload=true
+camel.component.salesforce.authentication-type=CLIENT_CREDENTIALS
+camel.component.salesforce.client-id=<YOUR_CLIENT_ID>
+camel.component.salesforce.client-secret=<YOUR_CLIENT_SECRET>
+camel.component.salesforce.instance-url=<YOUR_DOMAIN>
+camel.component.salesforce.login-url=<YOUR_DOMAIN>
+
