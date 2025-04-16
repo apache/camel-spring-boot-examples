@@ -26,26 +26,23 @@ public class PaymentRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
-                from("jms:queue:{{example.services.payment}}")
-                .routeId("payment-service")
-                .saga()
-                    .propagation(SagaPropagation.MANDATORY)
-                    .option("id", header("id"))
-                    .compensation("direct:cancelPayment")
-                    .log("Paying ${header.payFor} for order #${header.id}")
-                    .setBody(header("JMSCorrelationID"))
-                    .choice()
-                        .when(x -> Math.random() >= 0.85)
-                            .log("Payment ${header.payFor} for saga #${header.id} fails!")
-                            .throwException(new RuntimeException("Random failure during payment"))
-                        .endChoice()
-                    .end()
-                    .log("Payment ${header.payFor} done for order #${header.id} with payment transaction ${body}")
-                .end();
+        from("jms:queue:{{example.services.payment}}")
+            .routeId("payment-service")
+            .saga()
+                .propagation(SagaPropagation.MANDATORY)
+                .option("id", header("id"))
+                .compensation("direct:cancelPayment")
+            .log("Paying ${header.payFor} for order #${header.id}")
+            .setBody(header("JMSCorrelationID"))
+            .choice()
+                .when(x -> Math.random() >= 0.85)
+                    .log("Payment ${header.payFor} for saga #${header.id} fails!")
+                    .throwException(new RuntimeException("Random failure during payment"))
+            .end()
+            .log("Payment ${header.payFor} done for order #${header.id} with payment transaction ${body}");
 
         from("direct:cancelPayment")
-                .routeId("payment-cancel")
-                .log("Payment for order #${header.id} has been cancelled");
+            .routeId("payment-cancel")
+            .log("Payment for order #${header.id} has been cancelled");
     }
 }
