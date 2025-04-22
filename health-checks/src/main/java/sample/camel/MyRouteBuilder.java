@@ -36,6 +36,7 @@ public class MyRouteBuilder extends RouteBuilder {
         // this route is invalid and fails during startup
         // the supervising route controller will take over and attempt
         // to restart this route
-        from("netty:tcp:unknownhost").to("log:dummy").routeId("netty");
+        from("platform-http:/unknownhost").routeId("health-route")
+                .to("log:dummy");
     }
 }
