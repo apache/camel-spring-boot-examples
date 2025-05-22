@@ -27,7 +27,7 @@ You will need to compile this example first:
 
 [source,sh]
 ----
-$ mvn compile
+mvn compile
 ----
 
 === Run the example
@@ -37,16 +37,14 @@ the client.
 
 [source,sh]
 ----
-$ cd service1
-$ mvn compile spring-boot:run
+mvn -f service1 spring-boot:run
 ----
 
 When service1 is ready then start service2
 
 [source,sh]
 ----
-$ cd service2
-$ mvn compile camel:run
+mvn -f service2 camel:run
 ----
 
 And then start the client that calls service1 every second.
@@ -58,16 +56,14 @@ To use Spring Boot
 
 [source,sh]
 ----
-$ cd client
-$ mvn compile spring-boot:run
+mvn -f client compile spring-boot:run
 ----
 
 Or to use Camel Main
 
 [source,sh]
 ----
-$ cd client2
-$ mvn compile camel:run
+mvn -f client2 compile camel:run
 ----
 
 You can then stop service1 and see that the client should fallback to

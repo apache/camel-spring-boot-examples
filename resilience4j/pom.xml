@@ -34,6 +34,7 @@
 
     <properties>
         <category>EIP</category>
+        <log4j2-version>2.24.3</log4j2-version>
     </properties>
 
     <modules>
