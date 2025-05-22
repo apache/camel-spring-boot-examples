@@ -68,6 +68,6 @@ public class PojoClientTest {
 
 		Assertions.assertThat(cxfClient.getContact("Croway")).isNotNull();
 
-		Assertions.assertThatThrownBy(() -> cxfClient.getContact("Non existent")).isInstanceOf(NoSuchContactException.class);
+		Assertions.assertThatThrownBy(() -> cxfClient.getContact("Non existent - this error is expected")).isInstanceOf(NoSuchContactException.class);
 	}
 }
