@@ -32,7 +32,7 @@ final class ApplicationTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ApplicationTest.class);
 
-	private static final String CONTAINER_IMAGE = "quay.io/infinispan/server:15.1.4.Final";
+	private static final String CONTAINER_IMAGE = "quay.io/infinispan/server:15.2.1.Final";
 
 	private static GenericContainer<?> container;
 
