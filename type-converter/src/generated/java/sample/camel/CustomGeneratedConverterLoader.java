@@ -45,7 +45,13 @@ public final class CustomGeneratedConverterLoader implements TypeConverterLoader
 
     private void registerConverters(TypeConverterRegistry registry) {
         addTypeConverter(registry, sample.camel.Person.class, byte[].class, false,
-            (type, exchange, value) -> getCustomGeneratedConverter().toPerson((byte[]) value, exchange));
+            (type, exchange, value) -> {
+                Object answer = getCustomGeneratedConverter().toPerson((byte[]) value, exchange);
+                if (false && answer == null) {
+                    answer = Void.class;
+                }
+                return answer;
+            });
     }
 
     private static void addTypeConverter(TypeConverterRegistry registry, Class<?> toType, Class<?> fromType, boolean allowNull, SimpleTypeConverter.ConversionMethod method) {
