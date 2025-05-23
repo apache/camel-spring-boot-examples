@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 62 (0 deprecated)
+Number of Examples: 63 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -159,10 +159,9 @@ Number of Examples: 62 (0 deprecated)
 
 | link:jira/README.adoc[Jira] (jira) | SaaS | An example that uses Jira Camel API
 
-| link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) | SaaS | Twitter mentions is created as contacts in Salesforce
-
 | link:salesforce/README.adoc[Salesforce] (salesforce) | SaaS | How to work with Salesforce contacts using REST endpoints and Streaming API
 
+| link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) | SaaS | Twitter mentions is created as contacts in Salesforce
 |===
 // examples: END
 
