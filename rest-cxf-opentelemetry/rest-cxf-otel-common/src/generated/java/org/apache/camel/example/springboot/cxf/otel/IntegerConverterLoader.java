@@ -45,7 +45,13 @@ public final class IntegerConverterLoader implements TypeConverterLoader, CamelC
 
     private void registerConverters(TypeConverterRegistry registry) {
         addTypeConverter(registry, org.apache.camel.example.springboot.cxf.otel.RandomNumber.class, java.lang.Integer.class, false,
-            (type, exchange, value) -> org.apache.camel.example.springboot.cxf.otel.IntegerConverter.toRandomNumber((java.lang.Integer) value));
+            (type, exchange, value) -> {
+                Object answer = org.apache.camel.example.springboot.cxf.otel.IntegerConverter.toRandomNumber((java.lang.Integer) value);
+                if (false && answer == null) {
+                    answer = Void.class;
+                }
+                return answer;
+            });
     }
 
     private static void addTypeConverter(TypeConverterRegistry registry, Class<?> toType, Class<?> fromType, boolean allowNull, SimpleTypeConverter.ConversionMethod method) {

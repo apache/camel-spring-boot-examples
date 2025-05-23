@@ -18,6 +18,7 @@ package org.apache.camel.example.springboot.cxf.otel;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.bean.BeanConstants;
 import org.apache.camel.component.bean.validator.BeanValidationException;
 import org.apache.camel.component.cxf.common.message.CxfConstants;
 import org.apache.camel.component.minio.MinioConstants;
@@ -35,7 +36,6 @@ import jakarta.ws.rs.core.Response;
 @Component
 public class CamelRouter extends RouteBuilder {
 
-
     @Override
     public void configure() throws Exception {
         //very raw way, just to handle the validation responses
@@ -51,7 +51,7 @@ public class CamelRouter extends RouteBuilder {
                     "&providers=jaxrsProvider,openTelemetryProvider" +
                     "&loggingFeatureEnabled=true")
                 .to("log:camel-cxf-log?showAll=true")
-                .setHeader(Exchange.BEAN_METHOD_NAME, simple("${header.operationName}"))
+                .setHeader(BeanConstants.BEAN_METHOD_NAME, simple("${header.operationName}"))
                 .bean(RandomServiceImpl.class);
 
 

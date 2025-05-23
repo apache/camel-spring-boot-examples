@@ -45,7 +45,13 @@ public final class InputStreamConverterLoader implements TypeConverterLoader, Ca
 
     private void registerConverters(TypeConverterRegistry registry) {
         addTypeConverter(registry, org.apache.camel.example.springboot.cxf.otel.RandomNumber.class, java.io.InputStream.class, false,
-            (type, exchange, value) -> org.apache.camel.example.springboot.cxf.otel.InputStreamConverter.toRandomNumber((java.io.InputStream) value));
+            (type, exchange, value) -> {
+                Object answer = org.apache.camel.example.springboot.cxf.otel.InputStreamConverter.toRandomNumber((java.io.InputStream) value);
+                if (false && answer == null) {
+                    answer = Void.class;
+                }
+                return answer;
+            });
     }
 
     private static void addTypeConverter(TypeConverterRegistry registry, Class<?> toType, Class<?> fromType, boolean allowNull, SimpleTypeConverter.ConversionMethod method) {
