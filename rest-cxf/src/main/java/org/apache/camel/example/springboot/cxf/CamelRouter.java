@@ -18,6 +18,7 @@ package org.apache.camel.example.springboot.cxf;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.bean.BeanConstants;
 import org.apache.camel.component.bean.validator.BeanValidationException;
 
 import org.springframework.stereotype.Component;
@@ -43,7 +44,7 @@ public class CamelRouter extends RouteBuilder {
                     "&loggingFeatureEnabled=true")
                 .to("bean-validator:user")
                 .to("log:camel-cxf-log?showAll=true")
-                .setHeader(Exchange.BEAN_METHOD_NAME, simple("${header.operationName}"))
+                .setHeader(BeanConstants.BEAN_METHOD_NAME, simple("${header.operationName}"))
                 .bean(UserServiceImpl.class);
         // @formatter:on
     }
