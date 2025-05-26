@@ -8,6 +8,8 @@ This example shows how to configure SSL in different scenarios:
 2. two ways SSL, the server and the client check both certificates in a mutual trusted handshake
 3. same scenario as point 1 but the server configuration is managed directly in Camel (undertow component) instead of Spring Boot
 
+NOTE: The camel-undertow-starter is deprecated in camel-spring-boot, it's recommended to use the security settings managed by Spring Boot as show in the 1st example.
+
 === Prerequisites
 
 keytool installed and available on PATH
