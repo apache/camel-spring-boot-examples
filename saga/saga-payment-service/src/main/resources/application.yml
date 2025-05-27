@@ -22,6 +22,8 @@ spring:
     user: admin
     password: admin
     pool.enabled: true
+server:
+  port: 8081
 camel:
   servlet:
     mapping:
@@ -49,4 +51,3 @@ logging:
     org.apache.camel.processor.errorhandler.DefaultErrorHandler: OFF
     org.apache.camel.component.jms.EndpointMessageListener: OFF
     org.apache.camel.component.jms.reply.QueueReplyManager: OFF
-

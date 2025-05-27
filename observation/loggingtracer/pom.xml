@@ -21,33 +21,16 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.apache.camel.springboot.example</groupId>
-        <artifactId>camel-example-spring-boot-observation</artifactId>
-        <version>4.12.0-SNAPSHOT</version>
-    </parent>
-
+    <groupId>org.apache.camel.springboot.example</groupId>
     <artifactId>camel-example-spring-boot-observation-loggingtracer</artifactId>
+    <version>4.12.0-SNAPSHOT</version>
     <name>Camel SB Examples :: Observation :: LoggingTracer</name>
     <description>An example Observation Tracer</description>
 
     <properties>
-        <brave.version>5.15.0</brave.version>
-        <micrometer.version>1.10.4</micrometer.version>
+        <brave.version>6.0.3</brave.version>
+        <micrometer-tracing.version>1.5.0</micrometer-tracing.version>
     </properties>
-
-    <!-- import Camel BOM -->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.apache.camel</groupId>
-                <artifactId>camel-bom</artifactId>
-                <version>${camel-version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
 
@@ -62,7 +45,7 @@
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-core</artifactId>
-            <version>${micrometer.version}</version>
+            <version>${micrometer-tracing.version}</version>
         </dependency>
 
     </dependencies>

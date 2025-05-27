@@ -7,17 +7,13 @@ echo compiling project
 mvn clean package
 
 echo running payment service
-java -Dserver.port=8081 -jar saga-payment-service/target/*.jar > payment.log 2>&1 &
-echo "$!" > payment.pid
+mvn -f saga-payment-service/ spring-boot:run
 
 echo running flight service
-java -Dserver.port=8082 -jar saga-flight-service/target/*.jar > flight.log 2>&1 &
-echo "$!" > flight.pid
+mvn -f saga-flight-service/ spring-boot:run
 
 echo running train service
-java -Dserver.port=8083 -jar saga-train-service/target/*.jar > train.log 2>&1 &
-echo "$!" > train.pid
+mvn -f saga-train-service/ spring-boot:run
 
 echo running saga application
-java -Dserver.port=8084 -jar saga-app/target/*.jar > app.log 2>&1 &
-echo "$!" > app.pid
+mvn -f saga-app/ spring-boot:run

@@ -22,7 +22,7 @@ public class Service2Route extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("undertow:http://0.0.0.0:7070/service2").routeId("service2").streamCaching()
+        from("platform-http:/service2").routeId("service2").streamCache("true")
                 .log(" Service2 request: ${body}")
                 .transform(simple("Service2-${body}"))
                 .log("Service2 response: ${body}");

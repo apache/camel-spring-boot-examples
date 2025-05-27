@@ -26,7 +26,7 @@ public class MyRouteBuilder extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        // First, we have to configure our jetty component, which will be the rest
+        // First, we have to configure our rest component, which will be
         // in charge of querying the REST endpoints from actuator
         restConfiguration()
                 .host("0.0.0.0")

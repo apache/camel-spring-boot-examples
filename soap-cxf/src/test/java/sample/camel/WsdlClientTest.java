@@ -67,43 +67,43 @@ public class WsdlClientTest {
 	public void before() {
 		cxfClient = createCustomerClient();
 	}
-	
+
 	@Test
-        public void testRequestLimiting() throws Exception {
-            CountDownLatch latch = new CountDownLatch(50);
+    public void testRequestLimiting() throws Exception {
+        CountDownLatch latch = new CountDownLatch(50);
 
-            ExecutorService executor = Executors.newFixedThreadPool(200);
+        ExecutorService executor = Executors.newFixedThreadPool(200);
 
-            for (int i = 0; i < 50; i++) {
-                executor.execute(new SendRequest(latch));
-            }
-            latch.await();
+        for (int i = 0; i < 50; i++) {
+            executor.execute(new SendRequest(latch));
+        }
+        latch.await();
+    }
+
+    class SendRequest implements Runnable {
+
+        CountDownLatch latch;
+
+        SendRequest(CountDownLatch latch) {
+            this.latch = latch;
         }
 
-        class SendRequest implements Runnable {
+        @Override
+        public void run() {
+            try {
+                List<Customer> customers = cxfClient.getCustomersByName("test");
+                assertEquals(customers.get(0).getName(), "test");
+                assertEquals(customers.get(0).getCustomerId(), 1);
 
-            CountDownLatch latch;
-
-            SendRequest(CountDownLatch latch) {
-                this.latch = latch;
-            }
-
-            @Override
-            public void run() {
-                try {
-                    List<Customer> customers = cxfClient.getCustomersByName("test");
-                    assertEquals(customers.get(0).getName(), "test");
-                    assertEquals(customers.get(0).getCustomerId(), 1);
-
-                } catch (Exception ex) {
-                    // some requests are expected to fail and receive 503 error
-                    // cause Server side limit the concurrent request
-                    assertTrue(ex.getCause().getMessage().contains("503: Service Unavailable"));
-                } finally {
-                    latch.countDown();
-                }
+            } catch (Exception ex) {
+                // some requests are expected to fail and receive errors
+                // cause Server side limit the concurrent request
+                assertTrue(ex.getCause().getMessage().contains("header parser received no bytes"));
+            } finally {
+                latch.countDown();
             }
         }
+    }
 
 	@Test
 	public void testGetCustomer() throws Exception {

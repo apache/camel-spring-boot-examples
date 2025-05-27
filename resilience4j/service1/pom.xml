@@ -31,9 +31,6 @@
     <name>Camel SB Examples :: Resilience4j :: Service 1</name>
     <description>An example showing how to use Resilience4j EIP as circuit breaker in Camel routes</description>
 
-    <properties>
-    </properties>
-
     <!-- import Spring-Boot and Camel BOM -->
     <dependencyManagement>
         <dependencies>
@@ -73,7 +70,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-jetty-starter</artifactId>
+            <artifactId>camel-platform-http-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>

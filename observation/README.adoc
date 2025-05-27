@@ -25,6 +25,19 @@ You will need to compile this example first:
 $ mvn compile
 ----
 
+=== Run the container services
+
+[source,sh]
+----
+$ docker compose -f containers/docker-compose.yml up
+----
+
+Then you can access the services with the following urls:
+
+Zipkin    : http://localhost:9411/zipkin/
+Prometheus: http://localhost:9090/
+Grafana   : http://localhost:3000/
+
 === Run the example
 
 Then using three different shells and run service1 and service2 before
@@ -33,24 +46,21 @@ indicate that the service should be traced.
 
 [source,sh]
 ----
-$ cd service1
-$ mvn compile spring-boot:run
+$ mvn -f service2/ compile spring-boot:run
 ----
 
 When service1 is ready then start service2
 
 [source,sh]
 ----
-$ cd service2
-$ mvn compile spring-boot:run
+$ mvn -f service1/ compile spring-boot:run
 ----
 
 And then start the client that calls service1 every 30 seconds.
 
 [source,sh]
 ----
-$ cd client
-$ mvn compile spring-boot:run
+$ mvn -f client/ compile spring-boot:run
 ----
 
 The client application explicitly instantiates and initializes the

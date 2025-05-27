@@ -24,7 +24,7 @@ public class Service1Route extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("jetty:http://0.0.0.0:{{service1.port}}/service1").routeId("service1").streamCaching()
+        from("platform-http:/service1").routeId("service1").streamCache("true")
             .log("Service1 request: ${body}")
             .transform(simple("Service1-${body}"))
             .log("Service1 response: ${body}");
