@@ -80,7 +80,7 @@ public class ClientAPIWorkflowExample {
                     .log("Content marshalled to string: ${body}");
 
             from("direct:send")
-                    .log("Sending the file to an external system (simulation)");
+                    .log("Sending the file to an external system (simulation) with text: ${body}");
 
         }
 
