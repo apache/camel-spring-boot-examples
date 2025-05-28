@@ -70,8 +70,8 @@ public class RestExample {
                     .to("direct:sum");
 
             from("direct:sum")
-                    .setHeader("num1").simple("${headerAs(num1,Long)}")
-                    .setHeader("num2").simple("${headerAs(num2,Long)}")
+                    .setHeader("num1").simple("${header.num1}",Long.class)
+                    .setHeader("num2").simple("${header.num2}",Long.class)
                     .bean("calculator", "sum")
                     .process(new UnwrapStreamProcessor())
                     .setBody().simple("The result is: ${body}");

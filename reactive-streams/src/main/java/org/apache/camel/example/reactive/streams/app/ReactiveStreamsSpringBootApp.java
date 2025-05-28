@@ -17,10 +17,12 @@
 package org.apache.camel.example.reactive.streams.app;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //CHECKSTYLE:OFF
 @SpringBootApplication
+@ComponentScan(basePackages = "org.apache.camel.example.reactive.streams")
 public class ReactiveStreamsSpringBootApp {
 
     public static void main(String[] args) {
