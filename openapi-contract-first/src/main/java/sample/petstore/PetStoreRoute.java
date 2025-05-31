@@ -37,7 +37,9 @@ public class PetStoreRoute extends RouteBuilder {
     public void configure() throws Exception {
         // turn on json binding and scan for POJO classes in the model package
         restConfiguration().bindingMode(RestBindingMode.json)
-                .bindingPackageScan("sample.petstore.model");
+                .bindingPackageScan("sample.petstore.model")
+                // turn on request validation
+                .clientRequestValidation(true);
 
         rest().openApi().specification("petstore.json").missingOperation("ignore");
 

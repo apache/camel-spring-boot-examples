@@ -81,6 +81,11 @@
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-rest-openapi-starter</artifactId>
         </dependency>
+        <!-- enable validation -->
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-openapi-validator-starter</artifactId>
+        </dependency>
         <!-- json support -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
