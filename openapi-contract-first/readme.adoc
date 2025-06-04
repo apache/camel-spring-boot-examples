@@ -12,6 +12,9 @@ The example uses the Petstore OpenAPI example which comes with 18 APIs. This exa
 implemented 2 of these APIs, and to ignore the remaining APIs. This is handy during development,
 so you can implement the APIs one by one.
 
+In the `application.properties` we have configured context-path and base-path for the Rest DSL service
+which allows us to control this from the properties file, instead of hardcoded values in the spec file (petstore.json).
+
 === How to run
 
 You can run this example using
@@ -23,7 +26,7 @@ You can run this example using
 You can call the Rest APIs such as
 
 ----
-curl http://0.0.0.0:8080/api/v3/pet/123
+curl http://0.0.0.0:8080/myapp/myapi/pet/123
 ----
 
 Which returns information about a pet.
@@ -31,7 +34,7 @@ Which returns information about a pet.
 You can also update an existing PET such:
 
 ----
-curl -XPUT -H "Content-Type: application/json" --data "@daisy.json" http://0.0.0.0:8080/api/v3/pet
+curl -XPUT -H "Content-Type: application/json" --data "@daisy.json" http://0.0.0.0:8080/myapp/myapi/pet
 ----
 
 
