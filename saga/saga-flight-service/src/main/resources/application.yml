@@ -39,8 +39,8 @@ camel:
     local-participant-url: http://localhost:${server.port}/api
   service:
     lra.enabled: true
-  springboot:
-    main-run-controller: true
+  main:
+    run-controller: true
     name: Camel-flight
 example.services:
   flight: saga-flight-service

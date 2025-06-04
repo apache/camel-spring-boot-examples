@@ -16,11 +16,11 @@
 #
 
 camel:
-  springboot:
+  main:
     name: MyCamel
 
     # keep Camel running
-    main-run-controller: true
+    run-controller: true
 
     # verbose summary so you can see the pairing of routes and routes configurations
     startup-summary-level: verbose
