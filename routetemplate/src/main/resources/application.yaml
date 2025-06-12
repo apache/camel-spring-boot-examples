@@ -20,5 +20,5 @@ spring:
     active: xml
 
 camel:
-  springboot:
+  main:
     name: MyCamel

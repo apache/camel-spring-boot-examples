@@ -16,7 +16,7 @@
 #
 
 camel:
-  springboot:
+  main:
     name: ChuckCamel
     # keep the application running
     main-run-controller: true

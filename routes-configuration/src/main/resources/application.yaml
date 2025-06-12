@@ -16,7 +16,7 @@
 #
 
 camel:
-  springboot:
+  main:
     name: MyCamel
 
     # keep Camel running

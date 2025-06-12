@@ -39,7 +39,7 @@ camel:
     local-participant-url: http://localhost:${server.port}/api
   service:
     lra.enabled: true
-  springboot:
+  main:
     main-run-controller: true
     name: Camel-payment
 example.services:
