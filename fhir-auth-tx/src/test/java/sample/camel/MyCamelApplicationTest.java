@@ -38,7 +38,7 @@ public class MyCamelApplicationTest {
 
     @Test
     public void shouldPushConvertedHl7toFhir() throws Exception {
-        MockEndpoint mock = camelContext.getEndpoint("mock:fhir:transaction/withResources", MockEndpoint.class);
+        MockEndpoint mock = camelContext.getEndpoint("mock:fhir:transaction/withBundle", MockEndpoint.class);
         mock.expectedMessageCount(1);
 
         FileUtils.copyDirectory(new File("src/main/data"), new File("target/work/fhir/testinput"));
