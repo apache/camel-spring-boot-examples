@@ -16,6 +16,6 @@
 #
 
 camel:
-  springboot:
+  main:
     name: MyCamel
     routes-include-pattern: classpath:templates/*.xml,classpath:builders/*.xml
