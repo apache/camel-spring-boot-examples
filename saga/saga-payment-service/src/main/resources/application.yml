@@ -40,7 +40,7 @@ camel:
   service:
     lra.enabled: true
   main:
-    main-run-controller: true
+    run-controller: true
     name: Camel-payment
 example.services:
   payment: saga-payment-service

@@ -19,4 +19,4 @@ camel:
   main:
     name: ChuckCamel
     # keep the application running
-    main-run-controller: true
+    run-controller: true

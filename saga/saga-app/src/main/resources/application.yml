@@ -40,7 +40,7 @@ camel:
   service:
     lra.enabled: true
   main:
-    main-run-controller: true
+    run-controller: true
     name: Camel-saga
 example.services:
   train: saga-train-service
