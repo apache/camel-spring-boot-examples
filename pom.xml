@@ -49,6 +49,7 @@
 		<module>fhir-auth-tx</module>
 		<module>health-checks</module>
 		<module>http-ssl</module>
+		<module>http-streaming</module>
 		<module>infinispan</module>
 		<module>jira</module>
 		<module>jolokia</module>
