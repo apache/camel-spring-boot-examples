@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 62 (0 deprecated)
+Number of Examples: 63 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -96,7 +96,6 @@ Number of Examples: 62 (0 deprecated)
 | link:fhir/readme.adoc[Fhir] (fhir) | Health Care | An example showing how to work with Camel, FHIR and Spring Boot
 
 | link:fhir-auth-tx/readme.adoc[Fhir Auth Tx] (fhir-auth-tx) | Health Care | An example showing how to work with Camel, FHIR Authorization, FHIR Transaction and Spring Boot
-    
 
 | link:validator/readme.adoc[Validator Spring Boot] (validator) | Input/Output Type Contract | An example showing how to work with declarative validation and Spring Boot
 
@@ -112,7 +111,6 @@ Number of Examples: 62 (0 deprecated)
 | link:metrics/README.adoc[Metrics] (metrics) | Management and Monitoring | An example showing how to work with Camel and Spring Boot and report metrics to Graphite
 
 | link:observation/README.adoc[Micrometer Observation] (observation) | Management and Monitoring | An example showing how to trace incoming and outgoing messages from Camel with Micrometer Observation
-    
 
 | link:opentelemetry/README.adoc[OpenTelemetry] (opentelemetry) | Management and Monitoring | An example showing how to use Camel with OpenTelemetry
 
@@ -139,13 +137,14 @@ Number of Examples: 62 (0 deprecated)
 | link:widget-gadget/README.adoc[Widget Gadget] (widget-gadget) | Messaging | The widget and gadget example from EIP book, running on Spring Boot
 
 | link:reactive-streams/readme.adoc[Reactive Streams] (reactive-streams) | Reactive | An example that shows how Camel can exchange data using reactive streams with Spring Boot reactor
-    
 
 | link:http-ssl/README.adoc[Http Ssl] (http-ssl) | Rest | An example showing the Camel HTTP component with Spring Boot and SSL
 
 | link:openapi-contract-first/readme.adoc[Openapi Contract First] (openapi-contract-first) | Rest | Contract First OpenAPI example
 
 | link:platform-http/README.adoc[Platform Http] (platform-http) | Rest | An example showing Camel REST DSL with platform HTTP
+
+| link:http-streaming/README.adoc[Http Streaming] (http-streaming) | Rest | This example shows how to stream large files using platform HTTP component
 
 | link:rest-cxf/README.adoc[Rest Cxf] (rest-cxf) | Rest | An example showing Camel REST using CXF with Spring Boot
 
