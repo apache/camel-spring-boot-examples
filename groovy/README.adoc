@@ -1,0 +1,37 @@
+== Spring Boot Example with Yaml DSL and Groovy
+
+=== Introduction
+
+This example shows how to run Camel Spring Boot (YAML routes) with Groovy scripts
+for small functions and DTO classes.
+
+The Groovy source is located in `src/main/resources/camel-groovy`, which
+are pre-compiled on startup.
+
+This allows Camel routes to use the Groovy classes (as if they were Java classes).
+The route will then transform a JSon file into a DTO class using Jackson, and then
+enrich the DTO based on some business logic that are inlined Groovy script in the Camel route.
+
+=== Build
+
+You can build this example using:
+
+    $ mvn package
+
+=== Run
+
+You can run this example using:
+
+    $ mvn spring-boot:run
+
+And you should see output in the console.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
