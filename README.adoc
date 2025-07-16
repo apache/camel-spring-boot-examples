@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 64 (0 deprecated)
+Number of Examples: 65 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -131,6 +131,8 @@ Number of Examples: 64 (0 deprecated)
 | link:kafka-oauth/README.adoc[Kafka Oauth] (kafka-oauth) | Messaging | An example of Kafka authentication using OAuth.
 
 | link:kafka-offsetrepository/README.adoc[Kafka Offsetrepository] (kafka-offsetrepository) | Messaging | An example for Kafka offsetrepository
+
+| link:kafka-sql-transaction/README.adoc[Kafka Sql Transaction] (kafka-sql-transaction) | Messaging | An example of Kafka and SQL transactions.
 
 | link:paho-mqtt5-shared-subscriptions/README.adoc[Paho Mqtt5 Shared Subscriptions] (paho-mqtt5-shared-subscriptions) | Messaging | An example showing  how to set up multiple mqtt5 consumers that use shared subscription feature of MQTT5
 

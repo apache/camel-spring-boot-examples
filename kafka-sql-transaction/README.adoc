@@ -1,0 +1,228 @@
+== Camel Kafka and SQL transactions example
+
+=== Introduction
+
+An example that shows how https://camel.apache.org/components/next/kafka-component.html[Camel Kafka] transaction works by leveraging the kafka client transaction capability, note that however this quickstart makes use of the camel-sql component, the JDBC driver doesn't enlish in a global transaction, since kafka transaction support is not compatible with JTA.
+
+The https://camel.apache.org/components/next/kafka-component.html#_kafka_transaction[camel-kafka component has support for transactions], since camel 4.13 you can use the `transacted=true` parameter in either the kafka endpoint or in the `application.properties`. If you use camel 4.12 or before, then you have to use the `additionalProperties[transactional.id]` parameter.
+
+The main use case of this quickstart is a route that sends to a kafka topic and inserts a row to ta sql table, then in case of failure in the SQL operation, there is a rollback and the message is not sent to the kafka topic.
+
+To simulate the rollback, the table `foo` has an unique constraint in the `name` column, so for the example we will try to insert a duplicate name, causing the sql `insert` operation to fail and the exchange route marked for rollback.
+
+This example requires docker and https://camel.apache.org/manual/camel-jbang.html#_installation[camel-jbang].
+
+NOTE: This example makes use of the local transaction manager in Kafka client and the JDBC driver, this is not a JTA managed transaction, given that kafka doesn't support a JTA transaction api, as such for the 3rd example, if there is an error in the kafka delivery, then the SQL insert operation is not rolled back.
+
+
+=== Start the Kafka and PostgreSQL server
+
+* Use camel-jbang
+
+In camel-jbang there is a `camel infra` command to start services, before camel 4.13 the postgresql and kafka services were bound to random ports, but since camel 4.13 the service is bound to a fixed port. Then we suggest to use the latest camel-jbang to launch the service with a fixed port, so you don't have to manually update the port in `src/main/resources/application.yaml`.
+
+To start the postgresql server
+```
+camel infra run postgres
+```
+It will output this:
+```
+Starting service postgres
+{
+  "getServiceAddress" : "localhost:5432",
+  "host" : "localhost",
+  "password" : "test",
+  "port" : 5432,
+  "userName" : "test"
+}
+Press any key to stop the execution
+```
+
+If the port is different than `5432` then you should update the `src/main/resources/application.yaml`.
+
+To start the kafka server
+```
+camel infra run kafka
+```
+
+It will output this:
+```
+Starting service kafka
+{
+  "brokers" : "localhost:9092",
+  "getBootstrapServers" : "localhost:9092"
+}
+Press any key to stop the execution
+```
+
+If the port is different than `9092` then you should update the `src/main/resources/application.yaml`.
+
+* Use docker
+
+You can use docker in case you don't want to use camel-jbang.
+
+To start the postgresql server
+```
+docker run --rm --name postgresql -e POSTGRES_USER=test -e POSTGRES_PASSWORD=test -p 5432:5432 mirror.gcr.io/library/postgres:latest
+```
+
+To start the kafka server
+```
+docker run --rm --name kafka -p 9092:9092  mirror.gcr.io/apache/kafka:3.9.1
+```
+
+* Log the messages sent to the topic
+
+You can follow the messages sent to the kafka topic to make sure which messages were commited to the topic, note the isolation level of the consumer to read only the commited messages.
+
+```
+docker exec -it `docker ps|grep '9092->9092'|awk '{print $1}'` /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic foo --isolation-level read_committed
+```
+
+=== Build and run
+
+Build and run the quickstart.
+
+```
+mvn compile spring-boot:run
+```
+
+There are 4 routes represented by the HTTP endpoints:
+
+```
+1. http://localhost:8080/send/{word}
+2. http://localhost:8080/send2/{word}
+3. http://localhost:8080/sendtx/{word}
+4. http://localhost:8080/sendtx2/{word}
+```
+
+* 1 - No transaction - SQL Insert and send message to kafka topic
+
+The 1st route has no transaction support, once it receives the message from the consumer it executes the SQL insert, then sends the message to the kafka topic. If the SQL operation fails, the exception handling mechanism will interrupt the code execution and the kafka producer won't send the message to the kafka topic.
+
+Run the following command:
+```
+curl http://localhost:8080/send/bar1
+```
+
+You should see compreensive log in the example terminal with `http word: bar1` and the `{"foo": "bar1"}` in the kafka-consumer log terminal.
+
+Then if you re-run the curl command, it should show the error in the example terminal:
+```
+org.springframework.dao.DuplicateKeyException: PreparedStatementCallback; ERROR: duplicate key value violates unique constraint "foo_name_key"
+  Detail: Key (name)=(bar1) already exists.
+```
+
+And no message show in the kafka-consumer terminal, as if you examine the route, the kafka producer is not run, since the SQL insert fails before.
+```
+from("platform-http:/send/{word}")
+    .log("http word: ${header.word}")
+    .to("sql:" + insert)
+    .setBody(simple("{\"foo\": \"${header.word}\"}"))
+    .to("kafka:foo");
+```
+
+* 2 - No transaction - Send message to kafka topic and SQL Insert
+
+The 2nd route has no transaction support, once it receives the message from the consumer it sends the message to the kafka topic then executes the SQL insert command. If the SQL operation fails, as there is no transaction the message is not marked for rollback.
+
+Run the following command:
+```
+curl http://localhost:8080/send2/bar2
+```
+
+You should see compreensive log in the example terminal with `http word: bar2` and the `{"foo": "bar2"}` in the kafka-consumer log terminal.
+
+Then if you re-run the curl command, it should show the error in the example terminal:
+```
+org.springframework.dao.DuplicateKeyException: PreparedStatementCallback; ERROR: duplicate key value violates unique constraint "foo_name_key"
+  Detail: Key (name)=(bar2) already exists.
+```
+
+The `{"foo": "bar2"}` message show in the kafka-consumer terminal shows that the message is in the kafka topic, since there is no transaction in the kafka client, there is no rollback to perform.
+```
+from("platform-http:/send2/{word}")
+    .log("http word: ${header.word}")
+    .setBody(simple("{\"foo\": \"${header.word}\"}"))jiuredhat
+    .to("kafka:foo")
+    .to("sql:" + insert);
+```
+
+* 3 - With transaction - SQL Insert and send message to kafka topic
+
+The 3rd route has transaction support, once it receives the message from the consumer it executes the SQL insert, then sends the message to the kafka topic. If the SQL operation fails, the exception handling mechanism will interrupt the code execution and the kafka producer won't send the message to the kafka topic.
+
+Run the following command:
+```
+curl http://localhost:8080/sendtx/bar3
+```
+
+You should see compreensive log in the example terminal with `http word: bar3` message content and the kafka producer commit like `Commit kafka transaction endpoint27-route16 with exchange F865E9F937249D7-0000000000000001` and the `{"foo": "bar3"}` in the kafka-consumer log terminal.
+
+Then if you re-run the curl command, it should show the error in the example terminal:
+```
+org.springframework.dao.DuplicateKeyException: PreparedStatementCallback; ERROR: duplicate key value violates unique constraint "foo_name_key"
+  Detail: Key (name)=(bar3) already exists.
+```
+
+And no message show in the kafka-consumer terminal, as if you examine the route, the kafka producer doesn't run, since the SQL insert fails before.
+
+You can see there are additional code in comparison to the first route, the `onException` that marks the route for rollback and the `transacted=true` parameter of the kafka endpoint.
+
+```
+from("platform-http:/sendtx/{word}")
+    .onException(Exception.class)
+        .handled(true)
+        .rollback("Expected error when trying to insert duplicate values in the unique column.")
+    .end()
+    .log("http word: ${header.word}")
+    .to("sql:" + insert)
+    .setBody(simple("{\"foo\": \"${header.word}\"}"))
+    .to("kafka:foo?transacted=true");
+```
+
+* 4 - With transaction - Send message to kafka topic and SQL Insert
+
+The 4th route has transaction support, once it receives the message from the consumer it sends the message to the kafka topic and executes the SQL insert. you can note the kafka delivery occurs before the SQL operation, so if the SQL operation fails, the `onException` handling mechanism will catch the error and will mark the route exchange to rollback, then cascades to the kafka client to rollback the message delivery to the topic.
+
+Run the following command:
+```
+curl http://localhost:8080/sendtx2/bar4
+```
+
+You should see compreensive log in the example terminal with `http word: bar4` message content and the kafka producer commit like `Commit kafka transaction endpoint3-route16 with exchange F865E9F937249D7-0000000000000001` and the `{"foo": "bar4"}` in the kafka-consumer log terminal.
+
+
+Then if you re-run the curl command, it should show the error in the example terminal:
+```
+org.springframework.dao.DuplicateKeyException: PreparedStatementCallback; ERROR: duplicate key value violates unique constraint "foo_name_key"
+  Detail: Key (name)=(bar4) already exists.
+```
+
+And no message show in the kafka-consumer terminal, as if you examNine the route, the kafka producer runs but the route exchange is marked for rollback, so the message is not commited to the topic.
+
+You can see there are additional code in comparison to the first route, the `onException` that marks the route for rollback and the `transacted=true` parameter of the kafka endpoint.
+
+```
+from("platform-http:/sendtx2/{word}")
+    .onException(Exception.class)
+        .handled(true)
+        .rollback("Expected error when trying to insert duplicate values in the unique column.")
+    .end()
+    .log("http word: ${header.word}")
+    .setBody(simple("{\"foo\": \"${header.word}\"}"))
+    .to("kafka:foo?transacted=true")
+    .to("sql:" + insert);
+```
+
+Press `Ctrl-C` to exit.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback,
+then please https://camel.apache.org/community/support/[let us know].
+
+We also love contributors,
+so https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
