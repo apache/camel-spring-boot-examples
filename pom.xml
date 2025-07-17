@@ -55,6 +55,7 @@
 		<module>jira</module>
 		<module>jolokia</module>
 		<module>kafka-avro</module>
+        <module>kafka-sql-transaction</module>
 		<module>kafka-oauth</module>
 		<module>kafka-offsetrepository</module>
 		<module>kamelet-chucknorris</module>
