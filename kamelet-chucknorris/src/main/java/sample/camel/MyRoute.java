@@ -28,6 +28,7 @@ public class MyRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         from("kamelet:chuck-norris-source")
-                .log("${body}");
+            .delay(500)
+            .log("${body}");
     }
 }
