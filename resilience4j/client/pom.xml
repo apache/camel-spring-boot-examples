@@ -73,7 +73,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-resilience4j-starter</artifactId>
+            <artifactId>camel-resilience4j-micrometer-starter</artifactId>
         </dependency>
 
     </dependencies>
