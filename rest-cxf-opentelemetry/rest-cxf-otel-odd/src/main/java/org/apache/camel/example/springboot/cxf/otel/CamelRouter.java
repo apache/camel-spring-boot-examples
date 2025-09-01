@@ -20,7 +20,6 @@ import static org.apache.camel.example.springboot.cxf.otel.Constants.SERVICE_HEA
 
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.bean.BeanConstants;
 import org.apache.camel.component.bean.validator.BeanValidationException;
 import org.apache.camel.component.cxf.common.message.CxfConstants;
 import org.apache.camel.model.dataformat.JsonLibrary;
@@ -48,8 +47,8 @@ public class CamelRouter extends RouteBuilder {
                     "&providers=jaxrsProvider,openTelemetryProvider" +
                     "&loggingFeatureEnabled=true")
                 .to("log:camel-cxf-log?showAll=true")
-                .setHeader(BeanConstants.BEAN_METHOD_NAME, simple("${header.operationName}"))
-                .bean(OddServiceImpl.class);
+                .toD("bean:org.apache.camel.example.springboot.cxf.otel.OddServiceImpl" +
+                        "?method=${header.operationName}");
 
 
         from("direct:register").routeId("odd-register")
