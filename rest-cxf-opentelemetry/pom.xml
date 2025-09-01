@@ -33,7 +33,7 @@
 
     <properties>
         <category>CXF</category>
-        <opentelemetry-javaagent.version>2.7.0</opentelemetry-javaagent.version>
+        <opentelemetry-javaagent.version>2.19.0</opentelemetry-javaagent.version>
     </properties>
     
     <modules>

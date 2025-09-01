@@ -18,7 +18,6 @@ package org.apache.camel.example.springboot.cxf.otel;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.bean.BeanConstants;
 import org.apache.camel.component.bean.validator.BeanValidationException;
 import org.apache.camel.component.cxf.common.message.CxfConstants;
 import org.apache.camel.component.minio.MinioConstants;
@@ -51,8 +50,8 @@ public class CamelRouter extends RouteBuilder {
                     "&providers=jaxrsProvider,openTelemetryProvider" +
                     "&loggingFeatureEnabled=true")
                 .to("log:camel-cxf-log?showAll=true")
-                .setHeader(BeanConstants.BEAN_METHOD_NAME, simple("${header.operationName}"))
-                .bean(RandomServiceImpl.class);
+                .setHeader("methodName", simple("${header.operationName}"))
+                .toD("bean:org.apache.camel.example.springboot.cxf.otel.RandomServiceImpl?method=${header.methodName}");
 
 
         from("direct:play").routeId("play")
@@ -60,10 +59,14 @@ public class CamelRouter extends RouteBuilder {
                     .process(exchange -> exchange.getIn().getHeaders().clear())
                     .setHeader(CxfConstants.HTTP_METHOD, constant("GET"))
                     .toD("cxfrs:{{service.random.url}}/services/api/generate")
+                    .convertBodyTo(RandomNumber.class)
+                    .marshal().json(JsonLibrary.Jackson)
                     .process(exchange -> exchange.getIn().getHeaders().clear())
                     .setHeader(CxfConstants.HTTP_METHOD, constant("POST"))
                     .setHeader(CxfConstants.CONTENT_TYPE, constant(MediaType.APPLICATION_JSON))
                     .toD("cxfrs:{{service.even.url}}/services/api/check")
+                    .convertBodyTo(RandomNumber.class)
+                    .marshal().json(JsonLibrary.Jackson)
                     .process(exchange -> exchange.getIn().getHeaders().clear())
                     .setHeader(CxfConstants.HTTP_METHOD, constant("POST"))
                     .setHeader(CxfConstants.CONTENT_TYPE, constant(MediaType.APPLICATION_JSON))
@@ -103,7 +106,7 @@ public class CamelRouter extends RouteBuilder {
                 .toD("minio://{{bucket.name}}");
 
         from("direct:load-results").routeId("load-results")
-                .setVariable("results", () -> new Results())
+                .setVariable("results", Results::new)
                 .toD("minio://{{bucket.name}}?operation=listObjects")
                 .split(body())
                     .process(exchange -> {
