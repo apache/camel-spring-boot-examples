@@ -1,0 +1,43 @@
+== Spring Boot Example with Camel Platform HTTP act as reverse proxy
+
+=== Introduction
+
+This example illustrates how to use https://projects.spring.io/spring-boot/[Spring Boot] with http://camel.apache.org[Camel]. It implements a reverse proxy using https://camel.apache.org/components/latest/platform-http-component.html[platform-http].
+
+The project uses `camel-platform-http-starter` component as the implementation for platform-http-engine and `camel-http-starter` to implement the producer calling the http endpoint.
+
+=== Run
+
+You can run this example using:
+
+[source,bash]
+----
+mvn spring-boot:run
+----
+
+After the Spring Boot application is started, you can execute the following HTTP requests:
+
+[source,bash]
+----
+curl --proxy http://localhost:8080 -L  http://httpbin.org/get?arg1=val1 -H  'accept: application/json'
+----
+
+The command will call a test endpoint using the application as reverse proxy, you should see the Camel headers from both request and response in the log. Something similar to:
+
+----
+INFO 70370 --- [ad #1 - WireTap] header-request                           : {accept=application/json, arg1=val1, CamelHttpCharacterEncoding=UTF-8, CamelHttpMethod=GET, CamelHttpPath=/get, CamelHttpQuery=arg1=val1, CamelHttpServletRequest=org.apache.catalina.connector.RequestFacade@4f31b074, CamelHttpServletResponse=org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse@158137c0, CamelHttpUri=/get, CamelHttpUrl=http://httpbin.org/get, CamelPlatformHttpContextPath=/, host=httpbin.org, proxy-connection=Keep-Alive, user-agent=curl/8.9.1}
+INFO 70370 --- [ad #2 - WireTap] header-response                          : {accept=application/json, Access-Control-Allow-Credentials=true, Access-Control-Allow-Origin=*, arg1=val1, CamelHttpCharacterEncoding=UTF-8, CamelHttpMethod=GET, CamelHttpQuery=arg1=val1, CamelHttpResponseCode=200, CamelHttpResponseText=OK, CamelHttpServletRequest=org.apache.catalina.connector.RequestFacade@4f31b074, CamelHttpServletResponse=org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse@158137c0, CamelHttpUri=/get, CamelHttpUrl=http://httpbin.org/get, CamelPlatformHttpContextPath=/, Connection=keep-alive, Content-Length=387, Content-Type=application/json, Date=Thu, 04 Sep 2025 11:59:30 GMT, proxy-connection=Keep-Alive, Server=gunicorn/19.9.0}
+
+----
+
+The Spring Boot application can be stopped pressing `[CTRL] + [C]` in the shell.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!

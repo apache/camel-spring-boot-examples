@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 65 (0 deprecated)
+Number of Examples: 66 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -152,6 +152,8 @@ Number of Examples: 65 (0 deprecated)
 | link:openapi-contract-first/readme.adoc[Openapi Contract First] (openapi-contract-first) | Rest | Contract First OpenAPI example
 
 | link:platform-http/README.adoc[Platform Http] (platform-http) | Rest | An example showing Camel REST DSL with platform HTTP
+
+| link:platform-http-proxy/README.adoc[Platform Http Proxy] (platform-http-proxy) | EIP | An example with Camel Platform HTTP act as reverse proxy
 
 | link:rest-cxf/README.adoc[Rest Cxf] (rest-cxf) | Rest | An example showing Camel REST using CXF with Spring Boot
 
