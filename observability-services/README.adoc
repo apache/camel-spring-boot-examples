@@ -1,0 +1,95 @@
+== Spring Boot Example with Camel Observability Services
+
+=== Introduction
+
+This example illustrates how to use https://projects.spring.io/spring-boot/[Spring Boot] with http://camel.apache.org[Camel] to demonstrate observability capabilities. It implements a REST service that generates random numbers with variable response times, showcasing distributed tracing, metrics collection, and monitoring through OpenTelemetry.
+
+The project uses `camel-observability-services-starter` component for automatic instrumentation, `camel-platform-http-starter` for REST endpoints, and integrates with OpenTelemetry Java agent for comprehensive observability.
+
+For additional information there is https://camel.apache.org/blog/2025/03/camel-observability[blog post]
+
+=== Observability Stack
+
+To run the complete observability stack with Jaeger and Prometheus:
+
+[source,bash]
+----
+docker-compose up
+----
+
+This will start:
+
+ - OpenTelemetry Collector (ports 4317/4318) - collects traces and metrics
+ - Jaeger UI (http://localhost:16686) - distributed tracing visualization
+ - Prometheus (http://localhost:9090) - metrics collection and storage
+
+The application, using agent, sends telemetry data to the OpenTelemetry Collector, which exports traces to Jaeger and metrics to Prometheus.
+
+=== Run
+
+You can run this example using:
+
+[source,bash]
+----
+mvn spring-boot:run
+----
+
+After the Spring Boot application is started, you can execute the following HTTP requests:
+
+[source,bash]
+----
+curl http://localhost:8080/api/random
+----
+
+The command will call the random number generator endpoint. Each call will:
+- Generate a random number between 1-1000
+- Simulate a random delay between 100-2000ms
+- Return the number as response body
+- Create traces and metrics for observability
+
+You should see output similar to:
+
+----
+INFO 101511 --- [         task-1] generate-random-number                                   : Generated random number: 742 with delay: 1250ms
+----
+
+=== Exposed Observability endpoints
+
+The `camel-observability-services-starter` will configure the application and overrides the actuator setup so the health and metrics (in prometheus format) endpoints will be
+
+```
+http://localhost:9876/observe/health
+
+http://localhost:9876/observe/metrics
+```
+
+even if in this example the metrics will be distributed using OpenTelemetry agent and not scraping the `/observe/metrics` endpoint
+
+=== Testing Observability
+
+1. **Generate some traffic:**
+[source,bash]
+----
+for i in {1..10}; do curl http://localhost:8080/api/random; echo; sleep 1; done
+----
+
+2. **View traces in Jaeger:**
+   - Open http://localhost:16686
+   - Select service and search for traces
+
+3. **View metrics in Prometheus:**
+   - Open http://localhost:9090
+   - Query metrics like `camel_route_exchange_completed_total`
+
+
+The Spring Boot application can be stopped pressing `[CTRL] + [C]` in the shell.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!
