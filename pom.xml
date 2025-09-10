@@ -84,6 +84,7 @@
 		<module>routes-configuration</module>
 		<module>salesforce</module>
 		<module>saga</module>
+		<module>observability-services</module>
 		<module>soap-cxf</module>
 		<module>supervising-route-controller</module>
 		<module>twitter-salesforce</module>

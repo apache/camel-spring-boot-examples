@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 66 (0 deprecated)
+Number of Examples: 67 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
@@ -168,6 +168,8 @@ Number of Examples: 66 (0 deprecated)
 | link:salesforce/README.adoc[Salesforce] (salesforce) | SaaS | How to work with Salesforce contacts using REST endpoints and Streaming API
 
 | link:twitter-salesforce/README.adoc[Twitter Salesforce] (twitter-salesforce) | SaaS | Twitter mentions is created as contacts in Salesforce
+
+| link:observability-services/README.adoc[Observability Services] | Management and Monitoring | An example showing how to use Camel with Observability Services
 |===
 // examples: END
 
