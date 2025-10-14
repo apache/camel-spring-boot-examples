@@ -20,8 +20,11 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.ws.rs.core.Response;
 
+@Component
 public class UserServiceImpl implements UserService {
 
     private final Map<Integer, User> users = new TreeMap<>();
