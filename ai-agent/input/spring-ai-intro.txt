@@ -1,0 +1,1 @@
+Spring AI provides abstractions for AI services including chat models, embeddings, and vector stores. It enables developers to build AI-powered applications using familiar Spring patterns and practices.

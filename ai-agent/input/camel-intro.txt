@@ -1,0 +1,1 @@
+Apache Camel is an open-source integration framework based on Enterprise Integration Patterns. It provides a rule-based routing and mediation engine which enables you to define routing and mediation rules in various domain-specific languages.
