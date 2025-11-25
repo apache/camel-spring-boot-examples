@@ -1,0 +1,46 @@
+camel:
+  main:
+    run-controller: true
+    name: CamelSpringAI
+
+spring:
+  main:
+    web-application-type: none
+  ai:
+    model:
+      chat: openai
+      embedding:
+        text: openai
+        multimodal: off
+      audio:
+        speech: off
+        transcription: off
+      image: off
+      moderation: off
+    openai:
+      chat:
+        model: ${OPENAI_CHAT_MODEL}
+        options:
+          temperature: 0.7
+          model: ${OPENAI_CHAT_MODEL}
+        base-url: ${OPENAI_CHAT_BASE_URL}
+        api-key: ${OPENAI_CHAT_API_KEY}
+      embedding:
+        model: ${OPENAI_EMBEDDING_MODEL}
+        base-url: ${OPENAI_EMBEDDING_BASE_URL}
+        api-key: ${OPENAI_EMBEDDING_API_KEY}
+        options:
+          model: ${OPENAI_EMBEDDING_MODEL}
+    vectorstore:
+      qdrant:
+        host: localhost
+        port: 6334
+        collection-name: camel-ai-docs
+        initialize-schema: true
+        use-tls: false
+
+logging:
+  level:
+    org.apache.camel: INFO
+    sample.camel: INFO
+    org.springframework.ai: INFO

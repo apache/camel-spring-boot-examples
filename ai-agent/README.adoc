@@ -1,0 +1,174 @@
+== Spring Boot Example with Spring AI Agent
+
+=== Introduction
+
+This example demonstrates how to use Apache Camel with Spring AI to build AI-powered integration applications. The example showcases three key capabilities:
+
+1. *Chat* - Basic conversational AI using the Spring AI Chat component
+2. *Tools* - Function calling where the AI can invoke Camel routes as tools
+3. *Vector Store* - Semantic search using document embeddings with Qdrant
+
+The example uses Ollama as the AI model provider with the granite4:3b model for chat and embeddinggemma:300m for embeddings, and Qdrant as the vector database.
+
+==== Design Principles
+
+This example follows Apache Camel Spring AI's design philosophy of separating concerns:
+
+* *Business Logic in Camel Routes* - The route definitions focus purely on integration logic and data flow
+* *Infrastructure Configuration in application.yaml* - All non-functional requirements such as AI model selection, connection parameters, temperature settings, and external service endpoints are externalized to configuration files
+
+This separation enables:
+
+* Easy switching between different AI providers (e.g., Ollama, OpenAI, Azure) without changing route code
+* Environment-specific configurations (dev, staging, production) with different models or endpoints
+* Clear distinction between what the integration does (routes) and how it connects (configuration)
+
+=== Prerequisites
+
+==== Camel JBang
+Install Camel JBang to easily run infrastructure services:
+
+    $ curl -Ls https://sh.jbang.dev | bash -s - trust add https://github.com/apache/camel/
+    $ curl -Ls https://sh.jbang.dev | bash -s - app install --fresh --force camel@apache/camel
+
+Or if you already have JBang installed:
+
+    $ jbang app install camel@apache/camel
+
+==== Ollama
+You need to have Ollama installed and running locally. Install Ollama from https://ollama.ai and then pull the required models:
+
+    $ ollama pull granite4:3b
+    $ ollama pull embeddinggemma:300m
+
+The granite4:3b model is used for chat and the embeddinggemma:300m model is used for embeddings.
+
+Make sure Ollama is running on `http://localhost:11434` (default port) or update the `application.yaml` accordingly.
+
+NOTE: While you can use `camel infra run ollama` to run Ollama via Docker, be aware of performance limitations. On macOS, the Docker image cannot utilize GPU acceleration, making it extremely slow. Additionally, when running the Camel Ollama test-infra, both the Ollama Docker image and the default model (granite4, ~3GB) need to be downloaded on first run, which can be very time-consuming. For better performance, it's recommended to install Ollama natively.
+
+==== Qdrant
+Use Camel JBang to run Qdrant:
+
+    $ camel infra run qdrant
+
+Qdrant will be available on `http://localhost:6333`.
+
+=== Components Used
+
+* `camel-spring-ai-chat-starter` - Camel Spring AI chat integration
+* `camel-spring-ai-vector-store-starter` - Camel Spring AI vector store integration
+* `camel-spring-ai-tools-starter` - Camel Spring AI tools/function calling
+* `spring-ai-starter-model-ollama` - Spring AI Ollama model support
+* `spring-ai-starter-vector-store-qdrant` - Qdrant vector store integration
+
+=== Routes Overview
+
+NOTE: The routes use timer delays to ensure proper startup sequence. The chat route executes immediately on startup, the vector store query executes after a 10 second delay, and the tool chat route executes after a 20 second delay.
+
+==== ChatRoute
+Demonstrates basic chat functionality. Sends questions to the AI model and logs the responses. Executes immediately on startup.
+
+==== ToolRoute
+Shows how to define tools (functions) that the AI can call. The example includes a weather tool that the AI can invoke when asked about weather information. The tool is defined using the `spring-ai-tools` component with parameters. The tool chat route executes after a 20 second delay to ensure all services are ready.
+
+==== VectorStoreRoute
+Demonstrates semantic search using vector embeddings with Qdrant:
+
+* Watches the `input` directory for `.txt` files and adds them to the Qdrant vector store
+* Performs a sample similarity search query after a 10 second delay
+* Documents are automatically embedded and stored in Qdrant
+* Returns the top 3 most similar documents with a similarity threshold of 0.5
+
+=== Build
+
+You can build this example using:
+
+    $ mvn package
+
+=== Run
+
+You can run this example using:
+
+    $ mvn spring-boot:run
+
+=== Usage
+
+1. The chat route will automatically execute and ask questions about Apache Camel
+2. The tool route will demonstrate AI function calling with the weather tool (executes after 20 seconds)
+3. The vector store route will:
+   * Add sample documents from the `input` folder to the Qdrant vector store on startup
+   * Execute a sample similarity search query after 10 seconds
+   * You can add more `.txt` files to the `input` folder to expand the knowledge base
+
+=== Expected Output
+
+You should see in the console:
+
+* AI responses to the chat questions
+* Weather tool being called when the AI needs weather information
+* Vector store adding documents to Qdrant and performing a similarity search
+* The most relevant documents with similarity scores for the query
+
+The example will continue running and watching the `input` directory for new documents. Press Ctrl+C to stop.
+
+[source]
+----
+2025-11-25T17:24:21.770+01:00  INFO 51706 --- [ - timer://chat] chatRoute                                : Sending question to AI: What is Apache Camel?
+2025-11-25T17:24:29.858+01:00  INFO 51706 --- [ - timer://chat] chatRoute                                : AI Response: Apache Camel is an open-source integration framework based on known Java connectivity standards...
+
+
+2025-11-25T17:24:21.771+01:00  INFO 51706 --- [ - file://input] addDocuments                             : Adding document camel-intro.txt to vector store
+2025-11-25T17:24:22.048+01:00  INFO 51706 --- [ - file://input] addDocuments                             : Successfully added camel-intro.txt to vector store
+2025-11-25T17:24:22.048+01:00  INFO 51706 --- [ - file://input] addDocuments                             : Adding document spring-ai-intro.txt to vector store
+2025-11-25T17:24:22.183+01:00  INFO 51706 --- [ - file://input] addDocuments                             : Successfully added spring-ai-intro.txt to vector store
+2025-11-25T17:34:08.998+01:00  INFO 52622 --- [mer://queryDocs] queryDocuments                           : Querying vector store with: What is Apache Camel and what does it do?
+2025-11-25T17:34:09.206+01:00  INFO 52622 --- [mer://queryDocs] queryDocuments                           : Retrieved 1 documents from vector store
+2025-11-25T17:34:09.217+01:00  INFO 52622 --- [mer://queryDocs] queryDocuments                           : Document text: Apache Camel is an open-source integration framework based on Enterprise Integration Patterns. It provides a rule-based routing and mediation engine which enables you to define routing and mediation rules in various domain-specific languages.
+
+
+2025-11-25T17:51:41.445+01:00  INFO 54308 --- [imer://toolChat] toolChatRoute                            : Sending question with tool capability to AI: What is the weather like in Rome, Italy? Answer with English slang
+2025-11-25T17:51:43.520+01:00  INFO 54308 --- [imer://toolChat] weatherTool                              : Weather tool called for location: Rome
+2025-11-25T17:51:43.739+01:00  INFO 54308 --- [imer://toolChat] weatherTool                              : Geocoding result - Latitude: 41.89193, Longitude: 12.51133
+2025-11-25T17:51:43.858+01:00  INFO 54308 --- [imer://toolChat] weatherTool                              : Weather tool response: The weather in  is 12.4 degrees Celsius with 87% humidity, 100% cloud cover, wind speed 2.9 km/h from 7 degrees, and 0.2 mm precipitation.
+2025-11-25T17:51:47.786+01:00  INFO 54308 --- [imer://toolChat] toolChatRoute                            : AI Response with tool usage: So, Rome's got it pretty mild out there right now – about **12.4°C**, feels like a cool breeze with that high humidity hanging around at **87%**. No rain in sight (just **0.2mm**), and the sky’s practically overcast (**100% cloud cover**) thanks to those gentle winds from the north‑west at **7°** – perfect for grabbing an espresso outside while you ponder life, love, or just how many more layers you need before it gets chilly again!
+----
+
+=== Configuration
+
+The AI configuration can be modified in `src/main/resources/application.yaml`:
+
+* Change the Ollama base URL if running on a different host/port
+* Switch to a different model (ensure it's pulled in Ollama first)
+* Adjust the temperature for more/less creative responses
+* Modify Qdrant host/port if running on a different location
+* Change the collection name for different use cases
+* Modify topK in VectorStoreRoute for more/fewer search results
+
+==== Production Profile with OpenAI
+
+The example includes a production profile that uses OpenAI instead of Ollama. To use it, activate the `prod` Maven profile and set the required environment variables:
+
+[source,bash]
+----
+export OPENAI_CHAT_MODEL=gpt-4o
+export OPENAI_CHAT_BASE_URL=https://api.openai.com
+export OPENAI_CHAT_API_KEY=your-openai-api-key
+export OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+export OPENAI_EMBEDDING_BASE_URL=https://api.openai.com
+export OPENAI_EMBEDDING_API_KEY=your-openai-api-key
+
+mvn spring-boot:run -Pprod -Dspring-boot.run.profiles=prod
+----
+
+The production profile configuration is in `src/main/resources/application-prod.yaml` and uses environment variables for flexibility. You can customize the models and base URLs to use different OpenAI-compatible endpoints (e.g., Azure OpenAI, local OpenAI-compatible servers).
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/community/support/[let us know].
+
+We also love contributors, so
+https://camel.apache.org/community/contributing/[get involved] :-)
+
+The Camel riders!

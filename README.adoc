@@ -27,11 +27,13 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 67 (0 deprecated)
+Number of Examples: 68 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===
 | Example | Category | Description
+
+| link:ai-agent/README.adoc[Ai Agent] (ai-agent) | AI | An example showing how to work with Camel Spring AI for chat, tools, and vector store
 
 | link:aot-basic/readme.adoc[Aot Basic] (aot-basic) | AOT | Example on how to leverage Spring Boot AOT in Camel Spring Boot
 

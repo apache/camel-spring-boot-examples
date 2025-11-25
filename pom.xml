@@ -38,6 +38,7 @@
 		<module>spring-boot</module>
 		<module>activemq</module>
 		<module>actuator-http-metrics</module>
+		<module>ai-agent</module>
 		<module>amqp</module>
 		<module>aot-basic</module>
 		<module>arangodb</module>
