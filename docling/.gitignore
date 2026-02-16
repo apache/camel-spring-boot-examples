@@ -1,0 +1,11 @@
+target/
+src/main/resources/documents/*
+!src/main/resources/documents/.gitkeep
+!src/main/resources/documents/extract/
+src/main/resources/documents/extract/*
+!src/main/resources/documents/extract/.gitkeep
+src/main/resources/output/*
+!src/main/resources/output/.gitkeep
+!src/main/resources/output/metadata/
+src/main/resources/output/metadata/*
+!src/main/resources/output/metadata/.gitkeep

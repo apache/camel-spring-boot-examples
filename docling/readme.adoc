@@ -1,0 +1,108 @@
+== Camel Example Spring Boot and Docling
+
+This example shows how to work with Apache Camel and the Docling component using Spring Boot to convert documents to Markdown format.
+
+The example demonstrates document conversion from various formats (PDF, DOCX, PPTX, HTML, MD) to Markdown using the Docling service.
+
+=== Features
+
+* Document to Markdown Conversion - Automatically converts PDF, DOCX, PPTX, HTML, and MD files to Markdown format
+* Metadata Extraction - Optional route to extract structured data as JSON from documents
+* File-based Processing - Watch directories for new files and process them automatically
+* Java DSL Routes - Routes defined using Camel Java DSL
+
+=== Prerequisites
+
+Before running this example, you need:
+
+1. A running Docling-Serve instance at http://localhost:5001
+
+----
+docker run -p 5001:5001 -e DOCLING_SERVE_ENABLE_UI=1 ghcr.io/docling-project/docling-serve:latest
+----
+
+=== How to run
+
+You can run this example using:
+
+----
+mvn spring-boot:run
+----
+
+=== Usage
+
+==== Converting Documents to Markdown
+
+1. Start the application
+2. Place any PDF, DOCX, PPTX, HTML, or MD file in the `src/main/resources/documents/` directory
+3. The application will:
+   - Detect the new file
+   - Convert it to Markdown using Docling
+   - Save the converted file to `src/main/resources/output/` directory with `.md` extension
+   - Delete the original file from `src/main/resources/documents/`
+
+==== Extracting Structured Metadata
+
+1. Place documents in `src/main/resources/documents/extract/`
+2. The application will:
+   - Extract structured data from the document
+   - Save the metadata as JSON to `src/main/resources/output/metadata/`
+
+=== Project Structure
+
+----
+docling/
+└── src/
+    └── main/
+        ├── java/
+        │   └── org/apache/camel/example/springboot/docling/
+        │       ├── DoclingServeApplication.java
+        │       └── DoclingServeRoute.java
+        └── resources/
+            ├── application.properties
+            ├── documents/              # Input directory - place documents here
+            │   └── extract/           # Optional: place documents here for metadata extraction
+            └── output/                # Output directory for converted Markdown files
+                └── metadata/         # Output directory for extracted metadata JSON files
+----
+
+=== Configuration
+
+Edit `src/main/resources/application.properties` to configure:
+
+* `docling.serve.url` - URL of the Docling service
+* `documents.directory` - Input directory for documents to convert (default: src/main/resources/documents)
+* `output.directory` - Output directory for converted files (default: src/main/resources/output)
+
+=== Routes
+
+The application includes two routes defined in `src/main/java/org/apache/camel/example/springboot/docling/DoclingServeRoute.java`:
+
+==== document-to-markdown-converter
+
+* Watches: `src/main/resources/documents/` directory
+* Accepts: PDF, DOCX, PPTX, HTML, MD files
+* Action: Converts to Markdown
+* Output: `src/main/resources/output/{filename}.md`
+
+==== document-metadata-extractor
+
+* Watches: `src/main/resources/documents/extract/` directory
+* Accepts: PDF, DOCX, PPTX files
+* Action: Extracts structured data as JSON
+* Output: `src/main/resources/output/metadata/{filename}.json`
+
+=== Using Camel components
+
+Apache Camel provides 200+ components which you can use to integrate and route messages between many systems
+and data formats. To use any of these Camel components, add the component as a dependency to your project.
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!
