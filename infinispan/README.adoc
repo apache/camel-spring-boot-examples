@@ -13,9 +13,9 @@ You can build this example using:
 
 === Run
 
-Start Infinispan container in a separate terminal:
+Start an Infinispan server using the Camel CLI:
 
-    $ docker run --rm -e USER=admin -e PASS=password -p 11222:11222 -v $PWD/src/test/resources:/user-config/ quay.io/infinispan/server:15.0.5.Final -c /user-config/infinispan.xml
+    $ camel infra run infinispan
 
 You can run this example using:
 

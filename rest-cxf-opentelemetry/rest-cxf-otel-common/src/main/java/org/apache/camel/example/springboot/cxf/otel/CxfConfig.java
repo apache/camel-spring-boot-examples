@@ -21,8 +21,8 @@ import org.apache.cxf.tracing.opentelemetry.jaxrs.OpenTelemetryFeature;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.jakarta.rs.json.JacksonJsonProvider;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.jakarta.rs.json.JacksonJsonProvider;
 
 @Configuration
 public class CxfConfig {

@@ -43,7 +43,7 @@ public class TwitterSalesforceRoute extends RouteBuilder {
                     contact = Contact.class;
                 }
 
-                Object contactObject = contact.newInstance();
+                Object contactObject = contact.getDeclaredConstructor().newInstance();
                 Method setLastName = contact.getMethod("setLastName", String.class);
                 Method setTwitterScreenName__c = contact.getMethod("setTwitterScreenName__c", String.class);
                 setLastName.invoke(contactObject, name);

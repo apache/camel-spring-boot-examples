@@ -18,10 +18,13 @@ package sample.camel.service;
 
 import jakarta.xml.ws.WebFault;
 
+import java.io.Serial;
+
 @WebFault(name = "NoSuchContact")
 public class NoSuchContactException extends Exception {
 
-	private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
 	private String faultInfo;
 

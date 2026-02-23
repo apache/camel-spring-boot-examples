@@ -34,7 +34,7 @@ public class MyBean {
     private String say;
 
     public String saySomething(String body) {
-        return String.format("%s I am invoked %d times", say, ++counter);
+        return "%s I am invoked %d times".formatted(say, ++counter);
     }
 
 }

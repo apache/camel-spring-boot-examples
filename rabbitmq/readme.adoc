@@ -16,9 +16,9 @@ in the `application.properties` file as well.
 
 The sample requires a RabbitMQ broker to be running.
 
-You can for example easily start RabbitMQ via Docker
+You can use the Camel CLI to start a RabbitMQ broker:
 
-    docker run -it -p 5672:5672 --hostname my-rabbit --name some-rabbit rabbitmq:3
+    camel infra run rabbitmq
 
 Then you can run this example using
 

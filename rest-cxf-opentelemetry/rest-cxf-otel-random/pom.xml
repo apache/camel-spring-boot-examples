@@ -24,7 +24,7 @@
 	<parent>
 		<groupId>org.apache.camel.springboot.example</groupId>
 		<artifactId>camel-example-spring-boot-rest-cxf-opentelemetry</artifactId>
-		<version>4.18.0-SNAPSHOT</version>
+		<version>4.19.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>camel-example-spring-boot-rest-cxf-otel-random</artifactId>

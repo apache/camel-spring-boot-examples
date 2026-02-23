@@ -37,7 +37,6 @@ items:
         kind: DockerImage
         name: registry.redhat.io/amq7/amq-broker-rhel8:7.12
       generation: 0
-      importPolicy: {}
       name: "latest"
       referencePolicy:
         type: Source

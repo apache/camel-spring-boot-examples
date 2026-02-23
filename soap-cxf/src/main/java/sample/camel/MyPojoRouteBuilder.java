@@ -20,6 +20,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.cxf.jaxws.CxfEndpoint;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import sample.camel.service.ContactService;
@@ -28,6 +29,7 @@ import sample.camel.service.ContactService;
  * This class demonstrate how to expose a SOAP endpoint starting from java classes
  */
 @Component
+@Configuration
 public class MyPojoRouteBuilder extends RouteBuilder {
 
 	@Bean

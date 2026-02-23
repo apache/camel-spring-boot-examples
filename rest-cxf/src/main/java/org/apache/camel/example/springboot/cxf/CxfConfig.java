@@ -19,7 +19,7 @@ package org.apache.camel.example.springboot.cxf;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.fasterxml.jackson.jakarta.rs.json.JacksonJsonProvider;
+import tools.jackson.jakarta.rs.json.JacksonJsonProvider;
 
 @Configuration
 public class CxfConfig {

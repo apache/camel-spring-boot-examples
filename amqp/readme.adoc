@@ -2,19 +2,11 @@
 
 This example shows how to work with a simple Apache Camel application using Spring Boot and Apache ActiveMQ.
 
-=== Preparing ActiveMQ brokers
-
-From Apache ActiveMQ you can download the broker as a `.zip` or `.tar.gz` file.
-
-Unzip/tar the archive, and start a terminal.
-
-Change directory to the unzipped directory and start the broker.
-
-    bin/activemq console
-
-Which runs the broker in the foreground and logs to the console.
-
 === How to run the example
+
+You need a running ActiveMQ broker. You can use the Camel CLI to start an Artemis broker:
+
+    camel infra run artemis
 
 You can run this example using
 

@@ -28,10 +28,10 @@ public class CamelRoute extends RouteBuilder {
 
       from("timer://foo?period=10000&repeatCount=1")
                 .bean(MyBeanService.class, "createDocument")
-                .to("arangodb:myDb?operation=SAVE_DOCUMENT")
+                .to("arangodb:myDatabase?operation=SAVE_DOCUMENT")
                 .bean(MyBeanService.class, "readDocument")
                 .setHeader(ArangoDbConstants.RESULT_CLASS_TYPE).constant(String.class)
-                .to("arangodb:myDb?operation=FIND_DOCUMENT_BY_KEY")
+                .to("arangodb:myDatabase?operation=FIND_DOCUMENT_BY_KEY")
                 .log("Received body: ${body}");
     }
 }

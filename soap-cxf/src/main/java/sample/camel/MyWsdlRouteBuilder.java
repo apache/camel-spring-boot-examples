@@ -21,6 +21,7 @@ import org.apache.camel.component.cxf.jaxws.CxfEndpoint;
 import org.apache.cxf.message.MessageContentsList;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import com.example.customerservice.Customer;
@@ -37,6 +38,7 @@ import sample.camel.repository.CustomerRepository;
  * This class demonstrate how to expose a SOAP endpoint starting from a wsdl, using the cxf-codegen-plugin
  */
 @Component
+@Configuration
 public class MyWsdlRouteBuilder extends RouteBuilder {
 
 	private final CustomerRepository customerRepository;

@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.camel.springboot.example</groupId>
         <artifactId>examples</artifactId>
-        <version>4.18.0-SNAPSHOT</version>
+        <version>4.19.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-example-spring-boot-muti-datasources-2pc</artifactId>
@@ -82,10 +82,6 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-stream-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-spring-jdbc-starter</artifactId>
         </dependency>
 
@@ -93,12 +89,12 @@
         <dependency>
             <groupId>dev.snowdrop</groupId>
             <artifactId>narayana-spring-boot-starter</artifactId>
-            <version>3.2.0</version>
+            <version>4.0.0</version>
         </dependency>
         <dependency>
             <groupId>io.agroal</groupId>
             <artifactId>agroal-spring-boot-starter</artifactId>
-            <version>2.5</version>
+            <version>3.0</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -113,7 +109,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-spring-junit5</artifactId>
+            <artifactId>camel-test-spring-junit6</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -123,12 +119,14 @@
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>postgresql</artifactId>
+            <artifactId>testcontainers-postgresql</artifactId>
+            <version>${testcontainers-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <artifactId>testcontainers-junit-jupiter</artifactId>
+            <version>${testcontainers-version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

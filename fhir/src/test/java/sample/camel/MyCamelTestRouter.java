@@ -17,6 +17,7 @@
 package sample.camel;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.hl7.fhir.r4.model.Bundle;
 
 import org.springframework.stereotype.Component;
 
@@ -26,7 +27,11 @@ public class MyCamelTestRouter extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		from("direct:start")
-				.to("fhir://read/resourceById?resourceClass=Patient&stringId=1&serverUrl={{serverUrl}}&fhirVersion={{fhirVersion}}")
+				.to("fhir://search/searchByUrl?url=Patient&serverUrl={{serverUrl}}&fhirVersion={{fhirVersion}}")
+				.process(exchange -> {
+					Bundle bundle = exchange.getIn().getBody(Bundle.class);
+					exchange.getIn().setBody(bundle.getEntry().get(0).getResource());
+				})
 				.to("mock:result");
 	}
 }

@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.http.ProtocolException;
+import org.apache.hc.core5.http.ProtocolException;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Identifier;

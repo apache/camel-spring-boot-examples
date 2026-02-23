@@ -15,9 +15,38 @@ The example generates 2 routes:
 
 === How to deploy
 
-. Run the database container
-[source,console]
-podman run --rm --name db -e POSTGRES_PASSWORD=password -p 5432:5432 docker.io/library/postgres:latest
+. Start the PostgreSQL server
+
+* Use camel-jbang
+
+In camel-jbang there is a `camel infra` command to start services.
+
+To start the postgresql server
+```
+camel infra run postgres
+```
+It will output this:
+```
+Starting service postgres
+{
+  "getServiceAddress" : "localhost:5432",
+  "host" : "localhost",
+  "password" : "test",
+  "port" : 5432,
+  "userName" : "test"
+}
+Press any key to stop the execution
+```
+
+NOTE: If you use `camel infra run`, make sure the credentials in `src/main/resources/application.properties` match the ones reported by the service (e.g. `spring.datasource.username=test` and `spring.datasource.password=test`).
+
+* Use docker
+
+You can use docker in case you don't want to use camel-jbang.
+
+```
+docker run --rm --name db -e POSTGRES_PASSWORD=password -p 5432:5432 docker.io/library/postgres:latest
+```
 
 . Run the tests and package the `war` file
 [source,console]

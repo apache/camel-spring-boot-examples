@@ -13,19 +13,9 @@ This project consists of the following examples:
 
 This example requires that Kafka Server is up and running.
 
-    $ ${KAFKA}/bin/zookeeper-server-start.sh ${KAFKA}/config/zookeeper.properties
+You can use the Camel CLI to start a Kafka broker:
 
-    $ ${KAFKA}/bin/kafka-server-start.sh ${KAFKA}/config/server.properties
-
-You will need to create following topics before you run the examples.
-
-On windows run
-
-    $ ${KAFKA}/bin/kafka-topics.bat --create --zookeeper <zookeeper host ip>:<port> --replication-factor 1 --partitions 1 --topic my-topic
-
-On linux run
- 
-    $ ${KAFKA}/bin/kafka-topics.sh --create --zookeeper <zookeeper host ip>:<port> --replication-factor 1 --partitions 1 --topic my-topic
+    $ camel infra run kafka
 
 === Build
 

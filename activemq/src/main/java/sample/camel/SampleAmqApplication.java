@@ -17,17 +17,15 @@
 package sample.camel;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration;
+import org.springframework.boot.activemq.autoconfigure.ActiveMQAutoConfiguration;
 
 /* Disable ActiveMQAutoConfiguration to prevent Spring Boot from creating a
    default ConnectionFactory.  This allows us to configure our own ConnectionFactory
    via camel.component.activemq properties in application.properties.
 */
-@SpringBootApplication
-@EnableAutoConfiguration(exclude = {ActiveMQAutoConfiguration.class})
+@SpringBootApplication(exclude = {ActiveMQAutoConfiguration.class})
 public class SampleAmqApplication {
 
     public static void main(String[] args) {

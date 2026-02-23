@@ -17,4 +17,4 @@
     limitations under the License.
 
 -->
-<beans/>
+<beans bean-discovery-mode="all" version="4.0"/>

@@ -33,7 +33,6 @@ items:
         kind: DockerImage
         name: quay.io/jbosstm/lra-coordinator:latest
       generation: 0
-      importPolicy: {}
       name: "latest"
       referencePolicy:
         type: Source
@@ -87,4 +86,3 @@ items:
               name: lra-coordinator-data
         volumes:
           - name: lra-coordinator-data
-            emptyDir: {}

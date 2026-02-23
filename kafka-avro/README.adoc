@@ -33,18 +33,9 @@ $ curl -X DELETE http://localhost:8081/subjects/topic-value/versions/version-no
 
 This example requires that Kafka Server is up and running.
 
-    $ ${KAFKA}/bin/zookeeper-server-start.sh ${KAFKA}/config/zookeeper.properties
-    $ ${KAFKA}/bin/kafka-server-start.sh ${KAFKA}/config/server.properties
+You can use the Camel CLI to start a Kafka broker:
 
-You will need to create following topics before you run the examples.
-
-On windows run
-
-    $ ${KAFKA}/bin/kafka-topics.bat --create --zookeeper <zookeeper host ip>:<port> --replication-factor 1 --partitions 1 --topic employees-avro
-
-On linux run
-    
-    $ ${KAFKA}/bin/kafka-topics.sh --create --zookeeper <zookeeper host ip>:<port> --replication-factor 1 --partitions 1 --topic employees-avro
+    $ camel infra run kafka
 
 === Build
 

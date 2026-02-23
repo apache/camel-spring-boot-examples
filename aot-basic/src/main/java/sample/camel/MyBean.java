@@ -36,7 +36,7 @@ public class MyBean {
 
     @Reflective
     public String saySomething() {
-        return String.format("%s I am invoked %d times", say, ++counter);
+        return "%s I am invoked %d times".formatted(say, ++counter);
     }
 
 }

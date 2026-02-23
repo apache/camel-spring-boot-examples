@@ -23,13 +23,14 @@
 
     <groupId>org.apache.camel.springboot.example</groupId>
     <artifactId>camel-example-spring-boot-observation-loggingtracer</artifactId>
-    <version>4.18.0-SNAPSHOT</version>
+    <version>4.19.0-SNAPSHOT</version>
     <name>Camel SB Examples :: Observation :: LoggingTracer</name>
     <description>An example Observation Tracer</description>
 
     <properties>
         <brave.version>6.0.3</brave.version>
-        <micrometer-tracing.version>1.5.0</micrometer-tracing.version>
+    <maven.compiler.release>17</maven.compiler.release>
+        <micrometer-tracing.version>1.13.15</micrometer-tracing.version>
     </properties>
 
     <dependencies>

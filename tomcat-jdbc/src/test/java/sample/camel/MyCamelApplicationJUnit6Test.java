@@ -16,32 +16,49 @@
  */
 package sample.camel;
 
-import java.util.concurrent.TimeUnit;
-
 import org.apache.camel.CamelContext;
 import org.apache.camel.builder.NotifyBuilder;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.EnableRouteCoverage;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Example test class with Camel coverage. When running tests a mock web server will be running, simulating a web environment.
+ */
 @CamelSpringBootTest
 @SpringBootTest(classes = MyCamelApplication.class)
-public class MyCamelApplicationJUnit5Test {
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+@EnableRouteCoverage
+public class MyCamelApplicationJUnit6Test {
 
     @Autowired
     private CamelContext camelContext;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     @Test
     public void shouldProduceMessages() throws Exception {
-        // we expect that one or more messages is automatic done by the Camel
+        // we expect that one or more messages is automatically done by the Camel
         // route as it uses a timer to trigger
         NotifyBuilder notify = new NotifyBuilder(camelContext).whenDone(1).create();
+        assertTrue(notify.matches(5, TimeUnit.SECONDS));
 
-        assertTrue(notify.matches(10, TimeUnit.SECONDS));
+        // check if the correct message is in the database
+        List<Map<String, Object>> messages = jdbcTemplate.queryForList("select * from messages");
+        assertTrue(!messages.isEmpty());
+        assertTrue(messages.get(0).containsValue("Hello World I am invoked 1 times"));
     }
 
 }

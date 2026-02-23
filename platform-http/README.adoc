@@ -48,7 +48,7 @@ o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomc
 o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
 w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 451 ms
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.18.0-SNAPSHOT (MyCamel) is starting
+o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.19.0-SNAPSHOT (MyCamel) is starting
 o.a.c.impl.engine.AbstractCamelContext   : Routes startup (total:6 rest-dsl:6)
 o.a.c.impl.engine.AbstractCamelContext   :     Started route1 (rest://get:/todos)
 o.a.c.impl.engine.AbstractCamelContext   :     Started route2 (rest://get:/todos:/%7Bid%7D)
@@ -56,7 +56,7 @@ o.a.c.impl.engine.AbstractCamelContext   :     Started route3 (rest://patch:/tod
 o.a.c.impl.engine.AbstractCamelContext   :     Started route4 (rest://post:/todos)
 o.a.c.impl.engine.AbstractCamelContext   :     Started route5 (rest://delete:/todos)
 o.a.c.impl.engine.AbstractCamelContext   :     Started route6 (rest://delete:/todos:/%7Bid%7D)
-o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.18.0-SNAPSHOT (MyCamel) started in 8ms (build:0ms init:0ms start:8ms boot:428ms)
+o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.19.0-SNAPSHOT (MyCamel) started in 8ms (build:0ms init:0ms start:8ms boot:428ms)
 o.a.c.example.springboot.Application     : Started Application in 1.155 seconds (process running for 1.283)
 
 ----

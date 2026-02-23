@@ -21,6 +21,8 @@ import org.apache.camel.model.SagaPropagation;
 
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @Component
 public class PaymentRoute extends RouteBuilder {
 
@@ -35,7 +37,7 @@ public class PaymentRoute extends RouteBuilder {
             .log("Paying ${header.payFor} for order #${header.id}")
             .setBody(header("JMSCorrelationID"))
             .choice()
-                .when(x -> Math.random() >= 0.85)
+                .when(x -> ThreadLocalRandom.current().nextDouble() >= 0.85)
                     .log("Payment ${header.payFor} for saga #${header.id} fails!")
                     .throwException(new RuntimeException("Random failure during payment"))
             .end()

@@ -23,7 +23,7 @@
     <parent>
         <groupId>org.apache.camel.springboot.example</groupId>
         <artifactId>examples</artifactId>
-        <version>4.18.0-SNAPSHOT</version>
+        <version>4.19.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-example-spring-boot-rest-openapi</artifactId>
@@ -58,7 +58,7 @@
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
 
         <!-- Camel -->
@@ -105,8 +105,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-junit5</artifactId>
-            <version>${camel-version}</version>
+            <artifactId>camel-test-spring-junit6</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

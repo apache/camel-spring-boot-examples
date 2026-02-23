@@ -17,15 +17,8 @@
 package sample.camel;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.spring.spi.TransactionErrorHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.print.attribute.standard.MediaSize;
-import java.security.SecureRandom;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -61,12 +54,12 @@ public class MyCamelRouter extends RouteBuilder {
             .delay(simple("{{myPeriod}}"))
             .to("log:info?showAll=true")
             .setHeader("name", body())
-            // prepare the insert SQL
-            .setBody(simple("insert into names(name) values('${header.name}')"))
+            // prepare the insert SQL using named parameters
+            .setBody(constant("insert into names(name) values(:?name)"))
             .log("insert into the first database (non-unique)")
-            .to("spring-jdbc:ds1?resetAutoCommit=false")
+            .to("spring-jdbc:ds1?resetAutoCommit=false&useHeadersAsParameters=true")
             .log("insert into the second database (unique)")
-            .to("spring-jdbc:ds2?resetAutoCommit=false");
+            .to("spring-jdbc:ds2?resetAutoCommit=false&useHeadersAsParameters=true");
 
         // route to print inserted names
         from("timer:query?period={{myPeriod}}")

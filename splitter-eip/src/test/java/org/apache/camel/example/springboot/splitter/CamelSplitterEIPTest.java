@@ -17,6 +17,8 @@
  *
  */
 
+package org.apache.camel.example.springboot.splitter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,19 +28,19 @@ import org.apache.camel.CamelExecutionException;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.example.spring.boot.Application;
-import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
+import org.apache.camel.test.spring.junit6.CamelSpringBootTest;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.apache.camel.test.junit5.TestSupport.assertIsInstanceOf;
+import static org.apache.camel.test.junit6.TestSupport.assertIsInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = {Application.class})
-public class CamelSplitterEIPTests {
+public class CamelSplitterEIPTest {
 
 	@Autowired
 	private CamelContext camelContext;
@@ -110,8 +112,9 @@ public class CamelSplitterEIPTests {
 		MockEndpoint mockJ = camelContext.getEndpoint("mock:j", MockEndpoint.class);
 
 		// without error aggregation is done as usual
-		mockH.expectedBodiesReceived("A", "B", "C");
-		mockJ.expectedBodiesReceived("A+B+C");
+		// Messages are transformed by MyMessageTransformer before reaching mock:h
+		mockH.expectedBodiesReceived("Alpha", "Beta", "Charlie");
+		mockJ.expectedBodiesReceived("Alpha+Beta+Charlie");
 
 		producerTemplate.sendBody("direct:split-aggregate-stop-on-aggregation-exception", "A,B,C");
 
@@ -121,9 +124,12 @@ public class CamelSplitterEIPTests {
 		mockH.reset();
 		mockJ.reset();
 
-		// Received all messages that went into aggregation, including corrupted one
-		mockH.expectedBodiesReceived("A", "B", "E");
-		// Since aggregation stopped, receiving all original messages
+		// 'E' is not in the transformer dictionary, so it throws IllegalArgumentException.
+		// With .continued(true), the exception from the transformer is swallowed and the original
+		// body 'E' passes through to mock:h. Then the aggregation strategy also throws on 'E',
+		// which stops the split — so 'C' and 'D' are never processed.
+		mockH.expectedBodiesReceived("Alpha", "Beta", "E");
+		// The aggregation result is the original unsplit input since aggregation failed
 		mockJ.expectedBodiesReceived("A,B,E,C,D");
 
 		// 'E' is poison message which will lead to an error during aggregation

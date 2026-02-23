@@ -4,6 +4,10 @@ This example shows how to work with a simple Apache Camel application using Spri
 
 === How to run the example
 
+This example uses an embedded Artemis broker by default. Alternatively, you can start an external Artemis broker using the Camel CLI:
+
+    camel infra run artemis
+
 You can run this example using
 
     mvn spring-boot:run

@@ -53,7 +53,7 @@ public class RandomServiceImpl implements RandomService {
 		assert number != null;
 		assert number.getType() != null;
 		LOGGER.info("register {}", number);
-		final String objName = String.format("%s-%s", serviceName, number.getNumber());
+		final String objName = "%s-%s".formatted(serviceName, number.getNumber());
 		producerTemplate.sendBodyAndHeader("direct:save-obj", number, "objectName", objName);
 	}
 }

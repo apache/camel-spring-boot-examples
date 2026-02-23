@@ -49,7 +49,7 @@ indicate that the service should be traced.
 $ mvn -f service2/ compile spring-boot:run
 ----
 
-When service1 is ready then start service2
+When service2 is ready then start service1
 
 [source,sh]
 ----
