@@ -107,7 +107,7 @@
 
 	<properties>
 		<camel-version>4.19.0-SNAPSHOT</camel-version>
-    	<javaVersion>17</javaVersion>
+    	<javaVersion>21</javaVersion>
 		<skip.starting.camel.context>false</skip.starting.camel.context>
 		<jkube-maven-plugin-version>1.18.1</jkube-maven-plugin-version>
 		<jkube.generator.from>registry.access.redhat.com/ubi9/openjdk-17:latest</jkube.generator.from>
