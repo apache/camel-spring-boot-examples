@@ -1,0 +1,66 @@
+== Camel Example Spring Boot RAG with Qdrant
+
+This example shows a full end-to-end RAG (Retrieval-Augmented Generation) pipeline
+using the Camel OpenAI component for embeddings and chat, with Qdrant as vector store.
+
+=== Prerequisites
+
+1. A running Qdrant instance:
+
+----
+camel infra run qdrant
+----
+
+2. A running Ollama instance with the required models:
+
+----
+ollama pull nomic-embed-text
+ollama pull granite4:3b
+----
+
+=== How to run
+
+You can run this example using:
+
+----
+mvn spring-boot:run
+----
+
+=== What happens
+
+When the application starts, it executes the following RAG pipeline:
+
+1. **Create Collection** - Creates `rag_collection` in Qdrant. A collection is a named group of points, where each point holds an embedding vector and an optional payload (in this case, the original text). The collection is configured with Cosine distance, which measures how semantically similar two vectors are: the closer to 1.0, the more similar.
+2. **Index Documents** - Reads `.txt` files from the `input/` directory (a playlist of songs is provided as sample data). Each document is sent to the `nomic-embed-text` model via `openai:embeddings`, which converts the text into a 768-dimensional numerical vector (the embedding). An embedding is a dense array of floats that captures the semantic meaning of the text: texts with similar meaning produce vectors that are close together in the vector space. The embedding and the original text are then upserted into Qdrant as a point.
+3. **RAG Query** - Takes a question (e.g. _"Give me at least five songs containing the 'moon' word in the title"_), converts it into an embedding using the same model, and performs a similarity search in Qdrant to find the documents whose vectors are closest to the question vector. The retrieved document texts are assembled into a context prompt and sent to `openai:chat-completion` for a grounded answer.
+
+=== Configuration
+
+Edit `src/main/resources/application.properties` to configure:
+
+* `camel.component.qdrant.host` - Qdrant server host (default: localhost)
+* `camel.component.qdrant.port` - Qdrant gRPC port (default: 6334)
+* `camel.component.openai.base-url` - OpenAI-compatible API base URL (default: Ollama at http://localhost:11434/v1)
+* `camel.component.openai.model` - Chat completion model (default: granite4:3b)
+* `camel.component.openai.embedding-model` - Embedding model (default: nomic-embed-text)
+
+To use OpenAI instead of Ollama, change the base URL and set your API key:
+
+----
+camel.component.openai.base-url=https://api.openai.com/v1
+camel.component.openai.api-key=${OPENAI_API_KEY}
+camel.component.openai.model=gpt-4o-mini
+camel.component.openai.embedding-model=text-embedding-3-small
+----
+
+Note: when switching to a different embedding model, update the vector size in the collection creation accordingly (e.g., 1536 for text-embedding-3-small).
+
+=== Help and contributions
+
+If you hit any problem using Camel or have some feedback, then please
+https://camel.apache.org/support.html[let us know].
+
+We also love contributors, so
+https://camel.apache.org/contributing.html[get involved] :-)
+
+The Camel riders!

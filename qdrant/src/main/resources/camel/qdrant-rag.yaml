@@ -1,0 +1,149 @@
+- beans:
+    - name: ragCreateCollection
+      type: org.apache.camel.component.qdrant.rag.RAGCreateCollection
+      properties:
+        size: "768"
+        distance: "Cosine"
+    - name: ragUpsert
+      type: org.apache.camel.component.qdrant.rag.RAGUpsert
+      properties:
+        payloadKey: "content"
+        textVariable: "text"
+    - name: ragResultExtractor
+      type: org.apache.camel.component.qdrant.rag.RAGResultExtractor
+      properties:
+        payloadKey: "content"
+
+# Create collection on startup
+- route:
+    id: init-collection
+    from:
+      uri: timer:init
+      parameters:
+        repeatCount: "1"
+        delay: "1000"
+      steps:
+        - log:
+            message: "Creating collection: rag_collection"
+        - doTry:
+            steps:
+              - process:
+                  ref: ragCreateCollection
+              - to:
+                  uri: qdrant:rag_collection
+              - log:
+                  message: "Collection created successfully"
+            doCatch:
+              - exception:
+                  - java.lang.Exception
+                steps:
+                  - log:
+                      message: "Collection already exists or error: ${exception.message}"
+
+# Index documents from input directory (split file line-by-line)
+- route:
+    id: index-documents
+    from:
+      uri: "file:{{input.dir}}"
+      parameters:
+        noop: "true"
+        include: ".*\\.txt"
+        initialDelay: "3000"
+      steps:
+        - log:
+            message: "Indexing document: ${header.CamelFileName}"
+        - convertBodyTo:
+            type: java.lang.String
+        - split:
+            tokenize: "\n"
+            steps:
+              - to:
+                  uri: direct:index
+        - log:
+            message: "All documents indexed. Starting RAG query..."
+        - setBody:
+            expression:
+              constant:
+                expression: "Give me at least five songs containing the 'moon' word in the title"
+        - log:
+            message: "Query: ${body}"
+        - to:
+            uri: direct:rag
+
+# Embed and store a document in Qdrant
+- route:
+    id: embed-and-store
+    from:
+      uri: direct:index
+      steps:
+        - setVariable:
+            name: text
+            expression:
+              simple:
+                expression: "${body}"
+        - to:
+            uri: openai:embeddings
+        - process:
+            ref: ragUpsert
+        - to:
+            uri: qdrant:rag_collection
+        - log:
+            message: "Document indexed successfully"
+
+# RAG pipeline: embed query -> similarity search -> chat completion
+- route:
+    id: rag-pipeline
+    from:
+      uri: direct:rag
+      steps:
+        - setVariable:
+            name: query
+            expression:
+              simple:
+                expression: "${body}"
+        - setBody:
+            expression:
+              simple:
+                expression: "From the following query, extract the number of results requested. Reply with ONLY the number, nothing else. If no specific number is mentioned, reply with 10.\n\nQuery: ${variable.query}"
+        - to:
+            uri: openai:chat-completion
+        - setHeader:
+            name: CamelQdrantMaxResults
+            expression:
+              simple:
+                expression: "${body.trim()}"
+                resultType: int
+        - log:
+            message: "Max results requested: ${header.CamelQdrantMaxResults}"
+        - setBody:
+            expression:
+              simple:
+                expression: "${variable.query}"
+        - to:
+            uri: openai:embeddings
+        - setHeader:
+            name: CamelQdrantAction
+            constant: SIMILARITY_SEARCH
+        - setHeader:
+            name: CamelQdrantIncludePayload
+            constant: "true"
+        - setHeader:
+            name: CamelQdrantIncludeVectors
+            constant: "false"
+        - to:
+            uri: qdrant:rag_collection
+        - bean:
+            ref: ragResultExtractor
+            method: extract
+        - marshal:
+            json: {}
+        - log:
+            message: "Result by Qdrant: \n ${body}"
+        - setBody:
+            expression:
+              simple:
+                expression: "Based on the following search results ranked by relevance:\n${body}\n\n${variable.query}"
+        - to:
+            uri: openai:chat-completion
+        - log:
+            message: "AI Response: \n ${body}"
