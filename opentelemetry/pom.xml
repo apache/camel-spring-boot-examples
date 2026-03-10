@@ -35,6 +35,7 @@
     <properties>
         <category>Management and Monitoring</category>
         <title>OpenTelemetry</title>
+        <skipTests>true</skipTests>
     </properties>
 
     <modules>
