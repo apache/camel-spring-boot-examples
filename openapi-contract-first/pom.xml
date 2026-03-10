@@ -89,7 +89,7 @@
         <!-- json support -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-jackson-starter</artifactId>
+            <artifactId>camel-jackson3-starter</artifactId>
         </dependency>
         <!-- camel to use spring http server -->
         <dependency>
