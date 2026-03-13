@@ -72,6 +72,7 @@
 		<module>platform-http</module>
 		<module>platform-http-proxy</module>
 		<module>pojo</module>
+		<module>milvus</module>
 		<module>rabbitmq</module>
 		<module>reactive-streams</module>
 		<module>resilience4j</module>

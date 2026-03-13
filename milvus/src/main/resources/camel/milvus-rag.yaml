@@ -1,0 +1,202 @@
+- beans:
+    - name: ragCreateCollection
+      type: org.apache.camel.component.milvus.rag.RAGCreateCollection
+      properties:
+        collectionName: "cities"
+        dimension: "3"
+        textFieldName: "city"
+        vectorFieldName: "features"
+        textFieldMaxLength: "128"
+        additionalTextFields: "country,latitude,longitude"
+    - name: ragCreateIndex
+      type: org.apache.camel.component.milvus.rag.RAGCreateIndex
+      properties:
+        collectionName: "cities"
+        vectorFieldName: "features"
+        indexType: "IVF_FLAT"
+        metricType: "L2"
+    - name: ragSearch
+      type: org.apache.camel.component.milvus.rag.RAGSearch
+      properties:
+        collectionName: "cities"
+        outputFields: "city,country,latitude,longitude"
+        limit: "4"
+    - name: ragResultExtractor
+      type: org.apache.camel.component.milvus.rag.RAGResultExtractor
+      properties:
+        outputFields: "city,country,latitude,longitude"
+    - name: ragInsert
+      type: org.apache.camel.component.milvus.rag.RAGInsert
+      properties:
+        collectionName: "cities"
+        vectorFieldName: "features"
+        textFieldMappings: "city=cityName,country=cityCountry,latitude=cityLatitude,longitude=cityLongitude"
+    - name: vectorUtils
+      type: org.apache.camel.example.springboot.milvus.bean.VectorUtils
+      properties:
+        normalizationRanges: "35.0:65.0,-10.0:30.0,0.0:20.0"
+
+# Retry bad LLM responses, then skip
+- onException:
+    exception:
+      - java.lang.NumberFormatException
+      - java.lang.RuntimeException
+    handled:
+      constant: "true"
+    redeliveryPolicy:
+      maximumRedeliveries: 2
+      redeliveryDelay: 1000
+    steps:
+      - log:
+          message: "Skipping ${variable.cityName} after retries: ${exception.message}"
+
+# Create collection and index on startup
+- route:
+    id: init-collection
+    from:
+      uri: timer:init
+      parameters:
+        repeatCount: "1"
+        delay: "1000"
+      steps:
+        - log:
+            message: "Creating Milvus collection: cities"
+        - doTry:
+            steps:
+              - process:
+                  ref: ragCreateCollection
+              - to:
+                  uri: milvus:cities
+              - log:
+                  message: "[milvus] Collection created successfully"
+              - process:
+                  ref: ragCreateIndex
+              - to:
+                  uri: milvus:cities
+              - log:
+                  message: "[milvus] Index created successfully"
+            doCatch:
+              - exception:
+                  - java.lang.Exception
+                steps:
+                  - log:
+                      message: "[milvus] Collection already exists or error: ${exception.message}"
+
+# Read city names from input file and insert them into Milvus
+- route:
+    id: index-cities
+    from:
+      uri: "file:{{input.dir}}"
+      parameters:
+        noop: "true"
+        include: ".*\\.txt"
+        initialDelay: "3000"
+      steps:
+        - log:
+            message: "Processing cities from: ${header.CamelFileName}"
+        - convertBodyTo:
+            type: java.lang.String
+        - split:
+            tokenize: "\n"
+            steps:
+              - filter:
+                  simple: "${body.trim().length()} > 0"
+                  steps:
+                    - to:
+                        uri: direct:insert-city
+        - log:
+            message: "All cities indexed. Starting similarity search..."
+        - setBody:
+            expression:
+              constant:
+                expression: "Rome"
+        - to:
+            uri: direct:search-similar
+
+# Ask OpenAI for city data information (lat,lon,pop), then insert into Milvus
+- route:
+    id: insert-city
+    from:
+      uri: direct:insert-city
+      steps:
+        - setVariable:
+            name: cityName
+            expression:
+              simple:
+                expression: "${body.trim()}"
+        - setBody:
+            expression:
+              simple:
+                expression: "Reply with exactly one line of 4 semicolon-separated values for ${variable.cityName}: country;latitude;longitude;population_in_millions. All numeric values must be plain float numbers only, no units or text. No headers, no extra text. Example for Tokyo: Japan;35.68;139.69;13.96"
+        - to:
+            uri: openai:chat-completion
+        - log:
+            message: "[openai] City data for ${variable.cityName}: ${body}"
+        - setVariable:
+            name: cityCountry
+            expression:
+              simple:
+                expression: "${body.trim().split(';')[0].trim()}"
+        - setVariable:
+            name: cityLatitude
+            expression:
+              simple:
+                expression: "${body.trim().split(';')[1].trim()}"
+        - setVariable:
+            name: cityLongitude
+            expression:
+              simple:
+                expression: "${body.trim().split(';')[2].trim()}"
+        - transform:
+            expression:
+              simple:
+                expression: "${body.trim().replaceFirst('^[^;]*;', '')}"
+        - process:
+            ref: vectorUtils
+        - process:
+            ref: ragInsert
+        - to:
+            uri: milvus:cities
+        - log:
+            message: "[milvus] Inserted ${variable.cityName} into Milvus"
+
+# Search for closest cities to a given city
+- route:
+    id: search-closest
+    from:
+      uri: direct:search-closest
+      steps:
+        - setVariable:
+            name: searchCity
+            expression:
+              simple:
+                expression: "${body}"
+        - log:
+            message: "Searching for three closest cities to: ${variable.searchCity} "
+        - setBody:
+            expression:
+              simple:
+                expression: "Reply with exactly one line of 3 semicolon-separated numeric values for ${variable.searchCity}: latitude;longitude;population_in_millions. All values must be plain float numbers only, no units or text. No headers, no extra text. Example: 35.68;139.69;13.96"
+        - to:
+            uri: openai:chat-completion
+        - log:
+            message: "[openai] Search vector for ${variable.searchCity}: ${body}"
+        - process:
+            ref: vectorUtils
+        - process:
+            ref: ragSearch
+        - to:
+            uri: milvus:cities
+        - bean:
+            ref: ragResultExtractor
+            method: extract
+        - log:
+            message: "[milvus] Closest cities to ${variable.searchCity}: ${body}."
+        - setBody:
+            expression:
+              simple:
+                expression: "Milvus vector search found these cities closest to ${variable.searchCity}: ${body}. Excluding ${variable.searchCity} itself, what is the approximate distance in km from ${variable.searchCity} to each? Reply in a single line, comma-separated. Example format: Milan 480km, Zurich 685km, Vienna 766km"
+        - to:
+            uri: openai:chat-completion
+        - log:
+            message: "[openai] Answer: ${body}"
