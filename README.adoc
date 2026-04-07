@@ -27,7 +27,7 @@ readme's instructions.
 === Examples
 
 // examples: START
-Number of Examples: 70 (0 deprecated)
+Number of Examples: 71 (0 deprecated)
 
 [width="100%",cols="4,2,4",options="header"]
 |===

@@ -111,14 +111,14 @@
 		<camel-version>4.19.0-SNAPSHOT</camel-version>
     	<javaVersion>21</javaVersion>
 		<skip.starting.camel.context>false</skip.starting.camel.context>
-		<jkube-maven-plugin-version>1.18.1</jkube-maven-plugin-version>
+		<jkube-maven-plugin-version>1.19.0</jkube-maven-plugin-version>
 		<jkube.generator.from>registry.access.redhat.com/ubi9/openjdk-17:latest</jkube.generator.from>
 		<jkube.build.switchToDeployment>true</jkube.build.switchToDeployment>
-		<kafka-avro-serializer-version>7.1.1</kafka-avro-serializer-version>
-		<reactor-version>3.7.0</reactor-version>
+		<kafka-avro-serializer-version>7.8.2</kafka-avro-serializer-version>
+		<reactor-version>3.8.3</reactor-version>
 		<testcontainers-version>2.0.3</testcontainers-version>
-		<hapi-structures-v24-version>2.5.1</hapi-structures-v24-version>
-		<artemis-jakarta-version>2.38.0</artemis-jakarta-version>
+		<hapi-structures-v24-version>2.6.0</hapi-structures-v24-version>
+		<artemis-jakarta-version>2.44.0</artemis-jakarta-version>
 	</properties>
 
 	<repositories>
