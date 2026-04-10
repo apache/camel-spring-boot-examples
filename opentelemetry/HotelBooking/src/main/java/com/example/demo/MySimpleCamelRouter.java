@@ -39,9 +39,9 @@ public class MySimpleCamelRouter extends RouteBuilder {
                 .unmarshal().json(JsonLibrary.Jackson);
 
         // kafka based 
-        from("kafka:hotel_input?brokers=kafka:9092").routeId("bookHotel-kafka")
+        from("kafka:hotel_input?brokers=localhost:9092").routeId("bookHotel-kafka")
                 .log(LoggingLevel.INFO, "New book hotel request via Kafka topic")
                 .bean(new AvailableHotels(),"getAvailableHotel")
-                .to("kafka:hotel_output?brokers=kafka:9092");
+                .to("kafka:hotel_output?brokers=localhost:9092");
     }
 }
