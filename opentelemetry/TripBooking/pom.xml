@@ -32,7 +32,6 @@
 	<description>An example showing how to use Camel with OpenTelemetry</description>
 
 	<properties>
-		<io.opentracing.contrib.version>3.3.1</io.opentracing.contrib.version>
 		<opentelemetry-agent.version>1.25.1</opentelemetry-agent.version>
 	</properties>
 
@@ -111,7 +110,7 @@
 		<!-- OpenTelemetry -->
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-opentelemetry-starter</artifactId>
+			<artifactId>camel-opentelemetry2-starter</artifactId>
 		</dependency>
 
 		<!-- Testing -->
