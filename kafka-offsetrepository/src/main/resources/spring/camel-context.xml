@@ -57,7 +57,7 @@
             <setBody id="route-setBody-1">
                 <simple>This is first producer: ${id}</simple>
             </setBody>
-            <to id="_kafka1" uri="kafka:{{producer.topic}}?partitionKey={{partitionValue}}&amp;key=${id}"/>
+            <to id="_kafka1" uri="kafka:{{producer.topic}}?partitionKey={{partitionValue}}&amp;key=${id}&amp;recordMetadata=true"/>
             <log id="route-log-producer-1" message="producer >>> ${body}"/>
             <bean id="_bean1" ref="kafkaProcessor"/>
         </route>

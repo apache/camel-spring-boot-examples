@@ -16,6 +16,7 @@
  */
 package org.apache.camel.example.springboot.arangodb;
 
+import com.arangodb.entity.BaseDocument;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.arangodb.ArangoDbConstants;
 import org.springframework.stereotype.Component;
@@ -30,7 +31,7 @@ public class CamelRoute extends RouteBuilder {
                 .bean(MyBeanService.class, "createDocument")
                 .to("arangodb:myDatabase?operation=SAVE_DOCUMENT")
                 .bean(MyBeanService.class, "readDocument")
-                .setHeader(ArangoDbConstants.RESULT_CLASS_TYPE).constant(String.class)
+                .setHeader(ArangoDbConstants.RESULT_CLASS_TYPE).constant(BaseDocument.class)
                 .to("arangodb:myDatabase?operation=FIND_DOCUMENT_BY_KEY")
                 .log("Received body: ${body}");
     }
