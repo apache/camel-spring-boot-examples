@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.camel.springboot.example</groupId>
         <artifactId>examples</artifactId>
-        <version>4.18.0-SNAPSHOT</version>
+        <version>4.18.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>camel-example-spring-boot-fhir</artifactId>
@@ -107,8 +107,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
             <scope>test</scope>
         </dependency>
         <!-- test infra -->
@@ -135,6 +135,13 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <rerunFailingTestsCount>0</rerunFailingTestsCount>
+                </configuration>
             </plugin>
         </plugins>
     </build>
