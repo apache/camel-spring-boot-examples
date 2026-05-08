@@ -26,20 +26,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * A unit test using the annotation based approach
+ */
 @CamelSpringBootTest
 @SpringBootTest(classes = MyCamelApplication.class)
 @EnableRouteCoverage
-public class MyCamelApplicationJUnit6Test {
+public class MyCamelTest {
 
     @Autowired
     private CamelContext camelContext;
 
     @Test
-    public void shouldProduceMessages() throws Exception {
-        // we expect that one or more messages is automatic done by the Camel
+    public void shouldProduceMessages() {
+        // we expect that one or more messages is automatically done by the Camel
         // route as it uses a timer to trigger
         NotifyBuilder notify = new NotifyBuilder(camelContext).whenDone(1).create();
 

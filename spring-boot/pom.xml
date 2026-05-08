@@ -107,6 +107,14 @@
             <artifactId>camel-test-spring-junit6</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- dump route diagrams -->
+        <!-- TODO: SB starter -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-diagram</artifactId>
+            <version>${camel-version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
