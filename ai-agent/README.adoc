@@ -25,8 +25,8 @@ This separation enables:
 
 === Prerequisites
 
-==== Camel JBang
-Install Camel JBang to easily run infrastructure services:
+==== Camel CLI
+Install Camel CLI to easily run infrastructure services:
 
     $ curl -Ls https://sh.jbang.dev | bash -s - trust add https://github.com/apache/camel/
     $ curl -Ls https://sh.jbang.dev | bash -s - app install --fresh --force camel@apache/camel
@@ -48,7 +48,7 @@ Make sure Ollama is running on `http://localhost:11434` (default port) or update
 NOTE: While you can use `camel infra run ollama` to run Ollama via Docker, be aware of performance limitations. On macOS, the Docker image cannot utilize GPU acceleration, making it extremely slow. Additionally, when running the Camel Ollama test-infra, both the Ollama Docker image and the default model (granite4, ~3GB) need to be downloaded on first run, which can be very time-consuming. For better performance, it's recommended to install Ollama natively.
 
 ==== Qdrant
-Use Camel JBang to run Qdrant:
+Use Camel CLI to run Qdrant:
 
     $ camel infra run qdrant
 

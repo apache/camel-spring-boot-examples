@@ -15,7 +15,7 @@ The pipeline works end-to-end:
 
 === Prerequisites
 
-1. A running Milvus instance (using https://camel.apache.org/manual/camel-jbang.html[Camel JBang]):
+1. A running Milvus instance (using https://camel.apache.org/manual/camel-jbang.html[Camel CLI]):
 
 ----
 camel infra run milvus
