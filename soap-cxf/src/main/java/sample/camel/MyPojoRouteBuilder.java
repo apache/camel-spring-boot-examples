@@ -44,6 +44,6 @@ public class MyPojoRouteBuilder extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		from("cxf:bean:contact")
-				.recipientList(simple("bean:inMemoryContactService?method=${header.operationName}"));
+				.recipientList(simple("bean:inMemoryContactService?method=${header.CamelCxfOperationName}"));
 	}
 }

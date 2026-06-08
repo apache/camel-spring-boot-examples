@@ -64,7 +64,7 @@ public class MyWsdlRouteBuilder extends RouteBuilder {
 	public void configure() throws Exception {
 		// CustomerService is generated with cxf-codegen-plugin during the build
 		from("cxf:bean:customers")
-				.recipientList(simple("direct:${header.operationName}"));
+				.recipientList(simple("direct:${header.CamelCxfOperationName}"));
 
 		from("direct:getCustomersByName").process(exchange -> {
 			String name = exchange.getIn().getBody(String.class);
