@@ -58,7 +58,7 @@ Qdrant will be available on `http://localhost:6333`.
 
 * `camel-spring-ai-chat-starter` - Camel Spring AI chat integration
 * `camel-spring-ai-vector-store-starter` - Camel Spring AI vector store integration
-* `camel-spring-ai-tools-starter` - Camel Spring AI tools/function calling
+* `camel-ai-tool-starter` - Camel AI tools/function calling
 * `spring-ai-starter-model-ollama` - Spring AI Ollama model support
 * `spring-ai-starter-vector-store-qdrant` - Qdrant vector store integration
 
@@ -70,7 +70,7 @@ NOTE: The routes use timer delays to ensure proper startup sequence. The chat ro
 Demonstrates basic chat functionality. Sends questions to the AI model and logs the responses. Executes immediately on startup.
 
 ==== ToolRoute
-Shows how to define tools (functions) that the AI can call. The example includes a weather tool that the AI can invoke when asked about weather information. The tool is defined using the `spring-ai-tools` component with parameters. The tool chat route executes after a 20 second delay to ensure all services are ready.
+Shows how to define tools (functions) that the AI can call. The example includes a weather tool that the AI can invoke when asked about weather information. The tool is defined using the `ai-tool` component with parameters. The tool chat route executes after a 20 second delay to ensure all services are ready.
 
 ==== VectorStoreRoute
 Demonstrates semantic search using vector embeddings with Qdrant:
