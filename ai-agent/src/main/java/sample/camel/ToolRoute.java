@@ -20,7 +20,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 /**
- * Route that demonstrates Spring AI tool/function calling capabilities.
+ * Route that demonstrates AI tool/function calling capabilities.
  * The AI can invoke the weather tool to get current weather information.
  */
 @Component
@@ -29,7 +29,7 @@ public class ToolRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         // Define the weather tool that can be called by the AI
-        from("spring-ai-tools:weatherTool?tags=weather&description=Get the current weather for a location"
+        from("ai-tool:weatherTool?tags=weather&description=Get the current weather for a location"
             + "&parameter.location=string"
             + "&parameter.location.description=The city, e.g. Rome"
             + "&parameter.location.required=true")
@@ -53,7 +53,7 @@ public class ToolRoute extends RouteBuilder {
         from("direct:fetchWeather")
             .routeId("fetchWeatherRoute")
             .toD("https://api.open-meteo.com/v1/forecast?latitude=${header.latitude}&longitude=${header.longitude}&current=temperature_2m,weather_code,precipitation,wind_speed_10m,wind_direction_10m,relative_humidity_2m,cloud_cover&temperature_unit=celsius&wind_speed_unit=kmh")
-            .setBody(simple("The weather in ${header.location} is ${jq(.current.temperature_2m)} degrees Celsius with ${jq(.current.relative_humidity_2m)}% humidity, ${jq(.current.cloud_cover)}% cloud cover, wind speed ${jq(.current.wind_speed_10m)} km/h from ${jq(.current.wind_direction_10m)} degrees, and ${jq(.current.precipitation)} mm precipitation."));
+            .setBody(simple("The weather in ${header.savedLocation} is ${jq(.current.temperature_2m)} degrees Celsius with ${jq(.current.relative_humidity_2m)}% humidity, ${jq(.current.cloud_cover)}% cloud cover, wind speed ${jq(.current.wind_speed_10m)} km/h from ${jq(.current.wind_direction_10m)} degrees, and ${jq(.current.precipitation)} mm precipitation."));
 
         // Route that uses AI with function calling
         from("timer:toolChat?repeatCount=1&delay=20000")
