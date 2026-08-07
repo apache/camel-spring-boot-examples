@@ -29,31 +29,29 @@ public class ToolRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         // Define the weather tool that can be called by the AI
-        from("ai-tool:weatherTool?tags=weather&description=Get the current weather for a location"
-            + "&parameter.location=string"
-            + "&parameter.location.description=The city, e.g. Rome"
-            + "&parameter.location.required=true")
+        from("ai-tool:weatherTool?tags=weather&description=Get the current weather for a city"
+            + "&parameter.city=string"
+            + "&parameter.city.description=The city, e.g. Rome"
+            + "&parameter.city.required=true")
             .routeId("weatherTool")
-            .log("Weather tool called for location: ${header.location}")
+            .log("Weather tool called for city: ${header.city}")
             .to("direct:geocode")
             .log("Geocoding result - Latitude: ${header.latitude}, Longitude: ${header.longitude}")
             .to("direct:fetchWeather")
             .log("Weather tool response: ${body}");
 
-        // Geocoding route - convert location name to coordinates
+        // Geocoding route - convert city name to coordinates
         from("direct:geocode")
             .routeId("geocodeRoute")
-            .setHeader("savedLocation", simple("${header.location}"))
-            .toD("https://geocoding-api.open-meteo.com/v1/search?name=${header.location}&count=1&language=en&format=json")
+            .toD("https://geocoding-api.open-meteo.com/v1/search?name=${header.city}&count=1&language=en&format=json")
             .setHeader("latitude", jq(".results[0].latitude"))
-            .setHeader("longitude", jq(".results[0].longitude"))
-            .setHeader("location", simple("${header.savedLocation}"));
+            .setHeader("longitude", jq(".results[0].longitude"));
 
         // Weather fetching route - get current weather for coordinates
         from("direct:fetchWeather")
             .routeId("fetchWeatherRoute")
             .toD("https://api.open-meteo.com/v1/forecast?latitude=${header.latitude}&longitude=${header.longitude}&current=temperature_2m,weather_code,precipitation,wind_speed_10m,wind_direction_10m,relative_humidity_2m,cloud_cover&temperature_unit=celsius&wind_speed_unit=kmh")
-            .setBody(simple("The weather in ${header.savedLocation} is ${jq(.current.temperature_2m)} degrees Celsius with ${jq(.current.relative_humidity_2m)}% humidity, ${jq(.current.cloud_cover)}% cloud cover, wind speed ${jq(.current.wind_speed_10m)} km/h from ${jq(.current.wind_direction_10m)} degrees, and ${jq(.current.precipitation)} mm precipitation."));
+            .setBody(simple("The weather in ${header.city} is ${jq(.current.temperature_2m)} degrees Celsius with ${jq(.current.relative_humidity_2m)}% humidity, ${jq(.current.cloud_cover)}% cloud cover, wind speed ${jq(.current.wind_speed_10m)} km/h from ${jq(.current.wind_direction_10m)} degrees, and ${jq(.current.precipitation)} mm precipitation."));
 
         // Route that uses AI with function calling
         from("timer:toolChat?repeatCount=1&delay=20000")

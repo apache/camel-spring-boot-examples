@@ -128,7 +128,7 @@ The example will continue running and watching the `input` directory for new doc
 
 
 2025-11-25T17:51:41.445+01:00  INFO 54308 --- [imer://toolChat] toolChatRoute                            : Sending question with tool capability to AI: What is the weather like in Rome, Italy? Answer with English slang
-2025-11-25T17:51:43.520+01:00  INFO 54308 --- [imer://toolChat] weatherTool                              : Weather tool called for location: Rome
+2025-11-25T17:51:43.520+01:00  INFO 54308 --- [imer://toolChat] weatherTool                              : Weather tool called for city: Rome
 2025-11-25T17:51:43.739+01:00  INFO 54308 --- [imer://toolChat] weatherTool                              : Geocoding result - Latitude: 41.89193, Longitude: 12.51133
 2025-11-25T17:51:43.858+01:00  INFO 54308 --- [imer://toolChat] weatherTool                              : Weather tool response: The weather in  is 12.4 degrees Celsius with 87% humidity, 100% cloud cover, wind speed 2.9 km/h from 7 degrees, and 0.2 mm precipitation.
 2025-11-25T17:51:47.786+01:00  INFO 54308 --- [imer://toolChat] toolChatRoute                            : AI Response with tool usage: So, Rome's got it pretty mild out there right now – about **12.4°C**, feels like a cool breeze with that high humidity hanging around at **87%**. No rain in sight (just **0.2mm**), and the sky’s practically overcast (**100% cloud cover**) thanks to those gentle winds from the north‑west at **7°** – perfect for grabbing an espresso outside while you ponder life, love, or just how many more layers you need before it gets chilly again!
