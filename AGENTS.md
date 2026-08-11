@@ -15,7 +15,7 @@ essentials and adds what is specific to this examples repository.
 
 - Build: Maven 3.9+ (use the provided `./mvnw` wrapper)
 - Java: 21 (set by `javaVersion` in the root `pom.xml`)
-- Parent: `org.apache.camel.springboot.example:examples` (e.g. `4.22.0-SNAPSHOT`
+- Parent: `org.apache.camel.springboot.example:examples` (e.g. `4.23.0-SNAPSHOT`
   on `main`); pulls `camel-spring-boot-bom`
 - Tests: JUnit Jupiter via `@CamelSpringBootTest` (`camel-test-spring-junit6`)
 - JIRA project: `CAMEL` (https://issues.apache.org/jira/projects/CAMEL)
