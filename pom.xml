@@ -103,6 +103,7 @@
 		<module>splitter-eip</module>
 		<module>widget-gadget</module>
 		<module>azure</module>
+		<module>undertow</module>
 		<module>variables</module>
 		<module>vault</module>
     </modules>
