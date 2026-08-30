@@ -10,6 +10,10 @@ It pairs with the community blog post *GenAI Observability with Spring Boot and 
 (`docs/blog-drafts/genai-observability-02-spring-boot-obs-stack.adoc` in the
 https://github.com/apache/camel[Apache Camel] source tree).
 
+The example uses `camel-ai-observability-starter` for Spring Boot configuration of the global
+GenAI observability toggle (`camel.aiobservability.enabled`), together with `camel-ai-observability`
+for span and metric emission when a tracing or metrics backend is present.
+
 === Prerequisites
 
 * Java 17+

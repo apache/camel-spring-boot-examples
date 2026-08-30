@@ -73,6 +73,10 @@
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-ai-observability-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-langchain4j-chat-starter</artifactId>
         </dependency>
         <dependency>
