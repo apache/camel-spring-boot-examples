@@ -50,6 +50,7 @@
 		<module>groovy</module>
 		<module>fhir</module>
 		<module>fhir-auth-tx</module>
+		<module>genai-observability</module>
 		<module>health-checks</module>
 		<module>http-ssl</module>
 		<module>http-streaming</module>
