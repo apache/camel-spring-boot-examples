@@ -34,7 +34,7 @@
 
     <properties>
         <category>AI</category>
-        <langchain4j-beta-version>1.19.0-beta29</langchain4j-beta-version>
+        <langchain4j-version>1.19.0</langchain4j-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -80,14 +80,33 @@
             <artifactId>camel-langchain4j-chat-starter</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-yaml-dsl-starter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-ai-observability</artifactId>
             <version>${camel-version}</version>
         </dependency>
         <dependency>
             <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-ollama-spring-boot-starter</artifactId>
-            <version>${langchain4j-beta-version}</version>
+            <artifactId>langchain4j-ollama</artifactId>
+            <version>${langchain4j-version}</version>
+        </dependency>
+        <!-- Micrometer Tracing with the OpenTelemetry bridge: Spring Boot auto-configures the
+             OpenTelemetry SDK, an OTLP span exporter and a tracing handler on the
+             ObservationRegistry, so both Camel route spans and gen_ai.* spans are exported -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-micrometer-tracing-opentelemetry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing-bridge-otel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-exporter-otlp</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -6,19 +6,33 @@
 #
 
 - route:
-    id: genai-chat
+    id: genai-chat-1
     from:
-      uri: timer:genai
+      uri: timer:genai1
       parameters:
         period: "15000"
       steps:
         - setBody:
             constant: "In one sentence, what is Apache Camel integration?"
         - to:
-            uri: langchain4j-chat:demo
+            uri: langchain4j-chat:model1
             parameters:
-              chatModel: "#chatLanguageModel"
+              chatModel: "#chatModel1"
         - log:
-            message: "LLM reply: ${body}"
+            message: "[${header.CamelLangChain4jChatResponseModel}] LLM reply: ${body}"
+
+- route:
+    id: genai-chat-2
+    from:
+      uri: timer:genai2
+      parameters:
+        period: "20000"
+      steps:
+        - setBody:
+            constant: "In one sentence, what is an Enterprise Integration Pattern?"
+        - to:
+            uri: langchain4j-chat:model2
+            parameters:
+              chatModel: "#chatModel2"
         - log:
-            message: "Models: req=${header.CamelLangChain4jChatRequestModel} resp=${header.CamelLangChain4jChatResponseModel}"
+            message: "[${header.CamelLangChain4jChatResponseModel}] LLM reply: ${body}"
