@@ -4,7 +4,7 @@
 
 This example demonstrates *GenAI observability* in Apache Camel 4.23+ with Spring Boot:
 OpenTelemetry `gen_ai.*` span attributes and Micrometer metrics for `langchain4j-chat`
-LLM calls, visualized with Prometheus and VictoriaTraces.
+LLM calls, visualized with Prometheus, VictoriaTraces and Perses.
 
 It pairs with the community blog post *GenAI Observability with Spring Boot and the Camel Observability Stack*
 (`docs/blog-drafts/genai-observability-02-spring-boot-obs-stack.adoc` in the
@@ -14,12 +14,29 @@ The example uses `camel-ai-observability-starter` for Spring Boot configuration 
 GenAI observability toggle (`camel.aiobservability.enabled`), together with `camel-ai-observability`
 for span and metric emission when a tracing or metrics backend is present.
 
+Two routes call two different (small) Ollama models, so every GenAI metric and span carries a
+distinct `gen_ai.request.model` and dashboards show per-model series side by side.
+
+The `camel-observability-services-starter` dependency configures an opinionated observability
+setup: all Actuator endpoints move to a dedicated management port `9876` under the `/observe`
+base path, with the Prometheus endpoint mapped to `/observe/metrics`. Both the standard
+Spring Boot / Camel metrics and the `gen_ai.*` metrics are exposed there, since they share
+the same Micrometer registry.
+
+Traces use the Spring Boot idiomatic setup: Micrometer Tracing with the OpenTelemetry bridge
+(`spring-boot-micrometer-tracing-opentelemetry`, `micrometer-tracing-bridge-otel` and
+`opentelemetry-exporter-otlp`). Spring Boot auto-configures the OpenTelemetry SDK, the OTLP
+span exporter (`management.opentelemetry.tracing.export.otlp.endpoint`) and a tracing handler
+on the Actuator `ObservationRegistry`. Camel route spans (via `camel-opentelemetry2`) and the
+`gen_ai.*` client spans (recorded as Micrometer Observations) end up in the same trace.
+
 === Prerequisites
 
 * Java 17+
 * Maven 3.9+
-* Docker (for observability stack)
-* https://ollama.com/[Ollama] with `llama3.2` pulled
+* https://camel.apache.org/manual/camel-jbang.html[Camel CLI (JBang)] 4.22+
+* Docker (used by the Camel CLI to start the observability stack)
+* https://ollama.com/[Ollama] with `llama3.2:1b` and `qwen3:0.6b` pulled
 
 == Build
 
@@ -34,16 +51,20 @@ Terminal 1 — Ollama:
 
 [source,shell]
 ----
-ollama pull llama3.2
+ollama pull llama3.2:1b
+ollama pull qwen3:0.6b
 ollama serve
 ----
 
-Terminal 2 — observability stack (Prometheus + VictoriaTraces + Perses):
+Terminal 2 — observability stack (Prometheus + VictoriaTraces + VictoriaLogs + Perses):
 
 [source,shell]
 ----
-docker compose up -d
+camel infra run observability
 ----
+
+The stack starts on fixed ports and the bundled Prometheus is already configured to scrape
+the application metrics at `host.docker.internal:9876/observe/metrics`.
 
 Terminal 3 — Spring Boot application:
 
@@ -52,16 +73,83 @@ Terminal 3 — Spring Boot application:
 mvn spring-boot:run
 ----
 
-== Verify GenAI observability
+To use different models than the defaults:
 
 [source,shell]
 ----
-curl -s http://localhost:8080/actuator/prometheus | grep gen_ai
+mvn spring-boot:run -Dspring-boot.run.arguments="--langchain4j.ollama.chat-model-1.model-name=llama3.2 --langchain4j.ollama.chat-model-2.model-name=qwen3:1.7b"
+----
+
+== Verify GenAI observability
+
+Metrics are exposed on the management port `9876` (not the application port `8080`):
+
+[source,shell]
+----
+curl -s http://localhost:9876/observe/metrics | grep gen_ai
 ----
 
 * Prometheus: `http://localhost:9090`
-* VictoriaTraces: `http://localhost:9428/select/vmui`
-* Perses: `http://localhost:8088`
+* VictoriaTraces: `http://localhost:10428/select/vmui`
+* Perses: `http://localhost:3000`
+
+== Perses dashboards
+
+The observability stack provisions Perses with a general Camel dashboard (uptime, exchanges,
+routes, JVM):
+
+* Camel overview: `http://localhost:3000/projects/camel/dashboards/overview`
+
+A GenAI dashboard (LLM calls, per-model latency, error ratio, token usage) can be created
+through the Perses REST API using the dashboard definition in `perses-genai-dashboard.json`:
+
+[source,shell]
+----
+curl -X POST http://localhost:3000/api/v1/projects \
+  -H 'Content-Type: application/json' \
+  -d '{"kind":"Project","metadata":{"name":"camel_genai"},"spec":{}}'
+
+curl -X POST http://localhost:3000/api/v1/projects/camel_genai/dashboards \
+  -H 'Content-Type: application/json' \
+  --data @perses-genai-dashboard.json
+----
+
+* GenAI overview: `http://localhost:3000/projects/camel_genai/dashboards/overview`
+
+The dashboard itself contains a "How this dashboard was created" section with the same
+instructions. Note that Perses state lives in the container: after restarting the
+observability stack, re-run the two commands above to recreate the GenAI dashboard.
+
+=== Reading the GenAI dashboard
+
+image::docs/genai-dashboard-calls.png[GenAI Summary and LLM Calls sections]
+
+* *GenAI Summary* — running totals across all models: LLM calls, errors, in-flight calls,
+  and input/output token counters. With calls that take longer than the timer period,
+  "In-flight Calls" sits permanently at 1: the route serializes requests, and a new one
+  starts as soon as the previous completes.
+* *Call rate* — calls per second, one series per `gen_ai.request.model`. A fast model
+  settles at the timer frequency; a slow model's rate is capped by its own latency.
+* *Error ratio* — failed calls (tagged `error!="none"`) over total, per model. Flat 0%
+  lines mean every call succeeded.
+* *Mean / Max LLM latency* — per-model duration of the LLM call itself (the
+  `gen_ai.client.operation` timer, not the whole route).
+
+image::docs/genai-dashboard-tokens.png[Token Usage section]
+
+* *Token throughput* and *Avg tokens per call* — from the `gen_ai.client.token.usage`
+  counter, split by model and `gen_ai.token.type` (input/output).
+
+The screenshots were taken with `llama3.2` and `qwen3.5:0.8b` (via the model-name
+overrides shown above); the default models behave similarly, since the `qwen3` family
+also reasons before answering. The two models make the point of GenAI observability
+visible on identical prompts:
+`llama3.2` answers in about a second with a few dozen output tokens, while
+`qwen3.5:0.8b` - a *thinking* model - emits roughly 2K output tokens per call (mostly
+reasoning tokens before the one-sentence answer), which drives both its ~30-45s latency
+and its dominant share of token throughput. Same workload, an order of magnitude more
+token spend - exactly the kind of cost/latency trade-off these metrics are meant to
+surface.
 
 == Help and contributions
 

@@ -1,0 +1,566 @@
+{
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "overview"
+  },
+  "spec": {
+    "display": {
+      "name": "GenAI Overview"
+    },
+    "duration": "30m",
+    "panels": {
+      "llmCalls": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "LLM Calls"
+          },
+          "plugin": {
+            "kind": "StatChart",
+            "spec": {
+              "calculation": "last-number",
+              "format": {
+                "unit": "decimal",
+                "shortValues": true
+              },
+              "sparkline": {}
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "sum(gen_ai_client_operation_seconds_count)"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "llmErrors": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "LLM Errors"
+          },
+          "plugin": {
+            "kind": "StatChart",
+            "spec": {
+              "calculation": "last-number",
+              "format": {
+                "unit": "decimal",
+                "shortValues": true
+              },
+              "sparkline": {}
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "sum(gen_ai_client_operation_seconds_count{error!=\"none\"}) or vector(0)"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "inflightCalls": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "In-flight Calls"
+          },
+          "plugin": {
+            "kind": "StatChart",
+            "spec": {
+              "calculation": "last-number",
+              "format": {
+                "unit": "decimal",
+                "shortValues": true
+              },
+              "sparkline": {}
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "sum(gen_ai_client_operation_active_seconds_count)"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "inputTokens": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Input Tokens"
+          },
+          "plugin": {
+            "kind": "StatChart",
+            "spec": {
+              "calculation": "last-number",
+              "format": {
+                "unit": "decimal",
+                "shortValues": true
+              },
+              "sparkline": {}
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "sum(gen_ai_client_token_usage_total{gen_ai_token_type=\"input\"})"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "outputTokens": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Output Tokens"
+          },
+          "plugin": {
+            "kind": "StatChart",
+            "spec": {
+              "calculation": "last-number",
+              "format": {
+                "unit": "decimal",
+                "shortValues": true
+              },
+              "sparkline": {}
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "sum(gen_ai_client_token_usage_total{gen_ai_token_type=\"output\"})"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "callRate": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Call rate (calls/s)"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "legend": {
+                "position": "bottom"
+              },
+              "yAxis": {
+                "format": {
+                  "unit": "decimal",
+                  "decimalPlaces": 2
+                }
+              }
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "sum by (gen_ai_system, gen_ai_request_model) (rate(gen_ai_client_operation_seconds_count[1m]))",
+                    "seriesNameFormat": "{{gen_ai_system}} {{gen_ai_request_model}}"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "errorRatio": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Error ratio"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "legend": {
+                "position": "bottom"
+              },
+              "yAxis": {
+                "format": {
+                  "unit": "percent-decimal",
+                  "decimalPlaces": 2
+                }
+              }
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "sum by (gen_ai_request_model) ((rate(gen_ai_client_operation_seconds_count{error!=\"none\"}[5m]) or rate(gen_ai_client_operation_seconds_count[5m]) * 0)) / on(gen_ai_request_model) group_left sum by (gen_ai_request_model) (rate(gen_ai_client_operation_seconds_count[5m]) > 0)",
+                    "seriesNameFormat": "{{gen_ai_request_model}}"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "latencyMean": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Mean LLM latency"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "legend": {
+                "position": "bottom"
+              },
+              "yAxis": {
+                "format": {
+                  "unit": "seconds",
+                  "decimalPlaces": 2
+                }
+              }
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "sum by (gen_ai_system, gen_ai_request_model) (rate(gen_ai_client_operation_seconds_sum[5m])) / sum by (gen_ai_system, gen_ai_request_model) (rate(gen_ai_client_operation_seconds_count[5m]))",
+                    "seriesNameFormat": "{{gen_ai_system}} {{gen_ai_request_model}}"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "latencyMax": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Max LLM latency"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "legend": {
+                "position": "bottom"
+              },
+              "yAxis": {
+                "format": {
+                  "unit": "seconds",
+                  "decimalPlaces": 2
+                }
+              }
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "gen_ai_client_operation_seconds_max",
+                    "seriesNameFormat": "{{gen_ai_system}} {{gen_ai_request_model}}"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokenThroughput": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Token throughput (tokens/s)"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "legend": {
+                "position": "bottom"
+              },
+              "yAxis": {
+                "format": {
+                  "unit": "decimal",
+                  "decimalPlaces": 2
+                }
+              }
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "sum by (gen_ai_request_model, gen_ai_token_type) (rate(gen_ai_client_token_usage_total[1m]))",
+                    "seriesNameFormat": "{{gen_ai_request_model}} {{gen_ai_token_type}}"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokensPerCall": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Avg tokens per call"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "legend": {
+                "position": "bottom"
+              },
+              "yAxis": {
+                "format": {
+                  "unit": "decimal",
+                  "decimalPlaces": 2
+                }
+              }
+            }
+          },
+          "queries": [
+            {
+              "kind": "TimeSeriesQuery",
+              "spec": {
+                "plugin": {
+                  "kind": "PrometheusTimeSeriesQuery",
+                  "spec": {
+                    "query": "sum by (gen_ai_request_model, gen_ai_token_type) (rate(gen_ai_client_token_usage_total[5m])) / on(gen_ai_request_model) group_left sum by (gen_ai_request_model) (rate(gen_ai_client_operation_seconds_count[5m]))",
+                    "seriesNameFormat": "{{gen_ai_request_model}} {{gen_ai_token_type}}"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "howTo": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "How this dashboard was created"
+          },
+          "plugin": {
+            "kind": "Markdown",
+            "spec": {
+              "text": "## How this dashboard was created\n\nMetrics come from **camel-ai-observability**: the Spring Boot app exposes `gen_ai.*` meters on\n`http://localhost:9876/observe/metrics` and the stack's Prometheus scrapes that endpoint.\n\nThe dashboard is plain JSON managed through the Perses REST API. To recreate it (e.g. after\nrestarting `camel infra run observability`), from the `genai-observability` example directory:\n\n```\ncurl -X POST http://localhost:3000/api/v1/projects \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"kind\":\"Project\",\"metadata\":{\"name\":\"camel_genai\"},\"spec\":{}}'\n\ncurl -X POST http://localhost:3000/api/v1/projects/camel_genai/dashboards \\\n  -H 'Content-Type: application/json' \\\n  --data @perses-genai-dashboard.json\n```\n\nTo export the current state of this dashboard (after UI edits):\n\n```\ncurl http://localhost:3000/api/v1/projects/camel_genai/dashboards/overview\n```\n\nKey metrics used: `gen_ai_client_operation_seconds` (timer, tags `gen_ai_system`,\n`gen_ai_request_model`, `error`), `gen_ai_client_token_usage_total` (counter, tag\n`gen_ai_token_type`), `gen_ai_client_operation_active_seconds` (in-flight calls).\n"
+            }
+          }
+        }
+      }
+    },
+    "layouts": [
+      {
+        "kind": "Grid",
+        "spec": {
+          "display": {
+            "title": "GenAI Summary",
+            "collapse": {
+              "open": true
+            }
+          },
+          "items": [
+            {
+              "x": 0,
+              "y": 0,
+              "width": 4,
+              "height": 4,
+              "content": {
+                "$ref": "#/spec/panels/llmCalls"
+              }
+            },
+            {
+              "x": 4,
+              "y": 0,
+              "width": 4,
+              "height": 4,
+              "content": {
+                "$ref": "#/spec/panels/llmErrors"
+              }
+            },
+            {
+              "x": 8,
+              "y": 0,
+              "width": 4,
+              "height": 4,
+              "content": {
+                "$ref": "#/spec/panels/inflightCalls"
+              }
+            },
+            {
+              "x": 12,
+              "y": 0,
+              "width": 4,
+              "height": 4,
+              "content": {
+                "$ref": "#/spec/panels/inputTokens"
+              }
+            },
+            {
+              "x": 16,
+              "y": 0,
+              "width": 4,
+              "height": 4,
+              "content": {
+                "$ref": "#/spec/panels/outputTokens"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "Grid",
+        "spec": {
+          "display": {
+            "title": "LLM Calls",
+            "collapse": {
+              "open": true
+            }
+          },
+          "items": [
+            {
+              "x": 0,
+              "y": 0,
+              "width": 12,
+              "height": 8,
+              "content": {
+                "$ref": "#/spec/panels/callRate"
+              }
+            },
+            {
+              "x": 12,
+              "y": 0,
+              "width": 12,
+              "height": 8,
+              "content": {
+                "$ref": "#/spec/panels/errorRatio"
+              }
+            },
+            {
+              "x": 0,
+              "y": 8,
+              "width": 12,
+              "height": 8,
+              "content": {
+                "$ref": "#/spec/panels/latencyMean"
+              }
+            },
+            {
+              "x": 12,
+              "y": 8,
+              "width": 12,
+              "height": 8,
+              "content": {
+                "$ref": "#/spec/panels/latencyMax"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "Grid",
+        "spec": {
+          "display": {
+            "title": "Token Usage",
+            "collapse": {
+              "open": true
+            }
+          },
+          "items": [
+            {
+              "x": 0,
+              "y": 0,
+              "width": 12,
+              "height": 8,
+              "content": {
+                "$ref": "#/spec/panels/tokenThroughput"
+              }
+            },
+            {
+              "x": 12,
+              "y": 0,
+              "width": 12,
+              "height": 8,
+              "content": {
+                "$ref": "#/spec/panels/tokensPerCall"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "kind": "Grid",
+        "spec": {
+          "display": {
+            "title": "About",
+            "collapse": {
+              "open": false
+            }
+          },
+          "items": [
+            {
+              "x": 0,
+              "y": 0,
+              "width": 24,
+              "height": 12,
+              "content": {
+                "$ref": "#/spec/panels/howTo"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
