@@ -1,0 +1,20 @@
+services:
+  fhir:
+    image: hapiproject/hapi:v7.2.0
+    container_name: fhir-auth-tx-server
+    environment:
+      - hapi.fhir.fhir_version=DSTU3
+      - hapi.fhir.reuse_cached_search_results_millis=-1
+    expose:
+      - "8080"
+
+  fhir-auth-proxy:
+    image: nginx:1.27-alpine
+    container_name: fhir-auth-tx-proxy
+    depends_on:
+      - fhir
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/htpasswd:/etc/nginx/htpasswd:ro
+    ports:
+      - "8080:8080"
