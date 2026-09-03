@@ -1,0 +1,2585 @@
+[
+  {
+    "name": "org.apache.camel.component.bean.BeanComponent",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.bean.BeanComponentConfigurer",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.bean.BeanEndpointConfigurer",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.bean.DefaultBeanProcessorFactory",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.bean.springboot.BeanComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.bean.springboot.BeanComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureBeanComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.bean.springboot.BeanComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getAutowiredEnabled",
+        "parameterTypes": []
+      },
+      {
+        "name": "getBeanInfoCacheSize",
+        "parameterTypes": []
+      },
+      {
+        "name": "getLazyStartProducer",
+        "parameterTypes": []
+      },
+      {
+        "name": "getScope",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.beanclass.springboot.ClassComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.beanclass.springboot.ClassComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureClassComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.beanclass.springboot.ClassComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.browse.springboot.BrowseComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.browse.springboot.BrowseComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureBrowseComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.browse.springboot.BrowseComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.controlbus.springboot.ControlBusComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.controlbus.springboot.ControlBusComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureControlBusComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.controlbus.springboot.ControlBusComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.dataformat.springboot.DataFormatComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.dataformat.springboot.DataFormatComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureDataFormatComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.dataformat.springboot.DataFormatComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.dataset.springboot.DataSetComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.dataset.springboot.DataSetComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureDataSetComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.dataset.springboot.DataSetComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.dataset.springboot.DataSetComponentConverter",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.dataset.springboot.DataSetTestComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.dataset.springboot.DataSetTestComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureDataSetTestComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.dataset.springboot.DataSetTestComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.dataset.springboot.DataSetTestComponentConverter",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.direct.springboot.DirectComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.direct.springboot.DirectComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureDirectComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.direct.springboot.DirectComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.event.EventComponentConfigurer",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.event.EventEndpointConfigurer",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.file.GenericFileConverterLoader",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.file.springboot.FileComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.file.springboot.FileComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureFileComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.file.springboot.FileComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.language.springboot.LanguageComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.language.springboot.LanguageComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureLanguageComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.language.springboot.LanguageComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.log.springboot.LogComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.log.springboot.LogComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureLogComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.log.springboot.LogComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.log.springboot.LogComponentConverter",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.mock.springboot.MockComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.mock.springboot.MockComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureMockComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.mock.springboot.MockComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.mock.springboot.MockComponentConverter",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.ref.springboot.RefComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.ref.springboot.RefComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureRefComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.ref.springboot.RefComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.rest.springboot.RestApiComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.rest.springboot.RestApiComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureRestApiComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.rest.springboot.RestApiComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.rest.springboot.RestComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.rest.springboot.RestComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureRestComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.rest.springboot.RestComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.rest.springboot.RestComponentConverter",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.saga.springboot.SagaComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.saga.springboot.SagaComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureSagaComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.saga.springboot.SagaComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.scheduler.springboot.SchedulerComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.scheduler.springboot.SchedulerComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureSchedulerComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.scheduler.springboot.SchedulerComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.seda.springboot.SedaComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.seda.springboot.SedaComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureSedaComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.seda.springboot.SedaComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.seda.springboot.SedaComponentConverter",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.stub.springboot.StubComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.stub.springboot.StubComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureStubComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.stub.springboot.StubComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.stub.springboot.StubComponentConverter",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.timer.TimerComponent",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.timer.TimerComponentConfigurer",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.timer.TimerEndpointConfigurer",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.timer.springboot.TimerComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.timer.springboot.TimerComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureTimerComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.timer.springboot.TimerComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getAutowiredEnabled",
+        "parameterTypes": []
+      },
+      {
+        "name": "getBridgeErrorHandler",
+        "parameterTypes": []
+      },
+      {
+        "name": "getIncludeMetadata",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.validator.springboot.ValidatorComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.validator.springboot.ValidatorComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureValidatorComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.validator.springboot.ValidatorComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.validator.springboot.ValidatorComponentConverter",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.xslt.springboot.XsltComponentAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.xslt.springboot.XsltComponentConfiguration"
+        ]
+      },
+      {
+        "name": "configureXsltComponent",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.xslt.springboot.XsltComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.component.xslt.springboot.XsltComponentConverter",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.converter.CamelBaseBulkConverterLoader",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.converter.jaxp.CamelXmlJaxpBulkConverterLoader",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.converter.stream.CamelSupportBulkConverterLoader",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.dsl.yaml.YamlRoutesBuilderLoader",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.impl.RestConfigurationConfigurer",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.impl.engine.DefaultResourceResolvers$FileResolver",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.impl.engine.DefaultResourceResolvers$SourceResolver",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.impl.health.DefaultHealthCheckRegistry",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.bean.springboot.BeanLanguageAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.language.bean.springboot.BeanLanguageConfiguration"
+        ]
+      },
+      {
+        "name": "configureBeanLanguage",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.bean.springboot.BeanLanguageConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.constant.ConstantLanguage",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.constant.springboot.ConstantLanguageAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.language.constant.springboot.ConstantLanguageConfiguration"
+        ]
+      },
+      {
+        "name": "configureConstantLanguage",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.constant.springboot.ConstantLanguageConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getTrim",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.header.springboot.HeaderLanguageAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.language.header.springboot.HeaderLanguageConfiguration"
+        ]
+      },
+      {
+        "name": "configureHeaderLanguage",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.header.springboot.HeaderLanguageConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration"
+        ]
+      },
+      {
+        "name": "configureExchangePropertyLanguage",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.property.springboot.ExchangePropertyLanguageConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.ref.springboot.RefLanguageAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.language.ref.springboot.RefLanguageConfiguration"
+        ]
+      },
+      {
+        "name": "configureRefLanguage",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.ref.springboot.RefLanguageConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.simple.SimpleLanguage",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.simple.springboot.FileLanguageAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.language.simple.springboot.FileLanguageConfiguration"
+        ]
+      },
+      {
+        "name": "configureFileLanguage",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.simple.springboot.FileLanguageConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.simple.springboot.SimpleLanguageAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.language.simple.springboot.SimpleLanguageConfiguration"
+        ]
+      },
+      {
+        "name": "configureSimpleLanguage",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.simple.springboot.SimpleLanguageConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getNested",
+        "parameterTypes": []
+      },
+      {
+        "name": "getPretty",
+        "parameterTypes": []
+      },
+      {
+        "name": "getTrim",
+        "parameterTypes": []
+      },
+      {
+        "name": "getTrimResult",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration"
+        ]
+      },
+      {
+        "name": "configureTokenizeLanguage",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.tokenizer.springboot.TokenizeLanguageConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.variable.springboot.VariableLanguageAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration"
+        ]
+      },
+      {
+        "name": "configureVariableLanguage",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.variable.springboot.VariableLanguageConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.xpath.springboot.XPathLanguageAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration"
+        ]
+      },
+      {
+        "name": "configureXPathLanguage",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.language.xpath.springboot.XPathLanguageConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.main.DefaultConfigurationProperties",
+    "methods": [
+      {
+        "name": "setName",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setRoutesIncludePattern",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.springframework.beans.factory.ObjectProvider",
+          "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties"
+        ]
+      },
+      {
+        "name": "configureRestConfigurationDefinition",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.model.rest.springboot.RestConfigurationDefinitionProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getApiComponent",
+        "parameterTypes": []
+      },
+      {
+        "name": "getApiContextPath",
+        "parameterTypes": []
+      },
+      {
+        "name": "getApiContextRouteId",
+        "parameterTypes": []
+      },
+      {
+        "name": "getApiHost",
+        "parameterTypes": []
+      },
+      {
+        "name": "getApiProperty",
+        "parameterTypes": []
+      },
+      {
+        "name": "getApiVendorExtension",
+        "parameterTypes": []
+      },
+      {
+        "name": "getBindingMode",
+        "parameterTypes": []
+      },
+      {
+        "name": "getBindingPackageScan",
+        "parameterTypes": []
+      },
+      {
+        "name": "getClientRequestValidation",
+        "parameterTypes": []
+      },
+      {
+        "name": "getClientResponseValidation",
+        "parameterTypes": []
+      },
+      {
+        "name": "getComponent",
+        "parameterTypes": []
+      },
+      {
+        "name": "getComponentProperty",
+        "parameterTypes": []
+      },
+      {
+        "name": "getConsumerProperty",
+        "parameterTypes": []
+      },
+      {
+        "name": "getContextPath",
+        "parameterTypes": []
+      },
+      {
+        "name": "getCorsHeaders",
+        "parameterTypes": []
+      },
+      {
+        "name": "getDataFormatProperty",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEnableCors",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEnableNoContentResponse",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEndpointProperty",
+        "parameterTypes": []
+      },
+      {
+        "name": "getHost",
+        "parameterTypes": []
+      },
+      {
+        "name": "getHostNameResolver",
+        "parameterTypes": []
+      },
+      {
+        "name": "getInlineRoutes",
+        "parameterTypes": []
+      },
+      {
+        "name": "getJsonDataFormat",
+        "parameterTypes": []
+      },
+      {
+        "name": "getPort",
+        "parameterTypes": []
+      },
+      {
+        "name": "getProducerApiDoc",
+        "parameterTypes": []
+      },
+      {
+        "name": "getProducerComponent",
+        "parameterTypes": []
+      },
+      {
+        "name": "getScheme",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSkipBindingOnErrorCode",
+        "parameterTypes": []
+      },
+      {
+        "name": "getUseXForwardHeaders",
+        "parameterTypes": []
+      },
+      {
+        "name": "getValidationLevels",
+        "parameterTypes": []
+      },
+      {
+        "name": "getXmlDataFormat",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.processor.DefaultInternalProcessorFactory",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.processor.DefaultProcessorFactory",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.CamelAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "camelBeanPostProcessor",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext"
+        ]
+      },
+      {
+        "name": "camelContext",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.spring.boot.CamelConfigurationProperties",
+          "org.apache.camel.spring.spi.CamelBeanPostProcessor",
+          "org.apache.camel.spi.StartupConditionStrategy"
+        ]
+      },
+      {
+        "name": "properties",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.component.properties.PropertiesParser",
+          "org.apache.camel.spring.boot.PropertiesComponentConfiguration"
+        ]
+      },
+      {
+        "name": "propertiesParser",
+        "parameterTypes": [
+          "org.springframework.core.env.Environment"
+        ]
+      },
+      {
+        "name": "routesCollector",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.spring.boot.CamelConfigurationProperties"
+        ]
+      },
+      {
+        "name": "routesCollectorListener",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext",
+          "org.apache.camel.spring.boot.CamelConfigurationProperties",
+          "org.apache.camel.main.RoutesCollector"
+        ]
+      },
+      {
+        "name": "runtimePropertiesProvider",
+        "parameterTypes": [
+          "org.springframework.core.env.Environment"
+        ]
+      },
+      {
+        "name": "startupConditionStrategy",
+        "parameterTypes": [
+          "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.CamelConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getMain",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.CamelConfigurationProperties$Main",
+    "methods": [
+      {
+        "name": "setRunController",
+        "parameterTypes": [
+          "boolean"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.CamelStartupConditionConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.CamelVirtualThreadEnvironmentPostProcessor",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.ComponentConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.ComponentConfigurationPropertiesCommon",
+    "methods": [
+      {
+        "name": "isEnabled",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.LanguageConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.LanguageConfigurationPropertiesCommon",
+    "methods": [
+      {
+        "name": "isEnabled",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.PropertiesComponentConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.TypeConversionConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "defaultCamelConversionService",
+        "parameterTypes": [
+          "org.springframework.context.ApplicationContext"
+        ]
+      },
+      {
+        "name": "springTypeConverter",
+        "parameterTypes": [
+          "org.apache.camel.CamelContext",
+          "org.springframework.core.convert.ConversionService[]"
+        ]
+      },
+      {
+        "name": "typeConverter",
+        "parameterTypes": [
+          "org.apache.camel.CamelContext"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.actuate.endpoint.CamelRouteControllerEndpointAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "routeControllerEndpoint",
+        "parameterTypes": [
+          "org.apache.camel.CamelContext"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpointAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "camelEndpoint",
+        "parameterTypes": [
+          "org.apache.camel.CamelContext",
+          "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpointProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.actuate.endpoint.CamelRoutesEndpointProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "errorRegistry",
+        "parameterTypes": [
+          "org.apache.camel.CamelContext",
+          "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.errorregistry.CamelErrorRegistryConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.routetemplate.CamelRouteTemplateAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "routeTemplate",
+        "parameterTypes": [
+          "org.apache.camel.CamelContext",
+          "org.apache.camel.spring.boot.routetemplate.CamelRouteTemplateConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.routetemplate.CamelRouteTemplateConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.security.CamelSSLAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.security.CamelSSLAutoConfiguration$SSLCondition",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.security.CamelSSLAutoConfiguration$SSLConfigCondition",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.security.CamelSSLConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.security.CamelSecurityPolicyAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "camelSecurityPolicyResult",
+        "parameterTypes": [
+          "org.apache.camel.CamelContext",
+          "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties",
+          "org.springframework.core.env.Environment"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.security.CamelSecurityPolicyConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.threadpool.CamelThreadPoolAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "threadPool",
+        "parameterTypes": [
+          "org.apache.camel.CamelContext",
+          "org.apache.camel.spring.boot.threadpool.CamelThreadPoolConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.threadpool.CamelThreadPoolConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.trace.CamelTraceAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "backlogTracer",
+        "parameterTypes": [
+          "org.apache.camel.CamelContext",
+          "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.trace.CamelTraceConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.util.ConditionalOnCamelContextAndAutoConfigurationBeans",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.util.OnHierarchicalPropertiesCondition",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.AwsVaultAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "awsVaultConfiguration",
+        "parameterTypes": [
+          "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.AwsVaultConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getAccessKey",
+        "parameterTypes": []
+      },
+      {
+        "name": "getProfileName",
+        "parameterTypes": []
+      },
+      {
+        "name": "getRefreshPeriod",
+        "parameterTypes": []
+      },
+      {
+        "name": "getRegion",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSecretKey",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSecrets",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSqsQueueUrl",
+        "parameterTypes": []
+      },
+      {
+        "name": "getUriEndpointOverride",
+        "parameterTypes": []
+      },
+      {
+        "name": "isDefaultCredentialsProvider",
+        "parameterTypes": []
+      },
+      {
+        "name": "isOverrideEndpoint",
+        "parameterTypes": []
+      },
+      {
+        "name": "isProfileCredentialsProvider",
+        "parameterTypes": []
+      },
+      {
+        "name": "isRefreshEnabled",
+        "parameterTypes": []
+      },
+      {
+        "name": "isUseSqsNotification",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.AzureVaultAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "azureVaultConfiguration",
+        "parameterTypes": [
+          "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.AzureVaultConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getBlobAccessKey",
+        "parameterTypes": []
+      },
+      {
+        "name": "getBlobAccountName",
+        "parameterTypes": []
+      },
+      {
+        "name": "getBlobContainerName",
+        "parameterTypes": []
+      },
+      {
+        "name": "getClientId",
+        "parameterTypes": []
+      },
+      {
+        "name": "getClientSecret",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEventhubConnectionString",
+        "parameterTypes": []
+      },
+      {
+        "name": "getRefreshPeriod",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSecrets",
+        "parameterTypes": []
+      },
+      {
+        "name": "getTenantId",
+        "parameterTypes": []
+      },
+      {
+        "name": "getVaultName",
+        "parameterTypes": []
+      },
+      {
+        "name": "isAzureIdentityEnabled",
+        "parameterTypes": []
+      },
+      {
+        "name": "isRefreshEnabled",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.CyberArkVaultAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "cyberarkVaultConfiguration",
+        "parameterTypes": [
+          "org.apache.camel.spring.boot.vault.CyberArkVaultConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.CyberArkVaultConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getAccount",
+        "parameterTypes": []
+      },
+      {
+        "name": "getApiKey",
+        "parameterTypes": []
+      },
+      {
+        "name": "getAuthToken",
+        "parameterTypes": []
+      },
+      {
+        "name": "getCertificatePath",
+        "parameterTypes": []
+      },
+      {
+        "name": "getPassword",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSecrets",
+        "parameterTypes": []
+      },
+      {
+        "name": "getUrl",
+        "parameterTypes": []
+      },
+      {
+        "name": "getUsername",
+        "parameterTypes": []
+      },
+      {
+        "name": "isVerifySsl",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.GcpVaultAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "gcpVaultConfiguration",
+        "parameterTypes": [
+          "org.apache.camel.spring.boot.vault.GcpVaultConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.GcpVaultConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getProjectId",
+        "parameterTypes": []
+      },
+      {
+        "name": "getRefreshPeriod",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSecrets",
+        "parameterTypes": []
+      },
+      {
+        "name": "getServiceAccountKey",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSubscriptionName",
+        "parameterTypes": []
+      },
+      {
+        "name": "isRefreshEnabled",
+        "parameterTypes": []
+      },
+      {
+        "name": "isUseDefaultInstance",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.HashicorpVaultAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "hashicorpVaultConfiguration",
+        "parameterTypes": [
+          "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.HashicorpVaultConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getHost",
+        "parameterTypes": []
+      },
+      {
+        "name": "getNamespace",
+        "parameterTypes": []
+      },
+      {
+        "name": "getPort",
+        "parameterTypes": []
+      },
+      {
+        "name": "getRefreshPeriod",
+        "parameterTypes": []
+      },
+      {
+        "name": "getScheme",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSecrets",
+        "parameterTypes": []
+      },
+      {
+        "name": "getToken",
+        "parameterTypes": []
+      },
+      {
+        "name": "isCloud",
+        "parameterTypes": []
+      },
+      {
+        "name": "isRefreshEnabled",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.IBMVaultAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "ibmSecretsManagerVaultConfiguration",
+        "parameterTypes": [
+          "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.IBMVaultConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEventStreamBootstrapServers",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEventStreamConsumerPollTimeout",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEventStreamGroupId",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEventStreamPassword",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEventStreamTopic",
+        "parameterTypes": []
+      },
+      {
+        "name": "getEventStreamUsername",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSecrets",
+        "parameterTypes": []
+      },
+      {
+        "name": "getServiceUrl",
+        "parameterTypes": []
+      },
+      {
+        "name": "getToken",
+        "parameterTypes": []
+      },
+      {
+        "name": "isRefreshEnabled",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.KubernetesConfigMapVaultAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "kubernetesConfigMapVaultConfiguration",
+        "parameterTypes": [
+          "org.apache.camel.spring.boot.vault.KubernetesConfigMapVaultConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.KubernetesConfigMapVaultConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getConfigmaps",
+        "parameterTypes": []
+      },
+      {
+        "name": "isRefreshEnabled",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.KubernetesVaultAutoConfiguration",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "kubernetesVaultConfiguration",
+        "parameterTypes": [
+          "org.apache.camel.spring.boot.vault.KubernetesVaultConfigurationProperties"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.boot.vault.KubernetesVaultConfigurationProperties",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      },
+      {
+        "name": "getSecrets",
+        "parameterTypes": []
+      },
+      {
+        "name": "isRefreshEnabled",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.spring.converter.ResourceConverterLoader",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": []
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.vault.AwsVaultConfiguration",
+    "methods": [
+      {
+        "name": "setAccessKey",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setDefaultCredentialsProvider",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setOverrideEndpoint",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setProfileCredentialsProvider",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setProfileName",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setRefreshEnabled",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setRefreshPeriod",
+        "parameterTypes": [
+          "long"
+        ]
+      },
+      {
+        "name": "setRegion",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setSecretKey",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setSecrets",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setSqsQueueUrl",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setUriEndpointOverride",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setUseSqsNotification",
+        "parameterTypes": [
+          "boolean"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.vault.AzureVaultConfiguration",
+    "methods": [
+      {
+        "name": "setAzureIdentityEnabled",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setBlobAccessKey",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setBlobAccountName",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setBlobContainerName",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setClientId",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setClientSecret",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setEventhubConnectionString",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setRefreshEnabled",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setRefreshPeriod",
+        "parameterTypes": [
+          "long"
+        ]
+      },
+      {
+        "name": "setSecrets",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setTenantId",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setVaultName",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.vault.CyberArkVaultConfiguration",
+    "methods": [
+      {
+        "name": "setAccount",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setApiKey",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setAuthToken",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setCertificatePath",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setPassword",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setSecrets",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setUrl",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setUsername",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setVerifySsl",
+        "parameterTypes": [
+          "boolean"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.vault.GcpVaultConfiguration",
+    "methods": [
+      {
+        "name": "setProjectId",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setRefreshEnabled",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setRefreshPeriod",
+        "parameterTypes": [
+          "long"
+        ]
+      },
+      {
+        "name": "setSecrets",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setServiceAccountKey",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setSubscriptionName",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setUseDefaultInstance",
+        "parameterTypes": [
+          "boolean"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.vault.HashicorpVaultConfiguration",
+    "methods": [
+      {
+        "name": "setCloud",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setHost",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setNamespace",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setPort",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setRefreshEnabled",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setRefreshPeriod",
+        "parameterTypes": [
+          "long"
+        ]
+      },
+      {
+        "name": "setScheme",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setSecrets",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setToken",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.vault.IBMSecretsManagerVaultConfiguration",
+    "methods": [
+      {
+        "name": "setEventStreamBootstrapServers",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setEventStreamConsumerPollTimeout",
+        "parameterTypes": [
+          "long"
+        ]
+      },
+      {
+        "name": "setEventStreamGroupId",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setEventStreamPassword",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setEventStreamTopic",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setEventStreamUsername",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setRefreshEnabled",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setSecrets",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setServiceUrl",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setToken",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.vault.KubernetesConfigMapVaultConfiguration",
+    "methods": [
+      {
+        "name": "setConfigmaps",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      },
+      {
+        "name": "setRefreshEnabled",
+        "parameterTypes": [
+          "boolean"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "org.apache.camel.vault.KubernetesVaultConfiguration",
+    "methods": [
+      {
+        "name": "setRefreshEnabled",
+        "parameterTypes": [
+          "boolean"
+        ]
+      },
+      {
+        "name": "setSecrets",
+        "parameterTypes": [
+          "java.lang.String"
+        ]
+      }
+    ]
+  }
+]

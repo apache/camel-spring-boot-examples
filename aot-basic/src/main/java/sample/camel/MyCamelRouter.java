@@ -35,7 +35,7 @@ public class MyCamelRouter extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         // start from a timer
-        from("timer:java?period={{myPeriod}}").routeId("helloJava")
+        from("timer:java?period={{myPeriod}}&includeMetadata=true").routeId("helloJava")
                 // and call the bean
                 .bean(myBean, "saySomething")
                 // and log it

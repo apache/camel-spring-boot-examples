@@ -1,0 +1,160 @@
+{
+  "resources": {
+    "includes": [
+      {
+        "pattern": "\\QMETA-INF/services/org.apache.camel.spi.ContextServicePlugin\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/TypeConverterLoader\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/UberTypeConverterLoader\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/YamlDeserializerResolver\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/bean-processor-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/cli-connector-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/component/bean\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/component/timer\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/configurer/bean-component\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/configurer/bean-endpoint\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/configurer/constant-language\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/configurer/org.apache.camel.spi.RestConfiguration\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/configurer/simple-language\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/configurer/spring-event-component\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/configurer/spring-event-endpoint\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/configurer/timer-component\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/configurer/timer-endpoint\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/debugger-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/dev-console/default-registry\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/exchange-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/headers-map-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/health-check/default-registry\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/internal-processor-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/language/constant\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/language/simple\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/lru-cache-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/management/ManagementStrategyFactory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/model-reifier-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/model/BeanDefinition\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/model/LogDefinition\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/model/TransformDefinition\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/processor-exchange-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/processor-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/properties-source-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/reactive-executor\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/resource-loader\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/resource-resolver/file\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/resource-resolver/source\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/routes-loader\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/routes-loader/camel-yaml\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/routes-loader/xml\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/routes-loader/yaml\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/startup-step-recorder\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/thread-factory-listener\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/thread-pool-factory\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/variable-repository/global\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/variable-repository/group\\E"
+      },
+      {
+        "pattern": "\\QMETA-INF/services/org/apache/camel/variable-repository/route\\E"
+      },
+      {
+        "pattern": "\\Qorg/apache/camel/main/components.properties\\E"
+      },
+      {
+        "pattern": "\\Qorg/apache/camel/main/dataformats.properties\\E"
+      },
+      {
+        "pattern": "\\Qorg/apache/camel/main/languages.properties\\E"
+      }
+    ]
+  },
+  "bundles": []
+}
