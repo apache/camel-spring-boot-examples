@@ -80,10 +80,6 @@
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-endpointdsl-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-stream-starter</artifactId>
-        </dependency>
 
         <!-- test -->
         <dependency>
