@@ -66,6 +66,41 @@ starts in more than *1* second.
 
 For more details, please check the related https://docs.spring.io/spring-boot/docs/current/reference/html/native-image.html[Spring Boot documentation].
 
+=== How the native-image metadata was generated
+
+Spring Boot's AOT processing (`process-aot`) only sees reflection that goes through *Spring's* bean
+machinery. Camel resolves several of its own pieces (type converter loaders, languages, components,
+route loaders, ...) through its own internal SPI, invisible to Spring AOT, so extra GraalVM
+reachability metadata is required. It lives under
+`src/main/resources/META-INF/native-image/org.apache.camel.springboot.example/camel-example-spring-boot-aot-basic-extra/`
+(a sibling artifact-id directory, chosen so it doesn't collide with the `reachability-metadata.json`
+that Spring AOT itself generates at the example's own coordinates).
+
+It was produced like this:
+
+1. Run the app in JVM mode with the GraalVM tracing agent attached, exercising all three routes:
++
+[source,console]
+----
+mvn -Dspring-boot.run.jvmArguments="-agentlib:native-image-agent=config-output-dir=/tmp/native-agent-config" spring-boot:run
+----
+2. Let it run for a few timer cycles, then stop it. `/tmp/native-agent-config/reachability-metadata.json`
+   now contains every reflective/resource access the agent observed on the JVM.
+3. Diff that trace against what's already covered elsewhere (Spring AOT's own generated
+   `target/spring-aot/main/resources/.../reachability-metadata.json`, plus the metadata already bundled
+   inside the `camel-*` dependency jars themselves) and keep only the `org.apache.camel.*` entries that
+   are genuinely missing.
+4. Rebuild the native image (`mvn -Pnative native:compile`) and run the executable. Since the agent
+   traces JVM-mode reflection rather than native-image's own closed-world semantics, expect a few more
+   `MissingReflectionRegistrationError`/missing-resource errors on the first native runs; each error
+   names the exact class/resource to add. Repeat build-and-run until it starts cleanly.
+5. A separate, unrelated failure (`UnsupportedCharsetException: UTF-32BE`, from snakeyaml) needed
+   `-H:+AddAllCharsets` rather than a reflection entry — that's why `native-image.properties` sits
+   alongside `reachability-metadata.json` in the same directory rather than being folded into it.
+
+If you upgrade the Spring Boot, Camel, or GraalVM versions used by this example, re-run this recipe:
+newer versions can both fix existing gaps and introduce new ones.
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
