@@ -23,7 +23,7 @@
          to see live changes in Camel -->
 
     <route id="helloXML">
-        <from uri="timer:xml?period=2000"/>
+        <from uri="timer:xml?period=2000&amp;includeMetadata=true"/>
         <transform>
             <constant>Hello World From XML</constant>
         </transform>

@@ -1,7 +1,7 @@
 - route:
     id: helloYAML
     from:
-      uri: timer://yaml?period=2000
+      uri: timer://yaml?period=2000&includeMetadata=true
       steps:
         - log:
             message: "Hello World from YAML at ${header.CamelTimerFiredTime}"
