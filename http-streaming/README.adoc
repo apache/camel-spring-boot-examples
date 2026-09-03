@@ -51,6 +51,28 @@ Follow these steps to run the example:
 
   Camel Spring Boot should process the HTTP byte stream and dump it in a file in the 'client' directory.
 
+=== A note on `jailStartingDirectory`
+
+The upload backend writes the received stream with `to("file:../client?fileName=output&jailStartingDirectory=false")`.
+
+`jailStartingDirectory` is Camel's built-in path-traversal guard for `file:` endpoints: enabled by default, it refuses
+to read/write any resolved path that falls outside the endpoint's configured starting directory, which is what stops
+a crafted `CamelFileName` header from writing (or reading) files outside that directory via `../` sequences.
+
+It is disabled here only because the starting directory itself (`../client`) is expressed as a `..`-relative path,
+which Camel's containment check now unconditionally rejects regardless of destination -- there was no way to keep the
+check enabled without also changing how the target directory is expressed. That's safe in this example specifically
+because the written file name (`output`) is a hardcoded constant, never derived from exchange or header data, so
+there is nothing here for the check to actually protect against.
+
+[IMPORTANT]
+====
+Do not copy `jailStartingDirectory=false` into routes where the file name (or the directory) is derived from
+exchange data, headers, or any external input. Doing so reopens the exact path-traversal risk the option exists to
+prevent. Keep the default (`true`) in that case, and resolve the target directory to an absolute/canonical path
+instead of a `..`-relative one, so the containment check stays active and meaningful.
+====
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
