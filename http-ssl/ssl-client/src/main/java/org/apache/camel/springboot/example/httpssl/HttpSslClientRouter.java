@@ -31,6 +31,7 @@ public class HttpSslClientRouter extends RouteBuilder {
 				.to("direct:call-ssl-server");
 
 		from("direct:call-ssl-server")
-				.to("https://localhost:8443/ping?bridgeEndpoint=true");
+				.removeHeaders("CamelHttp*")
+				.to("https://localhost:8443/ping");
 	}
 }
