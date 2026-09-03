@@ -16,18 +16,17 @@
  */
 package sample.camel;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import ca.uhn.fhir.rest.client.exceptions.FhirClientConnectionException;
 import org.apache.camel.LoggingLevel;
+import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.hc.core5.http.ProtocolException;
 
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.Patient;
-import org.hl7.fhir.dstu3.model.Resource;
-import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -40,11 +39,24 @@ public class MyCamelRouter extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("file:{{input}}").routeId("fhir-example")
-                .onException(ProtocolException.class)
+        // connection/protocol failures talking to the FHIR server: retry a few times with
+        // backoff, then give up on this file so it isn't reprocessed forever on every poll
+        onException(ProtocolException.class, FhirClientConnectionException.class, RuntimeCamelException.class)
+                .maximumRedeliveries(3)
+                .redeliveryDelay(2000)
+                .backOffMultiplier(2)
+                .useExponentialBackOff()
                 .handled(true)
-                .log(LoggingLevel.ERROR, "Error connecting to FHIR server with URL:{{serverUrl}}, please check the application.properties file ${exception.message}")
-                .end()
+                .log(LoggingLevel.ERROR, "Error connecting to FHIR server with URL:{{serverUrl}}, please check the application.properties file and that the server is reachable ${exception.message}")
+                .end();
+
+        // anything else unexpected: log and move on instead of looping on the same file
+        onException(Exception.class)
+                .handled(true)
+                .log(LoggingLevel.ERROR, "Error processing ${file:name}: ${exception.message}")
+                .end();
+
+        from("file:{{input}}?moveFailed=.error").routeId("fhir-example")
                 .log("Converting ${file:name}")
                 .unmarshal().csv()
                 .process(exchange -> {
