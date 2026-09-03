@@ -17,6 +17,7 @@
 package org.apache.camel.example.springboot.docling;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,7 +29,7 @@ public class DoclingServeRoute extends RouteBuilder {
         from("file:{{documents.directory}}?delete=true&include=.*\\.(pdf|docx|pptx|html|md)$")
             .routeId("document-to-markdown-converter")
             .log("Processing document: ${header.CamelFileName}")
-            .to("docling:CONVERT_TO_MARKDOWN?useDoclingServe=true&doclingServeUrl={{docling.serve.url}}&contentInBody=true")
+            .to("docling:convert-to-markdown?operation=CONVERT_TO_MARKDOWN&useDoclingServe=true&doclingServeUrl={{docling.serve.url}}&contentInBody=true")
             .log("Document converted to Markdown: ${header.CamelFileName}")
             .setHeader("CamelFileName", simple("${file:name.noext}.md"))
             .to("file:{{output.directory}}")
@@ -37,7 +38,8 @@ public class DoclingServeRoute extends RouteBuilder {
         from("file:{{documents.directory}}/extract?delete=true&include=.*\\.(pdf|docx|pptx)$")
             .routeId("document-metadata-extractor")
             .log("Extracting metadata from: ${header.CamelFileName}")
-            .to("docling:EXTRACT_STRUCTURED_DATA?useDoclingServe=true&doclingServeUrl={{docling.serve.url}}&outputFormat=json&contentInBody=true")
+            .to("docling:extract-structured-data?operation=EXTRACT_STRUCTURED_DATA&useDoclingServe=true&doclingServeUrl={{docling.serve.url}}&contentInBody=true")
+            .marshal().json(JsonLibrary.Jackson)
             .log("Metadata extracted from: ${header.CamelFileName}")
             .setHeader("CamelFileName", simple("${file:name.noext}.json"))
             .to("file:{{output.directory}}/metadata")
