@@ -97,15 +97,15 @@ specified using regular expressions.
 
 Running that plugin needs a live login against a real org, so it only
 runs under the `+generate-salesforce-dto+` profile (`+-Dgenerate.dto+`),
-never during a plain `+mvn compile+`. Because of that, the route can't
-statically reference the generated `+org.apache.camel.salesforce.dto.Contact+`
-class - it may not exist on the classpath. Instead
-`+TwitterSalesforceRoute+` looks it up by name via reflection, using it
-when present (e.g. after running with `+-Dgenerate.dto+` against your
-own org) and otherwise falling back to the minimal, hand-maintained
+never during a plain `+mvn compile+`. This example itself only sets
+`+LastName+` and `+TwitterScreenName__c+`, so it doesn't need a
+generated DTO - it uses the minimal, hand-maintained
 `+org.apache.camel.example.mention.dto.Contact+` bundled with the
 example, which is enough to compile and run without any Salesforce
-credentials at build time.
+credentials at build time. The plugin and profile are kept around as a
+starting point if you want to extend the route to read or write
+additional fields on `+Contact+` (or other SObjects) - generate a DTO
+for them and use it in place of the bundled one.
 
 === Build
 
