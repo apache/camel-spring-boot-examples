@@ -36,6 +36,7 @@
         <category>Management and Monitoring</category>
         <title>OpenTelemetry</title>
         <skipTests>true</skipTests>
+        <opentelemetry-agent.version>2.19.0</opentelemetry-agent.version>
     </properties>
 
     <modules>
