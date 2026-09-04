@@ -23,7 +23,7 @@ After that, you can build this example using:
 
 [source,sh]
 ----
-$ cd spring-boot-widget-gadget
+$ cd widget-gadget
 $ mvn package
 ----
 
