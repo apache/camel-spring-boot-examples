@@ -30,12 +30,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class CamelRouter extends RouteBuilder {
 
-	@Override
-	public void configure() throws Exception {
-		restConfiguration()
-				.bindingMode(RestBindingMode.json);
+    @Override
+    public void configure() throws Exception {
+        restConfiguration()
+                .bindingMode(RestBindingMode.json);
 
-		// @formatter:off
+        // @formatter:off
         rest("/todos").description("Todo REST service")
             .consumes("application/json")
             .produces("application/json")
@@ -43,7 +43,7 @@ public class CamelRouter extends RouteBuilder {
             .get().description("Find all todos").outType(Todo[].class)
                 .responseMessage().code(200).message("All todos successfully returned").endResponseMessage()
                 .to("bean:todoService?method=listAll")
-        
+
             .get("/{id}").description("Find todo by ID")
                 .outType(Todo.class)
                 .param().name("id").type(path).description("The ID of the todo").dataType("long").endParam()
@@ -54,7 +54,7 @@ public class CamelRouter extends RouteBuilder {
                 .param().name("id").type(path).description("The ID of the todo to update").dataType("long").endParam()
                 .param().name("body").type(body).description("The todo to update").endParam()
                 .responseMessage().code(204).message("Todo successfully updated").endResponseMessage()
-				.to("bean:todoService?method=update(${body}, ${header.id})")
+                .to("bean:todoService?method=update(${body}, ${header.id})")
 
             .post().description("Create a todo").type(Todo.class)
                 .param().name("body").type(body).endParam()
@@ -70,5 +70,5 @@ public class CamelRouter extends RouteBuilder {
                 .responseMessage().code(200).message("Todo deleted").endResponseMessage()
                 .to("bean:todoService?method=deleteOne(${header.id})");
         // @formatter:on
-	}
+    }
 }
