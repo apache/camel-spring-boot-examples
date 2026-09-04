@@ -7,13 +7,21 @@ This is an example application of the `camel-fhir` component. We'll be using `ca
 
 The Camel route is located in the `MyCamelRouter` class.
 
-This example will read patients stored in csv files from a directory and convert them to FHIR dtsu3 patients and upload them to a configured FHIR server. Each file is uploaded in a new transaction.
+This example will read patients stored in csv files from a directory, convert each row to a FHIR dstu3 Patient and
+upload all the patients found in one file as a single FHIR transaction Bundle to a configured FHIR server that
+requires basic authentication. Each file is uploaded in a new transaction.
+
+If the FHIR server cannot be reached, or rejects the request, the route retries a few times with an increasing
+delay before giving up and logging the error, so a single bad or unreachable server does not cause the same file
+to be reprocessed forever.
 
 The example assumes you have a running FHIR server at your disposal, which is configured for basic authentication.
-You may use https://github.com/rkorytkowski/hapi-fhir/tree/basic-auth/hapi-fhir-jpaserver-example[hapi-fhir-jpa-server-example]. You can start it up by running `mvn jetty:run`.
+The `containers` folder in this example contains a `docker-compose.yml` that starts a plain
+https://hub.docker.com/r/hapiproject/hapi[hapiproject/hapi] FHIR server behind an `nginx` reverse proxy configured
+with HTTP Basic authentication, so you don't need a custom FHIR server build to try this example.
 
-By default, the example uses `\http://localhost:8080/hapi-fhir-jpaserver-example/baseDstu3` as the FHIR server URL, DSTU3 as the FHIR version, BASIC authentication (`admin` as username and `Admin123` as password) and `target/work/fhir/input`
-as the directory to look for csv patients. 
+By default, the example uses `\http://localhost:8080/fhir` as the FHIR server URL, DSTU3 as the FHIR version, BASIC authentication (`admin` as username and `Admin123` as password) and `target/work/fhir/input`
+as the directory to look for csv patients.
 
 However, you can edit the `application.properties` file to change the defaults and provide your own configuration.
 
@@ -29,36 +37,53 @@ $ mvn package
 
 === Run
 
+Before running the application, start the auth-enabled FHIR server:
+
+```sh
+$ docker compose -f containers/docker-compose.yml up -d
+```
+
+This starts two containers: the HAPI FHIR JPA server itself, and an `nginx` proxy in front of it that enforces
+HTTP Basic authentication (`admin` / `Admin123`) and is published on `\http://localhost:8080`. The FHIR server
+container itself is not published to the host, so every request has to go through the authenticated proxy.
+
 You can run this example using:
 
 ```sh
 $ mvn spring-boot:run
 ```
 
-When the Camel application runs, you should see a folder created under `target/work/fhir/input`. Copy the file `hl7v2.patient`
+When the Camel application runs, you should see a folder created under `target/work/fhir/input`. Copy the file `patients.csv`
 located in the `src/main/data` folder into it. You should see the following output:
 ```
-2018-07-24 11:52:51.615  INFO 30666 --- [work/fhir/input] fhir-example: Converting hl7v2.patient
-2018-07-24 11:52:52.700  INFO 30666 --- [work/fhir/input] fhir-example: Inserting Patient: {"resourceType":"Patient","id":"100005056","name":[{"family":"Freeman","given":["Vincent"]}]}
-2018-07-24 11:52:56.995  INFO 30666 --- [ #2 - CamelFhir] fhir-example: Patient created successfully: ca.uhn.fhir.rest.api.MethodOutcome@270f03f1
+2026-09-03 11:52:51.615  INFO 30666 --- [work/fhir/input] fhir-example: Converting patients.csv
+2026-09-03 11:52:52.700  INFO 30666 --- [ #2 - CamelFhir] fhir-example: Patients created successfully: org.hl7.fhir.dstu3.model.Bundle@13651cde
 ```
 
 The Camel application can be stopped pressing kbd:[Ctrl+c] in the shell.
 
+Once you are done, stop the FHIR server containers:
+
+```sh
+$ docker compose -f containers/docker-compose.yml down
+```
+
 === To get health check
 
-To show a summary of spring boot health check
+The application binds to a random HTTP port (`server.port=0` in `application.properties`) so that it never
+collides with the FHIR server on port 8080. Look for a line such as `Tomcat started on port(s): 54321 (http)`
+in the console output to find the actual port, then show a summary of the spring boot health check with:
 
 ----
-curl -XGET -s http://localhost:8080/actuator/health
+curl -XGET -s http://localhost:<port>/actuator/health
 ----
 
 === Help and contributions
 
-If you hit any problem using Camel or have some feedback, 
+If you hit any problem using Camel or have some feedback,
 then please https://camel.apache.org/support.html[let us know].
 
-We also love contributors, 
+We also love contributors,
 so https://camel.apache.org/contributing.html[get involved] :-)
 
 The Camel riders!
