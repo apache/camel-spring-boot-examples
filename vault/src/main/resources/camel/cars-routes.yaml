@@ -69,3 +69,6 @@
             uri: jdbc
             parameters:
               dataSourceName: datasource
+        - marshal:
+            json:
+              library: Jackson
