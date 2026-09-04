@@ -48,10 +48,7 @@ public class CamelRouter extends RouteBuilder {
         from("platform-http:reverse-proxy?matchOnUriPrefix=true")
                 .routeId("reverse-proxy")
                 .wireTap("direct:request")
-                .process(exchange -> {
-                    String path = exchange.getIn().getHeader(Exchange.HTTP_PATH, String.class);
-                    exchange.getIn().setHeader(Exchange.HTTP_PATH, path.substring(PROXY_PATH.length()));
-                })
+                .setHeader(Exchange.HTTP_PATH, simple("${header." + Exchange.HTTP_PATH + ".substring(" + PROXY_PATH.length() + ")}"))
                 .log("calling ${properties:reverse-proxy.target-base-uri}${headers." + Exchange.HTTP_PATH + "}")
                 .to("{{reverse-proxy.target-base-uri}}?bridgeEndpoint=true&throwExceptionOnFailure=false")
                 .wireTap("direct:response");
