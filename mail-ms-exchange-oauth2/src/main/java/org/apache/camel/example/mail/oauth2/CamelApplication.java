@@ -50,7 +50,7 @@ public class CamelApplication {
             @Override
             public void configure() throws Exception {
                 from("imaps://outlook.office365.com:993?" +
-                        "delay="+conf.getPollInterval()+"}&" +
+                        "delay="+conf.getPollInterval()+"&" +
                         "authenticator=#exchangeAuthenticator&" +
                         "mail.imaps.auth.mechanisms=XOAUTH2&" +
                         "debugMode="+conf.isDebug()+"&" +
