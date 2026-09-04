@@ -7,14 +7,16 @@ Run HashiCorp Vault
 
     docker run --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=myroot' -e 'VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200' -p 8200:8200 hashicorp/vault:1.16.1`
 
-Go to `http://localhost:8200/ui/vault/secrets/secret/kv/list` login with method Token and token `myroot` and create the following secrets:
+Go to `http://localhost:8200/ui/vault/secrets/secret/kv/list` login with method Token and token `myroot` and create the following secret:
 
-* a secret named `myDatabase`
+* a secret named `database`
 * a secret data `myPassword` with value `mysecretpassword`
 * a secret data `myUsername` with value `postgres`
 * a secret data `myJdbcURL` with value `jdbc:postgresql://localhost:5432/postgres`
 
 image::img/secret-database.png[]
+
+NOTE: the screenshot above shows the secret named `myDatabase` from an earlier version of this example; name the secret `database` as described above so it matches the path used in `cars-datasource.yaml`.
 
 Run the database container
 
