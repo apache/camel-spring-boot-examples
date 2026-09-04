@@ -21,16 +21,19 @@ import org.apache.camel.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class KafkaAvroMessageProcessor  implements Processor {
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaAvroProcessor.class);
-    public void process(Exchange exc) throws Exception {
-        //un-comment this after build
-       /* Employee emp = Employee.newBuilder()
-        .setFirstName("kakarla")
-        .setLastName("Ranjith")
-        .setBirthDate(new java.util.Date().getTime())
-        .build();
-        exc.getOut().setBody(emp);*/
+public class KafkaAvroMessageProcessor implements Processor {
+    private static final Logger LOG = LoggerFactory.getLogger(KafkaAvroMessageProcessor.class);
+
+    @Override
+    public void process(Exchange exchange) throws Exception {
+        Employee employee = Employee.newBuilder()
+            .setFirstName("Kakarla")
+            .setLastName("Ranjith")
+            .setBirthDate(System.currentTimeMillis())
+            .build();
+
+        LOG.info("Producing employee: {}", employee);
+        exchange.getIn().setBody(employee);
     }
 
 }

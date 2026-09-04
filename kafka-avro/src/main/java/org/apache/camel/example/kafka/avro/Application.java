@@ -18,16 +18,14 @@ package org.apache.camel.example.kafka.avro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportResource;
 
 //CHECKSTYLE:OFF
 /**
  * A sample Spring Boot application that starts the Camel routes.
  */
 @SpringBootApplication
-@ImportResource({"classpath:spring/camel-context.xml"})
 public class Application {
-                                                                                                                                                                                          
+
     // must have a main method spring-boot can run
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

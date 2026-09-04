@@ -1,55 +1,38 @@
-== Camel Kafka example
+== Camel Kafka Avro example
 
 === Introduction
 
-An example which shows how to integrate Camel with Kafka avro  to make use of avro serialize/deserializer
+An example which shows how to integrate Camel with Kafka using Avro serialization.
 
-First a kafka server should be started:
-----
-$ ./bin/schema-registry-start etc/schema-registry/schema-registry.properties
-----
+A timer triggers a producer route that builds an `Employee` Avro record (generated at
+build time from `src/main/resources/avro/employee.avsc`), marshals it to Avro binary with
+Camel's `avro` data format, and sends it to Kafka. A consumer route reads the same topic,
+unmarshals the bytes back into an `Employee` object and logs it.
 
-Then start confluent schema registry:
-register_schema.py is simple custom python script to register the employee.avsc schema in confluent schema registry:
-----
-$ python3.6 src/main/resources/register_schema.py http://localhost:8081 employees-avro src/main/resources/avro/employee.avsc
-Schema Registry URL: http://localhost:8081
-Topic: employees-avro
-Schema file: src/main/resources/avro/employee.avsc
-Success
-----
-
-----
-$ curl --noproxy '*' http://localhost:8081/subjects/employees-avro-value/versions/1
-{"subject":"employees-avro-value","version":1,"id":2,"schema":"{\"type\":\"record\",\"name\":\"Employee\",\"namespace\":\"com.example.kafkatutorials\",\"fields\":[{\"name\":\"firstName\",\"type\":\"string\"},{\"name\":\"lastName\",\"type\":\"string\"},{\"name\":\"birthDate\",\"type\":\"long\"}]}"}
-----
-
-To delete:
-----
-$ curl -X DELETE http://localhost:8081/subjects/topic-value/versions/version-no
-----
+The Avro schema is shared between producer and consumer through the application's
+classpath, so this example needs only a plain Kafka broker - it does not use, and does not
+require, a Confluent Schema Registry.
 
 === Preparing Kafka
 
-This example requires that Kafka Server is up and running.
+This example requires that a Kafka broker is up and running.
 
-You can use the Camel CLI to start a Kafka broker:
+You can use the Camel CLI to start one:
 
     $ camel infra run kafka
 
 === Build
 
-You will need to compile this example first:
+You will need to compile this example first, which also generates the `Employee` Avro class:
 
     $ mvn compile
 
 === Run
 
-Run the consumer first in separate shell 
-
     $ mvn spring-boot:run
 
-camel-context.xml file has both kafka-producer and kafka-consumer routes defined to produce/consume messages to topic my-topic.
+The application starts both routes: every second it produces a new `Employee` record to the
+`employees-avro` topic, and its consumer logs each `Employee` it reads back.
 
 Press `Ctrl-C` to exit.
 
@@ -63,11 +46,10 @@ You can enable verbose logging by adjusting the `src/main/resources/log4j2.prope
 
 === Help and contributions
 
-If you hit any problem using Camel or have some feedback, 
+If you hit any problem using Camel or have some feedback,
 then please https://camel.apache.org/community/support/[let us know].
 
-We also love contributors, 
+We also love contributors,
 so https://camel.apache.org/community/contributing/[get involved] :-)
 
 The Camel riders!
-

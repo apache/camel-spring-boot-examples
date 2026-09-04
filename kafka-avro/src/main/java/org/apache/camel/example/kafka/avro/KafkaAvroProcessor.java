@@ -27,14 +27,13 @@ import org.slf4j.LoggerFactory;
 
 public class KafkaAvroProcessor implements Processor {
     private static final Logger LOG = LoggerFactory.getLogger(KafkaAvroProcessor.class);
-    
+
     @Override
-    public void process(Exchange exc) throws Exception {
+    public void process(Exchange exchange) throws Exception {
         @SuppressWarnings("unchecked")
-        List<RecordMetadata> recordMetaData1 = (List<RecordMetadata>) exc.getIn().getHeader(KafkaConstants.KAFKA_RECORD_META);
-        for (RecordMetadata rd: recordMetaData1) {
-            LOG.info("producer partition is:"  + rd.partition());
-            LOG.info("producer partition message is:"  + rd.toString());
+        List<RecordMetadata> recordMetadataList = (List<RecordMetadata>) exchange.getIn().getHeader(KafkaConstants.KAFKA_RECORD_META);
+        for (RecordMetadata recordMetadata : recordMetadataList) {
+            LOG.info("Producer sent record to partition {}: {}", recordMetadata.partition(), recordMetadata);
         }
     }
 }
