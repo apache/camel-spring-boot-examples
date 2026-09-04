@@ -16,10 +16,8 @@
  */
 package org.apache.camel.example.mention;
 
-import java.lang.Class;
-import java.lang.reflect.Method;
-import org.apache.camel.salesforce.draftdto.Contact;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.example.mention.dto.Contact;
 import org.springframework.stereotype.Component;
 import twitter4j.v1.Status;
 import twitter4j.v1.User;
@@ -34,22 +32,11 @@ public class TwitterSalesforceRoute extends RouteBuilder {
             .process(exchange -> {
                 Status status = exchange.getIn().getBody(Status.class);
                 User user = status.getUser();
-                String name = user.getName();
-                String screenName = user.getScreenName();
-                Class contact = null;
-                if (Class.forName("org.apache.camel.salesforce.dto.Contact") != null) {
-                    contact = Class.forName("org.apache.camel.salesforce.dto.Contact");
-                } else {
-                    contact = Contact.class;
-                }
 
-                Object contactObject = contact.getDeclaredConstructor().newInstance();
-                Method setLastName = contact.getMethod("setLastName", String.class);
-                Method setTwitterScreenName__c = contact.getMethod("setTwitterScreenName__c", String.class);
-                setLastName.invoke(contactObject, name);
-                setTwitterScreenName__c.invoke(contactObject, screenName);
-                exchange.getIn().setBody(contactObject);
-
+                Contact contact = new Contact();
+                contact.setLastName(user.getName());
+                contact.setTwitterScreenName__c(user.getScreenName());
+                exchange.getIn().setBody(contact);
             })
             .to("salesforce:upsertSObject?sObjectIdName=TwitterScreenName__c")
             .log("SObject ID: ${body?.id}");

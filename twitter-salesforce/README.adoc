@@ -8,20 +8,26 @@ as a contact in Salesforce.
 
 === Configuring Twitter
 
-This example is already configured using a testing purpose twitter
-account named `cameltweet'. And therefore the example is ready to run
-out of the box.
+This example ships with the keys and tokens of a long-standing testing
+Twitter/X account named `cameltweet`, used only to let the example show
+a complete, working configuration; they are not a working credential you
+can rely on. They predate Twitter/X's 2023 API overhaul and are very
+likely no longer valid, and even if they were, they are for a shared
+testing account, not something to build on.
 
-This account is only for testing purpose, and should not be used in your
-custom applications. For that you need to setup and use your own twitter
-account.
+You must self-provision your own Twitter/X developer app and use its
+consumer key/secret and access token/secret in place of the values in
+`+application.properties+` before this example will actually run.
 
 === Configuring Salesforce
 
-This example uses Camels own test Salesforce developer account, you
-would most likely want to sign up with your own Developer account at
-https://developer.salesforce.com/. After you have done that, you’ll need
-to create a Connected Application for your integration.
+This example ships with `+clientId+`/`+clientSecret+` values for a Camel
+test Salesforce developer account, included only to show what a filled-in
+configuration looks like. As with the Twitter/X keys above, self-provision
+your own Salesforce Developer account at
+https://developer.salesforce.com/ for anything beyond reading this
+example, and follow the steps below to create your own Connected
+Application for your integration.
 
 To do this after logging in to your Salesforce Developer account,
 navigate to _Apps_ located under _Build_ and then _Create_, there you
@@ -88,6 +94,18 @@ to use the `+camel-salesforce-maven-plugin+` and specify the desired DTO in <con
 
 To generate only DTOs needed for Contact, but the parameter value can be
 specified using regular expressions.
+
+Running that plugin needs a live login against a real org, so it only
+runs under the `+generate-salesforce-dto+` profile (`+-Dgenerate.dto+`),
+never during a plain `+mvn compile+`. This example itself only sets
+`+LastName+` and `+TwitterScreenName__c+`, so it doesn't need a
+generated DTO - it uses the minimal, hand-maintained
+`+org.apache.camel.example.mention.dto.Contact+` bundled with the
+example, which is enough to compile and run without any Salesforce
+credentials at build time. The plugin and profile are kept around as a
+starting point if you want to extend the route to read or write
+additional fields on `+Contact+` (or other SObjects) - generate a DTO
+for them and use it in place of the bundled one.
 
 === Build
 
