@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "Employee",
-  "namespace": "com.example.kafkatutorials",
+  "namespace": "org.apache.camel.example.kafka.avro",
   "fields": [
     {
       "name": "firstName",

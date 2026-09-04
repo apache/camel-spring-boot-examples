@@ -34,15 +34,10 @@
         <category>Messaging</category>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!-- must match the Avro version pulled in by camel-avro-starter so generated
+             classes stay binary compatible with the runtime Avro classes -->
+        <avro-version>1.12.2</avro-version>
     </properties>
-
-    <!--necessary to resolve confluent dependencies-->
-    <repositories>
-        <repository>
-            <id>confluent</id>
-            <url>https://packages.confluent.io/maven/</url>
-        </repository>
-    </repositories>
 
     <dependencyManagement>
          <dependencies>
@@ -62,13 +57,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <!-- manages conflict forcing CSB/Camel version -->
-            <dependency>
-                <groupId>org.apache.avro</groupId>
-                <artifactId>avro</artifactId>
-                <version>${avro-version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -87,11 +75,11 @@
         <!-- Camel -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-spring-boot-xml-starter</artifactId>
+            <artifactId>camel-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-stream-starter</artifactId>
+            <artifactId>camel-timer-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
@@ -101,17 +89,12 @@
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-kafka-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.confluent</groupId>
-            <artifactId>kafka-avro-serializer</artifactId>
-            <version>${kafka-avro-serializer-version}</version>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!--Avro plugin to  generated classes from schema-->
-            <!-- <plugin>
+            <!-- Generates the Employee Avro class from src/main/resources/avro/employee.avsc -->
+            <plugin>
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro-maven-plugin</artifactId>
                 <version>${avro-version}</version>
@@ -120,12 +103,10 @@
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>schema</goal>
-                            <goal>protocol</goal>
-                            <goal>idl-protocol</goal>
                         </goals>
                         <configuration>
                             <sourceDirectory>${project.basedir}/src/main/resources/avro</sourceDirectory>
-                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                            <outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>
                             <stringType>String</stringType>
                             <createSetters>false</createSetters>
                             <enableDecimalLogicalType>true</enableDecimalLogicalType>
@@ -133,7 +114,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>  -->
+            </plugin>
             <!--force discovery of generated classes-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -148,7 +129,7 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>target/generated-sources/avro</source>
+                                <source>${project.build.directory}/generated-sources/avro</source>
                             </sources>
                         </configuration>
                     </execution>
