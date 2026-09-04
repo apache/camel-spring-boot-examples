@@ -20,6 +20,6 @@
       type: org.springframework.jdbc.datasource.DriverManagerDataSource
       properties:
         driverClassName: 'org.postgresql.Driver'
-        url: '{{hashicorp:secret:database/myJdbcURL}}'
-        username: '{{hashicorp:secret:database/myUsername}}'
-        password: '{{hashicorp:secret:database/myPassword}}'
+        url: '{{hashicorp:secret:database#myJdbcURL}}'
+        username: '{{hashicorp:secret:database#myUsername}}'
+        password: '{{hashicorp:secret:database#myPassword}}'

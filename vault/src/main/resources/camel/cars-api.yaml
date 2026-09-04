@@ -20,7 +20,7 @@
     get:
       - path: cars
         to: direct:get
-        produces: text/plain
+        produces: application/json
     post:
       - path: cars
         to: direct:create
