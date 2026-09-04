@@ -5,6 +5,11 @@
 This example demonstrates how you can use Camel-Infinispan Starter component. The example is really simple: put a key/value pair in a remote cache and get the same key.
 This example starts an Infinispan server with Infinispan Docker Image, so it can run OOTB.
 
+`camel infra run infinispan` only provisions the "default" cache-container on the server, it does not
+create a cache inside it. So the application itself creates the "default" cache on startup, via the
+`RemoteCacheManager` bean in `InfinispanConfiguration`, the same approach Camel's own Infinispan test
+suite uses (`RemoteCacheManager#administration().getOrCreateCache(...)`).
+
 === Build and test
 
 You can build this example using:
@@ -22,6 +27,10 @@ You can run this example using:
     $ mvn spring-boot:run
 
 And you should see output in the console.
+
+By default, the example connects to `localhost:11222` with the `admin`/`password` credentials that
+`camel infra run infinispan` uses. To point at a different server, set the `INFINISPAN_HOST`,
+`INFINISPAN_PORT`, `INFINISPAN_USERNAME` and `INFINISPAN_PASSWORD` environment variables.
 
 === Help and contributions
 
