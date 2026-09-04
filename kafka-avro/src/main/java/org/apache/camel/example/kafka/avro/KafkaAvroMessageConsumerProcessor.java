@@ -21,12 +21,13 @@ import org.apache.camel.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class KafkaAvroMessageConsumerProcessor  implements Processor {
+public class KafkaAvroMessageConsumerProcessor implements Processor {
     private static final Logger LOG = LoggerFactory.getLogger(KafkaAvroMessageConsumerProcessor.class);
 
+    @Override
     public void process(Exchange exchange) throws Exception {
-        String body = exchange.getIn().getBody(String.class);
-        LOG.info("KafkaAvroMessageConsumerProcessor:" + body);
+        Employee employee = exchange.getIn().getBody(Employee.class);
+        LOG.info("Consumed employee: {}", employee);
     }
 
 }

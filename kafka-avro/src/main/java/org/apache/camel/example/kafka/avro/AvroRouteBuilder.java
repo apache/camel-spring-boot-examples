@@ -17,19 +17,38 @@
 package org.apache.camel.example.kafka.avro;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.dataformat.avro.AvroDataFormat;
+import org.springframework.stereotype.Component;
 
+/**
+ * Produces {@link Employee} records to Kafka and consumes them back, using Camel's
+ * {@link AvroDataFormat} to marshal/unmarshal Avro binary. No Confluent Schema Registry is
+ * involved: both routes share the same generated Avro schema on the classpath, so a plain
+ * Kafka broker (e.g. started with {@code camel infra run kafka}) is all that is required.
+ */
+@Component
 public class AvroRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
 
-        from("timer://foo?period={{period}}")
-        .setBody(constant("Hi This is Avro example"))
-        .process(new KafkaAvroMessageProcessor())
-            .to("kafka:{{producer.topic}}?brokers={{kafka.bootstrap.url}}&keySerializer=org.apache.kafka.common.serialization.StringSerializer&valueSerializer=org.apache.camel.example.kafka.avro.CustomKafkaAvroSerializer");
+        AvroDataFormat employeeAvroFormat = new AvroDataFormat(Employee.getClassSchema());
+        employeeAvroFormat.setInstanceClassName(Employee.class.getName());
 
-        from("kafka:{{consumer.topic}}?brokers={{kafka.bootstrap.url}}&keyDeserializer=org.apache.kafka.common.serialization.StringDeserializer&valueDeserializer=org.apache.camel.example.kafka.avro.CustomKafkaAvroDeserializer")
-         .process(new KafkaAvroMessageConsumerProcessor())
-            .log("${body}");
+        from("timer://foo?period={{period}}")
+            .process(new KafkaAvroMessageProcessor())
+            .marshal(employeeAvroFormat)
+            .to("kafka:{{producer.topic}}?brokers={{kafka.bootstrap.url}}"
+                + "&keySerializer=org.apache.kafka.common.serialization.StringSerializer"
+                + "&valueSerializer=org.apache.kafka.common.serialization.ByteArraySerializer"
+                + "&recordMetadata=true")
+            .process(new KafkaAvroProcessor());
+
+        from("kafka:{{consumer.topic}}?brokers={{kafka.bootstrap.url}}"
+                + "&groupId={{consumer.group}}"
+                + "&keyDeserializer=org.apache.kafka.common.serialization.StringDeserializer"
+                + "&valueDeserializer=org.apache.kafka.common.serialization.ByteArrayDeserializer")
+            .unmarshal(employeeAvroFormat)
+            .process(new KafkaAvroMessageConsumerProcessor());
     }
 }
