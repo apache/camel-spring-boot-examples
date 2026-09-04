@@ -6,7 +6,7 @@ This example illustrates how to use https://projects.spring.io/spring-boot/[Spri
 
 The project uses the `camel-spring-boot-starter` dependency, a Spring Boot starter dependency for Camel that simplifies the Maven configuration.
 
-The project also uses `camel-servlet-starter` component as the implementation for platform-http-engine.
+The project also uses `camel-platform-http-starter`, which exposes the Camel REST DSL routes through the Spring MVC / embedded Tomcat servlet engine provided by `spring-boot-starter-webmvc`.
 
 === Build
 
@@ -38,16 +38,15 @@ You should see the following output when the application is launched (timestamp 
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
 
- :: Spring Boot ::                (v3.4.5)
+ :: Spring Boot ::                (v4.1.1)
 
-o.a.c.example.springboot.Application     : Starting Application using Java 17.0.15 with PID 3707237
+o.a.c.example.springboot.Application     : Starting Application using Java 25.0.2 with PID 15931
 o.a.c.example.springboot.Application     : No active profile set, falling back to 1 default profile: "default"
-o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
 o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.40]
-o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 451 ms
-o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 479 ms
+o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
 o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.23.0-SNAPSHOT (MyCamel) is starting
 o.a.c.impl.engine.AbstractCamelContext   : Routes startup (total:6 rest-dsl:6)
 o.a.c.impl.engine.AbstractCamelContext   :     Started route1 (rest://get:/todos)
@@ -56,8 +55,8 @@ o.a.c.impl.engine.AbstractCamelContext   :     Started route3 (rest://patch:/tod
 o.a.c.impl.engine.AbstractCamelContext   :     Started route4 (rest://post:/todos)
 o.a.c.impl.engine.AbstractCamelContext   :     Started route5 (rest://delete:/todos)
 o.a.c.impl.engine.AbstractCamelContext   :     Started route6 (rest://delete:/todos:/%7Bid%7D)
-o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.23.0-SNAPSHOT (MyCamel) started in 8ms (build:0ms init:0ms start:8ms boot:428ms)
-o.a.c.example.springboot.Application     : Started Application in 1.155 seconds (process running for 1.283)
+o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.23.0-SNAPSHOT (MyCamel) started in 16ms (build:0ms init:0ms start:16ms boot:430ms)
+o.a.c.example.springboot.Application     : Started Application in 1.196 seconds (process running for 1.372)
 
 ----
 

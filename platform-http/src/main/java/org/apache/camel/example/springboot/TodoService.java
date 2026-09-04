@@ -22,19 +22,19 @@ import java.util.Collection;
  * Service interface for managing todos.
  */
 public interface TodoService {
-	Collection<Todo> findNotCompleted();
+    Collection<Todo> findNotCompleted();
 
-	Collection<Todo> findCompleted();
+    Collection<Todo> findCompleted();
 
-	long deleteCompleted();
+    long deleteCompleted();
 
-	Todo findById(long id);
+    Todo findById(long id);
 
-	void create(Todo todo);
+    void create(Todo todo);
 
-	Todo update(Todo todo, long id);
+    Todo update(Todo todo, long id);
 
-	void deleteOne(long id);
+    void deleteOne(long id);
 
-	Collection<Todo> listAll();
+    Collection<Todo> listAll();
 }
