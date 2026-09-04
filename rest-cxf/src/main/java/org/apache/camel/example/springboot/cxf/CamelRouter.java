@@ -43,7 +43,7 @@ public class CamelRouter extends RouteBuilder {
                     "&loggingFeatureEnabled=true")
                 .to("bean-validator:user")
                 .to("log:camel-cxf-log?showAll=true")
-                .recipientList(simple("bean:userServiceImpl?method=${header.CamelCxfOperationName}"));
+                .toD("bean:userServiceImpl?method=${header.CamelCxfOperationName}");
         // @formatter:on
     }
 
