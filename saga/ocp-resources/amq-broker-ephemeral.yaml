@@ -35,7 +35,7 @@ items:
     tags:
     - from:
         kind: DockerImage
-        name: registry.redhat.io/amq7/amq-broker-rhel8:7.12
+        name: apache/artemis:latest-alpine
       generation: 0
       name: "latest"
       referencePolicy:
@@ -67,12 +67,10 @@ items:
         - imagePullPolicy: IfNotPresent
           image: "amq-broker:latest"
           env:
-            - name: AMQ_USER
+            - name: ARTEMIS_USER
               value: admin
-            - name: AMQ_PASSWORD
+            - name: ARTEMIS_PASSWORD
               value: admin
-            - name: AMQ_REQUIRE_LOGIN
-              value: "true"
           livenessProbe:
             httpGet:
               path: /

@@ -107,6 +107,10 @@
 
         <!-- artemis jms pooled connections-->
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-artemis</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>artemis-jakarta-client</artifactId>
         </dependency>
