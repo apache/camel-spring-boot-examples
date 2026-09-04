@@ -31,10 +31,6 @@
     <name>Camel SB Examples :: OpenTelemetry :: CarBooking</name>
     <description>An example showing how to use Camel with OpenTelemetry</description>
 
-    <properties>
-        <opentelemetry-agent.version>1.25.1</opentelemetry-agent.version>
-    </properties>
-
     <!-- import Spring-Boot and Camel BOM -->
     <dependencyManagement>
         <dependencies>
