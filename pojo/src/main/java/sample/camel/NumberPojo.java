@@ -21,7 +21,7 @@ import org.apache.camel.Produce;
 import org.springframework.stereotype.Component;
 
 /**
- * A POJO that listen to messages from the seda:numbers endpoint via {@link Consume}
+ * A POJO that listen to messages from the direct:numbers endpoint via {@link Consume}
  * and then via {@link MagicNumber} and {@link Produce} sends a message that will
  * be printed in the console.
  */
