@@ -16,14 +16,14 @@
  */
 package org.apache.camel.example.springboot.cxf.otel;
 
-import org.apache.camel.opentelemetry.starter.CamelOpenTelemetry;
+import org.apache.camel.opentelemetry2.starter.CamelOpenTelemetry2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 // CHECKSTYLE:OFF
 @SpringBootApplication
-@CamelOpenTelemetry
+@CamelOpenTelemetry2
 public class Application {
 
     /**

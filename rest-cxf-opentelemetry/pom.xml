@@ -98,7 +98,7 @@
         <!-- camel opentelemetry -->
         <dependency>
             <groupId>org.apache.camel.springboot</groupId>
-            <artifactId>camel-opentelemetry-starter</artifactId>
+            <artifactId>camel-opentelemetry2-starter</artifactId>
         </dependency>
 
         <!-- jax-rs json provider from jackson -->

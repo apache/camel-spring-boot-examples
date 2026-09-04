@@ -48,7 +48,7 @@ public class CamelRouter extends RouteBuilder {
                     "&loggingFeatureEnabled=true")
                 .to("log:camel-cxf-log?showAll=true")
                 .toD("bean:org.apache.camel.example.springboot.cxf.otel.EvenServiceImpl" +
-                        "?method=${header.operationName}");
+                        "?method=${header.CamelCxfOperationName}");
 
 
         from("direct:register").routeId("even-register")

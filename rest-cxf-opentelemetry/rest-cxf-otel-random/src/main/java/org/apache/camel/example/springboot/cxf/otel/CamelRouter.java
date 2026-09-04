@@ -50,7 +50,7 @@ public class CamelRouter extends RouteBuilder {
                     "&providers=jaxrsProvider,openTelemetryProvider" +
                     "&loggingFeatureEnabled=true")
                 .to("log:camel-cxf-log?showAll=true")
-                .setHeader("methodName", simple("${header.operationName}"))
+                .setHeader("methodName", simple("${header.CamelCxfOperationName}"))
                 .toD("bean:org.apache.camel.example.springboot.cxf.otel.RandomServiceImpl?method=${header.methodName}");
 
 
