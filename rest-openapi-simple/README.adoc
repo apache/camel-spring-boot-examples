@@ -30,6 +30,13 @@ $ java -jar target/camel-example-spring-boot-rest-openapi-*.jar \
         --petId=14
 ....
 
+NOTE: This example depends on the publicly hosted PetStore demo at
+https://petstore3.swagger.io. That demo is occasionally flaky or
+unavailable (for instance, `+getPetById+` may intermittently return a
+500 error for any ID) since it is outside of our control. If an
+operation fails unexpectedly, check the demo's availability before
+assuming there is a problem with the example itself.
+
 === Help and contributions
 
 If you hit any problem using Camel or have some feedback, then please
