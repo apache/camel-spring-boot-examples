@@ -2,9 +2,11 @@
 
 === Introduction
 
-This example illustrates how to use https://projects.spring.io/spring-boot/[Spring Boot] with http://camel.apache.org[Camel]. It implements a reverse proxy using https://camel.apache.org/components/latest/platform-http-component.html[platform-http].
+This example illustrates how to use https://projects.spring.io/spring-boot/[Spring Boot] with http://camel.apache.org[Camel]. It implements a *path-based reverse proxy* using https://camel.apache.org/components/latest/platform-http-component.html[platform-http]: requests received under `/reverse-proxy/**` are forwarded to a fixed backend, with the `/reverse-proxy` prefix stripped and the remaining path and query string preserved.
 
-The project uses `camel-platform-http-starter` component as the implementation for platform-http-engine and `camel-http-starter` to implement the producer calling the http endpoint.
+The project uses `camel-platform-http-starter` component as the implementation for platform-http-engine and `camel-http-starter` to implement the producer calling the http endpoint. The producer uses the http component's `bridgeEndpoint` option, which is the idiomatic way to build a reverse proxy with `camel-http`: the endpoint URI supplies the fixed backend (configured via the `reverse-proxy.target-base-uri` property, defaulting to `http://httpbin.org`), and the `CamelHttpPath`/`CamelHttpQuery` headers from the incoming request are appended to it automatically.
+
+NOTE: This is a reverse proxy reachable at a known path (`/reverse-proxy/...`), not a forward/HTTP-CONNECT proxy. Servlet containers such as the one backing `platform-http` normalize an absolute-form request line (as sent by `curl --proxy`) down to just the request path, discarding the target host - so a client can't point an HTTP forward proxy at this application. Talk to it directly instead, as shown below.
 
 === Run
 
@@ -15,20 +17,24 @@ You can run this example using:
 mvn spring-boot:run
 ----
 
-After the Spring Boot application is started, you can execute the following HTTP requests:
+After the Spring Boot application is started, you can execute the following HTTP request:
 
 [source,bash]
 ----
-curl --proxy http://localhost:8080 -L  http://httpbin.org/get?arg1=val1 -H  'accept: application/json'
+curl http://localhost:8080/reverse-proxy/get?arg1=val1 -H 'accept: application/json'
 ----
 
-The command will call a test endpoint using the application as reverse proxy, you should see the Camel headers from both request and response in the log. Something similar to:
+The command calls `/reverse-proxy/get` on the application, which forwards it to `http://httpbin.org/get`, you should see the Camel headers from both request and response in the log. Something similar to:
 
 ----
-INFO 70370 --- [ad #1 - WireTap] header-request                           : {accept=application/json, arg1=val1, CamelHttpCharacterEncoding=UTF-8, CamelHttpMethod=GET, CamelHttpPath=/get, CamelHttpQuery=arg1=val1, CamelHttpServletRequest=org.apache.catalina.connector.RequestFacade@4f31b074, CamelHttpServletResponse=org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse@158137c0, CamelHttpUri=/get, CamelHttpUrl=http://httpbin.org/get, CamelPlatformHttpContextPath=/, host=httpbin.org, proxy-connection=Keep-Alive, user-agent=curl/8.9.1}
-INFO 70370 --- [ad #2 - WireTap] header-response                          : {accept=application/json, Access-Control-Allow-Credentials=true, Access-Control-Allow-Origin=*, arg1=val1, CamelHttpCharacterEncoding=UTF-8, CamelHttpMethod=GET, CamelHttpQuery=arg1=val1, CamelHttpResponseCode=200, CamelHttpResponseText=OK, CamelHttpServletRequest=org.apache.catalina.connector.RequestFacade@4f31b074, CamelHttpServletResponse=org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse@158137c0, CamelHttpUri=/get, CamelHttpUrl=http://httpbin.org/get, CamelPlatformHttpContextPath=/, Connection=keep-alive, Content-Length=387, Content-Type=application/json, Date=Thu, 04 Sep 2025 11:59:30 GMT, proxy-connection=Keep-Alive, Server=gunicorn/19.9.0}
+INFO 70370 --- [ad #1 - WireTap] header-request                           : {accept=application/json, arg1=val1, CamelHttpCharacterEncoding=UTF-8, CamelHttpMethod=GET, CamelHttpPath=/reverse-proxy/get, CamelHttpQuery=arg1=val1, CamelHttpServletRequest=org.apache.catalina.connector.RequestFacade@4f31b074, CamelHttpServletResponse=org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse@158137c0, CamelHttpUri=/reverse-proxy/get, CamelHttpUrl=http://localhost:8080/reverse-proxy/get, CamelPlatformHttpContextPath=/, host=localhost:8080, user-agent=curl/8.9.1}
+INFO 70370 --- [ad #2 - WireTap] header-response                          : {accept=application/json, Access-Control-Allow-Credentials=true, Access-Control-Allow-Origin=*, arg1=val1, CamelHttpCharacterEncoding=UTF-8, CamelHttpMethod=GET, CamelHttpPath=/get, CamelHttpQuery=arg1=val1, CamelHttpResponseCode=200, CamelHttpResponseText=OK, CamelHttpServletRequest=org.apache.catalina.connector.RequestFacade@4f31b074, CamelHttpServletResponse=org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse@158137c0, CamelHttpUri=/get, CamelHttpUrl=http://localhost:8080/reverse-proxy/get, CamelPlatformHttpContextPath=/, Connection=keep-alive, Content-Length=387, Content-Type=application/json, Date=Thu, 04 Sep 2025 11:59:30 GMT, Server=gunicorn/19.9.0}
 
 ----
+
+Note that `CamelHttpUrl` always reflects the *incoming* request's own URL (this application's own address), not the backend - it is set by the servlet container from the inbound request and is unrelated to where the request is forwarded. Do not use it to build the forwarding target, as that leads to the proxy calling itself.
+
+CAUTION: The consumer path deliberately avoids the literal segment `proxy` (i.e. it is *not* `platform-http:proxy`). That exact path is a reserved marker in `camel-platform-http`: matching it turns the endpoint into a catch-all consumer that is meant to build a `Host`-header-based forward proxy, but that behavior is only implemented by the Vert.x platform-http engine - `camel-platform-http-starter` (the Spring MVC/servlet engine used by this example) has no such logic. Using `platform-http:proxy` here silently degrades into an unguarded catch-all consumer with no forwarding logic at all, matching unrelated paths (even `/error`) instead of returning a normal 404.
 
 The Spring Boot application can be stopped pressing `[CTRL] + [C]` in the shell.
 
