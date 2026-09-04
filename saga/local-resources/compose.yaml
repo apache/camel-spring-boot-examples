@@ -3,11 +3,10 @@ services:
     image: "quay.io/jbosstm/lra-coordinator:latest"
     network_mode: "host"
   amq-broker:
-    image: "registry.redhat.io/amq7/amq-broker-rhel8:7.12"
+    image: "apache/artemis:latest-alpine"
     environment:
-      - AMQ_USER=admin
-      - AMQ_PASSWORD=admin
-      - AMQ_REQUIRE_LOGIN=true
+      - ARTEMIS_USER=admin
+      - ARTEMIS_PASSWORD=admin
     ports:
       - "8161:8161"
       - "61616:61616"
