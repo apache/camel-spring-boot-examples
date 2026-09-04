@@ -29,7 +29,7 @@ public class HttpStreamingCamelServerRouter extends RouteBuilder {
 				.put("/test").to("direct:backend");
 
 		from("direct:backend")
-				.to("file:../client?fileName=output")
+				.to("file:../client?fileName=output&jailStartingDirectory=false")
 				.log("done streaming")
 				.setBody(constant("done"));
 	}
