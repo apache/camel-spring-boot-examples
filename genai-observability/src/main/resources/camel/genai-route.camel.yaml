@@ -17,7 +17,7 @@
         - to:
             uri: langchain4j-chat:model1
             parameters:
-              chatModel: "#chatModel1"
+              chatModel: "#ollamaChatModel"
         - log:
             message: "[${header.CamelLangChain4jChatResponseModel}] LLM reply: ${body}"
 
@@ -33,6 +33,6 @@
         - to:
             uri: langchain4j-chat:model2
             parameters:
-              chatModel: "#chatModel2"
+              chatModel: "#ollamaChatModel"
         - log:
             message: "[${header.CamelLangChain4jChatResponseModel}] LLM reply: ${body}"

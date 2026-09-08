@@ -34,7 +34,7 @@
 
     <properties>
         <category>AI</category>
-        <langchain4j-version>1.19.0</langchain4j-version>
+        <langchain4j-version>1.20.0</langchain4j-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -90,8 +90,8 @@
         </dependency>
         <dependency>
             <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-ollama</artifactId>
-            <version>${langchain4j-version}</version>
+            <artifactId>langchain4j-ollama-spring-boot4-starter</artifactId>
+            <version>${langchain4j-version}-beta30</version>
         </dependency>
         <!-- Micrometer Tracing with the OpenTelemetry bridge: Spring Boot auto-configures the
              OpenTelemetry SDK, an OTLP span exporter and a tracing handler on the

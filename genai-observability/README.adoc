@@ -14,8 +14,10 @@ The example uses `camel-ai-observability-starter` for Spring Boot configuration 
 GenAI observability toggle (`camel.aiobservability.enabled`), together with `camel-ai-observability`
 for span and metric emission when a tracing or metrics backend is present.
 
-Two routes call two different (small) Ollama models, so every GenAI metric and span carries a
-distinct `gen_ai.request.model` and dashboards show per-model series side by side.
+Two routes share the Spring Boot starter's auto-configured `ollamaChatModel` bean. Every GenAI
+metric and span is tagged with the configured `gen_ai.request.model`; the dashboards therefore
+show one model series for this example. Change the model name and restart the application to
+compare another model.
 
 The `camel-observability-services-starter` dependency configures an opinionated observability
 setup: all Actuator endpoints move to a dedicated management port `9876` under the `/observe`
@@ -36,7 +38,7 @@ on the Actuator `ObservationRegistry`. Camel route spans (via `camel-opentelemet
 * Maven 3.9+
 * https://camel.apache.org/manual/camel-jbang.html[Camel CLI (JBang)] 4.22+
 * Docker (used by the Camel CLI to start the observability stack)
-* https://ollama.com/[Ollama] with `llama3.2:1b` and `qwen3:0.6b` pulled
+* https://ollama.com/[Ollama] with `llama3.2:1b` pulled
 
 == Build
 
@@ -52,7 +54,6 @@ Terminal 1 — Ollama:
 [source,shell]
 ----
 ollama pull llama3.2:1b
-ollama pull qwen3:0.6b
 ollama serve
 ----
 
@@ -77,7 +78,7 @@ To use different models than the defaults:
 
 [source,shell]
 ----
-mvn spring-boot:run -Dspring-boot.run.arguments="--langchain4j.ollama.chat-model-1.model-name=llama3.2 --langchain4j.ollama.chat-model-2.model-name=qwen3:1.7b"
+mvn spring-boot:run -Dspring-boot.run.arguments="--langchain4j.ollama.chat-model.model-name=qwen3:1.7b"
 ----
 
 == Verify GenAI observability
@@ -100,7 +101,7 @@ routes, JVM):
 
 * Camel overview: `http://localhost:3000/projects/camel/dashboards/overview`
 
-A GenAI dashboard (LLM calls, per-model latency, error ratio, token usage) can be created
+A GenAI dashboard (LLM calls, model-tagged latency, error ratio, token usage) can be created
 through the Perses REST API using the dashboard definition in `perses-genai-dashboard.json`:
 
 [source,shell]
@@ -128,11 +129,12 @@ image::docs/genai-dashboard-calls.png[GenAI Summary and LLM Calls sections]
   and input/output token counters. With calls that take longer than the timer period,
   "In-flight Calls" sits permanently at 1: the route serializes requests, and a new one
   starts as soon as the previous completes.
-* *Call rate* — calls per second, one series per `gen_ai.request.model`. A fast model
-  settles at the timer frequency; a slow model's rate is capped by its own latency.
-* *Error ratio* — failed calls (tagged `error!="none"`) over total, per model. Flat 0%
+* *Call rate* — calls per second, grouped by `gen_ai.request.model`. This example produces one
+  series; a fast model settles at the timer frequency, while a slow model's rate is capped by
+  its latency.
+* *Error ratio* — failed calls (tagged `error!="none"`) over total, grouped by model. Flat 0%
   lines mean every call succeeded.
-* *Mean / Max LLM latency* — per-model duration of the LLM call itself (the
+* *Mean / Max LLM latency* — model-tagged duration of the LLM call itself (the
   `gen_ai.client.operation` timer, not the whole route).
 
 image::docs/genai-dashboard-tokens.png[Token Usage section]
@@ -140,16 +142,11 @@ image::docs/genai-dashboard-tokens.png[Token Usage section]
 * *Token throughput* and *Avg tokens per call* — from the `gen_ai.client.token.usage`
   counter, split by model and `gen_ai.token.type` (input/output).
 
-The screenshots were taken with `llama3.2` and `qwen3.5:0.8b` (via the model-name
-overrides shown above); the default models behave similarly, since the `qwen3` family
-also reasons before answering. The two models make the point of GenAI observability
-visible on identical prompts:
-`llama3.2` answers in about a second with a few dozen output tokens, while
-`qwen3.5:0.8b` - a *thinking* model - emits roughly 2K output tokens per call (mostly
-reasoning tokens before the one-sentence answer), which drives both its ~30-45s latency
-and its dominant share of token throughput. Same workload, an order of magnitude more
-token spend - exactly the kind of cost/latency trade-off these metrics are meant to
-surface.
+The screenshots were taken with `llama3.2` and `qwen3.5:0.8b` in separate application runs.
+Switching the configured model makes the cost/latency trade-off visible: `llama3.2` answers in
+about a second with a few dozen output tokens, while the *thinking* model `qwen3.5:0.8b` can
+emit roughly 2K output tokens per call (mostly reasoning tokens before the one-sentence answer),
+driving both its ~30-45s latency and its token throughput.
 
 == Help and contributions
 
