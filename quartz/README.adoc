@@ -16,7 +16,7 @@ You can run this example using:
 
     $ mvn spring-boot:run
 
-And you should see output in the console with high and low numbers. The example will self stop after one minute.
+And you should see output in the console, with a "Test" message logged every 5 seconds. The example will self stop after one minute.
 
 === Help and contributions
 
