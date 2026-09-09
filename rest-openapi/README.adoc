@@ -25,7 +25,7 @@ You should see the following output when the application is launched:
 [source,text]
 ----
 ...
-[INFO] --- spring-boot-maven-plugin:1.5.10.RELEASE:run (default-cli) @ camel-example-spring-boot-rest-openapi ---
+[INFO] --- spring-boot:4.1.1:run (default-cli) @ camel-example-spring-boot-rest-openapi ---
 [...]
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -33,12 +33,14 @@ You should see the following output when the application is launched:
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::        (v2.0.0.RELEASE)
-[...]
-2017-03-05 14:55:44.032  INFO 15312 --- [           main] o.a.camel.spring.SpringCamelContext      : Total 4 routes, of which 4 are started.
-2017-03-05 14:55:44.034  INFO 15312 --- [           main] o.a.camel.spring.SpringCamelContext      : Apache Camel 2.22.0-SNAPSHOT (CamelContext: camel-1) started in 0.614 seconds
-2017-03-05 14:55:44.131  INFO 15312 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
-2017-03-05 14:55:44.140  INFO 15312 --- [           main] o.a.c.example.springboot.Application     : Started Application in 6.265 seconds (JVM running for 21.092)
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-09-04T10:13:59.681+02:00  INFO 26229 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-09-04T10:13:59.872+02:00  INFO 26229 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.23.0-SNAPSHOT (MyCamel) is starting
+2026-09-04T10:13:59.913+02:00  INFO 26229 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Routes startup (total:4 rest-dsl:4)
+2026-09-04T10:13:59.913+02:00  INFO 26229 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.23.0-SNAPSHOT (MyCamel) started in 41ms (build:0ms init:0ms start:41ms boot:586ms)
+2026-09-04T10:13:59.915+02:00  INFO 26229 --- [           main] o.a.c.example.springboot.Application     : Started Application in 1.476 seconds (process running for 1.63)
 ----
 
 After the Spring Boot application is started, you can open the following URL in your web browser to access the REST endpoint and retrieve a list of users: http://localhost:8080/api/users
@@ -77,7 +79,7 @@ The Spring Boot application can be stopped pressing `[CTRL] + [C]` in the shell.
 
 === Actuator
 
-The actuator is available at: `http://localhost:8080/actuator/` such as metrics for Prometheus: `http://localhost:8080/actuator/prometheus`.
+The actuator is available at: `http://localhost:8080/actuator` such as metrics for Prometheus: `http://localhost:8080/actuator/prometheus`.
 
 === Help and contributions
 
