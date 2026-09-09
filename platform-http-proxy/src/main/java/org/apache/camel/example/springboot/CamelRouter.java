@@ -24,10 +24,11 @@ import org.springframework.stereotype.Component;
  * Reverse proxy route that logs headers around the backend call.
  *
  * Requests are accepted under the {@code /reverse-proxy} path and forwarded to the fixed backend
- * configured via {@code reverse-proxy.target-base-uri}. The {@code /reverse-proxy} prefix is stripped
- * from the request path so that, for example, {@code /reverse-proxy/get} is forwarded to
- * {@code <target-base-uri>/get}. The remaining path and query string are then appended
- * automatically by the http producer's {@code bridgeEndpoint} mode.
+ * configured via {@code reverse-proxy.target-base-uri}. The consumer's {@code stripUriPrefix} option
+ * makes {@code CamelHttpPath} relative to the {@code /reverse-proxy} consumer path, so that, for
+ * example, {@code /reverse-proxy/get} is forwarded to {@code <target-base-uri>/get}. The remaining
+ * path and query string are then appended automatically by the http producer's {@code bridgeEndpoint}
+ * mode.
  *
  * NOTE: the consumer path must not be the literal string "proxy" (e.g. "platform-http:proxy").
  * That exact path is a reserved marker in camel-platform-http: it turns the endpoint into a
@@ -39,16 +40,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class CamelRouter extends RouteBuilder {
 
-	private static final String PROXY_PATH = "/reverse-proxy";
-
 	@Override
 	public void configure() throws Exception {
 
 		// @formatter:off
-        from("platform-http:reverse-proxy?matchOnUriPrefix=true")
+        from("platform-http:reverse-proxy?matchOnUriPrefix=true&stripUriPrefix=true")
                 .routeId("reverse-proxy")
                 .wireTap("direct:request")
-                .setHeader(Exchange.HTTP_PATH, simple("${header." + Exchange.HTTP_PATH + ".substring(" + PROXY_PATH.length() + ")}"))
                 .log("calling ${properties:reverse-proxy.target-base-uri}${headers." + Exchange.HTTP_PATH + "}")
                 .to("{{reverse-proxy.target-base-uri}}?bridgeEndpoint=true&throwExceptionOnFailure=false")
                 .wireTap("direct:response");
