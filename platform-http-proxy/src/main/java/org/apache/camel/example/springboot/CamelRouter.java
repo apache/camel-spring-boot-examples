@@ -21,7 +21,21 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 /**
- * Reverse proxy route with routes that logs heders around the backend call
+ * Reverse proxy route that logs headers around the backend call.
+ *
+ * Requests are accepted under the {@code /reverse-proxy} path and forwarded to the fixed backend
+ * configured via {@code reverse-proxy.target-base-uri}. The consumer's {@code stripUriPrefix} option
+ * makes {@code CamelHttpPath} relative to the {@code /reverse-proxy} consumer path, so that, for
+ * example, {@code /reverse-proxy/get} is forwarded to {@code <target-base-uri>/get}. The remaining
+ * path and query string are then appended automatically by the http producer's {@code bridgeEndpoint}
+ * mode.
+ *
+ * NOTE: the consumer path must not be the literal string "proxy" (e.g. "platform-http:proxy").
+ * That exact path is a reserved marker in camel-platform-http: it turns the endpoint into a
+ * catch-all consumer meant to build a Host-header-based forward proxy, but that mode is only
+ * implemented by the Vert.x platform-http engine, not by camel-platform-http-starter (the
+ * servlet/Spring-MVC engine used here). On this engine it silently degrades into an unguarded
+ * catch-all with no forwarding logic, so a genuinely different path is used instead.
  */
 @Component
 public class CamelRouter extends RouteBuilder {
@@ -30,13 +44,11 @@ public class CamelRouter extends RouteBuilder {
 	public void configure() throws Exception {
 
 		// @formatter:off
-        from("platform-http:proxy/*?matchOnUriPrefix=true")
+        from("platform-http:reverse-proxy?matchOnUriPrefix=true&stripUriPrefix=true")
                 .routeId("reverse-proxy")
                 .wireTap("direct:request")
-                .removeHeader(Exchange.HTTP_PATH)
-                .log("calling ${headers." + Exchange.HTTP_URL + "}")
-                .toD("${headers." + Exchange.HTTP_URL + "}"
-                        + "?throwExceptionOnFailure=false&bridgeEndpoint=true")
+                .log("calling ${properties:reverse-proxy.target-base-uri}${headers." + Exchange.HTTP_PATH + "}")
+                .to("{{reverse-proxy.target-base-uri}}?bridgeEndpoint=true&throwExceptionOnFailure=false")
                 .wireTap("direct:response");
 
         from("direct:request")
