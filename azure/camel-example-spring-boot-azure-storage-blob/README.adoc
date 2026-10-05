@@ -1,0 +1,37 @@
+== Camel Azure Storage Blob Example
+
+=== Introduction
+
+This example demonstrates how to use the Apache Camel Azure Storage Blob component with Spring Boot to:
+
+* Upload block blobs
+* Set and get blob index tags
+* Find blobs by tag filter expressions
+* Create and read blob snapshots
+
+=== Running Tests (Azurite)
+
+Tests run automatically against https://github.com/Azure/Azurite[Azurite] (Azure Storage emulator) via Testcontainers. Docker must be running.
+
+    mvn verify
+
+=== Running with Azure
+
+To run against a real Azure Storage account:
+
+1. Create a General-purpose v2 Storage Account in the Azure portal
+2. Enable blob versioning under Data management > Data protection (optional, for version operations)
+3. Get your account name and access key from Security + networking > Access keys
+
+    export AZURE_STORAGE_ACCOUNT_NAME=youraccount
+    export AZURE_STORAGE_ACCESS_KEY=yourkey
+    export AZURE_STORAGE_CONTAINER_NAME=yourcontainer
+    mvn spring-boot:run
+
+=== Help and Contributions
+
+If you hit any problems please let us know on the https://camel.apache.org/community/mailing-list/[Camel Forums].
+
+Please help us make Apache Camel better - we appreciate any feedback you may have.
+
+https://camel.apache.org/community/contributing/[Contributing]

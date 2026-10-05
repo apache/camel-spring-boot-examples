@@ -1,0 +1,11 @@
+azure:
+  storage:
+    account-name: ${AZURE_STORAGE_ACCOUNT_NAME:devstoreaccount1}
+    container-name: ${AZURE_STORAGE_CONTAINER_NAME:testcontainer}
+
+camel:
+  component:
+    azure-storage-blob:
+      credential-type: SHARED_KEY_CREDENTIAL
+  springboot:
+    main-run-controller: true

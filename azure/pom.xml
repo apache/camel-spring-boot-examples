@@ -63,6 +63,7 @@
   <modules>
     <module>camel-example-spring-boot-azure-servicebus</module>
     <module>camel-example-spring-boot-azure-eventhubs</module>
+    <module>camel-example-spring-boot-azure-storage-blob</module>
   </modules>
 
 </project>
