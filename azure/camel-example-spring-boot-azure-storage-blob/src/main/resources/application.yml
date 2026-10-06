@@ -19,7 +19,7 @@ azure:
   storage:
     account-name: ${AZURE_STORAGE_ACCOUNT_NAME:devstoreaccount1}
     access-key: ${AZURE_STORAGE_ACCESS_KEY}
-    container-name: ${AZURE_STORAGE_CONTAINER_NAME:testcontainer}
+    container-name: ${AZURE_STORAGE_CONTAINER_NAME:yourcontainer}
 
 camel:
   component:

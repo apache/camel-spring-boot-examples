@@ -8,6 +8,7 @@ This example demonstrates how to use the Apache Camel Azure Storage Blob compone
 * Set and get blob index tags
 * Find blobs by tag filter expressions
 * Create and read blob snapshots
+* List blob versions by version ID
 
 === Running Tests (Azurite)
 
@@ -27,6 +28,15 @@ To run against a real Azure Storage account:
     export AZURE_STORAGE_ACCESS_KEY=yourkey
     export AZURE_STORAGE_CONTAINER_NAME=yourcontainer
     mvn spring-boot:run
+
+On startup the *version-demo* route uploads a blob twice and lists all versions with their version IDs:
+
+    === Blob Version ID Demo ===
+    Uploaded version 1
+    Uploaded version 2
+      version-demo.txt -- versionId=2026-10-06T11:30:00.1234567Z
+      version-demo.txt -- versionId=2026-10-06T11:30:01.2345678Z
+    === Demo complete ===
 
 === Help and Contributions
 
