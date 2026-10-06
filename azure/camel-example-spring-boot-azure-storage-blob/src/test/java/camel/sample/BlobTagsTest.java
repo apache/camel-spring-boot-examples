@@ -136,4 +136,21 @@ public class BlobTagsTest {
         assertEquals("document", retrieved.get("category"));
         assertEquals("high", retrieved.get("priority"));
     }
+
+    @Test
+    void testFindBlobsByTags() {
+        uploadTestBlob();
+
+        Map<String, String> tags = Map.of("Environment", "Production");
+        template.send("direct:setBlobTags", exchange -> {
+            exchange.getIn().setHeader(BlobConstants.BLOB_NAME, BLOB_NAME);
+            exchange.getIn().setHeader(BlobConstants.BLOB_TAGS, tags);
+        });
+
+        Exchange result = template.send("direct:findBlobsByTags", exchange -> {
+            exchange.getIn().setHeader(BlobConstants.BLOB_TAG_FILTER, "\"Environment\" = 'Production'");
+        });
+        assertNull(result.getException(), "findBlobsByTags should succeed: " + result.getException());
+        assertNotNull(result.getMessage().getBody(), "Should return results");
+    }
 }
