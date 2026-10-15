@@ -37,9 +37,9 @@ You should see the following output when the application is launched:
  :: Spring Boot ::                (v4.1.1)
 
 2026-09-04T10:13:59.681+02:00  INFO 26229 --- [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
-2026-09-04T10:13:59.872+02:00  INFO 26229 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.23.0-SNAPSHOT (MyCamel) is starting
+2026-09-04T10:13:59.872+02:00  INFO 26229 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.24.0-SNAPSHOT (MyCamel) is starting
 2026-09-04T10:13:59.913+02:00  INFO 26229 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Routes startup (total:4 rest-dsl:4)
-2026-09-04T10:13:59.913+02:00  INFO 26229 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.23.0-SNAPSHOT (MyCamel) started in 41ms (build:0ms init:0ms start:41ms boot:586ms)
+2026-09-04T10:13:59.913+02:00  INFO 26229 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.24.0-SNAPSHOT (MyCamel) started in 41ms (build:0ms init:0ms start:41ms boot:586ms)
 2026-09-04T10:13:59.915+02:00  INFO 26229 --- [           main] o.a.c.example.springboot.Application     : Started Application in 1.476 seconds (process running for 1.63)
 ----
 

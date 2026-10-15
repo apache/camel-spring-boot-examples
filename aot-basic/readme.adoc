@@ -47,14 +47,14 @@ Your application will start in native mode. The output of the application should
 2026-09-03T19:25:47.907+02:00 DEBUG 52866 --- [           main] sample.camel.Application                 : Running with Spring Boot v4.1.1, Spring v7.0.9
 2026-09-03T19:25:47.907+02:00  INFO 52866 --- [           main] sample.camel.Application                 : No active profile set, falling back to 1 default profile: "default"
 2026-09-03T19:25:47.919+02:00 DEBUG 52866 --- [           main] o.a.c.i.h.DefaultHealthCheckRegistry     : HealthCheckRepository with id registry-health-check-repository successfully registered
-2026-09-03T19:25:47.960+02:00  INFO 52866 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.23.0-SNAPSHOT (MyCamelNative) is starting
+2026-09-03T19:25:47.960+02:00  INFO 52866 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.24.0-SNAPSHOT (MyCamelNative) is starting
 2026-09-03T19:25:47.961+02:00  INFO 52866 --- [           main] c.s.b.CamelSpringBootApplicationListener : Starting CamelMainRunController to ensure the main thread keeps running
-2026-09-03T19:25:47.961+02:00  INFO 52866 --- [inRunController] org.apache.camel.main.MainSupport        : Apache Camel (Main) 4.23.0-SNAPSHOT is starting
+2026-09-03T19:25:47.961+02:00  INFO 52866 --- [inRunController] org.apache.camel.main.MainSupport        : Apache Camel (Main) 4.24.0-SNAPSHOT is starting
 2026-09-03T19:25:47.961+02:00  INFO 52866 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Routes startup (total:3)
 2026-09-03T19:25:47.961+02:00  INFO 52866 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started helloJava (timer://java)
 2026-09-03T19:25:47.961+02:00  INFO 52866 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started helloYAML (timer://yaml)
 2026-09-03T19:25:47.961+02:00  INFO 52866 --- [           main] o.a.c.impl.engine.AbstractCamelContext   :     Started helloXML (timer://xml)
-2026-09-03T19:25:47.961+02:00  INFO 52866 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.23.0-SNAPSHOT (MyCamelNative) started in 1ms (build:0ms init:0ms start:1ms)
+2026-09-03T19:25:47.961+02:00  INFO 52866 --- [           main] o.a.c.impl.engine.AbstractCamelContext   : Apache Camel 4.24.0-SNAPSHOT (MyCamelNative) started in 1ms (build:0ms init:0ms start:1ms)
 2026-09-03T19:25:47.962+02:00  INFO 52866 --- [           main] sample.camel.Application                 : Started Application in 0.066 seconds (process running for 0.081)
 2026-09-03T19:25:48.966+02:00  INFO 52866 --- [ - timer://java] helloJava                                : Hello World From Java I am invoked 1 times at Thu Sep 03 19:25:48 CEST 2026
 2026-09-03T19:25:48.966+02:00  INFO 52866 --- [ - timer://yaml] helloYAML                                : Hello World from YAML at Thu Sep 03 19:25:48 CEST 2026
