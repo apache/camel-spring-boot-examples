@@ -29,7 +29,6 @@
 
     <properties>
         <brave.version>6.0.3</brave.version>
-    <maven.compiler.release>17</maven.compiler.release>
         <micrometer-tracing.version>1.13.15</micrometer-tracing.version>
     </properties>
 
