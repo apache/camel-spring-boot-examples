@@ -113,7 +113,7 @@
     	<javaVersion>21</javaVersion>
 		<skip.starting.camel.context>false</skip.starting.camel.context>
 		<jkube-maven-plugin-version>1.19.0</jkube-maven-plugin-version>
-		<jkube.generator.from>registry.access.redhat.com/ubi9/openjdk-17:latest</jkube.generator.from>
+		<jkube.generator.from>registry.access.redhat.com/ubi9/openjdk-21:latest</jkube.generator.from>
 		<jkube.build.switchToDeployment>true</jkube.build.switchToDeployment>
 		<kafka-avro-serializer-version>7.8.2</kafka-avro-serializer-version>
 		<reactor-version>3.8.3</reactor-version>
