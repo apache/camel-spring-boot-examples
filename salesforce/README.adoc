@@ -10,7 +10,7 @@ The example provides REST API endpoints for managing Salesforce contacts (list a
 
 == Prerequisites
 
-* Java 17 or higher
+* Java 21 or higher
 * Maven 3.6+
 * Salesforce developer account
 * Salesforce Connected App credentials

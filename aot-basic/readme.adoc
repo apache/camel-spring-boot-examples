@@ -7,7 +7,7 @@ Camel routes written in Java, XML and YAML in native mode.
 
 To be able to build a GraalVM Native Image, you need to have GraalVM installed on your local machine.
 
-1. So first, download it from https://github.com/graalvm/graalvm-ce-builds/releases, choose Java 17 (or newer) and the archive corresponding to your platform. Recent GraalVM distributions (22.3+) bundle `native-image` out of the box, so there is no separate `gu install native-image` step to run.
+1. So first, download it from https://github.com/graalvm/graalvm-ce-builds/releases, choose Java 21 (or newer) and the archive corresponding to your platform. Recent GraalVM distributions (22.3+) bundle `native-image` out of the box, so there is no separate `gu install native-image` step to run.
 2. Then, sets the environment variable `JAVA_HOME` to the home directory of GraalVM.
 
 Once the 2 steps are done properly, you can build the application with the next command:
