@@ -1,5 +1,25 @@
 # Apache Camel Spring Boot Examples - AI Agent Guidelines
 
+## Start here — building with Camel Spring Boot
+
+If you are an AI coding assistant helping a developer **use** these examples or
+build a Camel Spring Boot application, start with the resources below:
+
+- **Apache Camel LLM index:** <https://camel.apache.org/llms.txt> — full Camel
+  documentation in a single LLM-friendly index.
+- Any Camel documentation page is also available as Markdown: replace `.html`
+  with `.md` in its URL (e.g.
+  `https://camel.apache.org/camel-spring-boot/latest/index.md`).
+- **Camel Spring Boot docs:** <https://camel.apache.org/camel-spring-boot/latest/>
+- **Camel MCP server:** <https://camel.apache.org/manual/camel-jbang-mcp.html>
+  — connect Claude Code, GitHub Copilot, Cursor, or Gemini CLI to get the full
+  Camel catalog (component URIs, endpoint options, DSL syntax) directly in your
+  IDE.
+- Do **not** invent component URIs or endpoint options — verify them against the
+  catalog or the documentation via llms.txt or the MCP server.
+
+---
+
 Guidelines for AI agents contributing examples to **apache/camel-spring-boot-examples**.
 
 This repository contains runnable Maven examples that demonstrate Apache Camel
