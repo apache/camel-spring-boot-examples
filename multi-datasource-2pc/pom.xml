@@ -89,12 +89,12 @@
         <dependency>
             <groupId>dev.snowdrop</groupId>
             <artifactId>narayana-spring-boot-starter</artifactId>
-            <version>4.0.0</version>
+            <version>4.1.1</version>
         </dependency>
         <dependency>
             <groupId>io.agroal</groupId>
             <artifactId>agroal-spring-boot-starter</artifactId>
-            <version>3.0</version>
+            <version>${agroal-version}</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>

@@ -80,15 +80,13 @@
 
           <!-- Add the Artemis jakarta client library which will include the ActiveMQConnectionFactory -->
         <dependency>
-            <groupId>org.apache.activemq</groupId>
+            <groupId>org.apache.artemis</groupId>
             <artifactId>artemis-jakarta-client</artifactId>
-            <version>${artemis-jakarta-version}</version> 
         </dependency>
         
         <dependency>
-            <groupId>org.apache.activemq</groupId>
+            <groupId>org.apache.artemis</groupId>
             <artifactId>artemis-jakarta-server</artifactId>
-            <version>${artemis-jakarta-version}</version>
         </dependency> 
                
         <dependency>

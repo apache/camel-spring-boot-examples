@@ -130,7 +130,7 @@
             <plugin>
                 <groupId>io.swagger.codegen.v3</groupId>
                 <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>3.0.52</version>
+                <version>3.0.85</version>
                 <executions>
                     <execution>
                         <goals>
@@ -149,6 +149,11 @@
                             <generateModelTests>false</generateModelTests>
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <generateModels>true</generateModels>
+                            <configOptions>
+                                <!-- the default "strict" mode wraps required+nullable fields in JsonNullable,
+                                     which needs jackson-databind-nullable; plain @NotNull is enough here -->
+                                <validationMode>legacy</validationMode>
+                            </configOptions>
                         </configuration>
                     </execution>
                 </executions>
@@ -157,7 +162,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>${build-helper-maven-plugin-version}</version>
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>

@@ -146,6 +146,7 @@
                     <plugin>
                         <artifactId>openshift-maven-plugin</artifactId>
                         <groupId>org.eclipse.jkube</groupId>
+                        <version>${jkube-maven-plugin-version}</version>
                         <executions>
                             <execution>
                                 <goals>

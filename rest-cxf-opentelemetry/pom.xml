@@ -33,7 +33,6 @@
 
     <properties>
         <category>CXF</category>
-        <opentelemetry-javaagent.version>2.19.0</opentelemetry-javaagent.version>
     </properties>
     
     <modules>
@@ -146,7 +145,7 @@
                                         <artifactItem>
                                             <groupId>io.opentelemetry.javaagent</groupId>
                                             <artifactId>opentelemetry-javaagent</artifactId>
-                                            <version>${opentelemetry-javaagent.version}</version>
+                                            <version>${opentelemetry-javaagent-version}</version>
                                             <type>jar</type>
                                             <outputDirectory>${project.build.directory}</outputDirectory>
                                         </artifactItem>

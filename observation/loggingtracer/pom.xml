@@ -21,16 +21,30 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.apache.camel.springboot.example</groupId>
+    <!-- Plain library (no Spring Boot repackaging), so it uses the examples root as parent
+         rather than camel-example-spring-boot-observation -->
+    <parent>
+        <groupId>org.apache.camel.springboot.example</groupId>
+        <artifactId>examples</artifactId>
+        <version>4.24.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
     <artifactId>camel-example-spring-boot-observation-loggingtracer</artifactId>
-    <version>4.24.0-SNAPSHOT</version>
     <name>Camel SB Examples :: Observation :: LoggingTracer</name>
     <description>An example Observation Tracer</description>
 
-    <properties>
-        <brave.version>6.0.3</brave.version>
-        <micrometer-tracing.version>1.13.15</micrometer-tracing.version>
-    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
 
@@ -38,14 +52,12 @@
         <dependency>
             <groupId>io.zipkin.brave</groupId>
             <artifactId>brave</artifactId>
-            <version>${brave.version}</version>
         </dependency>
 
         <!-- metrics -->
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-core</artifactId>
-            <version>${micrometer-tracing.version}</version>
         </dependency>
 
     </dependencies>

@@ -33,7 +33,6 @@
 
     <properties>
         <category>Management and Monitoring</category>
-        <opentelemetry-agent.version>2.19.0</opentelemetry-agent.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -107,7 +106,7 @@
                                 <artifactItem>
                                     <groupId>io.opentelemetry.javaagent</groupId>
                                     <artifactId>opentelemetry-javaagent</artifactId>
-                                    <version>${opentelemetry-agent.version}</version>
+                                    <version>${opentelemetry-javaagent-version}</version>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${project.build.directory}/javaagents</outputDirectory>
                                     <destFileName>javaagent.jar</destFileName>

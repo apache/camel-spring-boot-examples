@@ -90,7 +90,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.7.12</version>
+            <version>${pgjdbc-driver-version}</version>
         </dependency>
     </dependencies>
 
