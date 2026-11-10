@@ -36,7 +36,6 @@
         <category>Messaging</category>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <activemq-version>5.18.3</activemq-version>
     </properties>
 
     <dependencyManagement>

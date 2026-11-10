@@ -32,6 +32,8 @@
     <description>Example on how to leverage Spring Boot AOT in Camel Spring Boot</description>
 
     <properties>
+        <!-- keep in sync with native-build-tools-plugin.version managed by Spring Boot -->
+        <native-build-tools-plugin-version>1.1.14</native-build-tools-plugin-version>
         <category>AOT</category>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -71,6 +73,7 @@
             <plugin>
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
+                <version>${native-build-tools-plugin-version}</version>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

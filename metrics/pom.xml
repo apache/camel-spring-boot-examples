@@ -33,8 +33,6 @@
 
     <properties>
         <category>Management and Monitoring</category>
-
-        <jolokia-version>1.7.1</jolokia-version>
     </properties>
 
     <dependencyManagement>
@@ -74,11 +72,6 @@
         </dependency>
 
         <!-- operations -->
-        <dependency>
-            <groupId>org.jolokia</groupId>
-            <artifactId>jolokia-core</artifactId>
-            <version>${jolokia-version}</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>

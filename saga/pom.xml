@@ -34,7 +34,6 @@
 
     <properties>
         <category>EIP</category>
-        <jakarta-servlet-api-version>6.1.0</jakarta-servlet-api-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -111,7 +110,7 @@
             <artifactId>spring-boot-starter-artemis</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.activemq</groupId>
+            <groupId>org.apache.artemis</groupId>
             <artifactId>artemis-jakarta-client</artifactId>
         </dependency>
         <dependency>
@@ -162,6 +161,7 @@
 					<plugin>
 						<artifactId>openshift-maven-plugin</artifactId>
 						<groupId>org.eclipse.jkube</groupId>
+						<version>${jkube-maven-plugin-version}</version>
 						<executions>
 							<execution>
 								<goals>

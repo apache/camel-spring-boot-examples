@@ -34,7 +34,7 @@
         <category>Messaging</category>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <strimzi.version>0.15.0</strimzi.version>
+        <strimzi-kafka-oauth-version>0.18.1</strimzi-kafka-oauth-version>
     </properties>
 
     <dependencyManagement>
@@ -88,12 +88,12 @@
         <dependency>
             <groupId>io.strimzi</groupId>
             <artifactId>kafka-oauth-common</artifactId>
-            <version>${strimzi.version}</version>
+            <version>${strimzi-kafka-oauth-version}</version>
         </dependency>
         <dependency>
             <groupId>io.strimzi</groupId>
             <artifactId>kafka-oauth-client</artifactId>
-            <version>${strimzi.version}</version>
+            <version>${strimzi-kafka-oauth-version}</version>
         </dependency>
     </dependencies>
 
